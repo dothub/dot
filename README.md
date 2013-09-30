@@ -24,8 +24,8 @@ DOT (Distributed OpenFlow Testbed) is a tool for emulating an OpenFlow based Sof
 
 Team
 ====================================================================================================================
-Arup Raton Roy<br/>
-Md. Faizul Bari
-Mohamed Faten Zhani
-Reaz Ahmed
+Arup Raton Roy<br />
+Md. Faizul Bari<br />
+Mohamed Faten Zhani<br />
+Reaz Ahmed<br />
 Raouf Boutaba
