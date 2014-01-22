@@ -24,8 +24,10 @@ Overview
 
 Team
 ====================================================================================================================
-Arup Raton Roy<br />
-Md. Faizul Bari<br />
-Mohamed Faten Zhani<br />
-Reaz Ahmed<br />
-Raouf Boutaba
+<ul>
+	<li>Arup Raton Roy</li>
+	<li><a href="http://www.cs.uwaterloo.ca/~mfbari" target="_blank">Md. Faizul Bari</a></li>
+	<li><a href="https://cs.uwaterloo.ca/~mfzhani/" target="_blank">Mohamed Faten Zhani</a></li>
+	<li><a href="https://cs.uwaterloo.ca/~r5ahmed" target="_blank">Reaz Ahmed</a></li>
+	<li><a href="http://rboutaba.cs.uwaterloo.ca/index.html" target="_blank">Raouf Boutaba</a></li>
+</ul>
