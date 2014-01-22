@@ -5,7 +5,7 @@ Overview
 
 Installation Instructions
 ====================================================================================================================
-Please follow the instructon on <a href="dothub.org" target="_blank">dothub.org</a>.
+Please follow the instructons on <a href="http://www.dothub.org" target="_blank">dothub.org</a>.
 
 Team
 ====================================================================================================================
