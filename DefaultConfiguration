@@ -1,18 +1,18 @@
-MasterName=cn211
-MasterIP=10.254.254.45
-HostImage=~/images/new_clone2.qcow2
-LogicalTopology=LogicalTopology_6461
-PhysicalTopology=PhysicalTopology_100Machine
+MasterName=cn216
+MasterIP=10.254.254.50
+PhysicalTopology=PhysicalTopology_alpha
 PhysicalMachineDelay=No
-//PhysicalDealyFile=PhysicalTopology10Machine_delay
-Controllers=ControllerInfo1
-SwitchToController=Switch2Controller_6461
-HostConfiguration=HostInfo_6461
-UserCredentials=CredentialFile1
+PhysicalDealyFile=PhysicalTopologyDelay_alpha
+HostImage=~/images/new_clone2.qcow2
+LogicalTopology=LogicalTopology_alpha
+Controllers=ControllerInfo_alpha
+SwitchToController=Switch2Controller_alpha
+HostConfiguration=HostInfo_alpha
+UserCredentials=CredentialFile_alpha
 PartitioningAlgorithm=Guaranteed_Embedding
 PartitioningAlgorithmConfiguration=Guaranteed_Embedding_Conf
 HyperVisor=lib-virt
-HyperVisorConfiguration=lib-virt_Configuration1
+HyperVisorConfiguration=lib-virtConfiguration_alpha
 
 
 

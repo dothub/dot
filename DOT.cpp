@@ -170,9 +170,9 @@ void prepare(string globalConfFile)
 
 	DOT_Topology* dotTopology = DOT_Topology::getDOT_Topology(inputTopology, physicalEnvironment,
 			mapping, sw2controller, hosts, instantitiatedHost);
-	//dotTopology->generate();
+	dotTopology->generate();
 
-	//DeployDOT *deploy = new DeployDOT(dotTopology, instantitiatedSwitch, instantitiatedLink, instantitiatedHost,  &commandExecutor);
+	DeployDOT *deploy = new DeployDOT(dotTopology, instantitiatedSwitch, instantitiatedLink, instantitiatedHost,  &commandExecutor);
 
 
 	/*cout << Util::getFileName("~/hello/nothing") << endl;
