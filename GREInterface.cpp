@@ -21,19 +21,19 @@
  * GREInterface.cpp
  *
  *  Created on: 2013-08-28
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #include "GREInterface.h"
 
 GRE_Interface::GRE_Interface(string name)
-	:Interface(name, GRE)
+    :Interface(name, GRE)
 {
 
 }
 
 string GRE_Interface::getRemoteIP() {
-	return this->remoteIP;
+    return this->remoteIP;
 }
 
 GRE_Interface::~GRE_Interface() {

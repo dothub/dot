@@ -21,7 +21,7 @@
  * GREInterface.h
  *
  *  Created on: 2013-08-28
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef GREINTERFACE_H_
@@ -32,10 +32,10 @@
 class GRE_Interface: public Interface {
 
 public:
-	string remoteIP;
-	GRE_Interface(string name);
-	string getRemoteIP();
-	virtual ~GRE_Interface();
+    string remoteIP;
+    GRE_Interface(string name);
+    string getRemoteIP();
+    virtual ~GRE_Interface();
 };
 
 #endif /* GREINTERFACE_H_ */

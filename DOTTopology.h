@@ -21,7 +21,7 @@
  * DOTTopology.h
  *
  *  Created on: 2013-08-13
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef DOTTOPOLOGY_H_
@@ -49,34 +49,34 @@ class DeployDOT;
 
 class DOT_Topology {
 
-	map<unsigned long, Link*> linkMap;
-	map<string, Switch*> topologySwitchMap;
-	map<string, Switch*> gatewaySwitchMap;
-	map<string, Switch*> gatewaySwitchFromMachineMap;
-	map<pair<string, string>, Tunnel* > tunnelMap;
-	map<pair<Switch*, string>, Interface* > interfaceMap;
-	vector<pair<CutEdge*, CutEdge*> > cutEdgesPairVector;
+    map<unsigned long, Link*> linkMap;
+    map<string, Switch*> topologySwitchMap;
+    map<string, Switch*> gatewaySwitchMap;
+    map<string, Switch*> gatewaySwitchFromMachineMap;
+    map<pair<string, string>, Tunnel* > tunnelMap;
+    map<pair<Switch*, string>, Interface* > interfaceMap;
+    vector<pair<CutEdge*, CutEdge*> > cutEdgesPairVector;
 
-	PhysicalMachines* physicalMachines;
-	Mapping* mapping;
-	InputTopology * inputTopology;
-	Switch2Controller * switch2Controller;
-	Hosts* hosts;
-	InstantitiateHost* instantitiatedHost;
+    PhysicalMachines* physicalMachines;
+    Mapping* mapping;
+    InputTopology * inputTopology;
+    Switch2Controller * switch2Controller;
+    Hosts* hosts;
+    InstantitiateHost* instantitiatedHost;
 
-	static DOT_Topology* instanceDOT_Topology;
+    static DOT_Topology* instanceDOT_Topology;
 
-	DOT_Topology(InputTopology * inputTopology, PhysicalMachines* physicalMachines,
-			Mapping* mapping, Switch2Controller * switch2Controller, Hosts* hosts, InstantitiateHost* instantitiatedHost);
+    DOT_Topology(InputTopology * inputTopology, PhysicalMachines* physicalMachines,
+            Mapping* mapping, Switch2Controller * switch2Controller, Hosts* hosts, InstantitiateHost* instantitiatedHost);
 
-	friend class DeployDOT;
+    friend class DeployDOT;
 
 public:
-	static DOT_Topology* getDOT_Topology(InputTopology * inputTopology, PhysicalMachines* physicalMachines,
-				Mapping* mapping, Switch2Controller * switch2Controller, Hosts* hosts, InstantitiateHost* instantitiatedHost);
-	void generate();
+    static DOT_Topology* getDOT_Topology(InputTopology * inputTopology, PhysicalMachines* physicalMachines,
+                Mapping* mapping, Switch2Controller * switch2Controller, Hosts* hosts, InstantitiateHost* instantitiatedHost);
+    void generate();
 
-	virtual ~DOT_Topology();
+    virtual ~DOT_Topology();
 
 
 

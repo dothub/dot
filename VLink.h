@@ -21,7 +21,7 @@
  * VLink.h
  *
  *  Created on: 2013-08-28
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef VLINK_H_
@@ -31,9 +31,9 @@
 
 class VLink: public InstantitiateLink {
 public:
-	VLink(CommandExecutor* commandExec);
-	virtual ~VLink();
-	void createLink(Link* newLink);
+    VLink(CommandExecutor* commandExec);
+    virtual ~VLink();
+    void createLink(Link* newLink);
 };
 
 #endif /* VLINK_H_ */

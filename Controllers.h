@@ -21,7 +21,7 @@
  * Controllers.h
  *
  *  Created on: 2013-08-12
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef CONTROLLERS_H_
@@ -31,30 +31,30 @@
 using namespace std;
 
 class Controllers {
-	struct ControllerAttribute
-	{
-		unsigned int controller_id;
-		string ip;
-		string port;
-	};
+    struct ControllerAttribute
+    {
+        unsigned int controller_id;
+        string ip;
+        string port;
+    };
 
-	static Controllers* controllers;
+    static Controllers* controllers;
 
-	Controllers();
+    Controllers();
 
-	unsigned int numberOfControllers;
-	vector<ControllerAttribute > controllerIdVector;
+    unsigned int numberOfControllers;
+    vector<ControllerAttribute > controllerIdVector;
 public:
 
-	static Controllers* getControllers();
-	void populateControllers(string fileName);
+    static Controllers* getControllers();
+    void populateControllers(string fileName);
 
-	unsigned int getNumberOfControllers();
+    unsigned int getNumberOfControllers();
 
-	string getIPAddress(unsigned int ctrlId);
-	string getPort(unsigned int ctrlId);
+    string getIPAddress(unsigned int ctrlId);
+    string getPort(unsigned int ctrlId);
 
-	virtual ~Controllers();
+    virtual ~Controllers();
 };
 
 #endif /* CONTROLLERS_H_ */

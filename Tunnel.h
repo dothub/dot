@@ -21,7 +21,7 @@
  * Tunnel.h
  *
  *  Created on: 2013-08-13
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef TUNNEL_H_
@@ -38,15 +38,15 @@ using namespace std;
 class CutEdge;
 
 class Tunnel: public Link{
-	unsigned int cutEdgeCounter;
-	map<unsigned int, pair<CutEdge*, CutEdge*> > cutEdgeMap;
+    unsigned int cutEdgeCounter;
+    map<unsigned int, pair<CutEdge*, CutEdge*> > cutEdgeMap;
 public:
-	Tunnel(LinkType type = GRE_TUNNEL);
-	unsigned int assignCutEdges(CutEdge * cutEdge1, CutEdge* cutEdge2);
-	pair<CutEdge*, CutEdge*>  getCutEdges(unsigned int cutEdgeId);
-	void assignRemoteIPToInterface();
-	string remoteIP(Link* cutEdge);
-	virtual ~Tunnel();
+    Tunnel(LinkType type = GRE_TUNNEL);
+    unsigned int assignCutEdges(CutEdge * cutEdge1, CutEdge* cutEdge2);
+    pair<CutEdge*, CutEdge*>  getCutEdges(unsigned int cutEdgeId);
+    void assignRemoteIPToInterface();
+    string remoteIP(Link* cutEdge);
+    virtual ~Tunnel();
 };
 
 #endif /* TUNNEL_H_ */

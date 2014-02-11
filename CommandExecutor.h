@@ -21,7 +21,7 @@
  * CommandExecutor.h
  *
  *  Created on: 2013-08-05
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef COMMANDEXECUTOR_H_
@@ -33,27 +33,27 @@ using namespace std;
 
 class CommandExecutor
 {
-	Credentials* credential;
+    Credentials* credential;
 
-	string localIP;
-	string localName;
+    string localIP;
+    string localName;
 
-	string execute(string command);
+    string execute(string command);
 
-	void copyUsingLocal(string sourceMachine, string destinationMachine,
-			string sourcePath, string destinationPath, bool isFolder=false);
+    void copyUsingLocal(string sourceMachine, string destinationMachine,
+            string sourcePath, string destinationPath, bool isFolder=false);
 public:
 
-	string executeLocal(string command);
-	string  executeScriptLocal(string filePath, string fileName, string parameters="");
+    string executeLocal(string command);
+    string  executeScriptLocal(string filePath, string fileName, string parameters="");
 
-	string executeRemote(string machine, string command);
-	string executeScriptRemote(string machine, string filePath, string fileName, string parameters="");
+    string executeRemote(string machine, string command);
+    string executeScriptRemote(string machine, string filePath, string fileName, string parameters="");
 
-	void copyContent(string sourceMachine, string destinationMachine,
-				string sourcePath, string destinationPath, bool isFolder=false);
+    void copyContent(string sourceMachine, string destinationMachine,
+                string sourcePath, string destinationPath, bool isFolder=false);
 
-	CommandExecutor(Credentials* credential, string localIP, string localName);
+    CommandExecutor(Credentials* credential, string localIP, string localName);
 
 };
 

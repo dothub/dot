@@ -21,7 +21,7 @@
  * PartitioningAlgorithm.h
  *
  *  Created on: 2013-08-12
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef PARTITIONINGALGORITHM_H_
@@ -34,11 +34,11 @@ using namespace std;
 class Mapping;
 class PartitioningAlgorithm {
 protected:
-	void instertMapping(Mapping* mapping, string machine);
+    void instertMapping(Mapping* mapping, string machine);
 public:
-	PartitioningAlgorithm();
-	virtual ~PartitioningAlgorithm();
-	virtual void run() = 0;
+    PartitioningAlgorithm();
+    virtual ~PartitioningAlgorithm();
+    virtual void run() = 0;
 };
 
 #endif /* PARTITIONINGALGORITHM_H_ */

@@ -21,7 +21,7 @@
  * Util.cpp
  *
  *  Created on: 2013-08-12
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #include "Util.h"
@@ -29,16 +29,16 @@
 #include <iomanip>
 
 void Util::parseKeyValue(string input, string& key, string& value,
-		char delimeter) {
+        char delimeter) {
 
 
-	stringstream tokenizer(input);
+    stringstream tokenizer(input);
 
-	if(getline(tokenizer, key, delimeter) == false)
-		key = "";
+    if(getline(tokenizer, key, delimeter) == false)
+        key = "";
 
-	if(getline(tokenizer, value, delimeter) == false)
-		value = "";
+    if(getline(tokenizer, value, delimeter) == false)
+        value = "";
 
 }
 
@@ -56,28 +56,28 @@ string Util::getPathName(const string& strPath)
 
 void Util::parseString(string input, vector<string>* &tokens, char delimeter) {
 
-	tokens = new vector<string>();
+    tokens = new vector<string>();
 
-	stringstream tokenizer(input);
+    stringstream tokenizer(input);
 
-	string eachPart;
-	while(getline(tokenizer, eachPart, delimeter))
-	{
-		tokens->push_back(eachPart);
-	}
+    string eachPart;
+    while(getline(tokenizer, eachPart, delimeter))
+    {
+        tokens->push_back(eachPart);
+    }
 
 }
 
 string Util::intToHexString(unsigned long input, unsigned int width)
 {
-	ostringstream stream;
+    ostringstream stream;
 
-	if(width != 0)
-		stream << setw(width);
+    if(width != 0)
+        stream << setw(width);
 
-	stream << setfill('0');
-	stream << hex << input;
+    stream << setfill('0');
+    stream << hex << input;
 
-	return stream.str();
+    return stream.str();
 }
 

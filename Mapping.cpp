@@ -21,7 +21,7 @@
  * Mapping.cpp
  *
  *  Created on: 2013-08-07
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #include "Mapping.h"
@@ -31,10 +31,10 @@ Mapping* Mapping::mapping = NULL;
 
 Mapping* Mapping:: getMapping()
 {
-	if(mapping == NULL)
-		mapping = new Mapping();
+    if(mapping == NULL)
+        mapping = new Mapping();
 
-	return mapping;
+    return mapping;
 }
 
 Mapping::Mapping() {
@@ -43,18 +43,18 @@ Mapping::Mapping() {
 
 string Mapping::getMachine(unsigned long switchID) {
 
-	if(switchID < 0 || switchID >= this->switch2machine.size())
-	{
-		cout << "No switch found with the id: " << switchID << endl;
-		return "None";
-	}
+    if(switchID < 0 || switchID >= this->switch2machine.size())
+    {
+        cout << "No switch found with the id: " << switchID << endl;
+        return "None";
+    }
 
-	return this->switch2machine[switchID];
+    return this->switch2machine[switchID];
 }
 
 void Mapping::instertMapping(string machine) {
 
-	this->switch2machine.push_back(machine);
+    this->switch2machine.push_back(machine);
 
 }
 

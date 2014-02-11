@@ -21,7 +21,7 @@
  * DeployDOT.h
  *
  *  Created on: 2013-08-28
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef DEPLOYDOT_H_
@@ -35,26 +35,26 @@ class DOT_Topology;
 
 class DeployDOT {
 
-	DOT_Topology* dotTopology;
-	InstantitiateSwitch*  instantitiatedSwitch;
-	InstantitiateLink* instantitiatedLink;
-	InstantitiateHost* instantitiatedHost;
-	CommandExecutor* commandExecutor;
+    DOT_Topology* dotTopology;
+    InstantitiateSwitch*  instantitiatedSwitch;
+    InstantitiateLink* instantitiatedLink;
+    InstantitiateHost* instantitiatedHost;
+    CommandExecutor* commandExecutor;
 
 public:
-	DeployDOT(DOT_Topology* dotTopology, InstantitiateSwitch*  instantitiatedSwitch,
-			InstantitiateLink* instantitiatedLink, InstantitiateHost* instantitiatedHost,
-			CommandExecutor* commandExecutor);
-	virtual ~DeployDOT();
-	void deploySwitch();
-	void deployVMs();
-	void deployLinks();
-	void deployTunnel();
-	void assignPortNumbers();
-	void assignStaticRules();
-	void createLogicalTopology();
-	void createIPMACForController();
-	void startController();
+    DeployDOT(DOT_Topology* dotTopology, InstantitiateSwitch*  instantitiatedSwitch,
+            InstantitiateLink* instantitiatedLink, InstantitiateHost* instantitiatedHost,
+            CommandExecutor* commandExecutor);
+    virtual ~DeployDOT();
+    void deploySwitch();
+    void deployVMs();
+    void deployLinks();
+    void deployTunnel();
+    void assignPortNumbers();
+    void assignStaticRules();
+    void createLogicalTopology();
+    void createIPMACForController();
+    void startController();
 
 };
 

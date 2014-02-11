@@ -21,7 +21,7 @@
  * LibvirtAttachment.h
  *
  *  Created on: 2013-08-12
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef LIBVIRTATTACHMENT_H_
@@ -31,19 +31,19 @@
 
 class LibvirtAttachment: public InstantitiateHost {
 
-	string virt_type;
-	string networkFile;
+    string virt_type;
+    string networkFile;
 
-	void loadConfiguration(string fileName);
-	string createNewImage(unsigned long host_id);
+    void loadConfiguration(string fileName);
+    string createNewImage(unsigned long host_id);
 public:
-	LibvirtAttachment(Configurations* globalConf, Hosts* hosts, CommandExecutor* commandExec, InputTopology *topology, Mapping* mapping);
-	void createHost2SwitchAttachmentConf();
-	void startHost(unsigned long host_id);
-	void prepare();
-	string tapInterfacePrefix();
+    LibvirtAttachment(Configurations* globalConf, Hosts* hosts, CommandExecutor* commandExec, InputTopology *topology, Mapping* mapping);
+    void createHost2SwitchAttachmentConf();
+    void startHost(unsigned long host_id);
+    void prepare();
+    string tapInterfacePrefix();
 
-	virtual ~LibvirtAttachment();
+    virtual ~LibvirtAttachment();
 };
 
 #endif /* LIBVIRTATTACHMENT_H_ */

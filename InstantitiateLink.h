@@ -21,7 +21,7 @@
  * InstantitiateLink.h
  *
  *  Created on: 2013-08-28
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef INSTANTITIATELINK_H_
@@ -31,11 +31,11 @@
 
 class InstantitiateLink {
 protected:
-	CommandExecutor* commandExec;
+    CommandExecutor* commandExec;
 public:
-	InstantitiateLink(CommandExecutor* commandExec);
-	virtual ~InstantitiateLink();
-	void virtual createLink(Link* newLink)=0;
+    InstantitiateLink(CommandExecutor* commandExec);
+    virtual ~InstantitiateLink();
+    void virtual createLink(Link* newLink)=0;
 };
 
 #endif /* INSTANTITIATELINK_H_ */

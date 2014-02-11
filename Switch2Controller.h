@@ -21,7 +21,7 @@
  * Switch2Controller.h
  *
  *  Created on: 2013-08-13
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef SWITCH2CONTROLLER_H_
@@ -31,20 +31,20 @@
 using namespace std;
 
 class Switch2Controller {
-	Switch2Controller(Controllers* controllers);
+    Switch2Controller(Controllers* controllers);
 
-	static Switch2Controller* switch2Controller;
+    static Switch2Controller* switch2Controller;
 
-	Controllers * controllers;
-	map<unsigned long, unsigned int> sw2controllerMap;
+    Controllers * controllers;
+    map<unsigned long, unsigned int> sw2controllerMap;
 
 public:
-	static Switch2Controller* getSwitch2Controller(Controllers* controllers);
-	unsigned int getControllerId(unsigned long switchId);
-	string getControllerIP(unsigned long switchId);
-	string getControllerPort(unsigned long switchId);
-	void loadConfiguration(string fileName);
-	virtual ~Switch2Controller();
+    static Switch2Controller* getSwitch2Controller(Controllers* controllers);
+    unsigned int getControllerId(unsigned long switchId);
+    string getControllerIP(unsigned long switchId);
+    string getControllerPort(unsigned long switchId);
+    void loadConfiguration(string fileName);
+    virtual ~Switch2Controller();
 };
 
 #endif /* SWITCH2CONTROLLER_H_ */

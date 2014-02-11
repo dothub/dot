@@ -21,35 +21,35 @@
  * Interface.cpp
  *
  *  Created on: 2013-08-13
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #include "Interface.h"
 
 string Interface::getName() {
-	return this->name;
+    return this->name;
 }
 
 Interface::Interface(string name, InterfaceType type) {
-	this->name = name;
-	this->type = type;
+    this->name = name;
+    this->type = type;
 
 }
 void Interface::assignToSwitch(Switch* theSwitch)
 {
-	this->connectedToSwitch = theSwitch;
-	this->connectedToSwitch->assignInterface(this);
+    this->connectedToSwitch = theSwitch;
+    this->connectedToSwitch->assignInterface(this);
 }
 Switch* Interface::getSwitch() {
-	return this->connectedToSwitch;
+    return this->connectedToSwitch;
 }
 
 InterfaceType Interface::getType()
 {
-	return this->type;
+    return this->type;
 }
 
 Interface::~Interface() {
-	// TODO Auto-generated destructor stub
+    // TODO Auto-generated destructor stub
 }
 

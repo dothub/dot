@@ -21,7 +21,7 @@
  * ProcessInput.h
  *
  *  Created on: 2013-08-05
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef PROCESSINPUT_H_
@@ -29,8 +29,8 @@
 
 class ProcessInput {
 public:
-	ProcessInput();
-	virtual ~ProcessInput();
+    ProcessInput();
+    virtual ~ProcessInput();
 };
 
 #endif /* PROCESSINPUT_H_ */

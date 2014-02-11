@@ -21,7 +21,7 @@
  * InstantitiateSwitch.cpp
  *
  *  Created on: 2013-08-28
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #include "InstantitiateSwitch.h"
@@ -29,11 +29,11 @@
 InstantitiateSwitch::InstantitiateSwitch(CommandExecutor* commandExec)
 {
 
-	this->commandExec = commandExec;
+    this->commandExec = commandExec;
 
 }
 
 InstantitiateSwitch::~InstantitiateSwitch() {
-	// TODO Auto-generated destructor stub
+    // TODO Auto-generated destructor stub
 }
 

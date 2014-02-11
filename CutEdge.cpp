@@ -21,22 +21,22 @@
  * CutEdge.cpp
  *
  *  Created on: 2013-08-13
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #include "CutEdge.h"
 
 
 CutEdge::CutEdge(double bandwidth, Tunnel * belongsToTunnel, double delay)
-	:Link(bandwidth, delay, CUT_EDGE){
+    :Link(bandwidth, delay, CUT_EDGE){
 
-	this->belongsToTunnel = belongsToTunnel;
+    this->belongsToTunnel = belongsToTunnel;
 }
 
 
 
 Tunnel* CutEdge::getAttachedTunnel() {
-	return this->belongsToTunnel;
+    return this->belongsToTunnel;
 }
 
 CutEdge::~CutEdge() {

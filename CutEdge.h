@@ -21,7 +21,7 @@
  * CutEdge.h
  *
  *  Created on: 2013-08-13
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef CUTEDGE_H_
@@ -37,14 +37,14 @@ class Tunnel;
 
 class CutEdge: public Link {
 
-	Tunnel * belongsToTunnel;
+    Tunnel * belongsToTunnel;
 public:
-	CutEdge(double bandwidth, Tunnel * belongsToTunnel, double delay = 0);
-	unsigned int getCutEdgeId();
-	Tunnel * getAttachedTunnel();
-	friend class Tunnel;
-	virtual ~CutEdge();
-	unsigned int cut_edge_id;
+    CutEdge(double bandwidth, Tunnel * belongsToTunnel, double delay = 0);
+    unsigned int getCutEdgeId();
+    Tunnel * getAttachedTunnel();
+    friend class Tunnel;
+    virtual ~CutEdge();
+    unsigned int cut_edge_id;
 };
 
 #endif /* CUTEDGE_H_ */

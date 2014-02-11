@@ -21,7 +21,7 @@
  * CommandExecutor.cpp
  *
  *  Created on: 2013-08-05
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #include "CommandExecutor.h"
@@ -36,101 +36,101 @@ using namespace std;
 
 string CommandExecutor::execute(string command)
 {
-	FILE * pipe = popen(command.c_str(), "r");
+    FILE * pipe = popen(command.c_str(), "r");
 
-	if(!pipe)
-		return "ERROR";
+    if(!pipe)
+        return "ERROR";
 
-	char buffer[128];
-	string result;
+    char buffer[128];
+    string result;
 
-	while(!feof(pipe))
-	{
-		if(fgets(buffer, 128, pipe) != NULL)
-			result += buffer;
-	}
+    while(!feof(pipe))
+    {
+        if(fgets(buffer, 128, pipe) != NULL)
+            result += buffer;
+    }
 
-	pclose(pipe);
+    pclose(pipe);
 
-	return result;
-	//return "";
+    return result;
+    //return "";
 }
 
 
 string CommandExecutor::executeLocal(string command) {
 
-	return this->execute(command);
+    return this->execute(command);
 }
 
 string CommandExecutor::executeScriptLocal(string filePath, string fileName, string parameters) {
 
-	ostringstream toExecute;
-	toExecute << filePath << fileName << " " << parameters;
+    ostringstream toExecute;
+    toExecute << filePath << fileName << " " << parameters;
 
-	return this->execute(toExecute.str());
+    return this->execute(toExecute.str());
 }
 
 string CommandExecutor::executeRemote(string machine, string command)
 {
-	ostringstream toExecute;
+    ostringstream toExecute;
 
-	toExecute << "ssh " << this->credential->getUserName() <<"@" << machine
-			<< " \"" << command << "\"";
-	//cout << toExecute.str() << endl;
+    toExecute << "ssh " << this->credential->getUserName() <<"@" << machine
+            << " \"" << command << "\"";
+    //cout << toExecute.str() << endl;
 
-	return this->execute(toExecute.str());
+    return this->execute(toExecute.str());
 }
 
 string CommandExecutor::executeScriptRemote(string machine, string filePath, string fileName, string parameters) {
 
-	ostringstream fileWithPath;
-	fileWithPath << filePath << fileName;
+    ostringstream fileWithPath;
+    fileWithPath << filePath << fileName;
 
-	this->copyUsingLocal("localhost", machine, fileWithPath.str(), "~/");
+    this->copyUsingLocal("localhost", machine, fileWithPath.str(), "~/");
 
-	ostringstream remoteCommand;
-	remoteCommand << "./" << fileName << " " << parameters;
-	return this->executeRemote(machine, remoteCommand.str());
+    ostringstream remoteCommand;
+    remoteCommand << "./" << fileName << " " << parameters;
+    return this->executeRemote(machine, remoteCommand.str());
 
 }
 
 void CommandExecutor::copyUsingLocal(string sourceMachine,
-		string destinationMachine, string sourcePath, string destinationPath,
-		bool isFolder) {
+        string destinationMachine, string sourcePath, string destinationPath,
+        bool isFolder) {
 
-	ostringstream toExecute;
+    ostringstream toExecute;
 
-	toExecute << "scp ";
-	if(isFolder)
-		toExecute << "-r ";
-	if(sourceMachine.compare("localhost")==0)
-		toExecute << sourcePath << " ";
-	else
-		toExecute << this->credential->getUserName() << "@" << sourceMachine << ":" << sourcePath << " ";
+    toExecute << "scp ";
+    if(isFolder)
+        toExecute << "-r ";
+    if(sourceMachine.compare("localhost")==0)
+        toExecute << sourcePath << " ";
+    else
+        toExecute << this->credential->getUserName() << "@" << sourceMachine << ":" << sourcePath << " ";
 
-	if(destinationMachine.compare("localhost")==0)
-			toExecute << destinationPath;
-	else
-		toExecute << this->credential->getUserName() <<"@" << destinationMachine << ":" << destinationPath;
+    if(destinationMachine.compare("localhost")==0)
+            toExecute << destinationPath;
+    else
+        toExecute << this->credential->getUserName() <<"@" << destinationMachine << ":" << destinationPath;
 
-	cout << toExecute.str() << endl;
-	this->execute(toExecute.str());
+    cout << toExecute.str() << endl;
+    this->execute(toExecute.str());
 
 }
 
 void CommandExecutor::copyContent(string sourceMachine,
-		string destinationMachine, string sourcePath, string destinationPath,
-		bool isFolder) {
+        string destinationMachine, string sourcePath, string destinationPath,
+        bool isFolder) {
 
-	//TODO: to be written
-	copyUsingLocal(sourceMachine, destinationMachine, sourcePath, destinationPath, isFolder);
+    //TODO: to be written
+    copyUsingLocal(sourceMachine, destinationMachine, sourcePath, destinationPath, isFolder);
 }
 
 CommandExecutor::CommandExecutor(Credentials* credential, string localIP, string localName) {
 
-	this->credential = credential;
-	this->localIP = localIP;
-	this->localName = localName;
+    this->credential = credential;
+    this->localIP = localIP;
+    this->localName = localName;
 }
 
 

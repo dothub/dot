@@ -21,7 +21,7 @@
  * Mapping.h
  *
  *  Created on: 2013-08-07
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef MAPPING_H_
@@ -36,21 +36,21 @@ class PartitioningAlgorithm;
 
 class Mapping {
 
-	Mapping();
-	static Mapping* mapping;
+    Mapping();
+    static Mapping* mapping;
 
-	vector<string> switch2machine;
+    vector<string> switch2machine;
 
-	void instertMapping(string machine);
+    void instertMapping(string machine);
 
-	friend class PartitioningAlgorithm;
+    friend class PartitioningAlgorithm;
 
 public:
-	static Mapping* getMapping();
+    static Mapping* getMapping();
 
-	string getMachine(unsigned long switchID);
+    string getMachine(unsigned long switchID);
 
-	virtual ~Mapping();
+    virtual ~Mapping();
 
 
 };

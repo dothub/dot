@@ -21,7 +21,7 @@
  * Interface.h
  *
  *  Created on: 2013-08-13
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef INTERFACE_H_
@@ -41,19 +41,19 @@ enum InterfaceType { TAP, VETH, GRE };
 class Interface {
 
 protected:
-	string name;
-	Switch * connectedToSwitch;
-	InterfaceType type;
+    string name;
+    Switch * connectedToSwitch;
+    InterfaceType type;
 
 public:
-	unsigned int port;
-	Link* belongsToLink;
-	Interface(string name, InterfaceType type);
-	void assignToSwitch(Switch* theSwitch);
-	Switch * getSwitch();
-	string getName();
-	InterfaceType getType();
-	virtual ~Interface();
+    unsigned int port;
+    Link* belongsToLink;
+    Interface(string name, InterfaceType type);
+    void assignToSwitch(Switch* theSwitch);
+    Switch * getSwitch();
+    string getName();
+    InterfaceType getType();
+    virtual ~Interface();
 };
 
 #endif /* INTERFACE_H_ */

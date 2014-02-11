@@ -21,7 +21,7 @@
  * DOTTopology.cpp
  *
  *  Created on: 2013-08-13
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #include "DOTTopology.h"
@@ -36,221 +36,221 @@ DOT_Topology* DOT_Topology::instanceDOT_Topology = NULL;
 
 
 DOT_Topology::DOT_Topology(InputTopology * inputTopology, PhysicalMachines* physicalMachines,
-		Mapping* mapping, Switch2Controller * switch2Controller, Hosts* hosts, InstantitiateHost* instantitiatedHost) {
+        Mapping* mapping, Switch2Controller * switch2Controller, Hosts* hosts, InstantitiateHost* instantitiatedHost) {
 
-	this->inputTopology = inputTopology;
-	this->physicalMachines = physicalMachines;
-	this->mapping = mapping;
-	this->switch2Controller = switch2Controller;
-	this->hosts = hosts;
-	this->instantitiatedHost = instantitiatedHost;
+    this->inputTopology = inputTopology;
+    this->physicalMachines = physicalMachines;
+    this->mapping = mapping;
+    this->switch2Controller = switch2Controller;
+    this->hosts = hosts;
+    this->instantitiatedHost = instantitiatedHost;
 }
 
 DOT_Topology* DOT_Topology::getDOT_Topology(InputTopology* inputTopology,
-		PhysicalMachines* physicalMachines, Mapping* mapping,
-		Switch2Controller* switch2Controller, Hosts* hosts, InstantitiateHost* instantitiatedHost) {
-	if(instanceDOT_Topology == NULL)
-	{
-		instanceDOT_Topology = new DOT_Topology(inputTopology, physicalMachines, mapping, switch2Controller, hosts, instantitiatedHost);
-	}
-	return instanceDOT_Topology;
+        PhysicalMachines* physicalMachines, Mapping* mapping,
+        Switch2Controller* switch2Controller, Hosts* hosts, InstantitiateHost* instantitiatedHost) {
+    if(instanceDOT_Topology == NULL)
+    {
+        instanceDOT_Topology = new DOT_Topology(inputTopology, physicalMachines, mapping, switch2Controller, hosts, instantitiatedHost);
+    }
+    return instanceDOT_Topology;
 }
 
 void DOT_Topology::generate() {
-	//generate the topology switches
-	for(unsigned long i = 0; i < this->inputTopology->getNumberOfSwitches(); i++)
-	{
-		ostringstream switchName;
-		switchName << "topo" << (i+1);
-		Switch * newSwitch = new Switch(i, switchName.str(), this->mapping->getMachine(i),
-				this->switch2Controller->getControllerIP(i), this->switch2Controller->getControllerPort(i));
-		this->topologySwitchMap[switchName.str()] = newSwitch;
-	}
-	//generating the gateway switches
-	for(unsigned int i = 0; i < this->physicalMachines->getNumberOfPhysicalMachines(); i++)
-	{
-		ostringstream switchName;
-		switchName << "gw" << (i+1);
-		unsigned long base = 15;
-		base <<= 60;
-		string dpid = Util::intToHexString(base+i+1, 16);
-		//cout << dpid << endl;
-		Switch * newSwitch = new Switch(i, switchName.str(), this->physicalMachines->getIPAddress(i), "", "", GATEWAY_SWITCH, dpid);
-		this->gatewaySwitchMap[switchName.str()] = newSwitch;
-		this->gatewaySwitchFromMachineMap[this->physicalMachines->getIPAddress(i)] = newSwitch;
+    //generate the topology switches
+    for(unsigned long i = 0; i < this->inputTopology->getNumberOfSwitches(); i++)
+    {
+        ostringstream switchName;
+        switchName << "topo" << (i+1);
+        Switch * newSwitch = new Switch(i, switchName.str(), this->mapping->getMachine(i),
+                this->switch2Controller->getControllerIP(i), this->switch2Controller->getControllerPort(i));
+        this->topologySwitchMap[switchName.str()] = newSwitch;
+    }
+    //generating the gateway switches
+    for(unsigned int i = 0; i < this->physicalMachines->getNumberOfPhysicalMachines(); i++)
+    {
+        ostringstream switchName;
+        switchName << "gw" << (i+1);
+        unsigned long base = 15;
+        base <<= 60;
+        string dpid = Util::intToHexString(base+i+1, 16);
+        //cout << dpid << endl;
+        Switch * newSwitch = new Switch(i, switchName.str(), this->physicalMachines->getIPAddress(i), "", "", GATEWAY_SWITCH, dpid);
+        this->gatewaySwitchMap[switchName.str()] = newSwitch;
+        this->gatewaySwitchFromMachineMap[this->physicalMachines->getIPAddress(i)] = newSwitch;
 
-	}
+    }
 
-	cout << "Before Tunnel Generation" << endl;
-	cout << "number of physical machine " << this->physicalMachines->getNumberOfPhysicalMachines() << endl;
-	//Generating tunnels
-	for(unsigned int i = 0; i < this->physicalMachines->getNumberOfPhysicalMachines() - 1; i++)
-		for(unsigned int j = i+1; j < this->physicalMachines->getNumberOfPhysicalMachines(); j++)
-		{
-				Tunnel * newTunnel = new Tunnel();
-				cout << "tunnel link id: " << newTunnel->getId() << endl;
-				string IPAddressMachine1 = this->physicalMachines->getIPAddress(i);
-				cout << "GW1 " << this->gatewaySwitchFromMachineMap[IPAddressMachine1]->getIPOfMachine();
+    cout << "Before Tunnel Generation" << endl;
+    cout << "number of physical machine " << this->physicalMachines->getNumberOfPhysicalMachines() << endl;
+    //Generating tunnels
+    for(unsigned int i = 0; i < this->physicalMachines->getNumberOfPhysicalMachines() - 1; i++)
+        for(unsigned int j = i+1; j < this->physicalMachines->getNumberOfPhysicalMachines(); j++)
+        {
+                Tunnel * newTunnel = new Tunnel();
+                cout << "tunnel link id: " << newTunnel->getId() << endl;
+                string IPAddressMachine1 = this->physicalMachines->getIPAddress(i);
+                cout << "GW1 " << this->gatewaySwitchFromMachineMap[IPAddressMachine1]->getIPOfMachine();
 
-				newTunnel->getInterface1()->assignToSwitch(this->gatewaySwitchFromMachineMap[IPAddressMachine1]);
-				string IPAddressMachine2 = this->physicalMachines->getIPAddress(j);
-				newTunnel->getInterface2()->assignToSwitch(this->gatewaySwitchFromMachineMap[IPAddressMachine2]);
-				cout << " GW2 " << this->gatewaySwitchFromMachineMap[IPAddressMachine2]->getIPOfMachine() << endl;
+                newTunnel->getInterface1()->assignToSwitch(this->gatewaySwitchFromMachineMap[IPAddressMachine1]);
+                string IPAddressMachine2 = this->physicalMachines->getIPAddress(j);
+                newTunnel->getInterface2()->assignToSwitch(this->gatewaySwitchFromMachineMap[IPAddressMachine2]);
+                cout << " GW2 " << this->gatewaySwitchFromMachineMap[IPAddressMachine2]->getIPOfMachine() << endl;
 
-				newTunnel->assignRemoteIPToInterface();
-				cout << "tunnel between ip " << IPAddressMachine1 << " " << IPAddressMachine2 << endl;
-				cout << "interface1 ip " << newTunnel->getInterface1()->getSwitch()->getIPOfMachine() << " ";
-				cout << "interface2 ip " << newTunnel->getInterface2()->getSwitch()->getIPOfMachine() << endl;
+                newTunnel->assignRemoteIPToInterface();
+                cout << "tunnel between ip " << IPAddressMachine1 << " " << IPAddressMachine2 << endl;
+                cout << "interface1 ip " << newTunnel->getInterface1()->getSwitch()->getIPOfMachine() << " ";
+                cout << "interface2 ip " << newTunnel->getInterface2()->getSwitch()->getIPOfMachine() << endl;
 
-				this->tunnelMap[make_pair(IPAddressMachine1, IPAddressMachine2)] = newTunnel;
-				this->tunnelMap[make_pair(IPAddressMachine2, IPAddressMachine1)] = newTunnel;
+                this->tunnelMap[make_pair(IPAddressMachine1, IPAddressMachine2)] = newTunnel;
+                this->tunnelMap[make_pair(IPAddressMachine2, IPAddressMachine1)] = newTunnel;
 
-				this->interfaceMap[make_pair(newTunnel->getInterface1()->getSwitch(), newTunnel->getInterface1()->getName())]
-				                   = newTunnel->getInterface1();
-				this->interfaceMap[make_pair(newTunnel->getInterface2()->getSwitch(), newTunnel->getInterface2()->getName())]
-								                   = newTunnel->getInterface2();
-		}
+                this->interfaceMap[make_pair(newTunnel->getInterface1()->getSwitch(), newTunnel->getInterface1()->getName())]
+                                   = newTunnel->getInterface1();
+                this->interfaceMap[make_pair(newTunnel->getInterface2()->getSwitch(), newTunnel->getInterface2()->getName())]
+                                                   = newTunnel->getInterface2();
+        }
 
-	cout << "Tunnel Generated" << endl;
+    cout << "Tunnel Generated" << endl;
 
-	unsigned int cutEdgeId = 0;
-	//generating the links
-	for(unsigned long i = 0; i < this->inputTopology->getNumberOfSwitches()-1; i++)
-		for(unsigned long j = i+1; j < this->inputTopology->getNumberOfSwitches(); j++)
-		{
-			if(this->inputTopology->getLinkBandwidth(i,j) != 0)
-			{
-				string IPAddressMachine1 = this->mapping->getMachine(i);
-				string IPAddressMachine2 = this->mapping->getMachine(j);
-				//cout << i << ": " << IPAddressMachine1 << " " << j << ": " << IPAddressMachine2 << endl;
+    unsigned int cutEdgeId = 0;
+    //generating the links
+    for(unsigned long i = 0; i < this->inputTopology->getNumberOfSwitches()-1; i++)
+        for(unsigned long j = i+1; j < this->inputTopology->getNumberOfSwitches(); j++)
+        {
+            if(this->inputTopology->getLinkBandwidth(i,j) != 0)
+            {
+                string IPAddressMachine1 = this->mapping->getMachine(i);
+                string IPAddressMachine2 = this->mapping->getMachine(j);
+                //cout << i << ": " << IPAddressMachine1 << " " << j << ": " << IPAddressMachine2 << endl;
 
-				//Same partition
-				if(IPAddressMachine1.compare(IPAddressMachine2) == 0)
-				{
-						Link* newLink = new Link(this->inputTopology->getLinkBandwidth(i,j), this->inputTopology->getLinkDelay(i, j));
+                //Same partition
+                if(IPAddressMachine1.compare(IPAddressMachine2) == 0)
+                {
+                        Link* newLink = new Link(this->inputTopology->getLinkBandwidth(i,j), this->inputTopology->getLinkDelay(i, j));
 
-						ostringstream switchName;
-						switchName << "topo" << (i+1);
-						newLink->getInterface1()->assignToSwitch(this->topologySwitchMap[switchName.str()]);
+                        ostringstream switchName;
+                        switchName << "topo" << (i+1);
+                        newLink->getInterface1()->assignToSwitch(this->topologySwitchMap[switchName.str()]);
 
-						switchName.str("");
-						switchName << "topo" << (j+1);
-						newLink->getInterface2()->assignToSwitch(this->topologySwitchMap[switchName.str()]);
-						cout << "link id: " << newLink->getId() << endl;
-						this->linkMap[newLink->getId()] = newLink;
+                        switchName.str("");
+                        switchName << "topo" << (j+1);
+                        newLink->getInterface2()->assignToSwitch(this->topologySwitchMap[switchName.str()]);
+                        cout << "link id: " << newLink->getId() << endl;
+                        this->linkMap[newLink->getId()] = newLink;
 
-						this->interfaceMap[make_pair(newLink->getInterface1()->getSwitch(), newLink->getInterface1()->getName())]
-										                   = newLink->getInterface1();
-						this->interfaceMap[make_pair(newLink->getInterface2()->getSwitch(), newLink->getInterface2()->getName())]
-														                   = newLink->getInterface2();
+                        this->interfaceMap[make_pair(newLink->getInterface1()->getSwitch(), newLink->getInterface1()->getName())]
+                                                           = newLink->getInterface1();
+                        this->interfaceMap[make_pair(newLink->getInterface2()->getSwitch(), newLink->getInterface2()->getName())]
+                                                                           = newLink->getInterface2();
 
-				}
-				else
-				{
+                }
+                else
+                {
 
-					cutEdgeId++;
+                    cutEdgeId++;
 
-					Tunnel* tunnelBetweenMachines = this->tunnelMap[make_pair(IPAddressMachine1, IPAddressMachine2)];
-					cout << i << ": " << IPAddressMachine1 << " " << j << ": " << IPAddressMachine2 << endl;
-					cout << "Tunnel in Cutedge create: ";
-					cout << tunnelBetweenMachines->getInterface1()->getSwitch()->getIPOfMachine() << " ";
-					cout << tunnelBetweenMachines->getInterface2()->getSwitch()->getIPOfMachine() << endl;
+                    Tunnel* tunnelBetweenMachines = this->tunnelMap[make_pair(IPAddressMachine1, IPAddressMachine2)];
+                    cout << i << ": " << IPAddressMachine1 << " " << j << ": " << IPAddressMachine2 << endl;
+                    cout << "Tunnel in Cutedge create: ";
+                    cout << tunnelBetweenMachines->getInterface1()->getSwitch()->getIPOfMachine() << " ";
+                    cout << tunnelBetweenMachines->getInterface2()->getSwitch()->getIPOfMachine() << endl;
 
-					//create two virtual links
-					CutEdge* newLink1 = new CutEdge(this->inputTopology->getLinkBandwidth(i,j), tunnelBetweenMachines, this->inputTopology->getLinkDelay(i, j));
-					newLink1->cut_edge_id = cutEdgeId;
-					ostringstream switchName;
-					switchName << "topo" << (i+1);
-					newLink1->getInterface1()->assignToSwitch(this->topologySwitchMap[switchName.str()]);
+                    //create two virtual links
+                    CutEdge* newLink1 = new CutEdge(this->inputTopology->getLinkBandwidth(i,j), tunnelBetweenMachines, this->inputTopology->getLinkDelay(i, j));
+                    newLink1->cut_edge_id = cutEdgeId;
+                    ostringstream switchName;
+                    switchName << "topo" << (i+1);
+                    newLink1->getInterface1()->assignToSwitch(this->topologySwitchMap[switchName.str()]);
 
-					newLink1->getInterface2()->assignToSwitch(this->gatewaySwitchFromMachineMap[IPAddressMachine1]);
+                    newLink1->getInterface2()->assignToSwitch(this->gatewaySwitchFromMachineMap[IPAddressMachine1]);
 
-					this->linkMap[newLink1->getId()] = newLink1;
-					this->interfaceMap[make_pair(newLink1->getInterface1()->getSwitch(), newLink1->getInterface1()->getName())]
-														   = newLink1->getInterface1();
-					this->interfaceMap[make_pair(newLink1->getInterface2()->getSwitch(), newLink1->getInterface2()->getName())]
-					                   	   	   	   	   	   = newLink1->getInterface2();
-					cout << "cut edge1 link id: " << newLink1->getId() << endl;
-					CutEdge* newLink2 = new CutEdge(this->inputTopology->getLinkBandwidth(i,j), tunnelBetweenMachines, 0); //Only one of the cut edge will have the delay
-					newLink2->cut_edge_id = cutEdgeId;
+                    this->linkMap[newLink1->getId()] = newLink1;
+                    this->interfaceMap[make_pair(newLink1->getInterface1()->getSwitch(), newLink1->getInterface1()->getName())]
+                                                           = newLink1->getInterface1();
+                    this->interfaceMap[make_pair(newLink1->getInterface2()->getSwitch(), newLink1->getInterface2()->getName())]
+                                                           = newLink1->getInterface2();
+                    cout << "cut edge1 link id: " << newLink1->getId() << endl;
+                    CutEdge* newLink2 = new CutEdge(this->inputTopology->getLinkBandwidth(i,j), tunnelBetweenMachines, 0); //Only one of the cut edge will have the delay
+                    newLink2->cut_edge_id = cutEdgeId;
 
-					switchName.str("");
-					switchName << "topo" << (j+1);
-					newLink2->getInterface1()->assignToSwitch(this->topologySwitchMap[switchName.str()]);
+                    switchName.str("");
+                    switchName << "topo" << (j+1);
+                    newLink2->getInterface1()->assignToSwitch(this->topologySwitchMap[switchName.str()]);
 
-					newLink2->getInterface2()->assignToSwitch(this->gatewaySwitchFromMachineMap[IPAddressMachine2]);
-					cout << "cut edge2 link id: " << newLink2->getId() << endl;
+                    newLink2->getInterface2()->assignToSwitch(this->gatewaySwitchFromMachineMap[IPAddressMachine2]);
+                    cout << "cut edge2 link id: " << newLink2->getId() << endl;
 
-					this->linkMap[newLink2->getId()] = newLink2;
+                    this->linkMap[newLink2->getId()] = newLink2;
 
-					this->interfaceMap[make_pair(newLink2->getInterface1()->getSwitch(), newLink2->getInterface1()->getName())]
-																   = newLink2->getInterface1();
-					this->interfaceMap[make_pair(newLink2->getInterface2()->getSwitch(), newLink2->getInterface2()->getName())]
-										                   	   	   	   	   	   = newLink2->getInterface2();
+                    this->interfaceMap[make_pair(newLink2->getInterface1()->getSwitch(), newLink2->getInterface1()->getName())]
+                                                                   = newLink2->getInterface1();
+                    this->interfaceMap[make_pair(newLink2->getInterface2()->getSwitch(), newLink2->getInterface2()->getName())]
+                                                                               = newLink2->getInterface2();
 
-					//assign cut edge to tunnel
-					tunnelBetweenMachines->assignCutEdges(newLink1, newLink2);
+                    //assign cut edge to tunnel
+                    tunnelBetweenMachines->assignCutEdges(newLink1, newLink2);
 
-					this->cutEdgesPairVector.push_back(make_pair(newLink1, newLink2));
-
-
-				}
-			}
-
-		}
-
-	cout << "Link Generated" << endl;
-	//hosts generation
-	for(unsigned long i = 0; i < this->hosts->getNumberOfHosts(); i++)
-	{
-		unsigned long switchId = this->hosts->getSwitch(i);
-		ostringstream switchName;
-		switchName << "topo" << (switchId+1);
-		Switch* attachedToSwitch = this->topologySwitchMap[switchName.str()];
+                    this->cutEdgesPairVector.push_back(make_pair(newLink1, newLink2));
 
 
-		ostringstream interfaceName;
-		interfaceName << this->instantitiatedHost->tapInterfacePrefix();
-		interfaceName << attachedToSwitch->getNewVMAttachementPoint();
+                }
+            }
+
+        }
+
+    cout << "Link Generated" << endl;
+    //hosts generation
+    for(unsigned long i = 0; i < this->hosts->getNumberOfHosts(); i++)
+    {
+        unsigned long switchId = this->hosts->getSwitch(i);
+        ostringstream switchName;
+        switchName << "topo" << (switchId+1);
+        Switch* attachedToSwitch = this->topologySwitchMap[switchName.str()];
 
 
-		Interface* newInterface = new Interface(interfaceName.str(), TAP);
-		newInterface->assignToSwitch(attachedToSwitch);
+        ostringstream interfaceName;
+        interfaceName << this->instantitiatedHost->tapInterfacePrefix();
+        interfaceName << attachedToSwitch->getNewVMAttachementPoint();
 
-		this->interfaceMap[make_pair(attachedToSwitch, interfaceName.str())] = newInterface;
 
-	}
+        Interface* newInterface = new Interface(interfaceName.str(), TAP);
+        newInterface->assignToSwitch(attachedToSwitch);
 
-	cout << "DOT Generated" << endl;
+        this->interfaceMap[make_pair(attachedToSwitch, interfaceName.str())] = newInterface;
+
+    }
+
+    cout << "DOT Generated" << endl;
 
 }
 
 DOT_Topology::~DOT_Topology() {
 
-	for(map<unsigned long, Link*>::iterator iterator = this->linkMap.begin();
-			iterator != this->linkMap.end(); iterator++)
-	{
-		delete iterator->second;
-	}
+    for(map<unsigned long, Link*>::iterator iterator = this->linkMap.begin();
+            iterator != this->linkMap.end(); iterator++)
+    {
+        delete iterator->second;
+    }
 
-	for(map<pair<string, string>, Tunnel* >::iterator iterator = this->tunnelMap.begin();
-				iterator != this->tunnelMap.end(); iterator++)
-	{
-			delete iterator->second;
-	}
+    for(map<pair<string, string>, Tunnel* >::iterator iterator = this->tunnelMap.begin();
+                iterator != this->tunnelMap.end(); iterator++)
+    {
+            delete iterator->second;
+    }
 
-	for(map<string, Switch*>::iterator iterator = this->topologySwitchMap.begin();
-			iterator != this->topologySwitchMap.end(); iterator++)
-	{
-		delete iterator->second;
-	}
+    for(map<string, Switch*>::iterator iterator = this->topologySwitchMap.begin();
+            iterator != this->topologySwitchMap.end(); iterator++)
+    {
+        delete iterator->second;
+    }
 
 
-	for(map<string, Switch*>::iterator iterator = this->gatewaySwitchMap.begin();
-			iterator != this->gatewaySwitchMap.end(); iterator++)
-	{
-		delete iterator->second;
-	}
+    for(map<string, Switch*>::iterator iterator = this->gatewaySwitchMap.begin();
+            iterator != this->gatewaySwitchMap.end(); iterator++)
+    {
+        delete iterator->second;
+    }
 
 }
 

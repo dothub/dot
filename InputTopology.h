@@ -21,7 +21,7 @@
  * LogicalTopology.h
  *
  *  Created on: 2013-08-06
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef INPUTTOPOLOGY_H_
@@ -32,37 +32,37 @@ using namespace std;
 
 class InputTopology {
 
-	struct LinkProperty
-	{
-		double bandwidth;
-		double delay;
+    struct LinkProperty
+    {
+        double bandwidth;
+        double delay;
 
-		LinkProperty():bandwidth(0),delay(0){}
-	};
+        LinkProperty():bandwidth(0),delay(0){}
+    };
 
-	LinkProperty ** topology;
+    LinkProperty ** topology;
 
-	static InputTopology* inputTopology;
-	unsigned long numberOfSwitches;
+    static InputTopology* inputTopology;
+    unsigned long numberOfSwitches;
 
-	InputTopology();
+    InputTopology();
 
 public:
-	static InputTopology* getInputTopology();
+    static InputTopology* getInputTopology();
 
-	void populateTopology(string fileName);
+    void populateTopology(string fileName);
 
 
-	unsigned long getNumberOfSwitches();
-	void populateTopologyBandwidth(double ** & topologyBandwidth);
-	void populateTopologyDelay(double ** & topologyDelay);
+    unsigned long getNumberOfSwitches();
+    void populateTopologyBandwidth(double ** & topologyBandwidth);
+    void populateTopologyDelay(double ** & topologyDelay);
 
-	double getLinkDelay(unsigned long switch1, unsigned long switch2);
-	double getLinkBandwidth(unsigned long switch1, unsigned long switch2);
+    double getLinkDelay(unsigned long switch1, unsigned long switch2);
+    double getLinkBandwidth(unsigned long switch1, unsigned long switch2);
 
-	bool isNeighbor(unsigned long switch1, unsigned long switch2);
+    bool isNeighbor(unsigned long switch1, unsigned long switch2);
 
-	virtual ~InputTopology();
+    virtual ~InputTopology();
 };
 
 #endif /* INPUTTOPOLOGY_H_ */

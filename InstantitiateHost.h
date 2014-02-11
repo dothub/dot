@@ -21,7 +21,7 @@
  * HostAttachment.h
  *
  *  Created on: 2013-08-12
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef INSTANTITIATEHOST_H
@@ -38,23 +38,23 @@ INSTANTITIATEHOST_H
 class InstantitiateHost {
 
 protected:
-	Configurations* globalConf;
-	Hosts* hosts;
-	CommandExecutor* commandExec;
-	Mapping* mapping;
-	InputTopology* topology;
+    Configurations* globalConf;
+    Hosts* hosts;
+    CommandExecutor* commandExec;
+    Mapping* mapping;
+    InputTopology* topology;
 
-	virtual void createHost2SwitchAttachmentConf()=0;
-	virtual void loadConfiguration(string fileName)=0;
+    virtual void createHost2SwitchAttachmentConf()=0;
+    virtual void loadConfiguration(string fileName)=0;
 
 public:
-	InstantitiateHost(Configurations* globalConf, Hosts* hosts, CommandExecutor* commandExec, 	InputTopology * topology, Mapping* mapping);
+    InstantitiateHost(Configurations* globalConf, Hosts* hosts, CommandExecutor* commandExec,   InputTopology * topology, Mapping* mapping);
 
-	virtual void prepare()=0;
-	virtual void startHost(unsigned long host_id)=0;
-	virtual string tapInterfacePrefix()=0;
+    virtual void prepare()=0;
+    virtual void startHost(unsigned long host_id)=0;
+    virtual string tapInterfacePrefix()=0;
 
-	virtual ~InstantitiateHost();
+    virtual ~InstantitiateHost();
 };
 
 #endif /* INSTANTITIATEHOST_H */

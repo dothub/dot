@@ -21,7 +21,7 @@
  * Credentials.h
  *
  *  Created on: 2013-08-12
- *      Author: ar3roy
+ *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
 #ifndef CREDENTIALS_H_
@@ -32,22 +32,22 @@ using namespace std;
 
 class Credentials {
 
-	static Credentials* credentials;
+    static Credentials* credentials;
 
-	string userName;
-	string password;
-	string key;
+    string userName;
+    string password;
+    string key;
 
-	Credentials();
+    Credentials();
 public:
-	static Credentials* getCredentials();
-	void populateCredentials(string fileName);
+    static Credentials* getCredentials();
+    void populateCredentials(string fileName);
 
-	string getUserName();
-	string getPassword();
-	string getKeyName();
+    string getUserName();
+    string getPassword();
+    string getKeyName();
 
-	virtual ~Credentials();
+    virtual ~Credentials();
 };
 
 #endif /* CREDENTIALS_H_ */
