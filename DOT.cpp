@@ -32,8 +32,6 @@
 #include <map>
 #include <sstream>
 #include "PartitioningAlgorithm.h"
-#include "SA.h"
-#include "SA_Weighted.h"
 #include "CommandExecutor.h"
 #include "InputTopology.h"
 #include "PhysicalMachines.h"
