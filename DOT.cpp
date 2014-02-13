@@ -96,6 +96,7 @@ void prepare(string globalConfFile)
     if( partitioning->run() == false)
     {
         cout << "Embedding is not successful" << endl;
+        return;
     }
         
     // << "IP: " << physicalEnvironment->getIPAddress("cn212") << endl;
