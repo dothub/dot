@@ -64,7 +64,7 @@ GuranteedEmbedding::GuranteedEmbedding(string configurationFile, InputTopology* 
 
 }
 
-void GuranteedEmbedding::generateGreedy()
+bool GuranteedEmbedding::generateGreedy()
 {
     cout << "At GG NS: " << this->numberOfSwitches << endl;
     for(unsigned long count = 0; count < this->numberOfSwitches; count++)
@@ -74,6 +74,11 @@ void GuranteedEmbedding::generateGreedy()
         cout << "SwithchId: " << switch_id << endl;
         unsigned int machine_id = this->getBestPhysicalMachine(switch_id);
         cout << machine_id << endl;
+        if(machine_id == -1)
+        {
+            cout << "No feasible mapping" << endl;
+            return false;
+        }
         //updated the feasiblity
         for(unsigned long i = 0; i < this->numberOfSwitches; i++)
         {
@@ -97,6 +102,7 @@ void GuranteedEmbedding::generateGreedy()
         cout << "Assinging to embedding " << endl;
         this->currentEmbedding[switch_id] = machine_id;
     }
+    return true;
 }
 unsigned long GuranteedEmbedding::getNeighborCount(unsigned int switchId)
 {
@@ -211,6 +217,10 @@ unsigned int GuranteedEmbedding::getBestPhysicalMachine(unsigned long switchId)
                 capacity  = this->machines[*iter]->totalCPU;
             }
         }
+
+        //No feasible mapping
+        if(currentBest == -1)
+            return -1;
 
         this->machines[currentBest]->active = true;
         cout << "adding " << currentBest << endl;
@@ -517,11 +527,13 @@ unsigned int GuranteedEmbedding::getNumberOfActiveMachines(long * next)
     }
     return activeCount;
 }
-void GuranteedEmbedding::run()
+bool GuranteedEmbedding::run()
 {
     this->globalBest = new long[this->numberOfSwitches];
     cout << "Before greedy " << endl;
-    generateGreedy();
+    if(generateGreedy() == false)
+        return false;
+
     cout << "AFTER greedy now " << endl;
     cout << "0: " << this->currentEmbedding[0];
     cout << "Max: " << this->currentEmbedding[this->numberOfSwitches];
@@ -572,6 +584,8 @@ void GuranteedEmbedding::run()
     }
 
     generateOutput();
+
+    return true;
 }
 
 void GuranteedEmbedding::generateOutput()

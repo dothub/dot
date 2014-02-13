@@ -93,7 +93,11 @@ void prepare(string globalConfFile)
     partitioning = new GuranteedEmbedding(globalConf->partitioningAlgoConfFile, 
         inputTopology, physicalEnvironment, mapping, hosts);
 
-    partitioning->run();
+    if( partitioning->run() == false)
+    {
+        cout << "Embedding is not successful" << endl;
+    }
+        
     // << "IP: " << physicalEnvironment->getIPAddress("cn212") << endl;
     for(unsigned long i = 0; i < inputTopology->getInputTopology()->getNumberOfSwitches(); i++)
         cout << "Mapping: " << i << " " << mapping->getMapping()->getMachine(i) << endl;

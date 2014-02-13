@@ -38,7 +38,7 @@ protected:
 public:
     PartitioningAlgorithm();
     virtual ~PartitioningAlgorithm();
-    virtual void run() = 0;
+    virtual bool run() = 0;
 };
 
 #endif /* PARTITIONINGALGORITHM_H_ */

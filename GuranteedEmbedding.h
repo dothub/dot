@@ -109,7 +109,7 @@ class GuranteedEmbedding: public PartitioningAlgorithm {
         unsigned int* cpuOfPhysicalMachines;
 
         //Greedy
-        void generateGreedy();
+        bool generateGreedy();
         double rho;
         int * currentEmbedding;
         map<unsigned int, NodeValue*> unassignedNode;
@@ -162,7 +162,7 @@ class GuranteedEmbedding: public PartitioningAlgorithm {
         bool isFeasible(long * embedding );
 
     public:
-        void run();
+        bool  run();
         GuranteedEmbedding(string SAConfigurationFile, InputTopology * inputTopology, PhysicalMachines* physicalMachines, Mapping * mapping, Hosts* hosts);
         ~GuranteedEmbedding();
 };
