@@ -44,8 +44,6 @@ public:
     void populateCredentials(string fileName);
 
     string getUserName();
-    string getPassword();
-    string getKeyName();
 
     virtual ~Credentials();
 };
