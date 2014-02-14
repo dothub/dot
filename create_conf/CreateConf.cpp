@@ -19,7 +19,7 @@
 
 /*
  * 
- *  DOT.cpp
+ *  CreateConf.cpp
  *  Created on: 2014-02-13
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
