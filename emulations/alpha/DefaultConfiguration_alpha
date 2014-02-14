@@ -1,0 +1,15 @@
+MasterName=cn211
+MasterIP=10.254.254.45
+PhysicalTopology=./emulations/alpha/PhysicalTopology_alpha
+PhysicalMachineDelay=Yes
+PhysicalDelayFile=./emulations/alpha/PhysicalTopologyDelay_alpha
+LogicalTopology=./emulations/alpha/LogicalTopology_alpha
+HyperVisorConfiguration=./emulations/alpha/Hypervisor_alpha
+HyperVisor=lib-virt
+HostImage=~/images/base_VM.qcow2
+HostConfiguration=./emulations/alpha/HostInfo_alpha
+Controllers=./emulations/alpha/ControllerInfo_alpha
+SwitchToController=./emulations/alpha/Switch2Controller_alpha
+UserCredentials=./emulations/alpha/CredentialFile_alpha
+PartitioningAlgorithm=Guaranteed_Embedding
+PartitioningAlgorithmConfiguration=Guaranteed_Embedding_Conf

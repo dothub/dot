@@ -118,7 +118,7 @@ void prepare(string globalConfFile)
 
     Credentials* credentials = Credentials::getCredentials();
     credentials->populateCredentials(globalConf->credentialFile);
-    cout << credentials->getUserName() << " " << credentials->getPassword() << " " << credentials->getKeyName() << endl;
+    cout << credentials->getUserName() << endl;
 
     CommandExecutor commandExecutor(credentials, globalConf->masterIPAddress, globalConf->masterName);
 
