@@ -18,7 +18,7 @@
 */
 
 /*
- * main.cpp
+ * DOT.cpp
  *
  *  Created on: 2013-03-18
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
