@@ -114,7 +114,7 @@ void prepare(string globalConfFile)
     cout << "controller: " <<  sw2controller->getControllerIP(1) << endl;
 
 
-    cout << controllers->getIPAddress(1) << " " << controllers->getPort(1) << endl;
+    //cout << controllers->getIPAddress(1) << " " << controllers->getPort(1) << endl;
 
     Credentials* credentials = Credentials::getCredentials();
     credentials->populateCredentials(globalConf->credentialFile);
@@ -155,7 +155,7 @@ int main(int argc, char * argv[])
             "-g global configuration file (default: DefaultConfiguration)" << endl;
         exit(0);
     }
-    else if(argc == 2 && strcmp(argv[1],"-g") == 0)
+    else if(argc == 3 && strcmp(argv[1],"-g") == 0)
             globalConfFile = argv[2];
 
     else if(argc==1)
@@ -165,6 +165,7 @@ int main(int argc, char * argv[])
 
     //CommandExecutor executor;
     //executor.execute("ssh nsm2.cs.uwaterloo.ca \"./temp.sh arup.r.roy.tmp\"");
+    cout << globalConfFile << endl;
 
     prepare(globalConfFile);
 

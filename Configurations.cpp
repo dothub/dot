@@ -135,8 +135,8 @@ void Configurations::loadConfiguration() {
         delayBetweenPhysicalMachine = true;
         physicalMachineDelayFile = "PhysicalTopologyDelay";
 
-        if(eachConfiguration.find("PhysicalDealyFile") != eachConfiguration.end())
-            physicalMachineDelayFile = eachConfiguration["PhysicalDealyFile"];
+        if(eachConfiguration.find("PhysicalDelayFile") != eachConfiguration.end())
+            physicalMachineDelayFile = eachConfiguration["PhysicalDelayFile"];
     }
 
 }

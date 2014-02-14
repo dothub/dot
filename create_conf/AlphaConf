@@ -64,7 +64,7 @@ h5 s2 1
 #Controller # should start with 1
 #Next, each line a tuple:
 # c# ip port
-2
+1
 c1 10.254.254.45 6633
 
 [Switch2Controller]
