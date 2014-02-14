@@ -71,16 +71,6 @@ void Credentials::populateCredentials(string fileName) {
         else
             cout << "Please enter an user name in credential file: " << fileName <<  " with key: UserName" << endl;
 
-        if(confMap.find("Password") != confMap.end())
-        {
-            this->password = confMap["Password"];
-        }
-        else if(confMap.find("KeyFile") != confMap.end())
-        {
-            this->key = confMap["KeyFile"];
-        }
-        else
-            cout << "Please enter a password or public key information in: " << fileName <<  " with key: UserName or Key: KeyFile" << endl;
     }
     else
         cout << "Unable to open credential file: " << fileName << endl;
@@ -89,14 +79,6 @@ void Credentials::populateCredentials(string fileName) {
 string Credentials::getUserName() {
 
     return this->userName;
-}
-
-string Credentials::getPassword() {
-    return this->password;
-}
-
-string Credentials::getKeyName() {
-    return this->key;
 }
 
 Credentials::~Credentials() {
