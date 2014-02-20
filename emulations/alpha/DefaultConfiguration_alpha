@@ -1,8 +1,7 @@
 MasterName=cn211
 MasterIP=10.254.254.45
 PhysicalTopology=./emulations/alpha/PhysicalTopology_alpha
-PhysicalMachineDelay=Yes
-PhysicalDelayFile=./emulations/alpha/PhysicalTopologyDelay_alpha
+PhysicalMachineDelay=No
 LogicalTopology=./emulations/alpha/LogicalTopology_alpha
 HyperVisorConfiguration=./emulations/alpha/Hypervisor_alpha
 HyperVisor=lib-virt

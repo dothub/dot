@@ -31,6 +31,7 @@
 #include <float.h>
 #include <map>
 #include <sstream>
+#include <fstream>
 #include "PartitioningAlgorithm.h"
 #include "CommandExecutor.h"
 #include "InputTopology.h"
@@ -131,6 +132,27 @@ void prepare(string globalConfFile)
     DOT_Topology* dotTopology = DOT_Topology::getDOT_Topology(inputTopology, physicalEnvironment,
             mapping, sw2controller, hosts, instantitiatedHost);
     dotTopology->generate();
+
+    //Needs to modify
+    
+    ofstream fout("ongoing_emulation/mapping"); 
+ 
+    fout << credentials->getUserName() << endl;
+ 
+    if(fout.is_open()) 
+    { 
+        for(unsigned long i = 0; i < hosts->getNumberOfHosts(); i++) 
+        { 
+            fout << "h" << i+1 << " " << mapping->getMapping()->getMachine(hosts->getSwitch(i)) << endl; 
+        } 
+        fout.close(); 
+    } 
+    else 
+        cout << "Mappign file cannot be created" << endl; 
+ 
+   
+
+
 
     DeployDOT *deploy = new DeployDOT(dotTopology, instantitiatedSwitch, instantitiatedLink, instantitiatedHost,  &commandExecutor);
 

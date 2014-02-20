@@ -8,12 +8,10 @@ alpha
 #First line: Number of physical machines
 #Then, each line specifies a tuple:
 #type name ip cpu memory disk external_interface bandwidth
-5
+3
 manager cn211 10.254.254.45
-node cn212 10.254.254.46 4 512 8 eth0 1024
-node cn213 10.254.254.47 5 512 8 eth0 1024
-node cn214 10.254.254.48 4 512 8 eth0 1024
-node cn215 10.254.254.49 5 512 8 eth0 1024
+node cn215 10.254.254.49 4 512 8 eth0 1024
+node cn216 10.254.254.50 5 512 8 eth0 1024
 
 
 [PhysicalTopologyDelay]
@@ -23,8 +21,7 @@ node cn215 10.254.254.49 5 512 8 eth0 1024
 #First line: Number of pair of machines have delay
 #Next, each line specifies a tuple
 #machine1, machine2, delay (ms)
-1
-cn212 cn214 10
+0
 
 [LogicalTopology]
 #First line: Number of switches, number of links

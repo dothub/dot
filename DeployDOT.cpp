@@ -62,6 +62,8 @@ DeployDOT::~DeployDOT() {
 
 }
 
+
+
 void DeployDOT::deploySwitch() {
     //deploy topo switch
     for( map<string, Switch*>::iterator iter = this->dotTopology->topologySwitchMap.begin();

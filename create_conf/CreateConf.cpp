@@ -49,7 +49,7 @@ void processConfFile(string fileName)
 
     string emulationName;
     string directory = "./emulations/";
-    string baseIP= "10.0.0.0";
+    string baseIP= "10.254.0.0";
     
     string defaultConfFileName = "DefaultConfiguration_";
     string physicalTopologyFileName = "PhysicalTopology_";

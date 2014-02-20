@@ -160,7 +160,7 @@ string LibvirtAttachment::createNewImage(unsigned long host_id)
     string imagePath = Util::getPathName(this->globalConf->hostImage);
 
     ostringstream newImageName;
-    newImageName << imagePath << "clone_H" << host_id+1 << ".qcow2";
+    newImageName << imagePath << "clone_h" << host_id+1 << ".qcow2";
     ostringstream command;
 
     command << "sudo qemu-img create -b ";
@@ -180,10 +180,10 @@ void LibvirtAttachment::startHost(unsigned long host_id)
 
     ostringstream command;
 
-    command << "sudo virsh undefine H" << host_id+1;
+    command << "sudo virsh undefine h" << host_id+1;
     this->commandExec->executeRemote(this->mapping->getMachine(switchId), command.str());
     command.str("");
-    command << "sudo virsh destroy H" << host_id+1;
+    command << "sudo virsh destroy h" << host_id+1;
     this->commandExec->executeRemote(this->mapping->getMachine(switchId), command.str());
     command.str("");
     command << "sudo virt-install";
@@ -193,13 +193,17 @@ void LibvirtAttachment::startHost(unsigned long host_id)
             command << " --connect qemu:///system --virt-type kvm";
     }
 
-    command << " --name H" << host_id+1;
+    command << " --name h" << host_id+1;
     command << " --ram 64 ";
     command << " --disk  path="<< this->createNewImage(host_id)<<",format=qcow2";
-    command << " --vnc --noautoconsole";
+    command << " --graphics vnc,listen=0.0.0.0 --noautoconsole";
     command << " --network network=ovs_network_" << switchId+1 << ",mac="<< mac;
     command << " --boot hd";
 
+    this->commandExec->executeRemote(this->mapping->getMachine(switchId), command.str());
+
+    command.str("");
+    command << "sudo virsh autostart h" << host_id+1;
     this->commandExec->executeRemote(this->mapping->getMachine(switchId), command.str());
 
 }
