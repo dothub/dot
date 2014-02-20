@@ -245,7 +245,7 @@ void DeployDOT::startController() {
 
 
     this->commandExecutor->executeLocal("sudo kill `sudo lsof -t -i:6633`");
-    this->commandExecutor->executeLocal("java -jar ~/floodlight/target/floodlight.jar -cf ~/floodlight/src/main/resources/floodlightdefault.properties&");
+    this->commandExecutor->executeLocal("java -jar ~/floodlight/target/floodlight.jar -cf ~/floodlight/src/main/resources/floodlightdefault.properties &> /dev/null &");
 }
 
 
