@@ -197,7 +197,7 @@ void LibvirtAttachment::startHost(unsigned long host_id)
     command << " --ram 64 ";
     command << " --disk  path="<< this->createNewImage(host_id)<<",format=qcow2";
     command << " --graphics vnc,listen=0.0.0.0 --noautoconsole";
-    command << " --network network=ovs_network_" << switchId+1 << ",mac="<< mac;
+    command << " --network model=virtio,network=ovs_network_" << switchId+1 << ",mac="<< mac;
     command << " --boot hd";
 
     this->commandExec->executeRemote(this->mapping->getMachine(switchId), command.str());
