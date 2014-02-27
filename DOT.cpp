@@ -33,30 +33,14 @@
 #include <sstream>
 #include <fstream>
 #include "PartitioningAlgorithm.h"
-#include "CommandExecutor.h"
-#include "InputTopology.h"
-#include "PhysicalMachines.h"
+#include "Global.h"
 #include "Configurations.h"
-#include "Util.h"
-#include "Hosts.h"
-#include "Controllers.h"
-#include "Credentials.h"
-#include "InstantitiateHost.h"
 #include "LibvirtAttachment.h"
-#include "Switch2Controller.h"
 #include "GuranteedEmbedding.h"
-#include "Switch.h"
-#include "Tunnel.h"
-#include "Interface.h"
-#include "CutEdge.h"
 #include "DOTTopology.h"
-#include "InstantitiateHost.h"
-#include "InstantitiateLink.h"
-#include "InstantitiateSwitch.h"
-#include "OVS_1_9.h"
-#include "VLink.h"
+#include "OVS_1_10.h"
 #include "DeployDOT.h"
-
+#include "VLink.h"
 
 using namespace std;
 
@@ -65,34 +49,42 @@ void prepare(string globalConfFile)
 {
     Configurations *globalConf = Configurations::getConfiguration(globalConfFile);
 
-    InputTopology *inputTopology = InputTopology::getInputTopology();
-    inputTopology->populateTopology(globalConf->logicalTopologyFile);
+    Global::inputTopology = InputTopology::getInputTopology();
+    Global::inputTopology->populateTopology(globalConf->logicalTopologyFile);
 
-    PhysicalMachines * physicalEnvironment = PhysicalMachines::getPhysicalMachines();
-    physicalEnvironment->populateMachines(globalConf->physicalTopologyFile);
+    Global::physicalMachines = PhysicalMachines::getPhysicalMachines();
+    Global::physicalMachines->populateMachines(globalConf->physicalTopologyFile);
     {
         if(globalConf->delayBetweenPhysicalMachine)
         {
-            physicalEnvironment->populateDelay(globalConf->physicalMachineDelayFile);
+            Global::physicalMachines->populateDelay(globalConf->physicalMachineDelayFile);
         }
 
     }
 
-    cout << "Dealy: " << physicalEnvironment->getDelay(0, 1) << endl;
-    cout << "Dealy: " << physicalEnvironment->getDelay(1, 1) << endl;
-    Hosts* hosts = Hosts::getHosts();
-    hosts->populateHosts(globalConf->hostInfoFile);
-    //cout << "here" << endl;
+    Global::hosts = Hosts::getHosts();
+    Global::hosts->populateHosts(globalConf->hostInfoFile);
 
-    //cout << "IP: " << phy->getPhysicalMachines().getIPAddress("cn212") << endl;
-    //cout << "IP: " << physicalEnvironment->getIPAddress("cn212") << endl;
-    Mapping * mapping = Mapping::getMapping();
-    mapping = mapping->getMapping();
+    Global::controllers = Controllers::getControllers();
+    Global::controllers->populateControllers(globalConf->controllerInfoFile);
+    
+    Global::sw2controller = Switch2Controller::getSwitch2Controller(Global::controllers);
+    Global::sw2controller->loadConfiguration(globalConf->switch2ControllerFile);
+
+    Global::credentials = Credentials::getCredentials();
+    Global::credentials->populateCredentials(globalConf->credentialFile);
+
+    Global::commandExecutor = new CommandExecutor(Global::credentials, 
+        globalConf->masterIPAddress, globalConf->masterName);
 
 
-    PartitioningAlgorithm * partitioning;
-    partitioning = new GuranteedEmbedding(globalConf->partitioningAlgoConfFile, 
-        inputTopology, physicalEnvironment, mapping, hosts);
+    Global::mapping = Mapping::getMapping();
+
+
+    PartitioningAlgorithm * partitioning = new GuranteedEmbedding(
+        globalConf->partitioningAlgoConfFile, 
+        Global::inputTopology, Global::physicalMachines, 
+        Global::mapping, Global::hosts);
 
     if( partitioning->run() == false)
     {
@@ -100,72 +92,55 @@ void prepare(string globalConfFile)
         return;
     }
         
-    // << "IP: " << physicalEnvironment->getIPAddress("cn212") << endl;
-    for(unsigned long i = 0; i < inputTopology->getInputTopology()->getNumberOfSwitches(); i++)
-        cout << "Mapping: " << i << " " << mapping->getMapping()->getMachine(i) << endl;
 
-    //cout << hosts->getIPAddress(0) << " " << hosts->getMacAddress(0) << endl;
-
-    Controllers* controllers = Controllers::getControllers();
-    controllers->populateControllers(globalConf->controllerInfoFile);
-
-    Switch2Controller* sw2controller = Switch2Controller::getSwitch2Controller(controllers);
-    sw2controller->loadConfiguration(globalConf->switch2ControllerFile);
-
-    cout << "controller: " <<  sw2controller->getControllerIP(1) << endl;
-
-
-    //cout << controllers->getIPAddress(1) << " " << controllers->getPort(1) << endl;
-
-    Credentials* credentials = Credentials::getCredentials();
-    credentials->populateCredentials(globalConf->credentialFile);
-    cout << credentials->getUserName() << endl;
-
-    CommandExecutor commandExecutor(credentials, globalConf->masterIPAddress, globalConf->masterName);
-
-    InstantitiateSwitch*  instantitiatedSwitch = new OVS_1_9(&commandExecutor);
-    InstantitiateLink* instantitiatedLink = new VLink(&commandExecutor);
-    InstantitiateHost* instantitiatedHost = new LibvirtAttachment(globalConf, hosts, &commandExecutor, inputTopology, mapping);
+    
+    Global::instantitiatedSwitch = new OVS_1_10(Global::commandExecutor);
+    Global::instantitiatedLink = new VLink(Global::commandExecutor);
+    Global::instantitiatedHost = new LibvirtAttachment(globalConf, Global::hosts, 
+                   Global::commandExecutor, Global::inputTopology, Global::mapping);
 
     
 
-    DOT_Topology* dotTopology = DOT_Topology::getDOT_Topology(inputTopology, physicalEnvironment,
-            mapping, sw2controller, hosts, instantitiatedHost);
-    dotTopology->generate();
-
-    //Needs to modify
     
-    ofstream fout("ongoing_emulation/mapping"); 
- 
-    fout << credentials->getUserName() << endl;
- 
-    if(fout.is_open()) 
-    { 
-        for(unsigned long i = 0; i < hosts->getNumberOfHosts(); i++) 
-        { 
-            fout << "h" << i+1 << " " << mapping->getMapping()->getMachine(hosts->getSwitch(i)) << endl; 
-        } 
-        fout.close(); 
-    } 
-    else 
-        cout << "Mappign file cannot be created" << endl; 
- 
-   
-
-
-
-    DeployDOT *deploy = new DeployDOT(dotTopology, instantitiatedSwitch, instantitiatedLink, instantitiatedHost,  &commandExecutor);
-
-
-
-    cout << "end" <<endl;
-
 }
 
 void deploy()
 {
+    
+    DOT_Topology* dotTopology = DOT_Topology::getDOT_Topology(Global::inputTopology, 
+               Global::physicalMachines, Global::mapping, 
+               Global::sw2controller, Global::hosts, Global::instantitiatedHost);
+    
+    dotTopology->generate();
+
+    DeployDOT *deploy = new DeployDOT(dotTopology, Global::instantitiatedSwitch, 
+                            Global::instantitiatedLink, Global::instantitiatedHost, 
+                            Global::commandExecutor);
+
 
 }
+
+
+void generateMappingForRemote()
+{
+  
+    fstream fout("ongoing_emulation/mapping"); 
+ 
+    fout << Global::credentials->getUserName() << endl;
+ 
+    if(fout.is_open()) 
+    { 
+        for(unsigned long i = 0; i < Global::hosts->getNumberOfHosts(); i++) 
+        { 
+            fout << "h" << i+1 << " " 
+                << Global::mapping->getMapping()->getMachine(Global::hosts->getSwitch(i)) << endl; 
+        } 
+        fout.close(); 
+    } 
+    else 
+        cout << "Mapping file cannot be created" << endl; 
+}
+
 
 int main(int argc, char * argv[])
 {
@@ -185,11 +160,12 @@ int main(int argc, char * argv[])
     else
         exit(1);
 
-    //CommandExecutor executor;
-    //executor.execute("ssh nsm2.cs.uwaterloo.ca \"./temp.sh arup.r.roy.tmp\"");
     cout << globalConfFile << endl;
 
     prepare(globalConfFile);
+    deploy();
+    generateMappingForRemote();
+
 
     return 0;
 }

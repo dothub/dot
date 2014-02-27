@@ -1,0 +1,8 @@
+<network>
+  <name>ovs_network_5</name>
+  <forward mode='bridge'/>
+  <bridge name='topo5'/>
+  <virtualport type='openvswitch'/>
+  <portgroup name='vlan-01' default='yes'>
+  </portgroup> 
+</network>

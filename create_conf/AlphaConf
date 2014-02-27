@@ -9,10 +9,10 @@ alpha
 #Then, each line specifies a tuple:
 #type name ip cpu memory disk external_interface bandwidth
 3
-manager cn211 10.254.254.45
-node cn215 10.254.254.49 4 512 8 eth0 1024
-node cn216 10.254.254.50 5 512 8 eth0 1024
-
+manager cn216 10.254.254.50
+node cn213 10.254.254.47 4 11000 600 eth0 1024
+node cn214 10.254.254.48 4 11000 600 eth0 1024
+node cn215 10.254.254.49 4 11000 600 eth0 1024
 
 [PhysicalTopologyDelay]
 #Pairwise delay between any physical hosts
@@ -21,7 +21,10 @@ node cn216 10.254.254.50 5 512 8 eth0 1024
 #First line: Number of pair of machines have delay
 #Next, each line specifies a tuple
 #machine1, machine2, delay (ms)
-0
+3
+cn213 cn214 1
+cn214 cn215 1
+cn213 cn215 1
 
 [LogicalTopology]
 #First line: Number of switches, number of links
@@ -29,9 +32,10 @@ node cn216 10.254.254.50 5 512 8 eth0 1024
 #Switch # should start with 1
 #Next, each line specifies a bidirectional link with the following format:
 # s# s# bandwidth delay
-3 2 
-s1 s2 500 100
-s1 s3 499 150
+4 3 
+s1 s2 100 10
+s1 s3 100 10
+s1 s4 100 5
 
 [VirtualMachineProvision]
 #Start marker of this section. Don't remove
@@ -48,12 +52,11 @@ NetworkFile=libvirt_network.xml
 #Next, each line specifies a VM, the switch it is attached, CPU:
 # VM# s# CPU
 5
-h1 s1 1
+h1 s2 1
 h2 s2 2
 h3 s3 1
-h4 s1 1
-h5 s2 1
-
+h4 s3 1
+h5 s4 3
 
 [Controllers]
 #First line: Number of controllers
@@ -62,20 +65,21 @@ h5 s2 1
 #Next, each line a tuple:
 # c# ip port
 1
-c1 10.254.254.45 6633
+c1 10.254.254.50 6633
 
 [Switch2Controller]
 #First line: Number of switches
 #Next, each line specifies a switch and its controller
 # s# c#
-3
+4
 s1 c1
 s2 c1
 s3 c1
+s4 c1
 
 [Credentials]
 #User name of the dot nodes
-UserName=dot
+UserName=dotuser
 
 
 [Embedding]
