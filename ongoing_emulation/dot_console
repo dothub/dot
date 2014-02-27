@@ -1,0 +1,210 @@
+#!/bin/bash
+
+# This file is part of DOT.
+#
+#     DOT is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     DOT is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with DOT.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Copyright 2011-2013 dothub.org
+#
+
+#
+#  dot_access
+#
+#  Created on: 2014-02-18
+#      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
+
+
+
+USER_NAME="dot"
+VM_LIST=()
+
+
+#Function readMapping retrieves the username of the DOT node
+#and corresping host of the provisioned VMs
+#Takes the mapping file name as parameter
+function readMapping {
+
+	flag=0
+	index=0	
+	#reading the mapping file
+	while read line
+	do
+	
+		if [ "$flag" -eq 0 ]; then
+			#Reading the user name 
+			USER_NAME=$line			
+			flag=$((flag+1))
+			continue
+		fi
+	VM_LIST[$index]="$line"
+	index=$((index+1))
+
+	
+	done < $1
+
+} 
+
+#Reading the mapping file
+readMapping mapping
+
+proceessIDs=()
+processIndex=0
+
+while :
+do 
+
+	echo -ne "dot>"
+	
+	#Reading the command
+	read input
+		
+	#Parsing the input for input and command
+	command=`echo $input| cut -f1 -d' '`
+	parameter=`echo $input| cut -f2 -d' '`
+	
+	
+	case "$command" in
+		("connect") 
+			#Here, parameter is the name of the VM 
+			echo "Connecting $parameter"
+			
+			foundFlag=0
+
+			#Retrieving the the VM
+			for mapping in "${VM_LIST[@]}"
+			do
+			
+				#Finding a match
+				VM_NAME=`echo "$mapping"| grep $parameter| cut -f1 -d' '`
+			
+				if [ "$VM_NAME" = "$parameter" ]; then
+				
+					foundFlag=1
+					
+					#Retrieving the ip address of the host
+					IP_ADDRESS=`echo "$mapping"| grep $parameter | cut -f2 -d' '`
+		 				
+					
+					#Connecting the VM
+                        		virt-viewer -c qemu+ssh://$USER_NAME@$IP_ADDRESS/system $parameter &>/dev/null &  
+                        
+                       			#Storing the process id
+                        		processIDs[$processIndex]="$parameter $! active"
+                        		processIndex=$((processIndex+1))
+					
+					break
+								
+				fi
+			done 
+
+			#No VM is found
+                        if [ "$foundFlag" -eq 0 ]; then
+                                echo "$parameter is not running"
+                        fi			
+			;;
+
+		("disconnect") 
+			#Here, the parameter is the name of the VM
+						
+			#Retrieving the proeces id of the VM
+			retrieveFlag=0
+			for index in "${!processIDs[@]}"
+			do
+				status=`echo ${processIDs[$index]}| grep $parameter| cut -f3 -d' '`
+				
+				
+				if [ "$status" = "active" ]; then
+					#Found an active VM 
+					retrieveFlag=1
+					echo "Disconnecting $parameter"
+					
+					#retrieving the process id
+					process_id=`echo ${processIDs[$index]}|  cut -f2 -d' '`
+					
+					#Killing the process
+					kill -9 $process_id
+
+					#Removing the VM from the list of active VMs
+					unset processIDs[$index]
+					
+					break
+				fi
+
+			done
+			
+			#No VM is found
+			if [ "$retrieveFlag" -eq 0 ]; then
+				echo "$parameter is not connected"
+			fi
+			
+			;;
+
+		("quit") 
+			read -r -p "Do you want to disconnect all VMs? [Y/n]" response
+			response=${response,,} # tolower
+			
+			if [[ $response =~ ^(yes|y| ) ]]; then
+				for process in "${processIDs[@]}"
+				do
+					status=`echo $process| cut -f3 -d' '`
+                                        VM=`echo $process| cut -f1 -d' '`        
+
+					if [ "$status" = "active" ]; then
+						#Found an active VM 
+						echo "Disconnecting $VM"
+
+						#retrieving the process id
+						process_id=`echo $process|  cut -f2 -d' '`
+
+						#Killing the process
+						kill -9 $process_id
+
+                   fi
+
+				done
+			
+			fi
+
+			echo "Exiting...."
+			exit
+			;;
+        ("clean")
+            case "$parameter" in
+                ("all")
+                    
+                    for machine in `cat mapping | grep h | awk '{print $2}'| sort |uniq`
+                    do
+                        echo "Cleaning $machine"
+                        scp clean_machine.sh $USER_NAME@$machine:~  
+                        ssh $USER_NAME@$machine "sudo ./clean_machine.sh"
+                        ssh $USER_NAME@$machine "rm ~/clean_machine.sh"
+                        
+                    done
+                    
+                    echo "$USER_NAME" > mapping
+                    exit  
+                ;;
+                (*)
+                    echo "To clean DOT: clean all"
+            esac
+            ;;
+    	(*) 
+			echo "For connecting to VM: connect h#"
+			echo "For disconnecting a VM: disconnect h#"
+            echo "For cleaning DOT: clean all"
+			echo "To exit: quit"
+			;;
+
+	esac
+done
