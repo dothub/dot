@@ -67,6 +67,8 @@ void VLink::createLink(Link* newLink) {
         this->commandExec->executeLocal("chmod +x "+ fileName.str());
         this->commandExec->executeScriptRemote(newLink->getInterface1()->getSwitch()->getIPOfMachine(), "", fileName.str());
 
+        this->commandExec->executeRemote(newLink->getInterface1()->getSwitch()->getIPOfMachine(), "rm " + fileName.str());
+
         if(remove(fileName.str().c_str()) != 0 )
             cout << "Error Link Script file" << endl;
     }

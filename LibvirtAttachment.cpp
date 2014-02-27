@@ -137,6 +137,12 @@ void LibvirtAttachment::createHost2SwitchAttachmentConf()
                 netDefineCommand << "sudo virsh net-autostart ovs_network_" << i+1;
                 this->commandExec->executeRemote(this->mapping->getMachine(i), netDefineCommand.str());
 
+
+                this->commandExec->executeRemote(this->mapping->getMachine(i), "rm " + outputFileName.str());
+
+                if(remove(outputFileName.str().c_str()) != 0 )
+                    cout << "Error Virt attachment delete failed" << endl;
+                
             }
             else
                 cout << "Unable to create network configuration file: " << outputFileName.str() <<  endl;
