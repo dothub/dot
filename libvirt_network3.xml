@@ -1,8 +1,0 @@
-<network>
-  <name>ovs_network_3</name>
-  <forward mode='bridge'/>
-  <bridge name='topo3'/>
-  <virtualport type='openvswitch'/>
-  <portgroup name='vlan-01' default='yes'>
-  </portgroup> 
-</network>
