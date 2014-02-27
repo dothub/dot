@@ -74,14 +74,16 @@ void OVS_1_10::runSwitch(Switch* newSwitch) {
 
         fout.close();
 
-        //cout << "now" << endl;
+        
         this->commandExec->executeLocal("chmod +x "+fileName.str());
-        //cout << "now2" << endl;
+        
         this->commandExec->executeScriptRemote(newSwitch->getIPOfMachine(), "", fileName.str());
 
-
-        /*if(remove(fileName.str().c_str()) != 0 )
-            cout << "Error OVS Script file" << endl;*/
+        this->commandExec->executeRemote(newSwitch->getIPOfMachine(),
+               "rm "+ fileName.str());
+        
+        if(remove(fileName.str().c_str()) != 0 )
+            cout << "Error OVS Script file" << endl;
 
     }
     else
@@ -158,10 +160,12 @@ void OVS_1_10::assignStaticTunnelRule(Switch* newSwitch,
 
             this->commandExec->executeLocal("chmod +x "+fileName.str());
             this->commandExec->executeScriptRemote(newSwitch->getIPOfMachine(), "", fileName.str());
+            this->commandExec->executeRemote(newSwitch->getIPOfMachine(),
+               "rm "+ fileName.str());
 
-            /*if(remove(fileName.str().c_str()) != 0 )
+            if(remove(fileName.str().c_str()) != 0 )
                 cout << "Error OVS Static file" << endl;
-               */
+               
         }
         else
             cout << "Cannot create OVS Static Rule file" << endl;

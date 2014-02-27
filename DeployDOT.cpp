@@ -55,7 +55,7 @@ DeployDOT::DeployDOT(DOT_Topology* dotTopology, InstantitiateSwitch*  instantiti
     createIPMACForController();
     cout << "ipmac file for controller" <<endl;
     startController();
-    cout << "controller started" <<endl;
+    cout << "Controller started" <<endl;
 }
 
 DeployDOT::~DeployDOT() {
@@ -244,8 +244,9 @@ void DeployDOT::createIPMACForController() {
 void DeployDOT::startController() {
 
 
-    this->commandExecutor->executeLocal("sudo kill `sudo lsof -t -i:6633`");
-    this->commandExecutor->executeLocal("java -jar ~/floodlight/target/floodlight.jar -cf ~/floodlight/src/main/resources/floodlightdefault.properties &> /dev/null &");
+    this->commandExecutor->executeLocal("sudo kill `sudo lsof -t -i:6633` &>/dev/null");
+    this->commandExecutor->executeLocal("sudo java -jar ~/floodlight/target/floodlight.jar " 
+        "-cf ~/floodlight/src/main/resources/floodlightdefault.properties 1> /dev/null 2>&1 &");
 }
 
 
