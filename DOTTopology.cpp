@@ -36,22 +36,22 @@ DOT_Topology* DOT_Topology::instanceDOT_Topology = NULL;
 
 
 DOT_Topology::DOT_Topology(LogicalTopology * logicalTopology, PhysicalMachines* physicalMachines,
-        Mapping* mapping, Switch2Controller * switch2Controller, VMs* vms, AbstractVM* instantitiatedHost) {
+        Mapping* mapping, Switch2Controller * switch2Controller, VMs* vms, AbstractVM* abstractVM) {
 
     this->logicalTopology = logicalTopology;
     this->physicalMachines = physicalMachines;
     this->mapping = mapping;
     this->switch2Controller = switch2Controller;
     this->vms = vms;
-    this->instantitiatedHost = instantitiatedHost;
+    this->abstractVM = abstractVM;
 }
 
 DOT_Topology* DOT_Topology::getDOT_Topology(LogicalTopology* logicalTopology,
         PhysicalMachines* physicalMachines, Mapping* mapping,
-        Switch2Controller* switch2Controller, VMs* vms, AbstractVM* instantitiatedHost) {
+        Switch2Controller* switch2Controller, VMs* vms, AbstractVM* abstractVM) {
     if(instanceDOT_Topology == NULL)
     {
-        instanceDOT_Topology = new DOT_Topology(logicalTopology, physicalMachines, mapping, switch2Controller, vms, instantitiatedHost);
+        instanceDOT_Topology = new DOT_Topology(logicalTopology, physicalMachines, mapping, switch2Controller, vms, abstractVM);
     }
     return instanceDOT_Topology;
 }
@@ -210,7 +210,7 @@ void DOT_Topology::generate() {
 
 
         ostringstream interfaceName;
-        interfaceName << this->instantitiatedHost->tapInterfacePrefix();
+        interfaceName << this->abstractVM->tapInterfacePrefix();
         interfaceName << attachedToSwitch->getNewVMAttachementPoint();
 
 

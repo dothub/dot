@@ -1,24 +1,8 @@
-2014-02-28 01:40:17,142 INFO  LoggerFactory (LoggerFactory.cpp:49) - test
-2014-02-28 01:40:17,142 INFO  LoggerFactory (LoggerFactory.cpp:49) - test
-2014-02-28 01:40:17,142 INFO  LoggerFactory (LoggerFactory.cpp:51) - test2
-2014-02-28 01:40:17,142 INFO  LoggerFactory (LoggerFactory.cpp:51) - test2
-2014-02-28 01:43:33,635 INFO  LoggerFactory (LoggerFactory.cpp:49) - test
-2014-02-28 01:43:33,635 INFO  LoggerFactory (LoggerFactory.cpp:49) - test
-2014-02-28 01:43:33,635 INFO  LoggerFactory (LoggerFactory.cpp:51) - test2
-2014-02-28 01:43:33,635 INFO  LoggerFactory (LoggerFactory.cpp:51) - test2
-2014-02-28 01:47:06,670 INFO  LoggerFactory (LoggerFactory.cpp:51) - test
-2014-02-28 01:47:06,670 INFO  LoggerFactory (LoggerFactory.cpp:51) - test
-2014-02-28 01:47:06,670 INFO  LoggerFactory (LoggerFactory.cpp:53) - test2
-2014-02-28 01:47:06,670 INFO  LoggerFactory (LoggerFactory.cpp:53) - test2
-2014-02-28 01:47:06,671 ERROR log4cxx (LoggerFactory.cpp:75) - There is no logger for classnone
-2014-02-28 01:47:06,671 ERROR log4cxx (LoggerFactory.cpp:75) - There is no logger for classnone
-2014-02-28 02:09:03,381 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
-2014-02-28 02:09:03,381 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
-2014-02-28 02:09:29,301 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
-2014-02-28 02:09:29,301 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
-2014-02-28 02:13:14,317 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
-2014-02-28 02:13:14,317 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
-2014-02-28 02:13:14,317 INFO   (DOT.cpp:154) - Test 10noting
-2014-02-28 02:13:43,997 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
-2014-02-28 02:13:43,997 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
-2014-02-28 02:13:43,997 INFO   (DOT.cpp:154) - Test 10noting
+2014-02-28 02:52:51,382 INFO   (DOT.cpp:163) - DOT main has started 
+2014-02-28 02:52:51,382 INFO   (DOT.cpp:186) - Debug mode on
+2014-02-28 02:52:51,382 INFO   (DOT.cpp:209) - The global configuration file: emulations/alpha2/DefaultConfiguration_alpha2
+2014-02-28 02:52:51,382 INFO  prepare(std (DOT.cpp:51) - Reading the configurations
+2014-02-28 02:52:51,383 INFO  prepare(std (DOT.cpp:86) - Embedding is started
+2014-02-28 02:52:51,386 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
+2014-02-28 02:52:51,386 INFO   (DOT.cpp:111) - DOT Deployment has started 
+2014-02-28 02:52:51,386 INFO   (DOT.cpp:118) - DOT Topology is generated 

@@ -36,14 +36,14 @@ class DOT_Topology;
 class DeployDOT {
 
     DOT_Topology* dotTopology;
-    AbstractSwitch*  instantitiatedSwitch;
-    AbstractLink* instantitiatedLink;
-    AbstractVM* instantitiatedHost;
+    AbstractSwitch*  abstractSwitch;
+    AbstractLink* abstractLink;
+    AbstractVM* abstractVM;
     CommandExecutor* commandExecutor;
 
 public:
-    DeployDOT(DOT_Topology* dotTopology, AbstractSwitch*  instantitiatedSwitch,
-            AbstractLink* instantitiatedLink, AbstractVM* instantitiatedHost,
+    DeployDOT(DOT_Topology* dotTopology, AbstractSwitch*  abstractSwitch,
+            AbstractLink* abstractLink, AbstractVM* abstractVM,
             CommandExecutor* commandExecutor);
     virtual ~DeployDOT();
     void deploySwitch();

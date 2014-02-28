@@ -31,13 +31,13 @@
 
 using namespace std;
 
-DeployDOT::DeployDOT(DOT_Topology* dotTopology, AbstractSwitch*  instantitiatedSwitch,
-        AbstractLink* instantitiatedLink, AbstractVM* instantitiatedHost, CommandExecutor* commandExecutor)
+DeployDOT::DeployDOT(DOT_Topology* dotTopology, AbstractSwitch*  abstractSwitch,
+        AbstractLink* abstractLink, AbstractVM* abstractVM, CommandExecutor* commandExecutor)
 {
     this->dotTopology = dotTopology;
-    this->instantitiatedHost = instantitiatedHost;
-    this->instantitiatedLink = instantitiatedLink;
-    this->instantitiatedSwitch = instantitiatedSwitch;
+    this->abstractVM = abstractVM;
+    this->abstractLink = abstractLink;
+    this->abstractSwitch = abstractSwitch;
     this->commandExecutor = commandExecutor;
 
     deploySwitch();
@@ -72,17 +72,17 @@ void DeployDOT::deploySwitch() {
             iter != this->dotTopology->topologySwitchMap.end(); iter++)
     {
 
-        this->instantitiatedSwitch->clearSwitch(iter->second);
-        this->instantitiatedSwitch->runSwitch(iter->second);
+        this->abstractSwitch->clearSwitch(iter->second);
+        this->abstractSwitch->runSwitch(iter->second);
     }
 
     //deploy gateway switch
     for( map<string, Switch*>::iterator iter = this->dotTopology->gatewaySwitchMap.begin();
             iter != this->dotTopology->gatewaySwitchMap.end(); iter++)
     {
-        this->instantitiatedSwitch->clearSwitch(iter->second);
-        this->instantitiatedSwitch->runSwitch(iter->second);
-        this->instantitiatedSwitch->clearAllRules(iter->second);
+        this->abstractSwitch->clearSwitch(iter->second);
+        this->abstractSwitch->runSwitch(iter->second);
+        this->abstractSwitch->clearAllRules(iter->second);
     }
 
 
@@ -90,12 +90,12 @@ void DeployDOT::deploySwitch() {
 
 void DeployDOT::deployVMs() {
 
-    this->instantitiatedHost->prepare();
+    this->abstractVM->prepare();
     cout << "Virsh Network Created" <<endl;
     for(unsigned long i = 0; i < this->dotTopology->vms->getNumberOfVMs(); i++)
     {
-        this->instantitiatedHost->startHost(i);
-        this->instantitiatedHost->retrieveInterface(i);
+        this->abstractVM->startHost(i);
+        this->abstractVM->retrieveInterface(i);
 
         unsigned long switchId = this->dotTopology->vms->getSwitch(i);
         
@@ -107,7 +107,7 @@ void DeployDOT::deployVMs() {
  
         Switch* switchOfHost = this->dotTopology->topologySwitchMap[switchName.str()];
 
-        this->instantitiatedSwitch->assignQoSToPort(switchOfHost,
+        this->abstractSwitch->assignQoSToPort(switchOfHost,
             this->dotTopology->vms->getInterfaceName(i),
             this->dotTopology->vms->getBandwidth(i)*1000);
     }
@@ -118,18 +118,18 @@ void DeployDOT::deployLinks() {
     for(map<unsigned long, Link*>::iterator iter = this->dotTopology->linkMap.begin();
             iter != this->dotTopology->linkMap.end(); iter ++)
     {
-        this->instantitiatedLink->createLink(iter->second);
+        this->abstractLink->createLink(iter->second);
 
         //assigning to ovs
-        this->instantitiatedSwitch->attachPort(iter->second->getInterface1()->getSwitch(), iter->second->getInterface1());
-        this->instantitiatedSwitch->attachPort(iter->second->getInterface2()->getSwitch(), iter->second->getInterface2());
+        this->abstractSwitch->attachPort(iter->second->getInterface1()->getSwitch(), iter->second->getInterface1());
+        this->abstractSwitch->attachPort(iter->second->getInterface2()->getSwitch(), iter->second->getInterface2());
 
 
         //assigning rate limit to interface
-        this->instantitiatedSwitch->assignQoSToPort(iter->second->getInterface1()->getSwitch(),
+        this->abstractSwitch->assignQoSToPort(iter->second->getInterface1()->getSwitch(),
             iter->second->getInterface1()->getName(), 
             iter->second->getBandwidth()*1000);
-        this->instantitiatedSwitch->assignQoSToPort(iter->second->getInterface2()->getSwitch(),
+        this->abstractSwitch->assignQoSToPort(iter->second->getInterface2()->getSwitch(),
             iter->second->getInterface2()->getName(),
             iter->second->getBandwidth()*1000);
 
@@ -145,10 +145,10 @@ void DeployDOT::deployTunnel() {
             string IPAddressMachine2 = this->dotTopology->physicalMachines->getIPAddress(j);
 
             Interface* interface1 = this->dotTopology->tunnelMap[make_pair(IPAddressMachine1, IPAddressMachine2)]->getInterface1();
-            this->instantitiatedSwitch->attachPort(interface1->getSwitch(),interface1);
+            this->abstractSwitch->attachPort(interface1->getSwitch(),interface1);
 
             Interface* interface2 = this->dotTopology->tunnelMap[make_pair(IPAddressMachine1, IPAddressMachine2)]->getInterface2();
-            this->instantitiatedSwitch->attachPort(interface2->getSwitch(),interface2);
+            this->abstractSwitch->attachPort(interface2->getSwitch(),interface2);
 
         }
 }
@@ -158,7 +158,7 @@ void DeployDOT::assignPortNumbers() {
     for(map<pair<Switch*, string>, Interface* >::iterator iter = this->dotTopology->interfaceMap.begin();
             iter != this->dotTopology->interfaceMap.end(); iter++)
     {
-        this->instantitiatedSwitch->assignPortNumber(iter->second->getSwitch(), iter->second);
+        this->abstractSwitch->assignPortNumber(iter->second->getSwitch(), iter->second);
     }
 }
 
@@ -195,10 +195,10 @@ void DeployDOT::assignStaticRules() {
         else
             cout << "Tunnel Rule Generation Error" << endl;
 
-        cout << this->instantitiatedSwitch->createStaticTunnelRule(iter->first->getInterface2()->getSwitch(), iter->first->cut_edge_id,
+        cout << this->abstractSwitch->createStaticTunnelRule(iter->first->getInterface2()->getSwitch(), iter->first->cut_edge_id,
                 iter->first->getInterface2()->port, interMachine1->port) << endl;
 
-        cout << this->instantitiatedSwitch->createStaticTunnelRule(iter->second->getInterface2()->getSwitch(), iter->second->cut_edge_id,
+        cout << this->abstractSwitch->createStaticTunnelRule(iter->second->getInterface2()->getSwitch(), iter->second->cut_edge_id,
                         iter->second->getInterface2()->port, interMachine2->port) << endl;
 
         ruleMap[iter->first->getInterface2()->getSwitch()].push_back(make_pair(iter->first->cut_edge_id,
@@ -210,7 +210,7 @@ void DeployDOT::assignStaticRules() {
     for(map<Switch*, list<pair<unsigned int, pair<unsigned int, unsigned int> > > >::iterator iter = ruleMap.begin();
             iter != ruleMap.end(); iter++)
     {
-        this->instantitiatedSwitch->assignStaticTunnelRule(iter->first, iter->second);
+        this->abstractSwitch->assignStaticTunnelRule(iter->first, iter->second);
     }
 
 }

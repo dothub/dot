@@ -103,6 +103,9 @@ void LoggerFactory::initateFactory()
       
     //Self Logger     
     loggerPtr = &loggerLoggerFactory;
+
+    //Debug Mode is kept on for LoggerFactory
+    (*loggerPtr)->setLevel(Level::getDebug());
         
     DOMConfigurator::configure(Global::logConfigFile);
 
@@ -123,12 +126,15 @@ LoggerPtr* LoggerFactory::getLogger(string className)
 {
     if(this->loggerMap.find(className) == this->loggerMap.end())
     {
-        cout << "log here" <<endl;
+      
         LOG4CXX_ERROR((*loggerPtr), 
-            "There is no logger for class" << className);
+            "There is no logger for class " << className);
         return NULL;
     }
     
+    if(Global::debugMode)
+        (*loggerMap[className])->setLevel(Level::getDebug());
+
     return loggerMap[className];
 
 }

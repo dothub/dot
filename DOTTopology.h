@@ -62,18 +62,18 @@ class DOT_Topology {
     LogicalTopology * logicalTopology;
     Switch2Controller * switch2Controller;
     VMs* vms;
-    AbstractVM* instantitiatedHost;
+    AbstractVM* abstractVM;
 
     static DOT_Topology* instanceDOT_Topology;
 
     DOT_Topology(LogicalTopology * logicalTopology, PhysicalMachines* physicalMachines,
-            Mapping* mapping, Switch2Controller * switch2Controller, VMs* vms, AbstractVM* instantitiatedHost);
+            Mapping* mapping, Switch2Controller * switch2Controller, VMs* vms, AbstractVM* abstractVM);
 
     friend class DeployDOT;
 
 public:
     static DOT_Topology* getDOT_Topology(LogicalTopology * logicalTopology, PhysicalMachines* physicalMachines,
-                Mapping* mapping, Switch2Controller * switch2Controller, VMs* vms, AbstractVM* instantitiatedHost);
+                Mapping* mapping, Switch2Controller * switch2Controller, VMs* vms, AbstractVM* abstractVM);
     void generate();
 
     virtual ~DOT_Topology();

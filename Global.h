@@ -62,9 +62,9 @@ public:
     static Controllers* controllers;
     static Switch2Controller* sw2controller;
     static CommandExecutor* commandExecutor;
-    static AbstractSwitch*  instantitiatedSwitch;
-    static AbstractLink* instantitiatedLink;
-    static AbstractVM* instantitiatedHost;
+    static AbstractSwitch*  abstractSwitch;
+    static AbstractLink* abstractLink;
+    static AbstractVM* abstractVM;
     static bool debugMode;
     static string logConfigFile;
     static LoggerFactory* loggerFactory;

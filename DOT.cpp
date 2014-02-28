@@ -44,9 +44,12 @@
 
 using namespace std;
 
+LoggerPtr* selfLogger;
 
 void prepare(string globalConfFile)
 {
+    LOG4CXX_INFO((*selfLogger), "Reading the configurations");
+
     Configurations *globalConf = Configurations::getConfiguration(globalConfFile);
 
     Global::logicalTopology = LogicalTopology::getLogicalTopology();
@@ -80,6 +83,7 @@ void prepare(string globalConfFile)
 
     Global::mapping = Mapping::getMapping();
 
+    LOG4CXX_INFO((*selfLogger), "Embedding is started");
 
     EmbeddingAlgorithm * partitioning = new GuaranteedEmbedding(
         globalConf->partitioningAlgoConfFile, 
@@ -88,34 +92,37 @@ void prepare(string globalConfFile)
 
     if( partitioning->run() == false)
     {
-        cout << "Embedding is not successful" << endl;
+        LOG4CXX_INFO((*selfLogger), 
+             "Embedding is not successful");
         return;
     }
         
+    LOG4CXX_INFO((*selfLogger), "Instantiating the deployment specific devices");
 
-    
-    Global::instantitiatedSwitch = new OVS_1_10(Global::commandExecutor);
-    Global::instantitiatedLink = new VLink(Global::commandExecutor);
-    Global::instantitiatedHost = new KVMWithLibvirt(globalConf, Global::vms, 
+    Global::abstractSwitch = new OVS_1_10(Global::commandExecutor);
+    Global::abstractLink = new VLink(Global::commandExecutor);
+    Global::abstractVM = new KVMWithLibvirt(globalConf, Global::vms, 
                    Global::commandExecutor, Global::logicalTopology, Global::mapping);
-
-    
-
     
 }
 
 void deploy()
 {
-    
+    LOG4CXX_INFO((*selfLogger), "DOT Deployment has started ");
+
     DOT_Topology* dotTopology = DOT_Topology::getDOT_Topology(Global::logicalTopology, 
                Global::physicalMachines, Global::mapping, 
-               Global::sw2controller, Global::vms, Global::instantitiatedHost);
+               Global::sw2controller, Global::vms, Global::abstractVM);
     
     dotTopology->generate();
+    LOG4CXX_INFO((*selfLogger), "DOT Topology is generated ");
 
-    DeployDOT *deploy = new DeployDOT(dotTopology, Global::instantitiatedSwitch, 
-                            Global::instantitiatedLink, Global::instantitiatedHost, 
+
+    DeployDOT *deploy = new DeployDOT(dotTopology, Global::abstractSwitch, 
+                            Global::abstractLink, Global::abstractVM, 
                             Global::commandExecutor);
+
+    LOG4CXX_INFO((*selfLogger), "Emulated network has been deployed ");
 
 
 }
@@ -124,6 +131,8 @@ void deploy()
 void generateMappingForRemote()
 {
   
+    LOG4CXX_INFO((*selfLogger), "Generating Mapping File for DOT console ");
+
     fstream fout("ongoing_emulation/mapping"); 
  
     fout << Global::credentials->getUserName() << endl;
@@ -138,7 +147,8 @@ void generateMappingForRemote()
         fout.close(); 
     } 
     else 
-        cout << "Mapping file cannot be created" << endl; 
+        LOG4CXX_ERROR((*selfLogger), 
+            "Mapping file for \"DOT Console\" cannot be created"); 
 }
 
 
@@ -148,10 +158,9 @@ int main(int argc, char * argv[])
     string globalConfFile;
 
     Global::loggerFactory = LoggerFactory::getLoggerFactory();
-    
-    Global::loggerFactory->getLogger("none");
-    LoggerPtr* selfLogger = Global::loggerFactory->getLogger("main");
-    LOG4CXX_INFO((*selfLogger), "Test "<< 10 << "noting");
+  
+    selfLogger = Global::loggerFactory->getLogger("main");
+    LOG4CXX_INFO((*selfLogger), "DOT main has started ");
     
     if(argc == 1 ||
         (argc == 2 && strcmp(argv[1], "-h") == 0))
@@ -173,7 +182,9 @@ int main(int argc, char * argv[])
                 
                 Global::debugMode = true;
                 
-                cout << "Debug mode on" << endl;
+                LOG4CXX_INFO((*selfLogger), 
+                            "Debug mode on" );
+                (*selfLogger)->setLevel(Level::getDebug());
 
             }
             else if(strcmp(argv[1], "-d") == 0
@@ -182,17 +193,20 @@ int main(int argc, char * argv[])
                 globalConfFile = argv[3];
                 Global::debugMode = true;  
                 
-                cout << "Debug mode on" << endl;
+                LOG4CXX_INFO((*selfLogger), 
+                            "Debug mode on" );
+
+                (*selfLogger)->setLevel(Level::getDebug());
+
             }
             
             else
                 exit(1);
-    } 
+    }
 
-    else
-        exit(1);
-
-    cout << globalConfFile << endl;
+    LOG4CXX_INFO((*selfLogger), 
+           "The global configuration file: "
+             << globalConfFile);
     
     prepare(globalConfFile);
     deploy();
