@@ -18,13 +18,13 @@
 */
 
 /*
- * LibvirtAttachment.cpp
+ * KVMWithLibvirt.cpp
  *
  *  Created on: 2013-08-12
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#include "LibvirtAttachment.h"
+#include "KVMWithLibvirt.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -34,21 +34,21 @@
 
 using namespace std;
 
-LibvirtAttachment::LibvirtAttachment(Configurations* globalConf, VMs* vms, CommandExecutor* commandExec, LogicalTopology* topology, Mapping* mapping)
+KVMWithLibvirt::KVMWithLibvirt(Configurations* globalConf, VMs* vms, CommandExecutor* commandExec, LogicalTopology* topology, Mapping* mapping)
     :AbstractVM(globalConf, vms, commandExec, topology, mapping)
 {
     this->loadConfiguration(globalConf->hypervisorConfigurationFile);
 
 }
 
-LibvirtAttachment::~LibvirtAttachment() {
+KVMWithLibvirt::~KVMWithLibvirt() {
 
 }
-void LibvirtAttachment::prepare()
+void KVMWithLibvirt::prepare()
 {
     this->createHost2SwitchAttachmentConf();
 }
-void LibvirtAttachment::loadConfiguration(string fileName)
+void KVMWithLibvirt::loadConfiguration(string fileName)
 {
     map<string, string> eachConfiguration;
 
@@ -84,7 +84,7 @@ void LibvirtAttachment::loadConfiguration(string fileName)
         networkFile = eachConfiguration["networkFile"];
 
 }
-void LibvirtAttachment::createHost2SwitchAttachmentConf()
+void KVMWithLibvirt::createHost2SwitchAttachmentConf()
 {
 
     for(unsigned long i = 0; i < this->topology->getNumberOfSwitches(); i++)
@@ -154,12 +154,12 @@ void LibvirtAttachment::createHost2SwitchAttachmentConf()
     }
 }
 
-string LibvirtAttachment::tapInterfacePrefix()
+string KVMWithLibvirt::tapInterfacePrefix()
 {
     return "vnet";
 }
 
-string LibvirtAttachment::createNewImage(unsigned long host_id)
+string KVMWithLibvirt::createNewImage(unsigned long host_id)
 {
 
     unsigned long switchId = this->vms->getSwitch(host_id);
@@ -179,7 +179,7 @@ string LibvirtAttachment::createNewImage(unsigned long host_id)
 
     return newImageName.str();
 }
-void LibvirtAttachment::startHost(unsigned long host_id)
+void KVMWithLibvirt::startHost(unsigned long host_id)
 {
     unsigned long switchId = this->vms->getSwitch(host_id);
     string mac = this->vms->getMacAddress(host_id);
@@ -215,7 +215,7 @@ void LibvirtAttachment::startHost(unsigned long host_id)
 }
 
 
-void LibvirtAttachment::retrieveInterface(unsigned long host_id)
+void KVMWithLibvirt::retrieveInterface(unsigned long host_id)
 {
     unsigned long switchId = this->vms->getSwitch(host_id);
 

@@ -25,25 +25,37 @@
     </root>
 
     <!--The log level of classes -->
-    <category name="CommandExecutor" >
+    <category name="AbstractLink" >
         <priority value = "info" />
         <appender-ref ref="appxNormalAppender"/>
         <appender-ref ref="appxConsoleAppender"/>
     </category>
     
-    <category name="Configurations" >
+    <category name="AbstractSwitch" >
         <priority value = "info" />
         <appender-ref ref="appxNormalAppender"/>
         <appender-ref ref="appxConsoleAppender"/>
     </category>
 
-    <category name="Controllers" >
+    <category name="AbstractVM" >
         <priority value = "info" />
         <appender-ref ref="appxNormalAppender"/>
         <appender-ref ref="appxConsoleAppender"/>
     </category>
     
-    <category name="Credentials" >
+    <category name="CommandExecutor" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+
+    <category name="Configurations" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+    
+    <category name="Controllers" >
         <priority value = "info" />
         <appender-ref ref="appxNormalAppender"/>
         <appender-ref ref="appxConsoleAppender"/>
@@ -55,19 +67,31 @@
         <appender-ref ref="appxConsoleAppender"/>
     </category>
     
-    <category name="DOT" >
+    <category name="DeployDOT" >
         <priority value = "info" />
         <appender-ref ref="appxNormalAppender"/>
         <appender-ref ref="appxConsoleAppender"/>
     </category>
 
-    <category name="DOTTopology" >
+    <category name="DOT" >
         <priority value = "info" />
         <appender-ref ref="appxNormalAppender"/>
         <appender-ref ref="appxConsoleAppender"/>
     </category>
     
-    <category name="DeployDOT" >
+    <category name="DOTTopology" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+
+    <category name="EmbeddingAlgorithm" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+    
+    <category name="Global" >
         <priority value = "info" />
         <appender-ref ref="appxNormalAppender"/>
         <appender-ref ref="appxConsoleAppender"/>
@@ -84,29 +108,18 @@
         <appender-ref ref="appxNormalAppender"/>
         <appender-ref ref="appxConsoleAppender"/>
     </category>
-
-    <category name="VMs" >
+    
+    <category name="Interface" >
         <priority value = "info" />
         <appender-ref ref="appxNormalAppender"/>
         <appender-ref ref="appxConsoleAppender"/>
     </category>
     
-    <category name="LogicalTopology" >
+    <category name="LibvirtWithKVM" >
         <priority value = "info" />
         <appender-ref ref="appxNormalAppender"/>
         <appender-ref ref="appxConsoleAppender"/>
     </category>
 
-    <category name="InstantiateHost" >
-        <priority value = "info" />
-        <appender-ref ref="appxNormalAppender"/>
-        <appender-ref ref="appxConsoleAppender"/>
-    </category>
-    
-    <category name="Instanti" >
-        <priority value = "info" />
-        <appender-ref ref="appxNormalAppender"/>
-        <appender-ref ref="appxConsoleAppender"/>
-    </category>
 
 </log4j:configuration>

@@ -35,7 +35,7 @@
 #include "EmbeddingAlgorithm.h"
 #include "Global.h"
 #include "Configurations.h"
-#include "LibvirtAttachment.h"
+#include "KVMWithLibvirt.h"
 #include "GuaranteedEmbedding.h"
 #include "DOTTopology.h"
 #include "OVS_1_10.h"
@@ -96,7 +96,7 @@ void prepare(string globalConfFile)
     
     Global::instantitiatedSwitch = new OVS_1_10(Global::commandExecutor);
     Global::instantitiatedLink = new VLink(Global::commandExecutor);
-    Global::instantitiatedHost = new LibvirtAttachment(globalConf, Global::vms, 
+    Global::instantitiatedHost = new KVMWithLibvirt(globalConf, Global::vms, 
                    Global::commandExecutor, Global::logicalTopology, Global::mapping);
 
     

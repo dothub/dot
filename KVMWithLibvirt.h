@@ -18,7 +18,7 @@
 */
 
 /*
- * LibvirtAttachment.h
+ * KVMWithLibvirt.h
  *
  *  Created on: 2013-08-12
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
@@ -29,7 +29,7 @@
 
 #include "AbstractVM.h"
 
-class LibvirtAttachment: public AbstractVM {
+class KVMWithLibvirt: public AbstractVM {
 
     string virt_type;
     string networkFile;
@@ -37,14 +37,14 @@ class LibvirtAttachment: public AbstractVM {
     void loadConfiguration(string fileName);
     string createNewImage(unsigned long host_id);
 public:
-    LibvirtAttachment(Configurations* globalConf, VMs* vms, CommandExecutor* commandExec, LogicalTopology *topology, Mapping* mapping);
+    KVMWithLibvirt(Configurations* globalConf, VMs* vms, CommandExecutor* commandExec, LogicalTopology *topology, Mapping* mapping);
     void createHost2SwitchAttachmentConf();
     void startHost(unsigned long host_id);
     void retrieveInterface(unsigned long host_id);
     void prepare();
     string tapInterfacePrefix();
 
-    virtual ~LibvirtAttachment();
+    virtual ~KVMWithLibvirt();
 };
 
 #endif /* LIBVIRTATTACHMENT_H_ */
