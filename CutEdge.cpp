@@ -30,6 +30,7 @@
 CutEdge::CutEdge(double bandwidth, Tunnel * belongsToTunnel, double delay)
     :Link(bandwidth, delay, CUT_EDGE){
 
+    this->selfLogger = Global::loggerFactory->getLogger("CutEdge");
     this->belongsToTunnel = belongsToTunnel;
 }
 

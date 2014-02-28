@@ -28,7 +28,9 @@
 
 AbstractLink::AbstractLink(CommandExecutor* commandExec) {
     this->commandExec = commandExec;
+    this->selfLogger = Global::loggerFactory->getLogger("AbstractLink");
 
+    LOG4CXX_DEBUG((*selfLogger), "AbstractLink constructor is invoked ");
 }
 
 AbstractLink::~AbstractLink() {

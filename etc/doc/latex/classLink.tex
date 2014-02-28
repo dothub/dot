@@ -1,0 +1,198 @@
+\hypertarget{classLink}{\section{\-Link \-Class \-Reference}
+\label{classLink}\index{\-Link@{\-Link}}
+}
+
+
+\-This is the base class for a virtual link.  
+
+
+
+
+{\ttfamily \#include $<$\-Link.\-h$>$}
+
+\-Inheritance diagram for \-Link\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLink}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLink_aa6b6dbcaeaed9e77f11d5ea9e2bf0b9c}{\-Link} (double bandwidth, double delay=0, \-Link\-Type type=\-T\-O\-P\-O\-\_\-\-L\-I\-N\-K)
+\begin{DoxyCompactList}\small\item\em \-Constructor of the class. \end{DoxyCompactList}\item 
+\hyperlink{classInterface}{\-Interface} $\ast$ \hyperlink{classLink_a569be501deb522349bb98cb7a2c35d7d}{get\-Interface1} ()
+\begin{DoxyCompactList}\small\item\em \-Used to retrieve the first interface. \end{DoxyCompactList}\item 
+\hyperlink{classInterface}{\-Interface} $\ast$ \hyperlink{classLink_a34121ef74d9707874c657ff17d149723}{get\-Interface2} ()
+\begin{DoxyCompactList}\small\item\em \-Used to retrieve the second interface. \end{DoxyCompactList}\item 
+\-Link\-Type \hyperlink{classLink_abd3740fe04b6e879f7d7eaa61777c1a4}{get\-Type} ()
+\begin{DoxyCompactList}\small\item\em \-Used to retrieve the type of the link. \end{DoxyCompactList}\item 
+double \hyperlink{classLink_a60f08e504d5badbc2ca1ddcf9be8f60f}{get\-Delay} ()
+\begin{DoxyCompactList}\small\item\em \-Used to retrieve the dealy of the link. \end{DoxyCompactList}\item 
+double \hyperlink{classLink_af732993697aeab204a56906f65be9cfb}{get\-Bandwidth} ()
+\begin{DoxyCompactList}\small\item\em \-Used to retrieve the bandwidth of the link. \end{DoxyCompactList}\item 
+unsigned long \hyperlink{classLink_a41a0d1131848c5df499ebe96ca50915a}{get\-Id} ()
+\begin{DoxyCompactList}\small\item\em \-Used to retrieve the link id. \end{DoxyCompactList}\item 
+\hypertarget{classLink_a666e442abb3122fe5eb1705f1b2d650d}{virtual \hyperlink{classLink_a666e442abb3122fe5eb1705f1b2d650d}{$\sim$\-Link} ()}\label{classLink_a666e442abb3122fe5eb1705f1b2d650d}
+
+\begin{DoxyCompactList}\small\item\em \-Destructor of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classLink_a1b7ed4109872174fb3b76517c42eeb54}{unsigned long {\bfseries id}}\label{classLink_a1b7ed4109872174fb3b76517c42eeb54}
+
+\item 
+\hypertarget{classLink_a3e3ab7c92c77dbc66672e3f65d2cd803}{double {\bfseries delay}}\label{classLink_a3e3ab7c92c77dbc66672e3f65d2cd803}
+
+\item 
+\hypertarget{classLink_aff4506be6c9b62b335e3a389a01969ef}{double {\bfseries bandwidth}}\label{classLink_aff4506be6c9b62b335e3a389a01969ef}
+
+\item 
+\hypertarget{classLink_a11b41d0affcccf72ff2d9a43209e50f0}{\-Link\-Type {\bfseries type}}\label{classLink_a11b41d0affcccf72ff2d9a43209e50f0}
+
+\item 
+\hypertarget{classLink_ad3ca8fd68e8f3a78fb515473df7a803a}{\hyperlink{classInterface}{\-Interface} $\ast$ {\bfseries interface1}}\label{classLink_ad3ca8fd68e8f3a78fb515473df7a803a}
+
+\item 
+\hypertarget{classLink_a35dad666e4750f19b4c0321b671c6352}{\hyperlink{classInterface}{\-Interface} $\ast$ {\bfseries interface2}}\label{classLink_a35dad666e4750f19b4c0321b671c6352}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classLink_a2b31d056c09aa166ff69d4211d63920f}{static unsigned long {\bfseries id\-\_\-counter} = 0}\label{classLink_a2b31d056c09aa166ff69d4211d63920f}
+
+\item 
+\hypertarget{classLink_a8c8158083c04485a2c6cefa988ed2ea3}{static unsigned long {\bfseries veth\-\_\-counter} = 0}\label{classLink_a8c8158083c04485a2c6cefa988ed2ea3}
+
+\item 
+\hypertarget{classLink_a0edfbcbacf21e28604d886dda0b4ec41}{static unsigned long {\bfseries tunnel\-\_\-counter} = 0}\label{classLink_a0edfbcbacf21e28604d886dda0b4ec41}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classLink_ab9d93c4a848d92b720ddb92e311f2b44}{\-Logger\-Ptr $\ast$ {\bfseries self\-Logger}}\label{classLink_ab9d93c4a848d92b720ddb92e311f2b44}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-This is the base class for a virtual link. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classLink_aa6b6dbcaeaed9e77f11d5ea9e2bf0b9c}{\index{\-Link@{\-Link}!\-Link@{\-Link}}
+\index{\-Link@{\-Link}!Link@{\-Link}}
+\subsubsection[{\-Link}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Link\-::\-Link} (
+\begin{DoxyParamCaption}
+\item[{double}]{bandwidth, }
+\item[{double}]{delay = {\ttfamily 0}, }
+\item[{\-Link\-Type}]{type = {\ttfamily \-T\-O\-P\-O\-\_\-\-L\-I\-N\-K}}
+\end{DoxyParamCaption}
+)}}\label{classLink_aa6b6dbcaeaed9e77f11d5ea9e2bf0b9c}
+
+
+\-Constructor of the class. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em bandwidth} & -\/ \-Bandwidth in \-Mbps. \\
+\hline
+{\em delay} & -\/ \-Propagation delay in ms (\-Default\-: 0) \\
+\hline
+{\em type} & -\/ \hyperlink{classLink}{\-Link} type (\-Default\-: \-T\-O\-P\-O\-\_\-\-L\-I\-N\-K) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classLink_af732993697aeab204a56906f65be9cfb}{\index{\-Link@{\-Link}!get\-Bandwidth@{get\-Bandwidth}}
+\index{get\-Bandwidth@{get\-Bandwidth}!Link@{\-Link}}
+\subsubsection[{get\-Bandwidth}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Link\-::get\-Bandwidth} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classLink_af732993697aeab204a56906f65be9cfb}
+
+
+\-Used to retrieve the bandwidth of the link. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Returns bandwidth of the link 
+\end{DoxyReturn}
+\hypertarget{classLink_a60f08e504d5badbc2ca1ddcf9be8f60f}{\index{\-Link@{\-Link}!get\-Delay@{get\-Delay}}
+\index{get\-Delay@{get\-Delay}!Link@{\-Link}}
+\subsubsection[{get\-Delay}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Link\-::get\-Delay} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classLink_a60f08e504d5badbc2ca1ddcf9be8f60f}
+
+
+\-Used to retrieve the dealy of the link. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Returns the link delay 
+\end{DoxyReturn}
+\hypertarget{classLink_a41a0d1131848c5df499ebe96ca50915a}{\index{\-Link@{\-Link}!get\-Id@{get\-Id}}
+\index{get\-Id@{get\-Id}!Link@{\-Link}}
+\subsubsection[{get\-Id}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long {\bf \-Link\-::get\-Id} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classLink_a41a0d1131848c5df499ebe96ca50915a}
+
+
+\-Used to retrieve the link id. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Returns the link id 
+\end{DoxyReturn}
+\hypertarget{classLink_a569be501deb522349bb98cb7a2c35d7d}{\index{\-Link@{\-Link}!get\-Interface1@{get\-Interface1}}
+\index{get\-Interface1@{get\-Interface1}!Link@{\-Link}}
+\subsubsection[{get\-Interface1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Interface} $\ast$ {\bf \-Link\-::get\-Interface1} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classLink_a569be501deb522349bb98cb7a2c35d7d}
+
+
+\-Used to retrieve the first interface. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Returns first interface of the link 
+\end{DoxyReturn}
+\hypertarget{classLink_a34121ef74d9707874c657ff17d149723}{\index{\-Link@{\-Link}!get\-Interface2@{get\-Interface2}}
+\index{get\-Interface2@{get\-Interface2}!Link@{\-Link}}
+\subsubsection[{get\-Interface2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Interface} $\ast$ {\bf \-Link\-::get\-Interface2} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classLink_a34121ef74d9707874c657ff17d149723}
+
+
+\-Used to retrieve the second interface. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Returns second interface of the link 
+\end{DoxyReturn}
+\hypertarget{classLink_abd3740fe04b6e879f7d7eaa61777c1a4}{\index{\-Link@{\-Link}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!Link@{\-Link}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}\-Link\-Type {\bf \-Link\-::get\-Type} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classLink_abd3740fe04b6e879f7d7eaa61777c1a4}
+
+
+\-Used to retrieve the type of the link. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Returns the link type 
+\end{DoxyReturn}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\-Link.\-h\item 
+\-Link.\-cpp\end{DoxyCompactItemize}

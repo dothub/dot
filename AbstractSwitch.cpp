@@ -31,6 +31,7 @@ AbstractSwitch::AbstractSwitch(CommandExecutor* commandExec)
 
     this->commandExec = commandExec;
 
+    this->selfLogger = Global::loggerFactory->getLogger("AbstractSwitch");
 }
 
 AbstractSwitch::~AbstractSwitch() {

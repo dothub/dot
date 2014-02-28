@@ -1,0 +1,221 @@
+\hypertarget{classSwitch}{\section{\-Switch \-Class \-Reference}
+\label{classSwitch}\index{\-Switch@{\-Switch}}
+}
+
+
+\-This is the class for keeping infromation of the switch in the \-D\-O\-T topology.  
+
+
+
+
+{\ttfamily \#include $<$\-Switch.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSwitch_a123ff2a9ea3f7b58a255edeca601f491}{{\bfseries \-Switch} (unsigned long id, string name, string physical\-Machine\-I\-P, string controller\-I\-P=\char`\"{}\char`\"{}, string controller\-Port=\char`\"{}\char`\"{}, \-Switch\-Type type=\-T\-O\-P\-O\-\_\-\-S\-W\-I\-T\-C\-H, string dpid=\char`\"{}\char`\"{})}\label{classSwitch_a123ff2a9ea3f7b58a255edeca601f491}
+
+\item 
+void \hyperlink{classSwitch_a087f1aa58ee5489365e4236ec90a5439}{assign\-Interface} (\hyperlink{classInterface}{\-Interface} $\ast$new\-Interface)
+\begin{DoxyCompactList}\small\item\em \-The function assigns an interface to the switch. \end{DoxyCompactList}\item 
+string \hyperlink{classSwitch_a3cc7f9ef96f673293ab4ea4069caf27f}{get\-D\-P\-I\-D} ()
+\begin{DoxyCompactList}\small\item\em \-The function to return the datapath id of a switch. \end{DoxyCompactList}\item 
+unsigned long \hyperlink{classSwitch_a18e13da7323d92c01d383f56aeb7dc91}{get\-I\-D} ()
+\begin{DoxyCompactList}\small\item\em \-The function to return the id of a switch. \end{DoxyCompactList}\item 
+unsigned short \hyperlink{classSwitch_afde2d9f4d9e2510c45aec336a8a712ed}{get\-New\-V\-M\-Attachement\-Point} ()
+\begin{DoxyCompactList}\small\item\em \-The function to return the number of vnet interface. \end{DoxyCompactList}\item 
+\-Switch\-Type \hyperlink{classSwitch_aefcd830a9fcadb2458924ff3eb4a1ec0}{get\-Type} ()
+\begin{DoxyCompactList}\small\item\em \-The function to return the type of a switch. \end{DoxyCompactList}\item 
+string \hyperlink{classSwitch_a8b325a8f123eb07bdd2e7381af3a83f6}{get\-Name} ()
+\begin{DoxyCompactList}\small\item\em \-The function to return the name of a switch. \end{DoxyCompactList}\item 
+string \hyperlink{classSwitch_a52161638a0f5429ac83d78cbc85c82db}{get\-I\-P\-Of\-Machine} ()
+\begin{DoxyCompactList}\small\item\em \-The function to return the \-I\-P address of the machine where the switch is provisioned. \end{DoxyCompactList}\item 
+string \hyperlink{classSwitch_af11e69a311d13705bc6799a56a980b4c}{get\-I\-Pof\-Controller} ()
+\begin{DoxyCompactList}\small\item\em \-The function to return the \-I\-P address of the controller of the switch. \end{DoxyCompactList}\item 
+string \hyperlink{classSwitch_adc27b9def7bfc56b52411a20a6cca4b9}{get\-Portof\-Controller} ()
+\begin{DoxyCompactList}\small\item\em \-The function to return the port of the controller of the switch. \end{DoxyCompactList}\item 
+\hypertarget{classSwitch_ac9e0d5810af5ea21572d5dd7248baed8}{virtual \hyperlink{classSwitch_ac9e0d5810af5ea21572d5dd7248baed8}{$\sim$\-Switch} ()}\label{classSwitch_ac9e0d5810af5ea21572d5dd7248baed8}
+
+\begin{DoxyCompactList}\small\item\em \-Destructor of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSwitch_a0cfd5e0c8eace4d18f7fb55677e596fc}{unsigned long {\bfseries id}}\label{classSwitch_a0cfd5e0c8eace4d18f7fb55677e596fc}
+
+\item 
+\hypertarget{classSwitch_a0529a711159d27857d4352b7917f2c4a}{string {\bfseries dpid}}\label{classSwitch_a0529a711159d27857d4352b7917f2c4a}
+
+\item 
+\hypertarget{classSwitch_af7ec03da67ac27276af2ca2f5fc8ddd9}{string {\bfseries name}}\label{classSwitch_af7ec03da67ac27276af2ca2f5fc8ddd9}
+
+\item 
+\hypertarget{classSwitch_afd838e148f43d4c532ca62f9ec10cada}{\-Switch\-Type {\bfseries type}}\label{classSwitch_afd838e148f43d4c532ca62f9ec10cada}
+
+\item 
+\hypertarget{classSwitch_ade7fe6528530bbc889df73e2627bc4ce}{string {\bfseries machine\-\_\-ip}}\label{classSwitch_ade7fe6528530bbc889df73e2627bc4ce}
+
+\item 
+\hypertarget{classSwitch_ac0e8edd3aa68f8610b851d2bd1dc1dc5}{string {\bfseries controller\-\_\-ip}}\label{classSwitch_ac0e8edd3aa68f8610b851d2bd1dc1dc5}
+
+\item 
+\hypertarget{classSwitch_a73c93f9a7c05797b3259ecf7dddd50ab}{string {\bfseries controller\-\_\-port}}\label{classSwitch_a73c93f9a7c05797b3259ecf7dddd50ab}
+
+\item 
+\hypertarget{classSwitch_a803e0134f15b79149f6e25bfbf06382a}{unsigned short {\bfseries new\-V\-M\-Attachement\-I\-D}}\label{classSwitch_a803e0134f15b79149f6e25bfbf06382a}
+
+\item 
+\hypertarget{classSwitch_aa20a2632ba87301910667da3e23de09a}{map$<$ string, \hyperlink{classInterface}{\-Interface} $\ast$ $>$ {\bfseries interface\-Map}}\label{classSwitch_aa20a2632ba87301910667da3e23de09a}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSwitch_ae3e4e003e0b8aa8ff91815653c2a3427}{\-Logger\-Ptr $\ast$ {\bfseries self\-Logger}}\label{classSwitch_ae3e4e003e0b8aa8ff91815653c2a3427}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSwitch_a474394c99f3e061b6f49d2e00806f29c}{static const unsigned int {\bfseries dpid\-\_\-width} = 16}\label{classSwitch_a474394c99f3e061b6f49d2e00806f29c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-This is the class for keeping infromation of the switch in the \-D\-O\-T topology. 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classSwitch_a087f1aa58ee5489365e4236ec90a5439}{\index{\-Switch@{\-Switch}!assign\-Interface@{assign\-Interface}}
+\index{assign\-Interface@{assign\-Interface}!Switch@{\-Switch}}
+\subsubsection[{assign\-Interface}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Switch\-::assign\-Interface} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Interface} $\ast$}]{new\-Interface}
+\end{DoxyParamCaption}
+)}}\label{classSwitch_a087f1aa58ee5489365e4236ec90a5439}
+
+
+\-The function assigns an interface to the switch. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em } & new\-Interface-\/ \-Pointer to the interface \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSwitch_a3cc7f9ef96f673293ab4ea4069caf27f}{\index{\-Switch@{\-Switch}!get\-D\-P\-I\-D@{get\-D\-P\-I\-D}}
+\index{get\-D\-P\-I\-D@{get\-D\-P\-I\-D}!Switch@{\-Switch}}
+\subsubsection[{get\-D\-P\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Switch\-::get\-D\-P\-I\-D} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSwitch_a3cc7f9ef96f673293ab4ea4069caf27f}
+
+
+\-The function to return the datapath id of a switch. 
+
+\begin{DoxyReturn}{\-Returns}
+-\/ dpid of the switch 
+\end{DoxyReturn}
+\hypertarget{classSwitch_a18e13da7323d92c01d383f56aeb7dc91}{\index{\-Switch@{\-Switch}!get\-I\-D@{get\-I\-D}}
+\index{get\-I\-D@{get\-I\-D}!Switch@{\-Switch}}
+\subsubsection[{get\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long {\bf \-Switch\-::get\-I\-D} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSwitch_a18e13da7323d92c01d383f56aeb7dc91}
+
+
+\-The function to return the id of a switch. 
+
+\begin{DoxyReturn}{\-Returns}
+-\/ id of the switch 
+\end{DoxyReturn}
+\hypertarget{classSwitch_af11e69a311d13705bc6799a56a980b4c}{\index{\-Switch@{\-Switch}!get\-I\-Pof\-Controller@{get\-I\-Pof\-Controller}}
+\index{get\-I\-Pof\-Controller@{get\-I\-Pof\-Controller}!Switch@{\-Switch}}
+\subsubsection[{get\-I\-Pof\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Switch\-::get\-I\-Pof\-Controller} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSwitch_af11e69a311d13705bc6799a56a980b4c}
+
+
+\-The function to return the \-I\-P address of the controller of the switch. 
+
+\begin{DoxyReturn}{\-Returns}
+-\/ \-I\-P address as a string 
+\end{DoxyReturn}
+\hypertarget{classSwitch_a52161638a0f5429ac83d78cbc85c82db}{\index{\-Switch@{\-Switch}!get\-I\-P\-Of\-Machine@{get\-I\-P\-Of\-Machine}}
+\index{get\-I\-P\-Of\-Machine@{get\-I\-P\-Of\-Machine}!Switch@{\-Switch}}
+\subsubsection[{get\-I\-P\-Of\-Machine}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Switch\-::get\-I\-P\-Of\-Machine} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSwitch_a52161638a0f5429ac83d78cbc85c82db}
+
+
+\-The function to return the \-I\-P address of the machine where the switch is provisioned. 
+
+\begin{DoxyReturn}{\-Returns}
+-\/ \-I\-P address as a string 
+\end{DoxyReturn}
+\hypertarget{classSwitch_a8b325a8f123eb07bdd2e7381af3a83f6}{\index{\-Switch@{\-Switch}!get\-Name@{get\-Name}}
+\index{get\-Name@{get\-Name}!Switch@{\-Switch}}
+\subsubsection[{get\-Name}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Switch\-::get\-Name} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSwitch_a8b325a8f123eb07bdd2e7381af3a83f6}
+
+
+\-The function to return the name of a switch. 
+
+\begin{DoxyReturn}{\-Returns}
+-\/ \-Name of the switch 
+\end{DoxyReturn}
+\hypertarget{classSwitch_afde2d9f4d9e2510c45aec336a8a712ed}{\index{\-Switch@{\-Switch}!get\-New\-V\-M\-Attachement\-Point@{get\-New\-V\-M\-Attachement\-Point}}
+\index{get\-New\-V\-M\-Attachement\-Point@{get\-New\-V\-M\-Attachement\-Point}!Switch@{\-Switch}}
+\subsubsection[{get\-New\-V\-M\-Attachement\-Point}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short {\bf \-Switch\-::get\-New\-V\-M\-Attachement\-Point} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSwitch_afde2d9f4d9e2510c45aec336a8a712ed}
+
+
+\-The function to return the number of vnet interface. 
+
+\begin{DoxyReturn}{\-Returns}
+-\/ id of the vnet interface 
+\end{DoxyReturn}
+\hypertarget{classSwitch_adc27b9def7bfc56b52411a20a6cca4b9}{\index{\-Switch@{\-Switch}!get\-Portof\-Controller@{get\-Portof\-Controller}}
+\index{get\-Portof\-Controller@{get\-Portof\-Controller}!Switch@{\-Switch}}
+\subsubsection[{get\-Portof\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Switch\-::get\-Portof\-Controller} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSwitch_adc27b9def7bfc56b52411a20a6cca4b9}
+
+
+\-The function to return the port of the controller of the switch. 
+
+\begin{DoxyReturn}{\-Returns}
+-\/ \-Port as a string 
+\end{DoxyReturn}
+\hypertarget{classSwitch_aefcd830a9fcadb2458924ff3eb4a1ec0}{\index{\-Switch@{\-Switch}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!Switch@{\-Switch}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}\-Switch\-Type {\bf \-Switch\-::get\-Type} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSwitch_aefcd830a9fcadb2458924ff3eb4a1ec0}
+
+
+\-The function to return the type of a switch. 
+
+\begin{DoxyReturn}{\-Returns}
+-\/ \-Type of the switch 
+\end{DoxyReturn}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\-Switch.\-h\item 
+\-Switch.\-cpp\end{DoxyCompactItemize}

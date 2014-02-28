@@ -30,26 +30,63 @@
 #include "Link.h"
 #include <string>
 #include "Tunnel.h"
+#include "Global.h"
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
 
 using namespace log4cxx;
 using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
+
 using namespace std;
 
 class Tunnel;
 
+
+/**
+* This class extends the link class to provide additonal feature for Cross-host links.
+*/
 class CutEdge: public Link {
+   /**
+    * The event logger of this class.
+    */
     LoggerPtr* selfLogger;
+    /**
+    * The tunnel to which the cross-host link belongs
+    */
     Tunnel * belongsToTunnel;
 public:
+    /**
+    * Constructor of the class.
+    * @param bandwidth - Bandwidth in Mbps.
+    * @param belongsToTunnel - The tunnel to which the cut edge belongs to
+    * @param delay - Propagation delay in ms (Default: 0)
+    */
     CutEdge(double bandwidth, Tunnel * belongsToTunnel, double delay = 0);
+    
+    /**
+    * @return Returns the id of a  cut edge
+    */
+
     unsigned int getCutEdgeId();
+    
+    /**
+    * This function is used for retrieving the Tunnel of a cut edge 
+    * @return Returns the tunnel to which a cut edge is assigned.
+    */
     Tunnel * getAttachedTunnel();
     friend class Tunnel;
+    
+    /**
+    * Destructor of the class.
+    */
     virtual ~CutEdge();
+    /**
+    * The cut edge id
+    */
     unsigned int cut_edge_id;
 };
+
+
 
 #endif /* CUTEDGE_H_ */

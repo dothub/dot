@@ -32,6 +32,7 @@ using namespace std;
 Tunnel::Tunnel(LinkType type)
 : Link(0, type)
 {
+    this->selfLogger = Global::loggerFactory->getLogger("Tunnel");
     cutEdgeCounter = 1;
 
     if(type == GRE_TUNNEL)

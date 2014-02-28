@@ -34,6 +34,7 @@
 #include "Mapping.h"
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
+#include "Global.h"
 
 using namespace log4cxx;
 using namespace log4cxx::xml;
@@ -43,7 +44,14 @@ using namespace log4cxx::helpers;
 
 using namespace std;
 
+
+/**
+* This is the base class for provisioning VM with different hypervisor library.
+*/
 class AbstractVM {
+    /**
+    * The event logger of this class.
+    */
     LoggerPtr* selfLogger;
 
 protected:
@@ -52,17 +60,54 @@ protected:
     CommandExecutor* commandExec;
     Mapping* mapping;
     LogicalTopology* topology;
-       
+    
+    /**
+    * The virtual function to create the configuration to attach a VM to VSs.
+    */
     virtual void createHost2SwitchAttachmentConf()=0;
+    /**
+    * The virtual function to load the configuration to attach a VM to VSs.
+    */
     virtual void loadConfiguration(string fileName)=0;
 
 public:
-    AbstractVM(Configurations* globalConf, VMs* vms, CommandExecutor* commandExec,   LogicalTopology * topology, Mapping* mapping);
+    /**
+    * Constructor of the class.
+    * @param - globalConf - Pointer to global configuration
+    * @param - vms - Pointer to VMs of the logical toplogy
+    * @param commandExec - Pointer to the CommandExecutor.
+    * @param topology - Pointer to logical toplogy
+    * @param mapping - Pointer to switch to physical machine mapping
+    */
+    AbstractVM(Configurations* globalConf, VMs* vms, 
+        CommandExecutor* commandExec,   LogicalTopology * topology, Mapping* mapping);
 
+    /**
+    * Virtual function for preprocessing task.
+    */
     virtual void prepare()=0;
+    /**
+    * The virtual function to provide an interface to deploy a VM.
+    * @param: host_id - VM id
+    */
     virtual void startHost(unsigned long host_id)=0;
+   
+    /**
+    * The virtual function to provide an interface to retrieve the prefix used for tap.
+    * @return - Prefix as a string
+    */ 
     virtual string tapInterfacePrefix()=0;
+
+    /**
+    * The virtual function to Provide an interface to retrieve the interface name of the tap.
+    * @param: host_id - VM id
+    */ 
+
     virtual void retrieveInterface(unsigned long host_id)=0;
+
+    /**
+    * Destructor of the class.
+    */
     virtual ~AbstractVM();
 };
 

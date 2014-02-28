@@ -1,0 +1,187 @@
+\hypertarget{classKVMWithLibvirt}{\section{\-K\-V\-M\-With\-Libvirt \-Class \-Reference}
+\label{classKVMWithLibvirt}\index{\-K\-V\-M\-With\-Libvirt@{\-K\-V\-M\-With\-Libvirt}}
+}
+
+
+\-The class for provisioning \-V\-M with in \-K\-V\-M hypervisor using libvirt.  
+
+
+
+
+{\ttfamily \#include $<$\-K\-V\-M\-With\-Libvirt.\-h$>$}
+
+\-Inheritance diagram for \-K\-V\-M\-With\-Libvirt\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classKVMWithLibvirt}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classKVMWithLibvirt_a0e64758e02ef58e760c1cd8712d8b728}{\-K\-V\-M\-With\-Libvirt} (\hyperlink{classConfigurations}{\-Configurations} $\ast$global\-Conf, \hyperlink{classVMs}{\-V\-Ms} $\ast$vms, \hyperlink{classCommandExecutor}{\-Command\-Executor} $\ast$command\-Exec, \hyperlink{classLogicalTopology}{\-Logical\-Topology} $\ast$topology, \hyperlink{classMapping}{\-Mapping} $\ast$mapping)
+\begin{DoxyCompactList}\small\item\em \-Constructor of the class. \end{DoxyCompactList}\item 
+\hypertarget{classKVMWithLibvirt_a60d9bb868861d9f82bfa0e128037aa77}{void \hyperlink{classKVMWithLibvirt_a60d9bb868861d9f82bfa0e128037aa77}{create\-Host2\-Switch\-Attachment\-Conf} ()}\label{classKVMWithLibvirt_a60d9bb868861d9f82bfa0e128037aa77}
+
+\begin{DoxyCompactList}\small\item\em \-The function to create the configuration to attach a \-V\-M to \-V\-Ss. \end{DoxyCompactList}\item 
+void \hyperlink{classKVMWithLibvirt_a0a8b035f4472bb586c32eb9f2c42adff}{start\-Host} (unsigned long host\-\_\-id)
+\begin{DoxyCompactList}\small\item\em \-The function to deploy a \-V\-M. \end{DoxyCompactList}\item 
+void \hyperlink{classKVMWithLibvirt_a71eeb177804ff7fca2834f28a7163702}{retrieve\-Interface} (unsigned long host\-\_\-id)
+\begin{DoxyCompactList}\small\item\em \-The function to retrieve the interface name of the tap and update the \-V\-M property. \end{DoxyCompactList}\item 
+\hypertarget{classKVMWithLibvirt_a789576619203856a47073c657f55f678}{void \hyperlink{classKVMWithLibvirt_a789576619203856a47073c657f55f678}{prepare} ()}\label{classKVMWithLibvirt_a789576619203856a47073c657f55f678}
+
+\begin{DoxyCompactList}\small\item\em \-The function for preprocessing task. \end{DoxyCompactList}\item 
+string \hyperlink{classKVMWithLibvirt_a72b1ccc74e4795ee4f4375da3a551e70}{tap\-Interface\-Prefix} ()
+\begin{DoxyCompactList}\small\item\em \-The function to retrieve the prefix used for tap. \end{DoxyCompactList}\item 
+\hypertarget{classKVMWithLibvirt_a6deab5d821db1b50e6ae3111082ddce3}{virtual \hyperlink{classKVMWithLibvirt_a6deab5d821db1b50e6ae3111082ddce3}{$\sim$\-K\-V\-M\-With\-Libvirt} ()}\label{classKVMWithLibvirt_a6deab5d821db1b50e6ae3111082ddce3}
+
+\begin{DoxyCompactList}\small\item\em \-Destructor of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Private \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classKVMWithLibvirt_a9bf3eed10d4db0b96d84e178512ae867}{void \hyperlink{classKVMWithLibvirt_a9bf3eed10d4db0b96d84e178512ae867}{load\-Configuration} (string file\-Name)}\label{classKVMWithLibvirt_a9bf3eed10d4db0b96d84e178512ae867}
+
+\begin{DoxyCompactList}\small\item\em \-The function to load the network.\-xml to attach a \-V\-M to \-V\-Ss. \end{DoxyCompactList}\item 
+string \hyperlink{classKVMWithLibvirt_abb5003678efe02ddaf9daef164755e42}{create\-New\-Image} (unsigned long host\-\_\-id)
+\begin{DoxyCompactList}\small\item\em \-The function to copy the default disk image for new \-V\-M. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classKVMWithLibvirt_a823582390a7f121eddb939c29b9fd6df}{\-Logger\-Ptr $\ast$ \hyperlink{classKVMWithLibvirt_a823582390a7f121eddb939c29b9fd6df}{self\-Logger}}\label{classKVMWithLibvirt_a823582390a7f121eddb939c29b9fd6df}
+
+\begin{DoxyCompactList}\small\item\em \-The event logger of this class. \end{DoxyCompactList}\item 
+string \hyperlink{classKVMWithLibvirt_a6f19aaec56c4a4e486dfdd8538e37b3a}{virt\-\_\-type}
+\begin{DoxyCompactList}\small\item\em \-The type of the hypervisor. \end{DoxyCompactList}\item 
+\hypertarget{classKVMWithLibvirt_a917f9a461521a22163ed12a54fbc7c5f}{string \hyperlink{classKVMWithLibvirt_a917f9a461521a22163ed12a54fbc7c5f}{network\-File}}\label{classKVMWithLibvirt_a917f9a461521a22163ed12a54fbc7c5f}
+
+\begin{DoxyCompactList}\small\item\em \-The name of the network configuration file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-The class for provisioning \-V\-M with in \-K\-V\-M hypervisor using libvirt. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classKVMWithLibvirt_a0e64758e02ef58e760c1cd8712d8b728}{\index{\-K\-V\-M\-With\-Libvirt@{\-K\-V\-M\-With\-Libvirt}!\-K\-V\-M\-With\-Libvirt@{\-K\-V\-M\-With\-Libvirt}}
+\index{\-K\-V\-M\-With\-Libvirt@{\-K\-V\-M\-With\-Libvirt}!KVMWithLibvirt@{\-K\-V\-M\-With\-Libvirt}}
+\subsubsection[{\-K\-V\-M\-With\-Libvirt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-K\-V\-M\-With\-Libvirt\-::\-K\-V\-M\-With\-Libvirt} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Configurations} $\ast$}]{global\-Conf, }
+\item[{{\bf \-V\-Ms} $\ast$}]{vms, }
+\item[{{\bf \-Command\-Executor} $\ast$}]{command\-Exec, }
+\item[{{\bf \-Logical\-Topology} $\ast$}]{topology, }
+\item[{{\bf \-Mapping} $\ast$}]{mapping}
+\end{DoxyParamCaption}
+)}}\label{classKVMWithLibvirt_a0e64758e02ef58e760c1cd8712d8b728}
+
+
+\-Constructor of the class. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em -\/} & global\-Conf -\/ \-Pointer to global configuration \\
+\hline
+{\em -\/} & vms -\/ \-Pointer to \hyperlink{classVMs}{\-V\-Ms} of the logical toplogy \\
+\hline
+{\em command\-Exec} & -\/ \-Pointer to the \hyperlink{classCommandExecutor}{\-Command\-Executor}. \\
+\hline
+{\em topology} & -\/ \-Pointer to logical toplogy \\
+\hline
+{\em mapping} & -\/ \-Pointer to switch to physical machine mapping \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classKVMWithLibvirt_abb5003678efe02ddaf9daef164755e42}{\index{\-K\-V\-M\-With\-Libvirt@{\-K\-V\-M\-With\-Libvirt}!create\-New\-Image@{create\-New\-Image}}
+\index{create\-New\-Image@{create\-New\-Image}!KVMWithLibvirt@{\-K\-V\-M\-With\-Libvirt}}
+\subsubsection[{create\-New\-Image}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-K\-V\-M\-With\-Libvirt\-::create\-New\-Image} (
+\begin{DoxyParamCaption}
+\item[{unsigned long}]{host\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classKVMWithLibvirt_abb5003678efe02ddaf9daef164755e42}
+
+
+\-The function to copy the default disk image for new \-V\-M. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em } & host\-\_\-id -\/ \-V\-M id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-: \-Name of the image with its path 
+\end{DoxyReturn}
+\hypertarget{classKVMWithLibvirt_a71eeb177804ff7fca2834f28a7163702}{\index{\-K\-V\-M\-With\-Libvirt@{\-K\-V\-M\-With\-Libvirt}!retrieve\-Interface@{retrieve\-Interface}}
+\index{retrieve\-Interface@{retrieve\-Interface}!KVMWithLibvirt@{\-K\-V\-M\-With\-Libvirt}}
+\subsubsection[{retrieve\-Interface}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-K\-V\-M\-With\-Libvirt\-::retrieve\-Interface} (
+\begin{DoxyParamCaption}
+\item[{unsigned long}]{host\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{classKVMWithLibvirt_a71eeb177804ff7fca2834f28a7163702}
+
+
+\-The function to retrieve the interface name of the tap and update the \-V\-M property. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em } & host\-\_\-id -\/ \-V\-M id \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements \hyperlink{classAbstractVM_a02beee0b81284b2dfa5d98e3c26a2586}{\-Abstract\-V\-M}.
+
+\hypertarget{classKVMWithLibvirt_a0a8b035f4472bb586c32eb9f2c42adff}{\index{\-K\-V\-M\-With\-Libvirt@{\-K\-V\-M\-With\-Libvirt}!start\-Host@{start\-Host}}
+\index{start\-Host@{start\-Host}!KVMWithLibvirt@{\-K\-V\-M\-With\-Libvirt}}
+\subsubsection[{start\-Host}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-K\-V\-M\-With\-Libvirt\-::start\-Host} (
+\begin{DoxyParamCaption}
+\item[{unsigned long}]{host\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{classKVMWithLibvirt_a0a8b035f4472bb586c32eb9f2c42adff}
+
+
+\-The function to deploy a \-V\-M. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em } & host\-\_\-id -\/ \-V\-M id \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements \hyperlink{classAbstractVM_a85958cf509c4eafa9072693346bf0d65}{\-Abstract\-V\-M}.
+
+\hypertarget{classKVMWithLibvirt_a72b1ccc74e4795ee4f4375da3a551e70}{\index{\-K\-V\-M\-With\-Libvirt@{\-K\-V\-M\-With\-Libvirt}!tap\-Interface\-Prefix@{tap\-Interface\-Prefix}}
+\index{tap\-Interface\-Prefix@{tap\-Interface\-Prefix}!KVMWithLibvirt@{\-K\-V\-M\-With\-Libvirt}}
+\subsubsection[{tap\-Interface\-Prefix}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-K\-V\-M\-With\-Libvirt\-::tap\-Interface\-Prefix} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{classKVMWithLibvirt_a72b1ccc74e4795ee4f4375da3a551e70}
+
+
+\-The function to retrieve the prefix used for tap. 
+
+\begin{DoxyReturn}{\-Returns}
+-\/ \-Prefix as a string 
+\end{DoxyReturn}
+
+
+\-Implements \hyperlink{classAbstractVM_ae2fa8799756c7ca16b29bfccd9051a1f}{\-Abstract\-V\-M}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{classKVMWithLibvirt_a6f19aaec56c4a4e486dfdd8538e37b3a}{\index{\-K\-V\-M\-With\-Libvirt@{\-K\-V\-M\-With\-Libvirt}!virt\-\_\-type@{virt\-\_\-type}}
+\index{virt\-\_\-type@{virt\-\_\-type}!KVMWithLibvirt@{\-K\-V\-M\-With\-Libvirt}}
+\subsubsection[{virt\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-K\-V\-M\-With\-Libvirt\-::virt\-\_\-type}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classKVMWithLibvirt_a6f19aaec56c4a4e486dfdd8538e37b3a}
+
+
+\-The type of the hypervisor. 
+
+\-Here\-: kvm. 
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\-K\-V\-M\-With\-Libvirt.\-h\item 
+\-K\-V\-M\-With\-Libvirt.\-cpp\end{DoxyCompactItemize}

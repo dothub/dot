@@ -26,7 +26,7 @@
 
 #ifndef OVS_1_10_H_
 #define OVS_1_10_H_
-
+#include "Global.h"
 #include "AbstractSwitch.h"
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
@@ -36,21 +36,85 @@ using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
 
 class OVS_1_10: public AbstractSwitch {
+    /**
+    * The event logger of this class.
+    */
     LoggerPtr* selfLogger;
 
 protected:
-    string createClearAllRules(Switch* newSwitch);
-    string createStaticTunnelRule(Switch* newSwitch, unsigned int tunnel_id, unsigned int input_port, unsigned int output_port);
+    /**
+    * This function generates the rules to delete all flows.
+    * @param theSwitch - Pointer to the switch
+    * @return The command as a string
+    */
+    string createClearAllRules(Switch* theSwitch);
+    
+    
+    /**
+    * This creates the static rules for tunnel.
+    * @param theSwitch - Pointer to the switch
+    * @param tunnel_id - Tunnel tag
+    * @param input_port - The input port of the flow rule
+    * @param output_port - The output por of the flow rule
+    * @return The command as a string
+    */
+    string createStaticTunnelRule(Switch* theSwitch, unsigned int tunnel_id, 
+            unsigned int input_port, unsigned int output_port);
 public:
+    /**
+    * Constructor of the class.
+    * @param commandExec - Pointer to the global object of CommandExecutor.
+    */
     OVS_1_10(CommandExecutor* commandExec);
+    /**
+    * Destructor of the class.
+    */
     virtual ~OVS_1_10();
-    void clearSwitch(Switch* newSwitch);
-    void runSwitch(Switch* newSwitch);
-    void attachPort(Switch* newSwitch, Interface* newInterface);
-    void assignPortNumber(Switch* newSwitch, Interface* newInterface);
-    void assignStaticTunnelRule(Switch* newSwitch, list<pair<unsigned int, pair<unsigned int, unsigned int> > > rules );
-    void clearAllRules(Switch* newSwitch);
-    void assignQoSToPort(Switch* newSwitch, string portName, unsigned long rate, unsigned long burst=0);
+    /**
+    * This function deletes the switch.
+    * @param theSwitch - Pointer to the switch
+    */
+    void clearSwitch(Switch* theSwitch);
+    /**
+    * This function starts a switch.
+    * @param theSwitch - Pointer to the switch
+    */
+    void runSwitch(Switch* theSwitch);
+   
+    /**
+    * This function attaches an Interface to a switch.
+    * @param theSwitch - Pointer to the switch
+    * @param newInterface - Pointer to the interface
+    */
+    void attachPort(Switch* theSwitch, Interface* newInterface);
+    /**
+    * This function attaches assings port number of the switch to which the interface is attached.
+    * @param theSwitch - Pointer to the switch
+    * @param newInterface - Pointer to the interface
+    */   
+    void assignPortNumber(Switch* theSwitch, Interface* newInterface);
+    /**
+    * This function assigns static tunnel rules.
+    * @param theSwitch - Pointer to the switch
+    * @param rules - A list of <tunnel id, input port, output port> encapsulated in pair
+    */
+    void assignStaticTunnelRule(Switch* theSwitch, 
+            list<pair<unsigned int, pair<unsigned int, unsigned int> > > rules );
+    
+    /**
+    * This clears all rules.
+    * @param theSwitch - Pointer to the switch
+    */
+    void clearAllRules(Switch* theSwitch);
+    /**
+    * This function provides rate limiting of  an interface.
+    * @param theSwitch - Pointer to the switch
+    * @param portName - The name of the port
+    * @param rate - Bandwidth in kbps
+    * @param burst- Traffic burst (Default: 0)
+    */
+    void assignQoSToPort(Switch* theSwitch, string portName, 
+            unsigned long rate, unsigned long burst=0);
 };
 
 #endif /* OVS_1_10_H_ */

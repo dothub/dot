@@ -35,13 +35,27 @@ using namespace log4cxx;
 using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
 
+/**
+* This class stores additional information about a GRE interface.
+*/
 
 class GRE_Interface: public Interface {
     LoggerPtr* selfLogger;
 public:
     string remoteIP;
+    /**
+    * Constructor of the class.
+    * @param name - Name of the GRE Interface.
+    */
     GRE_Interface(string name);
+    /**
+    * @return- Returns the remote IP of a GRE interface.
+    */
     string getRemoteIP();
+    
+    /**
+    * Destructor of the class.
+    */
     virtual ~GRE_Interface();
 };
 

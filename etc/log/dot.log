@@ -6,3 +6,10 @@
 2014-02-28 02:52:51,386 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
 2014-02-28 02:52:51,386 INFO   (DOT.cpp:111) - DOT Deployment has started 
 2014-02-28 02:52:51,386 INFO   (DOT.cpp:118) - DOT Topology is generated 
+2014-02-28 07:45:19,816 INFO   (DOT.cpp:163) - DOT main has started 
+2014-02-28 07:45:19,816 INFO   (DOT.cpp:209) - The global configuration file: emulations/alpha2/DefaultConfiguration_alpha2
+2014-02-28 07:45:19,816 INFO  prepare(std (DOT.cpp:51) - Reading the configurations
+2014-02-28 07:45:19,817 INFO  prepare(std (DOT.cpp:86) - Embedding is started
+2014-02-28 07:45:19,822 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
+2014-02-28 07:45:19,822 INFO   (DOT.cpp:111) - DOT Deployment has started
+2014-02-28 07:45:19,823 INFO   (DOT.cpp:118) - DOT Topology is generated

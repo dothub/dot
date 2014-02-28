@@ -33,6 +33,7 @@ AbstractVM::AbstractVM(Configurations* globalConf, VMs* vms, CommandExecutor* co
     this->commandExec = commandExec;
     this->topology = topology;
     this->mapping = mapping;
+    this->selfLogger = Global::loggerFactory->getLogger("AbstractVM");
 }
 
 AbstractVM::~AbstractVM() {

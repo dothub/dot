@@ -34,11 +34,12 @@
 
 using namespace std;
 
-KVMWithLibvirt::KVMWithLibvirt(Configurations* globalConf, VMs* vms, CommandExecutor* commandExec, LogicalTopology* topology, Mapping* mapping)
+KVMWithLibvirt::KVMWithLibvirt(Configurations* globalConf, VMs* vms, 
+    CommandExecutor* commandExec, LogicalTopology* topology, Mapping* mapping)
     :AbstractVM(globalConf, vms, commandExec, topology, mapping)
 {
     this->loadConfiguration(globalConf->hypervisorConfigurationFile);
-
+    this->selfLogger = Global::loggerFactory->getLogger("KVMWithLibvirt");
 }
 
 KVMWithLibvirt::~KVMWithLibvirt() {
@@ -113,7 +114,8 @@ void KVMWithLibvirt::createHost2SwitchAttachmentConf()
                 command << "sed -i \'s/\\$/" << i+1 << "/g\' " << outputFileName.str();
                 this->commandExec->executeLocal(command.str());
 
-                this->commandExec->copyContent("localhost", this->mapping->getMachine(i), outputFileName.str(), outputFileName.str());
+                this->commandExec->copyContent("localhost", 
+                    this->mapping->getMachine(i), outputFileName.str(), outputFileName.str());
 
                 ostringstream netDefineCommand;
 

@@ -35,9 +35,21 @@ using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
 
 class Interface;
+/**
+* This is an enumerator for link type.
+*/
+enum LinkType { 
+    /**Intra-host link */
+    TOPO_LINK, 
+    /** Cross-host link */
+    CUT_EDGE, 
+    /** Tunnel using GRE */
+    GRE_TUNNEL 
+};
 
-enum LinkType { TOPO_LINK, CUT_EDGE, GRE_TUNNEL };
-
+/**
+* This is the base class for a virtual link.
+*/
 class Link {
     LoggerPtr* selfLogger;
 
@@ -55,13 +67,47 @@ protected:
     Interface* interface2;
 
 public:
+    /**
+    * Constructor of the class.
+    * @param bandwidth - Bandwidth in Mbps.
+    * @param delay - Propagation delay in ms (Default: 0)
+    * @param type - Link type (Default: TOPO_LINK)
+    */
     Link(double bandwidth, double delay = 0, LinkType type = TOPO_LINK);
+    
+    /**
+    * Used to retrieve the first interface
+    * @return Returns first interface of the link
+    */
     Interface* getInterface1();
+    /**
+    * Used to retrieve the second interface
+    * @return Returns second interface of the link
+    */
     Interface* getInterface2();
+    /**
+    * Used to retrieve the type of the link
+    * @return Returns the link type
+    */    
     LinkType getType();
+    /**
+    * Used to retrieve the dealy of the link
+    * @return Returns the link delay
+    */
     double getDelay();
+    /**
+    * Used to retrieve the bandwidth of the link
+    * @return Returns bandwidth of the link
+    */
     double getBandwidth();
+    /**
+    * Used to retrieve the link id
+    * @return Returns the link id
+    */
     unsigned long getId();
+    /**
+    * Destructor of the class.
+    */
     virtual ~Link();
 };
 

@@ -36,15 +36,34 @@ using namespace log4cxx;
 using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
 
-
+/**
+* This is the base class for provisioning virtual link for different environment.
+*/
 class AbstractLink {
-
+    /**
+    * The event logger of this class.
+    */
     LoggerPtr* selfLogger;
 protected:
+    /**
+    * Pointer to the CommandExecutor Object.
+    */   
     CommandExecutor* commandExec;
 public:
+    /**
+    * Constructor of AbstractLink class.
+    * @param commandExec - Pointer to the global object of CommandExecutor.
+    */ 
     AbstractLink(CommandExecutor* commandExec);
+    /**
+    * Destructor of AbstractLink class.
+    */
     virtual ~AbstractLink();
+   
+    /**
+    * This function provides a an interface to create a vlink from a link attribute
+    * @param newLink - The object containing the link properties.
+    */
     void virtual createLink(Link* newLink)=0;
 };
 

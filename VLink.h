@@ -35,12 +35,30 @@ using namespace log4cxx;
 using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
 
+
+/**
+* This is the class to create a linux virtual ethernet link.
+*/
 class VLink: public AbstractLink {
+    /**
+    * The event logger of this class.
+    */
     LoggerPtr* selfLogger;
 
 public:
+    /**
+    * Constructor of the class.
+    * @param commandExec - Pointer to the global object of CommandExecutor.
+    */
     VLink(CommandExecutor* commandExec);
+   
+    /**
+    * Destructor of the class.
+    */
     virtual ~VLink();
+   /**
+    * Destructor of AbstractLink class.
+    */
     void createLink(Link* newLink);
 };
 

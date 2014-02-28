@@ -36,6 +36,9 @@ using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
 using namespace std;
 
+/**
+* This is a singleton class for storing switch2controller assignment.
+*/
 class Switch2Controller {
 
     LoggerPtr* selfLogger;
@@ -47,11 +50,38 @@ class Switch2Controller {
     map<unsigned long, unsigned int> sw2controllerMap;
 
 public:
+    
     static Switch2Controller* getSwitch2Controller(Controllers* controllers);
+   
+    /**
+    * The function to return the ID of the controller of the switch 
+    * @param - switchId - ID of the switch 
+    * @return - ID as an integer
+    */
     unsigned int getControllerId(unsigned long switchId);
+    
+    /**
+    * The function to return the IP address of the controller of the switch 
+    * @param - switchId - ID of the switch 
+    * @return - IP address as a string
+    */
     string getControllerIP(unsigned long switchId);
+    
+    /**
+    * The function to return the port of the controller of the switch 
+    * @param - switchId - ID of the switch 
+    * @return - Port as a string
+    */
     string getControllerPort(unsigned long switchId);
+    /**
+    * The function to populate switch 2 controller from a file.
+    * @param fileName - Name of the file
+    */
     void loadConfiguration(string fileName);
+    
+    /**
+    * Destructor of the class.
+    */
     virtual ~Switch2Controller();
 };
 

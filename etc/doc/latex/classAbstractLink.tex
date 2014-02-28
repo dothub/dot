@@ -1,0 +1,91 @@
+\hypertarget{classAbstractLink}{\section{\-Abstract\-Link \-Class \-Reference}
+\label{classAbstractLink}\index{\-Abstract\-Link@{\-Abstract\-Link}}
+}
+
+
+\-This is the base class for provisioning virtual link for different environment.  
+
+
+
+
+{\ttfamily \#include $<$\-Abstract\-Link.\-h$>$}
+
+\-Inheritance diagram for \-Abstract\-Link\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classAbstractLink}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classAbstractLink_ab375caaaecaf65210014af9f57128ebd}{\-Abstract\-Link} (\hyperlink{classCommandExecutor}{\-Command\-Executor} $\ast$\hyperlink{classAbstractLink_a51a304e32addcc90f5c6c5cb150070e2}{command\-Exec})
+\begin{DoxyCompactList}\small\item\em \-Constructor of \hyperlink{classAbstractLink}{\-Abstract\-Link} class. \end{DoxyCompactList}\item 
+\hypertarget{classAbstractLink_a4784615a938046dffaf6b93457ea266d}{virtual \hyperlink{classAbstractLink_a4784615a938046dffaf6b93457ea266d}{$\sim$\-Abstract\-Link} ()}\label{classAbstractLink_a4784615a938046dffaf6b93457ea266d}
+
+\begin{DoxyCompactList}\small\item\em \-Destructor of \hyperlink{classAbstractLink}{\-Abstract\-Link} class. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classAbstractLink_a7ccb9603a75fbf87e2bc5347bd1bfc9b}{create\-Link} (\hyperlink{classLink}{\-Link} $\ast$new\-Link)=0
+\begin{DoxyCompactList}\small\item\em \-This function provides a an interface to create a vlink from a link attribute. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classAbstractLink_a51a304e32addcc90f5c6c5cb150070e2}{\hyperlink{classCommandExecutor}{\-Command\-Executor} $\ast$ \hyperlink{classAbstractLink_a51a304e32addcc90f5c6c5cb150070e2}{command\-Exec}}\label{classAbstractLink_a51a304e32addcc90f5c6c5cb150070e2}
+
+\begin{DoxyCompactList}\small\item\em \-Pointer to the \hyperlink{classCommandExecutor}{\-Command\-Executor} \-Object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classAbstractLink_a675cb238f968a0fe99e57fea988e119c}{\-Logger\-Ptr $\ast$ \hyperlink{classAbstractLink_a675cb238f968a0fe99e57fea988e119c}{self\-Logger}}\label{classAbstractLink_a675cb238f968a0fe99e57fea988e119c}
+
+\begin{DoxyCompactList}\small\item\em \-The event logger of this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-This is the base class for provisioning virtual link for different environment. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classAbstractLink_ab375caaaecaf65210014af9f57128ebd}{\index{\-Abstract\-Link@{\-Abstract\-Link}!\-Abstract\-Link@{\-Abstract\-Link}}
+\index{\-Abstract\-Link@{\-Abstract\-Link}!AbstractLink@{\-Abstract\-Link}}
+\subsubsection[{\-Abstract\-Link}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Abstract\-Link\-::\-Abstract\-Link} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Command\-Executor} $\ast$}]{command\-Exec}
+\end{DoxyParamCaption}
+)}}\label{classAbstractLink_ab375caaaecaf65210014af9f57128ebd}
+
+
+\-Constructor of \hyperlink{classAbstractLink}{\-Abstract\-Link} class. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em command\-Exec} & -\/ \-Pointer to the global object of \hyperlink{classCommandExecutor}{\-Command\-Executor}. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classAbstractLink_a7ccb9603a75fbf87e2bc5347bd1bfc9b}{\index{\-Abstract\-Link@{\-Abstract\-Link}!create\-Link@{create\-Link}}
+\index{create\-Link@{create\-Link}!AbstractLink@{\-Abstract\-Link}}
+\subsubsection[{create\-Link}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Abstract\-Link\-::create\-Link} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Link} $\ast$}]{new\-Link}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{classAbstractLink_a7ccb9603a75fbf87e2bc5347bd1bfc9b}
+
+
+\-This function provides a an interface to create a vlink from a link attribute. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em new\-Link} & -\/ \-The object containing the link properties. \\
+\hline
+\end{DoxyParams}
+
+
+\-Implemented in \hyperlink{classVLink_afe3664a322734686f0d9ea94a755aab5}{\-V\-Link}.
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\-Abstract\-Link.\-h\item 
+\-Abstract\-Link.\-cpp\end{DoxyCompactItemize}

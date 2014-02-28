@@ -26,6 +26,8 @@
 
 #include "Link.h"
 #include <sstream>
+#include "Global.h"
+
 using namespace std;
 
 unsigned long Link::id_counter = 0;
@@ -34,6 +36,9 @@ unsigned long Link::tunnel_counter= 0;
 
 
 Link::Link(double bandwidth, double delay, LinkType type){
+
+    this->selfLogger = Global::loggerFactory->getLogger("Link");
+
     this->id = id_counter++;
     if(type == TOPO_LINK || type == CUT_EDGE)
     {

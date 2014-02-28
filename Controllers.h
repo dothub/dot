@@ -36,9 +36,18 @@ using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
 using namespace std;
 
+
+/**
+* This singleton class stores all controller inforamtion.
+*/
+
 class Controllers {
     LoggerPtr* selfLogger;
     
+    
+    /**
+    * This structure stores ID,IP Address and Port of a controller.
+    */
     struct ControllerAttribute
     {
         unsigned int controller_id;
@@ -49,18 +58,43 @@ class Controllers {
     static Controllers* controllers;
 
     Controllers();
-
+    
     unsigned int numberOfControllers;
     vector<ControllerAttribute > controllerIdVector;
 public:
 
     static Controllers* getControllers();
+    
+    
+    /**
+    * The function to populate controller from a file.
+    * @param fileName - Name of the file
+    */
     void populateControllers(string fileName);
 
+    /**
+    * @retuur- Returns the number of controllers
+    */
     unsigned int getNumberOfControllers();
-
+    
+    /**
+    * The function to return the ip address of a controller
+    * @param- ctrlId - Controller ID.
+    * @return - IP address of the controller
+    */
     string getIPAddress(unsigned int ctrlId);
+    
+
+    /**
+    * The function to return the portof a controller
+    * @param- ctrlId - Controller ID.
+    * @return - Port of the controller
+    */
     string getPort(unsigned int ctrlId);
+
+    /**
+    * Destructor of the class.
+    */
 
     virtual ~Controllers();
 };

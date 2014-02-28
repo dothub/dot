@@ -31,6 +31,7 @@
 #include "CutEdge.h"
 #include <string>
 #include <map>
+#include "Global.h"
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
 
@@ -42,16 +43,51 @@ using namespace std;
 
 class CutEdge;
 
+/**
+* This class extends the Link class for providing additional features for Tunnel.
+*/
 class Tunnel: public Link{
+    
     LoggerPtr* selfLogger;
+    
     unsigned int cutEdgeCounter;
     map<unsigned int, pair<CutEdge*, CutEdge*> > cutEdgeMap;
 public:
+    /**
+    * Constructor of the class.
+    * @param type - Link type (Default: GRE_LINK)
+    */
     Tunnel(LinkType type = GRE_TUNNEL);
+   
+    /**
+    * This function assigns a pair of cut edges belonging to the tunnel.
+    * @param cutEdge1 - One cut edge of the pair
+    * @param cutEdge2 - Another cut edge of the pair 
+    */
     unsigned int assignCutEdges(CutEdge * cutEdge1, CutEdge* cutEdge2);
+    
+    /**
+    * This function retrieve a cut edge pair from its id.
+    * @param cutEdgeId - Id of a cut edge pair
+    * @return - CutEdge pair 
+    */  
     pair<CutEdge*, CutEdge*>  getCutEdges(unsigned int cutEdgeId);
+    
+    /**
+    * This function assigns ip address of the remote machine to the tunnel.
+    */  
     void assignRemoteIPToInterface();
+    
+    /**
+    * This function returns the ip address of the remote machine for a cut edge
+    * @param cutEdge - Pointer to a cut edge
+    * @return - IP Address as a string    */
+
     string remoteIP(Link* cutEdge);
+    
+    /**
+    * Destructor of the class.
+    */
     virtual ~Tunnel();
 };
 

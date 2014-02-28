@@ -33,8 +33,7 @@ using namespace std;
 
 VLink::VLink(CommandExecutor* commandExec):
     AbstractLink(commandExec){
-
-
+    this->selfLogger = Global::loggerFactory->getLogger("VLink");
 }
 
 VLink::~VLink() {
@@ -54,7 +53,8 @@ void VLink::createLink(Link* newLink) {
                 << " type veth peer name " << newLink->getInterface2()->getName() << endl;
 
         fout << "sudo ip link add name " << newLink->getInterface1()->getName()
-                        << " type veth peer name " << newLink->getInterface2()->getName() << endl;
+                    << " type veth peer name " 
+                    << newLink->getInterface2()->getName() << endl;
 
         fout << "sudo ifconfig " << newLink->getInterface1()->getName() << " up" << endl;
         fout << "sudo ifconfig " << newLink->getInterface2()->getName() << " up" << endl;
@@ -65,16 +65,19 @@ void VLink::createLink(Link* newLink) {
 
 
         this->commandExec->executeLocal("chmod +x "+ fileName.str());
-        this->commandExec->executeScriptRemote(newLink->getInterface1()->getSwitch()->getIPOfMachine(), "", fileName.str());
+        this->commandExec->executeScriptRemote(
+                newLink->getInterface1()->getSwitch()->getIPOfMachine(), 
+                "", fileName.str());
 
-        this->commandExec->executeRemote(newLink->getInterface1()->getSwitch()->getIPOfMachine(), "rm " + fileName.str());
+        this->commandExec->executeRemote(
+            newLink->getInterface1()->getSwitch()->getIPOfMachine(), 
+            "rm " + fileName.str());
 
         if(remove(fileName.str().c_str()) != 0 )
-            cout << "Error Link Script file" << endl;
+            LOG4CXX_ERROR((*selfLogger), "Link script file cannot be deleted");
     }
     else
-        cout << "Cannot create Link Script file" << endl;
+        LOG4CXX_FATAL((*selfLogger), "Cannot create Link Script file" );
 
 }
-
 

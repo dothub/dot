@@ -38,150 +38,161 @@ OVS_1_10::OVS_1_10(CommandExecutor* commandExec)
     :AbstractSwitch(commandExec)
 {
     // TODO Auto-generated constructor stub
-
+    this->selfLogger = Global::loggerFactory->getLogger("OVS_1_10");
+    LOG4CXX_DEBUG((*selfLogger), "Constructor is called");
 }
+
 
 OVS_1_10::~OVS_1_10() {
     // TODO Auto-generated destructor stub
 }
 
-void OVS_1_10::clearSwitch(Switch* newSwitch) {
+void OVS_1_10::clearSwitch(Switch* theSwitch) {
 
     ostringstream command;
-    command << "sudo ovs-vsctl del-br " << newSwitch->getName();
+    command << "sudo ovs-vsctl del-br " << theSwitch->getName();
 
-    this->commandExec->executeRemote(newSwitch->getIPOfMachine(), command.str());
+    this->commandExec->executeRemote(theSwitch->getIPOfMachine(), command.str());
 
 }
 
-void OVS_1_10::runSwitch(Switch* newSwitch) {
+void OVS_1_10::runSwitch(Switch* theSwitch) {
 
 
     ostringstream fileName;
-    fileName << "ovs_create_"<< newSwitch->getName() << ".sh";
+    fileName << "ovs_create_"<< theSwitch->getName() << ".sh";
     ofstream fout(fileName.str().c_str());
 
     if(fout.is_open())
     {
-        fout << "sudo ovs-vsctl add-br " << newSwitch->getName() << endl;
-        if(newSwitch->getIPofController().compare("")!=0)
+        fout << "sudo ovs-vsctl add-br " << theSwitch->getName() << endl;
+        if(theSwitch->getIPofController().compare("")!=0)
         {
-            fout << "sudo ovs-vsctl set-controller " << newSwitch->getName()
-                        << " tcp:" << newSwitch->getIPofController() << ":" << newSwitch->getPortofController() << endl;
-            fout << "sudo ovs-vsctl set-fail-mode " << newSwitch->getName() << " secure" << endl;
+            fout << "sudo ovs-vsctl set-controller " << theSwitch->getName()
+                        << " tcp:" << theSwitch->getIPofController() 
+                        << ":" << theSwitch->getPortofController() << endl;
+            fout << "sudo ovs-vsctl set-fail-mode " 
+                << theSwitch->getName() << " secure" << endl;
         }
-        fout << "sudo ovs-vsctl set bridge " << newSwitch->getName() << " other-config:datapath-id=" << newSwitch->getDPID() << endl;
+        fout << "sudo ovs-vsctl set bridge " 
+             << theSwitch->getName() << " other-config:datapath-id=" 
+            << theSwitch->getDPID() << endl;
 
         fout.close();
 
         
         this->commandExec->executeLocal("chmod +x "+fileName.str());
         
-        this->commandExec->executeScriptRemote(newSwitch->getIPOfMachine(), "", fileName.str());
+        this->commandExec->executeScriptRemote(theSwitch->getIPOfMachine(), "", fileName.str());
 
-        this->commandExec->executeRemote(newSwitch->getIPOfMachine(),
+        this->commandExec->executeRemote(theSwitch->getIPOfMachine(),
                "rm "+ fileName.str());
         
         if(remove(fileName.str().c_str()) != 0 )
-            cout << "Error OVS Script file" << endl;
+            LOG4CXX_ERROR((*selfLogger), "Cannot remove  OVS Script file");
 
     }
     else
-        cout << "Cannot create OVS Script file" << endl;
+        LOG4CXX_FATAL((*selfLogger), "Cannot create OVS Script file");
 
 
 }
 
-void OVS_1_10::attachPort(Switch* newSwitch, Interface* newInterface) {
+void OVS_1_10::attachPort(Switch* theSwitch, Interface* newInterface) {
 
     //hypervisor will create the tap interface
     ostringstream command;
     if(newInterface->getType() == VETH)
-        command << "sudo ovs-vsctl add-port " << newSwitch->getName() << " " << newInterface->getName();
+        command << "sudo ovs-vsctl add-port " 
+                << theSwitch->getName() << " " << newInterface->getName();
     else if(newInterface->getType() == GRE)
-        command << " sudo ovs-vsctl add-port " << newSwitch->getName() << " " << newInterface->getName()
+        command << " sudo ovs-vsctl add-port " << theSwitch->getName() 
+                    << " " << newInterface->getName()
                     << " -- set interface " <<  newInterface->getName()
-                    << " type=gre options:remote_ip=" << ((GRE_Interface*)newInterface)->getRemoteIP() << " options:key=flow";
+                    << " type=gre options:remote_ip=" 
+                    << ((GRE_Interface*)newInterface)->getRemoteIP() 
+                    << " options:key=flow";
 
     //cout << command.str() << endl;
-    this->commandExec->executeRemote(newSwitch->getIPOfMachine(), command.str());
+    this->commandExec->executeRemote(theSwitch->getIPOfMachine(), command.str());
 
 }
 
-string OVS_1_10::createClearAllRules(Switch* newSwitch) {
+string OVS_1_10::createClearAllRules(Switch* theSwitch) {
     ostringstream command;
-    command << "sudo ovs-ofctl del-flows " << newSwitch->getName();
+    command << "sudo ovs-ofctl del-flows " << theSwitch->getName();
 
     return command.str();
 }
 
-string OVS_1_10::createStaticTunnelRule(Switch* newSwitch,
+string OVS_1_10::createStaticTunnelRule(Switch* theSwitch,
         unsigned int tunnel_id, unsigned int input_port,
         unsigned int output_port) {
 
     ostringstream command;
-    command << "sudo ovs-ofctl add-flow " << newSwitch->getName()
-            << " in_port=" << input_port << ",actions=set_tunnel:"<< tunnel_id << ",output:" << output_port << endl;
-    command << "sudo ovs-ofctl add-flow " << newSwitch->getName()
-            << " in_port=" << output_port << ",tun_id=" << tunnel_id << ",actions=output:" << input_port;
+    command << "sudo ovs-ofctl add-flow " << theSwitch->getName()
+            << " in_port=" << input_port << ",actions=set_tunnel:"
+            << tunnel_id << ",output:" << output_port << endl;
+    command << "sudo ovs-ofctl add-flow " << theSwitch->getName()
+            << " in_port=" << output_port << ",tun_id=" 
+            << tunnel_id << ",actions=output:" << input_port;
     return command.str();
 }
-
-void OVS_1_10::assignPortNumber(Switch* newSwitch, Interface* newInterface) {
+void OVS_1_10::assignPortNumber(Switch* theSwitch, Interface* newInterface) {
 
     ostringstream command;
-    command << "sudo ovs-ofctl show " << newSwitch->getName() << "| grep " << newInterface->getName() << "|cut -f1 -d'('|cut -f2 -d' '";
-    string portNumber = this->commandExec->executeRemote(newSwitch->getIPOfMachine(), command.str());
+    command << "sudo ovs-ofctl show " << theSwitch->getName() 
+            << "| grep " << newInterface->getName() 
+            << "|cut -f1 -d'('|cut -f2 -d' '";
+    string portNumber = this->commandExec->executeRemote(
+                                theSwitch->getIPOfMachine(), command.str());
 
     stringstream strStream(portNumber);
     strStream >> newInterface->port;
 
 }
-
-void OVS_1_10::assignStaticTunnelRule(Switch* newSwitch,
+void OVS_1_10::assignStaticTunnelRule(Switch* theSwitch,
         list<pair<unsigned int, pair<unsigned int, unsigned int> > > rules) {
 
         ostringstream fileName;
-        fileName << "ovs_static_"<< newSwitch->getName() << ".sh";
+        fileName << "ovs_static_"<< theSwitch->getName() << ".sh";
         ofstream fout(fileName.str().c_str());
 
         if(fout.is_open())
         {
-            fout << this->createClearAllRules(newSwitch) << endl;
+            fout << this->createClearAllRules(theSwitch) << endl;
 
             for(list<pair<unsigned int, pair<unsigned int, unsigned int> > >::iterator iter = rules.begin();
                         iter != rules.end(); iter++)
             {
-                fout << this->createStaticTunnelRule(newSwitch, iter->first, iter->second.first, iter->second.second) << endl;
+                fout << this->createStaticTunnelRule(theSwitch, iter->first, iter->second.first, iter->second.second) << endl;
             }
 
 
             fout.close();
 
             this->commandExec->executeLocal("chmod +x "+fileName.str());
-            this->commandExec->executeScriptRemote(newSwitch->getIPOfMachine(), "", fileName.str());
-            this->commandExec->executeRemote(newSwitch->getIPOfMachine(),
+            this->commandExec->executeScriptRemote(theSwitch->getIPOfMachine(), "", fileName.str());
+            this->commandExec->executeRemote(theSwitch->getIPOfMachine(),
                "rm "+ fileName.str());
 
             if(remove(fileName.str().c_str()) != 0 )
-                cout << "Error OVS Static file" << endl;
+                LOG4CXX_ERROR((*selfLogger), "Error OVS Static file");
                
         }
         else
-            cout << "Cannot create OVS Static Rule file" << endl;
+            LOG4CXX_FATAL((*selfLogger), "Cannot create OVS Static Rule file");
 
 
 
 }
+void OVS_1_10::clearAllRules(Switch* theSwitch) {
 
-void OVS_1_10::clearAllRules(Switch* newSwitch) {
-
-    string command = this->createClearAllRules(newSwitch);
-    this->commandExec->executeRemote(newSwitch->getIPOfMachine(), command);
+    string command = this->createClearAllRules(theSwitch);
+    this->commandExec->executeRemote(theSwitch->getIPOfMachine(), command);
 }
 
-
-void OVS_1_10::assignQoSToPort(Switch* newSwitch, 
+void OVS_1_10::assignQoSToPort(Switch* theSwitch, 
     string portName, unsigned long rate, unsigned long burst)
 {
     ostringstream command;
@@ -189,9 +200,8 @@ void OVS_1_10::assignQoSToPort(Switch* newSwitch,
         << " Interface " << portName 
         << " ingress_policing_rate=" << rate;
 
-    cout << command.str() << endl;
 
-    this->commandExec->executeRemote(newSwitch->getIPOfMachine(),
+    this->commandExec->executeRemote(theSwitch->getIPOfMachine(),
         command.str());
     
     command.str("");
@@ -202,9 +212,8 @@ void OVS_1_10::assignQoSToPort(Switch* newSwitch,
             << " Interface " << portName 
             << " ingress_policing_burst=" << burst;
 
-        cout << command.str() << endl;
     
-        this->commandExec->executeRemote(newSwitch->getIPOfMachine(),
+        this->commandExec->executeRemote(theSwitch->getIPOfMachine(),
             command.str());
     
     }

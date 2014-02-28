@@ -1,0 +1,122 @@
+\hypertarget{classControllers}{\section{\-Controllers \-Class \-Reference}
+\label{classControllers}\index{\-Controllers@{\-Controllers}}
+}
+
+
+\-This singleton class stores all controller inforamtion.  
+
+
+
+
+{\ttfamily \#include $<$\-Controllers.\-h$>$}
+
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structControllers_1_1ControllerAttribute}{\-Controller\-Attribute}
+\begin{DoxyCompactList}\small\item\em \-This structure stores \-I\-D,\-I\-P \-Address and \-Port of a controller. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classControllers_ac6623105f2ae4a17ba25bfdfb3b71100}{populate\-Controllers} (string file\-Name)
+\begin{DoxyCompactList}\small\item\em \-The function to populate controller from a file. \end{DoxyCompactList}\item 
+\hypertarget{classControllers_a5d70c9cefe0f9d9f3b3645238d635dca}{unsigned int \hyperlink{classControllers_a5d70c9cefe0f9d9f3b3645238d635dca}{get\-Number\-Of\-Controllers} ()}\label{classControllers_a5d70c9cefe0f9d9f3b3645238d635dca}
+
+\begin{DoxyCompactList}\small\item\em -\/ \-Returns the number of controllers \end{DoxyCompactList}\item 
+string \hyperlink{classControllers_a7a87e9db1f4f10a0702e0ba13d772a97}{get\-I\-P\-Address} (unsigned int ctrl\-Id)
+\begin{DoxyCompactList}\small\item\em \-The function to return the ip address of a controller. \end{DoxyCompactList}\item 
+string \hyperlink{classControllers_a03171f2ca753df4f2f09749c2720e192}{get\-Port} (unsigned int ctrl\-Id)
+\begin{DoxyCompactList}\small\item\em \-The function to return the portof a controller. \end{DoxyCompactList}\item 
+\hypertarget{classControllers_aaf8f766b52c5f2807836439367add513}{virtual \hyperlink{classControllers_aaf8f766b52c5f2807836439367add513}{$\sim$\-Controllers} ()}\label{classControllers_aaf8f766b52c5f2807836439367add513}
+
+\begin{DoxyCompactList}\small\item\em \-Destructor of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classControllers_a73de3d32d2e538ec833959619295527c}{static \hyperlink{classControllers}{\-Controllers} $\ast$ {\bfseries get\-Controllers} ()}\label{classControllers_a73de3d32d2e538ec833959619295527c}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classControllers_ab983786981c89fddb4929ac1d8b8ae4d}{\-Logger\-Ptr $\ast$ {\bfseries self\-Logger}}\label{classControllers_ab983786981c89fddb4929ac1d8b8ae4d}
+
+\item 
+\hypertarget{classControllers_a77580d1957ba1ddd0902fbd3c25bb6ea}{unsigned int {\bfseries number\-Of\-Controllers}}\label{classControllers_a77580d1957ba1ddd0902fbd3c25bb6ea}
+
+\item 
+\hypertarget{classControllers_af5c0e541ef81c735e931ff037d94405e}{vector$<$ \hyperlink{structControllers_1_1ControllerAttribute}{\-Controller\-Attribute} $>$ {\bfseries controller\-Id\-Vector}}\label{classControllers_af5c0e541ef81c735e931ff037d94405e}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classControllers_adea690ebd0e2a10ceee205bea9cd0074}{static \hyperlink{classControllers}{\-Controllers} $\ast$ {\bfseries controllers} = \-N\-U\-L\-L}\label{classControllers_adea690ebd0e2a10ceee205bea9cd0074}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-This singleton class stores all controller inforamtion. 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classControllers_a7a87e9db1f4f10a0702e0ba13d772a97}{\index{\-Controllers@{\-Controllers}!get\-I\-P\-Address@{get\-I\-P\-Address}}
+\index{get\-I\-P\-Address@{get\-I\-P\-Address}!Controllers@{\-Controllers}}
+\subsubsection[{get\-I\-P\-Address}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Controllers\-::get\-I\-P\-Address} (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{ctrl\-Id}
+\end{DoxyParamCaption}
+)}}\label{classControllers_a7a87e9db1f4f10a0702e0ba13d772a97}
+
+
+\-The function to return the ip address of a controller. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em } & ctrl\-Id -\/ \-Controller \-I\-D. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+-\/ \-I\-P address of the controller 
+\end{DoxyReturn}
+\hypertarget{classControllers_a03171f2ca753df4f2f09749c2720e192}{\index{\-Controllers@{\-Controllers}!get\-Port@{get\-Port}}
+\index{get\-Port@{get\-Port}!Controllers@{\-Controllers}}
+\subsubsection[{get\-Port}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Controllers\-::get\-Port} (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{ctrl\-Id}
+\end{DoxyParamCaption}
+)}}\label{classControllers_a03171f2ca753df4f2f09749c2720e192}
+
+
+\-The function to return the portof a controller. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em } & ctrl\-Id -\/ \-Controller \-I\-D. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+-\/ \-Port of the controller 
+\end{DoxyReturn}
+\hypertarget{classControllers_ac6623105f2ae4a17ba25bfdfb3b71100}{\index{\-Controllers@{\-Controllers}!populate\-Controllers@{populate\-Controllers}}
+\index{populate\-Controllers@{populate\-Controllers}!Controllers@{\-Controllers}}
+\subsubsection[{populate\-Controllers}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Controllers\-::populate\-Controllers} (
+\begin{DoxyParamCaption}
+\item[{string}]{file\-Name}
+\end{DoxyParamCaption}
+)}}\label{classControllers_ac6623105f2ae4a17ba25bfdfb3b71100}
+
+
+\-The function to populate controller from a file. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em file\-Name} & -\/ \-Name of the file \\
+\hline
+\end{DoxyParams}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\-Controllers.\-h\item 
+\-Controllers.\-cpp\end{DoxyCompactItemize}

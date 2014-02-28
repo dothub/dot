@@ -35,6 +35,9 @@ using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
 using namespace std;
 
+/**
+* This singleton class stores inforamtion about user credentials.
+*/
 class Credentials {
 
     LoggerPtr* selfLogger;
@@ -47,7 +50,18 @@ class Credentials {
     Credentials();
 public:
     static Credentials* getCredentials();
+   
+     /**
+    * The function to populate credentials from a file.
+    * @param fileName - Name of the file
+    */
+ 
     void populateCredentials(string fileName);
+
+     /**
+    * The function returns the username.
+    * @return Name of the user as a string
+    */
 
     string getUserName();
 

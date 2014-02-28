@@ -44,10 +44,15 @@ class Link;
 
 enum InterfaceType { TAP, VETH, GRE };
 
+/**
+* This class stores the information about provisioned Interface.
+*/
+
 class Interface {
 
     LoggerPtr* selfLogger;
 protected:
+
     string name;
     Switch * connectedToSwitch;
     InterfaceType type;
@@ -55,11 +60,40 @@ protected:
 public:
     unsigned int port;
     Link* belongsToLink;
+  
+    /**
+    * Constructor of the class.
+    * @param name - Interface Name 
+    * @param - type - Type of the interface
+    */ 
     Interface(string name, InterfaceType type);
+    
+     /**
+     * This function keeps the switch of the interface.
+    * @param theSwitch - Pointer to the switch where the interface belongs
+    */
+
     void assignToSwitch(Switch* theSwitch);
+    
+    /**
+     * This function returns the switch of the interface.
+    * @return Pointer to the switch where the interface belongs
+    */
     Switch * getSwitch();
+    /**
+     * This function returns the name  of the interface.
+    */
+
     string getName();
+    /**
+     * This function returns the type of the interface.
+    */
     InterfaceType getType();
+    
+    /**
+    * Destructor of the class.
+    */
+
     virtual ~Interface();
 };
 

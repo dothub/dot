@@ -53,7 +53,6 @@ using namespace std;
 /* 
 * 
 */
-
 class LoggerFactory;
 class LogicalTopology;
 class Credentials;

@@ -39,14 +39,24 @@ using namespace std;
 
 class EmbeddingAlgorithm;
 
+/**
+* This class stores the output of the embedding.
+*/
 class Mapping {
     LoggerPtr* selfLogger;
 
     Mapping();
     static Mapping* mapping;
 
+    /**
+    * Keeps the list of active machines hosting a switch.
+    */
     vector<string> switch2machine;
 
+    /**
+    * Function to insert a mapping of a switch
+    * @param machine - IP address of the Machine.
+    */
     void instertMapping(string machine);
 
     friend class EmbeddingAlgorithm;
@@ -54,8 +64,15 @@ class Mapping {
 public:
     static Mapping* getMapping();
 
+    /**
+    * Function to return the IP address of the machine where a switch is emebedded
+    * @param switchID - ID of the switch
+    * @return IP address of the  machine.
+    */
     string getMachine(unsigned long switchID);
-
+    /**
+    * Destructor of the class.
+    */
     virtual ~Mapping();
 
 
