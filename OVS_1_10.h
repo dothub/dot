@@ -42,7 +42,7 @@ public:
     void assignPortNumber(Switch* newSwitch, Interface* newInterface);
     void assignStaticTunnelRule(Switch* newSwitch, list<pair<unsigned int, pair<unsigned int, unsigned int> > > rules );
     void clearAllRules(Switch* newSwitch);
-
+    void assignQoSToPort(Switch* newSwitch, string portName, unsigned long rate, unsigned long burst=0);
 };
 
 #endif /* OVS_1_10_H_ */

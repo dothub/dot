@@ -48,7 +48,7 @@ public:
     virtual string createStaticTunnelRule(Switch* newSwitch, unsigned int tunnel_id, unsigned int input_port, unsigned int output_port)=0;
     virtual void assignStaticTunnelRule(Switch* newSwitch, list<pair<unsigned int, pair<unsigned int, unsigned int> > > rules )=0;
     virtual void clearAllRules(Switch* newSwitch)=0;
-
+    virtual void assignQoSToPort(Switch* newSwitch, string portName, unsigned long rate, unsigned long burst=0)=0; 
     virtual ~InstantitiateSwitch();
 };
 

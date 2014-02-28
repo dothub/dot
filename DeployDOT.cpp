@@ -106,6 +106,16 @@ void DeployDOT::deployLinks() {
         //assigning to ovs
         this->instantitiatedSwitch->attachPort(iter->second->getInterface1()->getSwitch(), iter->second->getInterface1());
         this->instantitiatedSwitch->attachPort(iter->second->getInterface2()->getSwitch(), iter->second->getInterface2());
+
+
+        //assigning rate limit to interface
+        this->instantitiatedSwitch->assignQoSToPort(iter->second->getInterface1()->getSwitch(),
+            iter->second->getInterface1()->getName(), 
+            iter->second->getBandwidth()*1000);
+        this->instantitiatedSwitch->assignQoSToPort(iter->second->getInterface2()->getSwitch(),
+            iter->second->getInterface2()->getName(),
+            iter->second->getBandwidth()*1000);
+
     }
 }
 

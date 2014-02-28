@@ -181,6 +181,34 @@ void OVS_1_10::clearAllRules(Switch* newSwitch) {
 }
 
 
+void OVS_1_10::assignQoSToPort(Switch* newSwitch, 
+    string portName, unsigned long rate, unsigned long burst)
+{
+    ostringstream command;
+    command << "sudo ovs-vsctl set"
+        << " Interface " << portName 
+        << " ingress_policing_rate=" << rate;
 
+    cout << command.str() << endl;
+
+    this->commandExec->executeRemote(newSwitch->getIPOfMachine(),
+        command.str());
+    
+    command.str("");
+
+    if(burst != 0)
+    {
+        command << "sudo ovs-vsctl set"
+            << " Interface " << portName 
+            << " ingress_policing_burst=" << burst;
+
+        cout << command.str() << endl;
+    
+        this->commandExec->executeRemote(newSwitch->getIPOfMachine(),
+            command.str());
+    
+    }
+
+}
 
 

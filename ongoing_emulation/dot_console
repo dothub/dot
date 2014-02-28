@@ -60,7 +60,7 @@ readMapping mapping
 
 proceessIDs=()
 processIndex=0
-
+connectedVM=0
 while :
 do 
 
@@ -103,7 +103,10 @@ do
                         		processIDs[$processIndex]="$parameter $! active"
                         		processIndex=$((processIndex+1))
 					
-					break
+		            
+                    connectedVM=$((connectedVM+1))
+
+        			break
 								
 				fi
 			done 
@@ -138,6 +141,8 @@ do
 					#Removing the VM from the list of active VMs
 					unset processIDs[$index]
 					
+                    connectedVM=$((connectedVM-1))
+
 					break
 				fi
 
@@ -150,50 +155,59 @@ do
 			
 			;;
 
-		("quit") 
-			read -r -p "Do you want to disconnect all VMs? [Y/n]" response
-			response=${response,,} # tolower
+		("quit")
+            if [ ! "$connectedVM" = 0 ]; then
+
+			    read -r -p "Do you want to disconnect all VMs? [Y/n]" response
+			    response=${response,,} # tolower
 			
-			if [[ $response =~ ^(yes|y| ) ]]; then
-				for process in "${processIDs[@]}"
-				do
-					status=`echo $process| cut -f3 -d' '`
-                                        VM=`echo $process| cut -f1 -d' '`        
+			    if [[ $response =~ ^(yes|y| ) ]]; then
+				    for process in "${processIDs[@]}"
+				    do
+					    status=`echo $process| cut -f3 -d' '`
+                                            VM=`echo $process| cut -f1 -d' '`        
 
-					if [ "$status" = "active" ]; then
-						#Found an active VM 
-						echo "Disconnecting $VM"
+					    if [ "$status" = "active" ]; then
+						    #Found an active VM 
+						    echo "Disconnecting $VM"
 
-						#retrieving the process id
-						process_id=`echo $process|  cut -f2 -d' '`
+						    #retrieving the process id
+						    process_id=`echo $process|  cut -f2 -d' '`
 
-						#Killing the process
-						kill -9 $process_id
+						    #Killing the process
+						    kill -9 $process_id
 
-                   fi
+                        fi
 
-				done
+				    done
 			
-			fi
+			    fi
+            fi
 
-			echo "Exiting...."
+		    echo "Exiting...."
 			exit
 			;;
+        
         ("clean")
             case "$parameter" in
                 ("all")
-                    
-                    for machine in `cat mapping | grep h | awk '{print $2}'| sort |uniq`
-                    do
-                        echo "Cleaning $machine"
-                        scp clean_machine.sh $USER_NAME@$machine:~  
-                        ssh $USER_NAME@$machine "sudo ./clean_machine.sh"
-                        ssh $USER_NAME@$machine "rm ~/clean_machine.sh"
+                    read -r -p "Do you want to destroy all VMs and VSs? [Y/n]" response
+                    response=${response,,} # tolower
+    
+                    if [[ $response =~ ^(yes|y| ) ]]; then
+ 
+                        for machine in `cat mapping | grep h | awk '{print $2}'| sort |uniq`
+                        do
+                            echo "Cleaning $machine"
+                            scp clean_machine.sh $USER_NAME@$machine:~  
+                            ssh $USER_NAME@$machine "sudo ./clean_machine.sh"
+                            ssh $USER_NAME@$machine "rm ~/clean_machine.sh"
                         
-                    done
+                        done
                     
-                    echo "$USER_NAME" > mapping
-                    exit  
+                        echo "$USER_NAME" > mapping
+                        exit 
+                    fi 
                 ;;
                 (*)
                     echo "To clean DOT: clean all"
