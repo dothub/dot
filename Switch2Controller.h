@@ -28,9 +28,17 @@
 #define SWITCH2CONTROLLER_H_
 #include "Controllers.h"
 #include <map>
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
 using namespace std;
 
 class Switch2Controller {
+
+    LoggerPtr* selfLogger;
     Switch2Controller(Controllers* controllers);
 
     static Switch2Controller* switch2Controller;

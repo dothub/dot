@@ -31,13 +31,19 @@
 #include "CutEdge.h"
 #include <string>
 #include <map>
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
 
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
 
 using namespace std;
 
 class CutEdge;
 
 class Tunnel: public Link{
+    LoggerPtr* selfLogger;
     unsigned int cutEdgeCounter;
     map<unsigned int, pair<CutEdge*, CutEdge*> > cutEdgeMap;
 public:

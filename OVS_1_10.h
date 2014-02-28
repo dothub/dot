@@ -28,8 +28,16 @@
 #define OVS_1_10_H_
 
 #include "AbstractSwitch.h"
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
 
 class OVS_1_10: public AbstractSwitch {
+    LoggerPtr* selfLogger;
+
 protected:
     string createClearAllRules(Switch* newSwitch);
     string createStaticTunnelRule(Switch* newSwitch, unsigned int tunnel_id, unsigned int input_port, unsigned int output_port);

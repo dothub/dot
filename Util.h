@@ -28,10 +28,17 @@
 #define UTIL_H_
 #include <string>
 #include <vector>
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
 
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
 using namespace std;
 
 class Util {
+    LoggerPtr* selfLogger;
+
 public:
     void static parseKeyValue(string input, string& key, string& value, char delimeter);
     void static parseString(string input, vector<string>* &tokens, char delimeter);

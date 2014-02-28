@@ -30,11 +30,17 @@
 #include "AbstractSwitch.h"
 #include "AbstractLink.h"
 #include "AbstractVM.h"
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
 
 class DOT_Topology;
 
 class DeployDOT {
-
+    LoggerPtr* selfLogger;
     DOT_Topology* dotTopology;
     AbstractSwitch*  abstractSwitch;
     AbstractLink* abstractLink;

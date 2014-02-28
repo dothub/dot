@@ -26,11 +26,17 @@
 
 #ifndef KVMWITHLIBVIRT_H_
 #define KVMWITHLIBVIRT_H_
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
 
 #include "AbstractVM.h"
 
 class KVMWithLibvirt: public AbstractVM {
-
+    LoggerPtr* selfLogger;
     string virt_type;
     string networkFile;
 

@@ -32,10 +32,19 @@
 #include "CommandExecutor.h"
 #include "LogicalTopology.h"
 #include "Mapping.h"
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
+
+
 
 using namespace std;
-ABSTRACTVM_H
+
 class AbstractVM {
+    LoggerPtr* selfLogger;
 
 protected:
     Configurations* globalConf;

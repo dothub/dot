@@ -28,10 +28,17 @@
 #define CONFIGURATIONS_H_
 
 #include <string>
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
 
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
 using namespace std;
 
 class Configurations {
+
+    LoggerPtr* selfLogger;
 
     static Configurations* configuration;
     Configurations(string configurationFileName);

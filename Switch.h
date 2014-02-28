@@ -29,6 +29,13 @@
 #include <string>
 #include <map>
 #include "Interface.h"
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
+
 class Interface;
 
 using namespace std;
@@ -36,7 +43,7 @@ using namespace std;
 enum SwitchType { TOPO_SWITCH, GATEWAY_SWITCH };
 
 class Switch {
-
+    LoggerPtr* selfLogger;
     const static unsigned int dpid_width = 16;
 
 protected:

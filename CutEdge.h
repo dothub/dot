@@ -30,13 +30,18 @@
 #include "Link.h"
 #include <string>
 #include "Tunnel.h"
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
 
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
 using namespace std;
 
 class Tunnel;
 
 class CutEdge: public Link {
-
+    LoggerPtr* selfLogger;
     Tunnel * belongsToTunnel;
 public:
     CutEdge(double bandwidth, Tunnel * belongsToTunnel, double delay = 0);

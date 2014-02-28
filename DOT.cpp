@@ -108,14 +108,14 @@ void prepare(string globalConfFile)
 
 void deploy()
 {
-    LOG4CXX_INFO((*selfLogger), "DOT Deployment has started ");
+    LOG4CXX_INFO((*selfLogger), "DOT Deployment has started");
 
     DOT_Topology* dotTopology = DOT_Topology::getDOT_Topology(Global::logicalTopology, 
                Global::physicalMachines, Global::mapping, 
                Global::sw2controller, Global::vms, Global::abstractVM);
     
     dotTopology->generate();
-    LOG4CXX_INFO((*selfLogger), "DOT Topology is generated ");
+    LOG4CXX_INFO((*selfLogger), "DOT Topology is generated");
 
 
     DeployDOT *deploy = new DeployDOT(dotTopology, Global::abstractSwitch, 

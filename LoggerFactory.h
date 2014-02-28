@@ -26,12 +26,11 @@
 
 #ifndef LOGGERFACTORY_H_
 #define LOGGERFACTORY_H_
-
+#include "Global.h"
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
 #include <string>
 #include <map>
-#include "Global.h"
 
 using namespace log4cxx;
 using namespace log4cxx::xml;

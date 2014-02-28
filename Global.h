@@ -41,6 +41,13 @@
 #include <string>
 #include <cstdio>
 #include "LoggerFactory.h"
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
+
 
 using namespace std;
 /* 
@@ -48,9 +55,20 @@ using namespace std;
 */
 
 class LoggerFactory;
+class LogicalTopology;
+class Credentials;
+class PhysicalMachines;
+class VMs;
+class Mapping;
+class Controllers;
+class Switch2Controllr;
+class CommandExecutor;
+class AbstractSwitch;
+class AbstractLink;
+class AbstractVM;
 
 class Global {
-
+    LoggerPtr* selfLogger;
 public:
     static string MasterName;
     static string MasterIP;

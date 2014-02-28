@@ -27,11 +27,17 @@
 #ifndef CREDENTIALS_H_
 #define CREDENTIALS_H_
 #include <string>
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
 
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
 using namespace std;
 
 class Credentials {
 
+    LoggerPtr* selfLogger;
     static Credentials* credentials;
 
     string userName;

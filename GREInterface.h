@@ -28,9 +28,16 @@
 #define GREINTERFACE_H_
 
 #include "Interface.h"
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
+
 
 class GRE_Interface: public Interface {
-
+    LoggerPtr* selfLogger;
 public:
     string remoteIP;
     GRE_Interface(string name);

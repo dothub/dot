@@ -27,12 +27,20 @@
 #ifndef LINK_H_
 #define LINK_H_
 #include "Interface.h"
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
 
 class Interface;
 
 enum LinkType { TOPO_LINK, CUT_EDGE, GRE_TUNNEL };
 
 class Link {
+    LoggerPtr* selfLogger;
+
 protected:
     static unsigned long id_counter;
     static unsigned long veth_counter;

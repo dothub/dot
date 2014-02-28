@@ -30,6 +30,12 @@
 #include "Link.h"
 #include "Switch.h"
 #include <string>
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
 using namespace std;
 
 
@@ -40,6 +46,7 @@ enum InterfaceType { TAP, VETH, GRE };
 
 class Interface {
 
+    LoggerPtr* selfLogger;
 protected:
     string name;
     Switch * connectedToSwitch;
