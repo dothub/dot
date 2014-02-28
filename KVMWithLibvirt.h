@@ -24,8 +24,8 @@
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#ifndef LIBVIRTATTACHMENT_H_
-#define LIBVIRTATTACHMENT_H_
+#ifndef KVMWITHLIBVIRT_H_
+#define KVMWITHLIBVIRT_H_
 
 #include "AbstractVM.h"
 
@@ -47,4 +47,4 @@ public:
     virtual ~KVMWithLibvirt();
 };
 
-#endif /* LIBVIRTATTACHMENT_H_ */
+#endif /* KVMWITHLIBVIRT_H_ */
