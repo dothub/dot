@@ -18,14 +18,14 @@
 */
 
 /*
- * InstantitiateSwitch.h
+ * AbstractSwitch.h
  *
  *  Created on: 2013-08-28
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#ifndef INSTANTITIATESWITCH_H_
-#define INSTANTITIATESWITCH_H_
+#ifndef ABSTRACTSWITCH_H_
+#define ABSTRACTSWITCH_H_
 #include <string>
 #include <list>
 #include "Switch.h"
@@ -34,13 +34,13 @@
 
 using namespace std;
 
-class InstantitiateSwitch {
+class AbstractSwitch {
 protected:
     CommandExecutor* commandExec;
     virtual string createClearAllRules(Switch* newSwitch)=0;
 
 public:
-    InstantitiateSwitch(CommandExecutor* commandExec);
+    AbstractSwitch(CommandExecutor* commandExec);
     virtual void clearSwitch(Switch* newSwitch)=0;
     virtual void runSwitch(Switch* newSwitch)=0;
     virtual void attachPort(Switch* newSwitch, Interface* newInterface)=0;
@@ -49,7 +49,7 @@ public:
     virtual void assignStaticTunnelRule(Switch* newSwitch, list<pair<unsigned int, pair<unsigned int, unsigned int> > > rules )=0;
     virtual void clearAllRules(Switch* newSwitch)=0;
     virtual void assignQoSToPort(Switch* newSwitch, string portName, unsigned long rate, unsigned long burst=0)=0; 
-    virtual ~InstantitiateSwitch();
+    virtual ~AbstractSwitch();
 };
 
-#endif /* INSTANTITIATESWITCH_H_ */
+#endif /* ABSTRACTSWITCH_H_ */

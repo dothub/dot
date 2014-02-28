@@ -32,12 +32,12 @@
 #include "Switch.h"
 #include "PhysicalMachines.h"
 #include "Mapping.h"
-#include "InputTopology.h"
+#include "LogicalTopology.h"
 #include "Switch2Controller.h"
-#include "InstantitiateHost.h"
+#include "AbstractVM.h"
 #include "Tunnel.h"
 #include "CutEdge.h"
-#include "Hosts.h"
+#include "VMs.h"
 #include "DeployDOT.h"
 #include <string>
 #include <map>
@@ -59,21 +59,21 @@ class DOT_Topology {
 
     PhysicalMachines* physicalMachines;
     Mapping* mapping;
-    InputTopology * inputTopology;
+    LogicalTopology * logicalTopology;
     Switch2Controller * switch2Controller;
-    Hosts* hosts;
-    InstantitiateHost* instantitiatedHost;
+    VMs* vms;
+    AbstractVM* instantitiatedHost;
 
     static DOT_Topology* instanceDOT_Topology;
 
-    DOT_Topology(InputTopology * inputTopology, PhysicalMachines* physicalMachines,
-            Mapping* mapping, Switch2Controller * switch2Controller, Hosts* hosts, InstantitiateHost* instantitiatedHost);
+    DOT_Topology(LogicalTopology * logicalTopology, PhysicalMachines* physicalMachines,
+            Mapping* mapping, Switch2Controller * switch2Controller, VMs* vms, AbstractVM* instantitiatedHost);
 
     friend class DeployDOT;
 
 public:
-    static DOT_Topology* getDOT_Topology(InputTopology * inputTopology, PhysicalMachines* physicalMachines,
-                Mapping* mapping, Switch2Controller * switch2Controller, Hosts* hosts, InstantitiateHost* instantitiatedHost);
+    static DOT_Topology* getDOT_Topology(LogicalTopology * logicalTopology, PhysicalMachines* physicalMachines,
+                Mapping* mapping, Switch2Controller * switch2Controller, VMs* vms, AbstractVM* instantitiatedHost);
     void generate();
 
     virtual ~DOT_Topology();

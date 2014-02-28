@@ -27,23 +27,23 @@
 #ifndef DEPLOYDOT_H_
 #define DEPLOYDOT_H_
 #include "DOTTopology.h"
-#include "InstantitiateSwitch.h"
-#include "InstantitiateLink.h"
-#include "InstantitiateHost.h"
+#include "AbstractSwitch.h"
+#include "AbstractLink.h"
+#include "AbstractVM.h"
 
 class DOT_Topology;
 
 class DeployDOT {
 
     DOT_Topology* dotTopology;
-    InstantitiateSwitch*  instantitiatedSwitch;
-    InstantitiateLink* instantitiatedLink;
-    InstantitiateHost* instantitiatedHost;
+    AbstractSwitch*  instantitiatedSwitch;
+    AbstractLink* instantitiatedLink;
+    AbstractVM* instantitiatedHost;
     CommandExecutor* commandExecutor;
 
 public:
-    DeployDOT(DOT_Topology* dotTopology, InstantitiateSwitch*  instantitiatedSwitch,
-            InstantitiateLink* instantitiatedLink, InstantitiateHost* instantitiatedHost,
+    DeployDOT(DOT_Topology* dotTopology, AbstractSwitch*  instantitiatedSwitch,
+            AbstractLink* instantitiatedLink, AbstractVM* instantitiatedHost,
             CommandExecutor* commandExecutor);
     virtual ~DeployDOT();
     void deploySwitch();

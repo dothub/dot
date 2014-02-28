@@ -18,24 +18,27 @@
 */
 
 /*
- * HostAttachment.cpp
+ * EmbeddingAlgorithm.h
  *
  *  Created on: 2013-08-12
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#include "InstantitiateHost.h"
+#ifndef EMBEDDINGALGORITHM_H_
+#define EMBEDDINGALGORITHM_H_
+#include <string>
+#include "Mapping.h"
 
-InstantitiateHost::InstantitiateHost(Configurations* globalConf, Hosts* hosts, CommandExecutor* commandExec, InputTopology* topology, Mapping* mapping)
-{
-    this->globalConf = globalConf;
-    this->hosts = hosts;
-    this->commandExec = commandExec;
-    this->topology = topology;
-    this->mapping = mapping;
-}
+using namespace std;
 
-InstantitiateHost::~InstantitiateHost() {
+class Mapping;
+class EmbeddingAlgorithm {
+protected:
+    void instertMapping(Mapping* mapping, string machine);
+public:
+    EmbeddingAlgorithm();
+    virtual ~EmbeddingAlgorithm();
+    virtual bool run() = 0;
+};
 
-}
-
+#endif /* EMBEDDINGALGORITHM_H_ */

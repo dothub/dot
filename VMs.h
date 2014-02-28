@@ -18,20 +18,20 @@
 */
 
 /*
- * Hosts.h
+ * VMs.h
  *
  *  Created on: 2013-08-12
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#ifndef HOSTS_H_
-#define HOSTS_H_
+#ifndef VMS_H_
+#define VMS_H_
 
 #include <string>
 #include <vector>
 using namespace std;
 
-class Hosts {
+class VMs {
     struct HostAttribute
     {
         unsigned long host_id;
@@ -42,17 +42,17 @@ class Hosts {
         unsigned long interfaceBandwidth;
         string interfaceName;
     };
-    static Hosts* hosts;
-    Hosts();
+    static VMs* vms;
+    VMs();
 
-    unsigned long numberOfHosts;
+    unsigned long numberOfVMs;
     vector<HostAttribute > hostIdVector;
 
 public:
-    static Hosts* getHosts();
-    void populateHosts(string fileName);
+    static VMs* getVMs();
+    void populateVMs(string fileName);
 
-    unsigned long getNumberOfHosts();
+    unsigned long getNumberOfVMs();
 
     unsigned long getSwitch(unsigned long hostId);
     string getMacAddress(unsigned long hostId);
@@ -62,7 +62,7 @@ public:
     string getInterfaceName(unsigned long hostId);
     void setInterfaceName(unsigned long hostId, string name);
 
-    virtual ~Hosts();
+    virtual ~VMs();
 };
 
-#endif /* HOSTS_H_ */
+#endif /* VMS_H_ */

@@ -35,30 +35,30 @@ using namespace std;
 DOT_Topology* DOT_Topology::instanceDOT_Topology = NULL;
 
 
-DOT_Topology::DOT_Topology(InputTopology * inputTopology, PhysicalMachines* physicalMachines,
-        Mapping* mapping, Switch2Controller * switch2Controller, Hosts* hosts, InstantitiateHost* instantitiatedHost) {
+DOT_Topology::DOT_Topology(LogicalTopology * logicalTopology, PhysicalMachines* physicalMachines,
+        Mapping* mapping, Switch2Controller * switch2Controller, VMs* vms, AbstractVM* instantitiatedHost) {
 
-    this->inputTopology = inputTopology;
+    this->logicalTopology = logicalTopology;
     this->physicalMachines = physicalMachines;
     this->mapping = mapping;
     this->switch2Controller = switch2Controller;
-    this->hosts = hosts;
+    this->vms = vms;
     this->instantitiatedHost = instantitiatedHost;
 }
 
-DOT_Topology* DOT_Topology::getDOT_Topology(InputTopology* inputTopology,
+DOT_Topology* DOT_Topology::getDOT_Topology(LogicalTopology* logicalTopology,
         PhysicalMachines* physicalMachines, Mapping* mapping,
-        Switch2Controller* switch2Controller, Hosts* hosts, InstantitiateHost* instantitiatedHost) {
+        Switch2Controller* switch2Controller, VMs* vms, AbstractVM* instantitiatedHost) {
     if(instanceDOT_Topology == NULL)
     {
-        instanceDOT_Topology = new DOT_Topology(inputTopology, physicalMachines, mapping, switch2Controller, hosts, instantitiatedHost);
+        instanceDOT_Topology = new DOT_Topology(logicalTopology, physicalMachines, mapping, switch2Controller, vms, instantitiatedHost);
     }
     return instanceDOT_Topology;
 }
 
 void DOT_Topology::generate() {
     //generate the topology switches
-    for(unsigned long i = 0; i < this->inputTopology->getNumberOfSwitches(); i++)
+    for(unsigned long i = 0; i < this->logicalTopology->getNumberOfSwitches(); i++)
     {
         ostringstream switchName;
         switchName << "topo" << (i+1);
@@ -115,10 +115,10 @@ void DOT_Topology::generate() {
 
     unsigned int cutEdgeId = 0;
     //generating the links
-    for(unsigned long i = 0; i < this->inputTopology->getNumberOfSwitches()-1; i++)
-        for(unsigned long j = i+1; j < this->inputTopology->getNumberOfSwitches(); j++)
+    for(unsigned long i = 0; i < this->logicalTopology->getNumberOfSwitches()-1; i++)
+        for(unsigned long j = i+1; j < this->logicalTopology->getNumberOfSwitches(); j++)
         {
-            if(this->inputTopology->getLinkBandwidth(i,j) != 0)
+            if(this->logicalTopology->getLinkBandwidth(i,j) != 0)
             {
                 string IPAddressMachine1 = this->mapping->getMachine(i);
                 string IPAddressMachine2 = this->mapping->getMachine(j);
@@ -127,7 +127,7 @@ void DOT_Topology::generate() {
                 //Same partition
                 if(IPAddressMachine1.compare(IPAddressMachine2) == 0)
                 {
-                        Link* newLink = new Link(this->inputTopology->getLinkBandwidth(i,j), this->inputTopology->getLinkDelay(i, j));
+                        Link* newLink = new Link(this->logicalTopology->getLinkBandwidth(i,j), this->logicalTopology->getLinkDelay(i, j));
 
                         ostringstream switchName;
                         switchName << "topo" << (i+1);
@@ -157,7 +157,7 @@ void DOT_Topology::generate() {
                     cout << tunnelBetweenMachines->getInterface2()->getSwitch()->getIPOfMachine() << endl;
 
                     //create two virtual links
-                    CutEdge* newLink1 = new CutEdge(this->inputTopology->getLinkBandwidth(i,j), tunnelBetweenMachines, this->inputTopology->getLinkDelay(i, j));
+                    CutEdge* newLink1 = new CutEdge(this->logicalTopology->getLinkBandwidth(i,j), tunnelBetweenMachines, this->logicalTopology->getLinkDelay(i, j));
                     newLink1->cut_edge_id = cutEdgeId;
                     ostringstream switchName;
                     switchName << "topo" << (i+1);
@@ -171,7 +171,7 @@ void DOT_Topology::generate() {
                     this->interfaceMap[make_pair(newLink1->getInterface2()->getSwitch(), newLink1->getInterface2()->getName())]
                                                            = newLink1->getInterface2();
                     cout << "cut edge1 link id: " << newLink1->getId() << endl;
-                    CutEdge* newLink2 = new CutEdge(this->inputTopology->getLinkBandwidth(i,j), tunnelBetweenMachines, 0); //Only one of the cut edge will have the delay
+                    CutEdge* newLink2 = new CutEdge(this->logicalTopology->getLinkBandwidth(i,j), tunnelBetweenMachines, 0); //Only one of the cut edge will have the delay
                     newLink2->cut_edge_id = cutEdgeId;
 
                     switchName.str("");
@@ -200,10 +200,10 @@ void DOT_Topology::generate() {
         }
 
     cout << "Link Generated" << endl;
-    //hosts generation
-    for(unsigned long i = 0; i < this->hosts->getNumberOfHosts(); i++)
+    //vms generation
+    for(unsigned long i = 0; i < this->vms->getNumberOfVMs(); i++)
     {
-        unsigned long switchId = this->hosts->getSwitch(i);
+        unsigned long switchId = this->vms->getSwitch(i);
         ostringstream switchName;
         switchName << "topo" << (switchId+1);
         Switch* attachedToSwitch = this->topologySwitchMap[switchName.str()];

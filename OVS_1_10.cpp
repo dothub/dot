@@ -35,7 +35,7 @@
 using namespace std;
 
 OVS_1_10::OVS_1_10(CommandExecutor* commandExec)
-    :InstantitiateSwitch(commandExec)
+    :AbstractSwitch(commandExec)
 {
     // TODO Auto-generated constructor stub
 

@@ -34,8 +34,8 @@
 
 using namespace std;
 
-LibvirtAttachment::LibvirtAttachment(Configurations* globalConf, Hosts* hosts, CommandExecutor* commandExec, InputTopology* topology, Mapping* mapping)
-    :InstantitiateHost(globalConf, hosts, commandExec, topology, mapping)
+LibvirtAttachment::LibvirtAttachment(Configurations* globalConf, VMs* vms, CommandExecutor* commandExec, LogicalTopology* topology, Mapping* mapping)
+    :AbstractVM(globalConf, vms, commandExec, topology, mapping)
 {
     this->loadConfiguration(globalConf->hypervisorConfigurationFile);
 
@@ -162,7 +162,7 @@ string LibvirtAttachment::tapInterfacePrefix()
 string LibvirtAttachment::createNewImage(unsigned long host_id)
 {
 
-    unsigned long switchId = this->hosts->getSwitch(host_id);
+    unsigned long switchId = this->vms->getSwitch(host_id);
     string imagePath = Util::getPathName(this->globalConf->hostImage);
 
     ostringstream newImageName;
@@ -181,8 +181,8 @@ string LibvirtAttachment::createNewImage(unsigned long host_id)
 }
 void LibvirtAttachment::startHost(unsigned long host_id)
 {
-    unsigned long switchId = this->hosts->getSwitch(host_id);
-    string mac = this->hosts->getMacAddress(host_id);
+    unsigned long switchId = this->vms->getSwitch(host_id);
+    string mac = this->vms->getMacAddress(host_id);
 
     ostringstream command;
 
@@ -217,7 +217,7 @@ void LibvirtAttachment::startHost(unsigned long host_id)
 
 void LibvirtAttachment::retrieveInterface(unsigned long host_id)
 {
-    unsigned long switchId = this->hosts->getSwitch(host_id);
+    unsigned long switchId = this->vms->getSwitch(host_id);
 
     //start
     ostringstream fileName;
@@ -248,7 +248,7 @@ void LibvirtAttachment::retrieveInterface(unsigned long host_id)
         
         cout << "Interface Name: " << interfaceName;
         
-        this->hosts->setInterfaceName(host_id, interfaceName);
+        this->vms->setInterfaceName(host_id, interfaceName);
     }
     else
         cout << "Cannot create Interface Script file" << endl;

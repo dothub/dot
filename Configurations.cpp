@@ -59,7 +59,7 @@ void Configurations::loadConfiguration() {
     switch2ControllerFile = "Switch2Controller";
     hostInfoFile = "HostInfo";
     credentialFile="CredentialFile";
-    partitioningAlgorithm = "SA";
+    embeddingAlgorithm = "SA";
     partitioningAlgoConfFile = "SA_Configuration";
     hypervisor="lib-virt";
     hypervisorConfigurationFile="lib-virt_Configuration";
@@ -118,11 +118,11 @@ void Configurations::loadConfiguration() {
     if(eachConfiguration.find("UserCredentials") != eachConfiguration.end())
         credentialFile = eachConfiguration["UserCredentials"];
 
-    if(eachConfiguration.find("PartitioningAlgorithm") != eachConfiguration.end())
-        partitioningAlgorithm = eachConfiguration["PartitioningAlgorithm"];
+    if(eachConfiguration.find("EmbeddingAlgorithm") != eachConfiguration.end())
+        embeddingAlgorithm = eachConfiguration["EmbeddingAlgorithm"];
 
-    if(eachConfiguration.find("PartitioningAlgorithmConfiguration") != eachConfiguration.end())
-        partitioningAlgoConfFile = eachConfiguration["PartitioningAlgorithmConfiguration"];
+    if(eachConfiguration.find("EmbeddingAlgorithmConfiguration") != eachConfiguration.end())
+        partitioningAlgoConfFile = eachConfiguration["EmbeddingAlgorithmConfiguration"];
 
     if(eachConfiguration.find("HyperVisor") != eachConfiguration.end())
         hypervisor = eachConfiguration["HyperVisor"];

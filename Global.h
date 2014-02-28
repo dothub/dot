@@ -29,15 +29,15 @@
 
 #include "Credentials.h"
 #include "PhysicalMachines.h"
-#include "InputTopology.h"
-#include "Hosts.h"
+#include "LogicalTopology.h"
+#include "VMs.h"
 #include "Mapping.h"
 #include "Controllers.h"
 #include "Switch2Controller.h"
 #include "CommandExecutor.h"
-#include "InstantitiateSwitch.h"
-#include "InstantitiateLink.h"
-#include "InstantitiateHost.h"
+#include "AbstractSwitch.h"
+#include "AbstractLink.h"
+#include "AbstractVM.h"
 #include <log4cxx/logger.h>
 #include <map>
 #include <string>
@@ -56,16 +56,16 @@ public:
     static string MasterName;
     static string MasterIP;
     static Credentials* credentials;
-    static InputTopology* inputTopology;
+    static LogicalTopology* logicalTopology;
     static PhysicalMachines* physicalMachines;
-    static Hosts* hosts;
+    static VMs* vms;
     static Mapping* mapping;
     static Controllers* controllers;
     static Switch2Controller* sw2controller;
     static CommandExecutor* commandExecutor;
-    static InstantitiateSwitch*  instantitiatedSwitch;
-    static InstantitiateLink* instantitiatedLink;
-    static InstantitiateHost* instantitiatedHost;
+    static AbstractSwitch*  instantitiatedSwitch;
+    static AbstractLink* instantitiatedLink;
+    static AbstractVM* instantitiatedHost;
 };
 
 #endif /* GLOBAL_H_ */

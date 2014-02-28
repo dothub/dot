@@ -18,27 +18,24 @@
 */
 
 /*
- * PartitioningAlgorithm.h
+ * AbstractLink.h
  *
- *  Created on: 2013-08-12
+ *  Created on: 2013-08-28
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#ifndef PARTITIONINGALGORITHM_H_
-#define PARTITIONINGALGORITHM_H_
-#include <string>
-#include "Mapping.h"
+#ifndef ABSTRACTLINK_H_
+#define ABSTRACTLINK_H_
+#include "CommandExecutor.h"
+#include "Link.h"
 
-using namespace std;
-
-class Mapping;
-class PartitioningAlgorithm {
+class AbstractLink {
 protected:
-    void instertMapping(Mapping* mapping, string machine);
+    CommandExecutor* commandExec;
 public:
-    PartitioningAlgorithm();
-    virtual ~PartitioningAlgorithm();
-    virtual bool run() = 0;
+    AbstractLink(CommandExecutor* commandExec);
+    virtual ~AbstractLink();
+    void virtual createLink(Link* newLink)=0;
 };
 
-#endif /* PARTITIONINGALGORITHM_H_ */
+#endif /* ABSTRACTLINK_H_ */

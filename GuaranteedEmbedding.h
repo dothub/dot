@@ -18,20 +18,20 @@
 */
 
 /*
- * GuranteedEmbedding.h
+ * GuaranteedEmbedding.h
  *
  *  Created on: 2013-08-31
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#ifndef GURANTEEDEMBEDDING_H_
-#define GURANTEEDEMBEDDING_H_
+#ifndef GUARANTEEDEMBEDDING_H_
+#define GUARANTEEDEMBEDDING_H_
 
-#include "PartitioningAlgorithm.h"
+#include "EmbeddingAlgorithm.h"
 #include "PhysicalMachines.h"
-#include "InputTopology.h"
+#include "LogicalTopology.h"
 #include "Mapping.h"
-#include "Hosts.h"
+#include "VMs.h"
 #include <vector>
 #include <list>
 #include <string>
@@ -70,12 +70,12 @@ public:
             double totalCPU;
             double totalBandwidth;
 
-            list<unsigned int> feasibleHosts;
+            list<unsigned int> feasibleVMs;
 
 };
 
 
-class GuranteedEmbedding: public PartitioningAlgorithm {
+class GuaranteedEmbedding: public EmbeddingAlgorithm {
         //inputs
 
         double alpha;
@@ -105,7 +105,7 @@ class GuranteedEmbedding: public PartitioningAlgorithm {
 
         unsigned long numberOfSwitches;
         unsigned int numberOfPhysicalMachines;
-        unsigned long numberOfHosts;
+        unsigned long numberOfVMs;
         unsigned int* cpuOfPhysicalMachines;
 
         //Greedy
@@ -149,12 +149,12 @@ class GuranteedEmbedding: public PartitioningAlgorithm {
 
         //process input
         void processConfigurationFile(string fileName);
-        void processInputTopology(InputTopology* inputTopology);
+        void processLogicalTopology(LogicalTopology* logicalTopology);
         void processPhysicalMachines();
 
         Mapping* mapping;
         PhysicalMachines* physicalMachines;
-        Hosts* hosts;
+        VMs* vms;
 
 
         void runSA();
@@ -163,8 +163,8 @@ class GuranteedEmbedding: public PartitioningAlgorithm {
 
     public:
         bool  run();
-        GuranteedEmbedding(string SAConfigurationFile, InputTopology * inputTopology, PhysicalMachines* physicalMachines, Mapping * mapping, Hosts* hosts);
-        ~GuranteedEmbedding();
+        GuaranteedEmbedding(string SAConfigurationFile, LogicalTopology * logicalTopology, PhysicalMachines* physicalMachines, Mapping * mapping, VMs* vms);
+        ~GuaranteedEmbedding();
 };
 
-#endif /* GURANTEEDEMBEDDING_H_ */
+#endif /* GUARANTEEDEMBEDDING_H_ */

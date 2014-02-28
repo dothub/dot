@@ -18,20 +18,20 @@
 */
 
 /*
- * InstantitiateLink.cpp
+ * AbstractLink.cpp
  *
  *  Created on: 2013-08-28
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#include "InstantitiateLink.h"
+#include "AbstractLink.h"
 
-InstantitiateLink::InstantitiateLink(CommandExecutor* commandExec) {
+AbstractLink::AbstractLink(CommandExecutor* commandExec) {
     this->commandExec = commandExec;
 
 }
 
-InstantitiateLink::~InstantitiateLink() {
+AbstractLink::~AbstractLink() {
     // TODO Auto-generated destructor stub
 }
 

@@ -24,37 +24,37 @@
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#ifndef INSTANTITIATEHOST_H
-#define INSTANTITIATEHOST_H
+#ifndef ABSTRACTVM_H
+#define ABSTRACTVM_H
 #include <string>
-#include "Hosts.h"
+#include "VMs.h"
 #include "Configurations.h"
 #include "CommandExecutor.h"
-#include "InputTopology.h"
+#include "LogicalTopology.h"
 #include "Mapping.h"
 
 using namespace std;
-INSTANTITIATEHOST_H
-class InstantitiateHost {
+ABSTRACTVM_H
+class AbstractVM {
 
 protected:
     Configurations* globalConf;
-    Hosts* hosts;
+    VMs* vms;
     CommandExecutor* commandExec;
     Mapping* mapping;
-    InputTopology* topology;
+    LogicalTopology* topology;
        
     virtual void createHost2SwitchAttachmentConf()=0;
     virtual void loadConfiguration(string fileName)=0;
 
 public:
-    InstantitiateHost(Configurations* globalConf, Hosts* hosts, CommandExecutor* commandExec,   InputTopology * topology, Mapping* mapping);
+    AbstractVM(Configurations* globalConf, VMs* vms, CommandExecutor* commandExec,   LogicalTopology * topology, Mapping* mapping);
 
     virtual void prepare()=0;
     virtual void startHost(unsigned long host_id)=0;
     virtual string tapInterfacePrefix()=0;
     virtual void retrieveInterface(unsigned long host_id)=0;
-    virtual ~InstantitiateHost();
+    virtual ~AbstractVM();
 };
 
-#endif /* INSTANTITIATEHOST_H */
+#endif /* ABSTRACTVM_H */

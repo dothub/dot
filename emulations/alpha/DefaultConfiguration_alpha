@@ -11,5 +11,5 @@ HostConfiguration=./emulations/alpha/HostInfo_alpha
 Controllers=./emulations/alpha/ControllerInfo_alpha
 SwitchToController=./emulations/alpha/Switch2Controller_alpha
 UserCredentials=./emulations/alpha/CredentialFile_alpha
-PartitioningAlgorithm=Guaranteed_Embedding
-PartitioningAlgorithmConfiguration=Guaranteed_Embedding_Conf
+EmbeddingAlgorithm=Guaranteed_Embedding
+EmbeddingAlgorithmConfiguration=Guaranteed_Embedding_Conf

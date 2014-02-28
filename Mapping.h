@@ -26,13 +26,13 @@
 
 #ifndef MAPPING_H_
 #define MAPPING_H_
-#include "PartitioningAlgorithm.h"
+#include "EmbeddingAlgorithm.h"
 #include <string>
 #include <vector>
 
 using namespace std;
 
-class PartitioningAlgorithm;
+class EmbeddingAlgorithm;
 
 class Mapping {
 
@@ -43,7 +43,7 @@ class Mapping {
 
     void instertMapping(string machine);
 
-    friend class PartitioningAlgorithm;
+    friend class EmbeddingAlgorithm;
 
 public:
     static Mapping* getMapping();

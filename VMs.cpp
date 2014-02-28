@@ -18,40 +18,40 @@
 */
 
 /*
- * Hosts.cpp
+ * VMs.cpp
  *
  *  Created on: 2013-08-12
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#include "Hosts.h"
+#include "VMs.h"
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
 
-Hosts* Hosts::hosts = NULL;
+VMs* VMs::vms = NULL;
 
-Hosts::Hosts() {
+VMs::VMs() {
 
 }
 
-Hosts* Hosts::getHosts() {
+VMs* VMs::getVMs() {
 
-    if(hosts == NULL)
-        hosts = new Hosts();
+    if(vms == NULL)
+        vms = new VMs();
 
-    return hosts;
+    return vms;
 }
 
-void Hosts::populateHosts(string fileName) {
+void VMs::populateVMs(string fileName) {
     ifstream fin(fileName.c_str());
 
     if(fin.is_open())
     {
-        fin >> this->numberOfHosts;
+        fin >> this->numberOfVMs;
 
 
-        for(unsigned long i = 0; i < this->numberOfHosts; i++)
+        for(unsigned long i = 0; i < this->numberOfVMs; i++)
         {
             string host_str, switch_str, mac, ip;
             unsigned int cpu;
@@ -77,7 +77,7 @@ void Hosts::populateHosts(string fileName) {
         cout << "Unable to open host file: " << fileName << endl;
 }
 
-unsigned long Hosts::getSwitch(unsigned long hostId) {
+unsigned long VMs::getSwitch(unsigned long hostId) {
 
     if(hostId < 0 || hostId >= this->hostIdVector.size())
     {
@@ -88,7 +88,7 @@ unsigned long Hosts::getSwitch(unsigned long hostId) {
     return this->hostIdVector[hostId].switch_id;
 }
 
-string Hosts::getMacAddress(unsigned long hostId) {
+string VMs::getMacAddress(unsigned long hostId) {
 
     if(hostId < 0 || hostId >= this->hostIdVector.size())
     {
@@ -99,7 +99,7 @@ string Hosts::getMacAddress(unsigned long hostId) {
     return this->hostIdVector[hostId].mac;
 }
 
-string Hosts::getIPAddress(unsigned long hostId) {
+string VMs::getIPAddress(unsigned long hostId) {
 
     if(hostId < 0 || hostId >= this->hostIdVector.size())
     {
@@ -111,7 +111,7 @@ string Hosts::getIPAddress(unsigned long hostId) {
 
 }
 
-unsigned int Hosts::getCPU(unsigned long hostId) {
+unsigned int VMs::getCPU(unsigned long hostId) {
 
     if(hostId < 0 || hostId >= this->hostIdVector.size())
     {
@@ -123,7 +123,7 @@ unsigned int Hosts::getCPU(unsigned long hostId) {
 
 }
 
-unsigned long Hosts::getBandwidth(unsigned long hostId) {
+unsigned long VMs::getBandwidth(unsigned long hostId) {
 
     if(hostId < 0 || hostId >= this->hostIdVector.size())
     {
@@ -136,7 +136,7 @@ unsigned long Hosts::getBandwidth(unsigned long hostId) {
 }
 
 
-void Hosts::setInterfaceName(unsigned long hostId, string name) {
+void VMs::setInterfaceName(unsigned long hostId, string name) {
 
     if(hostId < 0 || hostId >= this->hostIdVector.size())
     {
@@ -149,7 +149,7 @@ void Hosts::setInterfaceName(unsigned long hostId, string name) {
 }
 
 
-string Hosts::getInterfaceName(unsigned long hostId) {
+string VMs::getInterfaceName(unsigned long hostId) {
 
     if(hostId < 0 || hostId >= this->hostIdVector.size())
     {
@@ -162,12 +162,12 @@ string Hosts::getInterfaceName(unsigned long hostId) {
 }
 
 
-unsigned long Hosts::getNumberOfHosts() {
+unsigned long VMs::getNumberOfVMs() {
 
-    return this->numberOfHosts;
+    return this->numberOfVMs;
 }
 
-Hosts::~Hosts() {
+VMs::~VMs() {
 
 }
 

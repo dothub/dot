@@ -27,9 +27,9 @@
 #ifndef LIBVIRTATTACHMENT_H_
 #define LIBVIRTATTACHMENT_H_
 
-#include "InstantitiateHost.h"
+#include "AbstractVM.h"
 
-class LibvirtAttachment: public InstantitiateHost {
+class LibvirtAttachment: public AbstractVM {
 
     string virt_type;
     string networkFile;
@@ -37,7 +37,7 @@ class LibvirtAttachment: public InstantitiateHost {
     void loadConfiguration(string fileName);
     string createNewImage(unsigned long host_id);
 public:
-    LibvirtAttachment(Configurations* globalConf, Hosts* hosts, CommandExecutor* commandExec, InputTopology *topology, Mapping* mapping);
+    LibvirtAttachment(Configurations* globalConf, VMs* vms, CommandExecutor* commandExec, LogicalTopology *topology, Mapping* mapping);
     void createHost2SwitchAttachmentConf();
     void startHost(unsigned long host_id);
     void retrieveInterface(unsigned long host_id);

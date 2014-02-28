@@ -27,9 +27,9 @@
 #ifndef OVS_1_10_H_
 #define OVS_1_10_H_
 
-#include "InstantitiateSwitch.h"
+#include "AbstractSwitch.h"
 
-class OVS_1_10: public InstantitiateSwitch {
+class OVS_1_10: public AbstractSwitch {
 protected:
     string createClearAllRules(Switch* newSwitch);
     string createStaticTunnelRule(Switch* newSwitch, unsigned int tunnel_id, unsigned int input_port, unsigned int output_port);

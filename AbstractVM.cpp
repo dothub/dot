@@ -18,22 +18,24 @@
 */
 
 /*
- * InstantitiateSwitch.cpp
+ * HostAttachment.cpp
  *
- *  Created on: 2013-08-28
+ *  Created on: 2013-08-12
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#include "InstantitiateSwitch.h"
+#include "AbstractVM.h"
 
-InstantitiateSwitch::InstantitiateSwitch(CommandExecutor* commandExec)
+AbstractVM::AbstractVM(Configurations* globalConf, VMs* vms, CommandExecutor* commandExec, LogicalTopology* topology, Mapping* mapping)
 {
-
+    this->globalConf = globalConf;
+    this->vms = vms;
     this->commandExec = commandExec;
-
+    this->topology = topology;
+    this->mapping = mapping;
 }
 
-InstantitiateSwitch::~InstantitiateSwitch() {
-    // TODO Auto-generated destructor stub
+AbstractVM::~AbstractVM() {
+
 }
 

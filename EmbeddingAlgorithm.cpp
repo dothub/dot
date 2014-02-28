@@ -18,24 +18,25 @@
 */
 
 /*
- * InstantitiateLink.h
+ * EmbeddingAlgorithm.cpp
  *
- *  Created on: 2013-08-28
+ *  Created on: 2013-08-12
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#ifndef INSTANTITIATELINK_H_
-#define INSTANTITIATELINK_H_
-#include "CommandExecutor.h"
-#include "Link.h"
+#include "EmbeddingAlgorithm.h"
 
-class InstantitiateLink {
-protected:
-    CommandExecutor* commandExec;
-public:
-    InstantitiateLink(CommandExecutor* commandExec);
-    virtual ~InstantitiateLink();
-    void virtual createLink(Link* newLink)=0;
-};
+EmbeddingAlgorithm::EmbeddingAlgorithm() {
+    // TODO Auto-generated constructor stub
 
-#endif /* INSTANTITIATELINK_H_ */
+}
+
+void EmbeddingAlgorithm::instertMapping(Mapping* mapping, string machine) {
+
+    mapping->instertMapping(machine);
+}
+
+EmbeddingAlgorithm::~EmbeddingAlgorithm() {
+    // TODO Auto-generated destructor stub
+}
+

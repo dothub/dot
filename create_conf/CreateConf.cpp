@@ -348,11 +348,11 @@ void processConfFile(string fileName)
                         << hostConfigurationFileName << emulationName << endl;
 
                 cout << "VM: " << line << endl;
-                int numberOfHosts = atoi(line.c_str());
+                int numberOfVMs = atoi(line.c_str());
             
                 fout_Host << line << endl;
 
-                for(int i = 0; i < numberOfHosts; i++)
+                for(int i = 0; i < numberOfVMs; i++)
                 {
                     getline(fin, line);
 
@@ -454,8 +454,8 @@ void processConfFile(string fileName)
             else if(line.substr(0,strlen("[Embedding]")).compare("[Embedding]") == 0)
             {
                 //Currently assigned to default value
-                fout_DefaultConf << "PartitioningAlgorithm=Guaranteed_Embedding" << endl
-                                 << "PartitioningAlgorithmConfiguration=Guaranteed_Embedding_Conf" << endl;
+                fout_DefaultConf << "EmbeddingAlgorithm=Guaranteed_Embedding" << endl
+                                 << "EmbeddingAlgorithmConfiguration=Guaranteed_Embedding_Conf" << endl;
             }
 
             

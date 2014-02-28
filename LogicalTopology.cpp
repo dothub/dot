@@ -24,7 +24,7 @@
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#include "InputTopology.h"
+#include "LogicalTopology.h"
 
 #include <assert.h>
 #include <stdlib.h>
@@ -35,23 +35,23 @@
 
 using namespace std;
 
-InputTopology* InputTopology::inputTopology=NULL;
+LogicalTopology* LogicalTopology::logicalTopology=NULL;
 
 
-InputTopology* InputTopology:: getInputTopology()
+LogicalTopology* LogicalTopology:: getLogicalTopology()
 {
-    if(inputTopology == NULL)
-        inputTopology = new InputTopology();
+    if(logicalTopology == NULL)
+        logicalTopology = new LogicalTopology();
 
-    return inputTopology;
+    return logicalTopology;
 }
 
-unsigned long InputTopology::getNumberOfSwitches()
+unsigned long LogicalTopology::getNumberOfSwitches()
 {
     return this->numberOfSwitches;
 }
 
-void InputTopology::populateTopology(string fileName) {
+void LogicalTopology::populateTopology(string fileName) {
 
 
     ifstream fin(fileName.c_str());
@@ -90,7 +90,7 @@ void InputTopology::populateTopology(string fileName) {
 
 }
 
-void InputTopology::populateTopologyBandwidth(double**& topologyBandwidth) {
+void LogicalTopology::populateTopologyBandwidth(double**& topologyBandwidth) {
 
     topologyBandwidth = new double* [this->numberOfSwitches];
 
@@ -103,7 +103,7 @@ void InputTopology::populateTopologyBandwidth(double**& topologyBandwidth) {
     }
 }
 
-void InputTopology::populateTopologyDelay(double**& topologyDelay) {
+void LogicalTopology::populateTopologyDelay(double**& topologyDelay) {
 
     topologyDelay = new double* [this->numberOfSwitches];
 
@@ -116,28 +116,28 @@ void InputTopology::populateTopologyDelay(double**& topologyDelay) {
     }
 }
 
-InputTopology::InputTopology() {
+LogicalTopology::LogicalTopology() {
 
 
 }
 
-double InputTopology::getLinkDelay(unsigned long switch1,
+double LogicalTopology::getLinkDelay(unsigned long switch1,
         unsigned long switch2) {
 
     return this->topology[switch1][switch2].delay;
 }
 
-double InputTopology::getLinkBandwidth(unsigned long switch1,
+double LogicalTopology::getLinkBandwidth(unsigned long switch1,
         unsigned long switch2) {
 
     return this->topology[switch1][switch2].bandwidth;
 }
 
-bool InputTopology::isNeighbor(unsigned long switch1, unsigned long switch2) {
+bool LogicalTopology::isNeighbor(unsigned long switch1, unsigned long switch2) {
     return this->topology[switch1][switch2].bandwidth != 0 || this->topology[switch2][switch1].bandwidth != 0;
 }
 
-InputTopology::~InputTopology() {
+LogicalTopology::~LogicalTopology() {
 
 }
 

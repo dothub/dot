@@ -18,13 +18,13 @@
 */
 
 /*
- * GuranteedEmbedding.cpp
+ * GuaranteedEmbedding.cpp
  *
  *  Created on: 2013-08-31
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#include "GuranteedEmbedding.h"
+#include "GuaranteedEmbedding.h"
 #include <string.h>
 #include <math.h>
 #include <float.h>
@@ -37,7 +37,7 @@
 using namespace std;
 
 
-GuranteedEmbedding::GuranteedEmbedding(string configurationFile, InputTopology* inputTopology, PhysicalMachines* physicalMachines, Mapping* mapping, Hosts* hosts)
+GuaranteedEmbedding::GuaranteedEmbedding(string configurationFile, LogicalTopology* logicalTopology, PhysicalMachines* physicalMachines, Mapping* mapping, VMs* vms)
 {
 
     //initialzing the random number generator
@@ -47,15 +47,15 @@ GuranteedEmbedding::GuranteedEmbedding(string configurationFile, InputTopology* 
 
     this->mapping = mapping;
     this->physicalMachines = physicalMachines;
-    this->hosts = hosts;
+    this->vms = vms;
     this->processConfigurationFile(configurationFile);
 
 
-    this->numberOfHosts = this->hosts->getNumberOfHosts();
+    this->numberOfVMs = this->vms->getNumberOfVMs();
 
     processPhysicalMachines();
     //cout << "After process Machine" << endl;
-    processInputTopology(inputTopology);
+    processLogicalTopology(logicalTopology);
 
 
     //cout << "Befor greedy started" << endl;
@@ -64,7 +64,7 @@ GuranteedEmbedding::GuranteedEmbedding(string configurationFile, InputTopology* 
 
 }
 
-bool GuranteedEmbedding::generateGreedy()
+bool GuaranteedEmbedding::generateGreedy()
 {
     cout << "At GG NS: " << this->numberOfSwitches << endl;
     for(unsigned long count = 0; count < this->numberOfSwitches; count++)
@@ -85,14 +85,14 @@ bool GuranteedEmbedding::generateGreedy()
             if(this->logical_topology[switch_id][i] != 0)
             {
                 //not embedded neighbor
-                for(list<unsigned int>::iterator iterator = this->unassignedNode[i]->feasibleHosts.begin();
-                            iterator != this->unassignedNode[i]->feasibleHosts.end(); iterator++)
+                for(list<unsigned int>::iterator iterator = this->unassignedNode[i]->feasibleVMs.begin();
+                            iterator != this->unassignedNode[i]->feasibleVMs.end(); iterator++)
                 {
                     this->unassignedNode[i]->embeddedNeighbors++;
                     if(this->logical_topology_delay[switch_id][i] < this->physicalMachines->getDelay(machine_id, *iterator))
                     {
                          cout << " removing " << i << " from " << *iterator << endl;
-                         iterator = this->unassignedNode[i]->feasibleHosts.erase(iterator);
+                         iterator = this->unassignedNode[i]->feasibleVMs.erase(iterator);
                     }
                 }
 
@@ -104,7 +104,7 @@ bool GuranteedEmbedding::generateGreedy()
     }
     return true;
 }
-unsigned long GuranteedEmbedding::getNeighborCount(unsigned int switchId)
+unsigned long GuaranteedEmbedding::getNeighborCount(unsigned int switchId)
 {
     unsigned long count = 0;
     for(unsigned int i = 0; i < this->numberOfSwitches; i++)
@@ -115,7 +115,7 @@ unsigned long GuranteedEmbedding::getNeighborCount(unsigned int switchId)
     return count;
 }
 
-double GuranteedEmbedding::getAggregatedBandwidths(unsigned int switchId)
+double GuaranteedEmbedding::getAggregatedBandwidths(unsigned int switchId)
 {
     double totalBandwdith = 0;
     for(unsigned int i = 0; i < this->numberOfSwitches; i++)
@@ -125,7 +125,7 @@ double GuranteedEmbedding::getAggregatedBandwidths(unsigned int switchId)
     }
     return totalBandwdith;
 }
-void GuranteedEmbedding::processPhysicalMachines()
+void GuaranteedEmbedding::processPhysicalMachines()
 {
     this->numberOfPhysicalMachines = this->physicalMachines->getNumberOfPhysicalMachines();
     this->cpuOfPhysicalMachines = new unsigned int[this->numberOfPhysicalMachines];
@@ -148,15 +148,15 @@ void GuranteedEmbedding::processPhysicalMachines()
 
 }
 
-unsigned int GuranteedEmbedding::getBestPhysicalMachine(unsigned long switchId)
+unsigned int GuaranteedEmbedding::getBestPhysicalMachine(unsigned long switchId)
 {
     //search all feasible
     map<unsigned int, pair<double,double> > physicalMachinesAttributes;
     double minCapacityFactor = DBL_MAX;
     double maxNeighborFactor = -1;
 
-    for(list<unsigned int>::iterator iter = this->unassignedNode[switchId]->feasibleHosts.begin();
-            iter != this->unassignedNode[switchId]->feasibleHosts.end(); iter++)
+    for(list<unsigned int>::iterator iter = this->unassignedNode[switchId]->feasibleVMs.begin();
+            iter != this->unassignedNode[switchId]->feasibleVMs.end(); iter++)
     {
         if(this->machines[*iter]->active == false)
             continue;
@@ -204,10 +204,10 @@ unsigned int GuranteedEmbedding::getBestPhysicalMachine(unsigned long switchId)
 
         double capacity = -1;
         int currentBest = -1;
-        cout << "Feasible hosts size: " << this->unassignedNode[switchId]->feasibleHosts.size() << endl;
+        cout << "Feasible vms size: " << this->unassignedNode[switchId]->feasibleVMs.size() << endl;
 
-        for(list<unsigned int>::iterator iter = this->unassignedNode[switchId]->feasibleHosts.begin();
-                iter != this->unassignedNode[switchId]->feasibleHosts.end(); iter++)
+        for(list<unsigned int>::iterator iter = this->unassignedNode[switchId]->feasibleVMs.begin();
+                iter != this->unassignedNode[switchId]->feasibleVMs.end(); iter++)
         {
             cout << "feasible host " << *iter << endl;
 
@@ -228,7 +228,7 @@ unsigned int GuranteedEmbedding::getBestPhysicalMachine(unsigned long switchId)
 
     }
 }
-void GuranteedEmbedding::assignSwitch(unsigned long switch_id, unsigned int physicalMachine)
+void GuaranteedEmbedding::assignSwitch(unsigned long switch_id, unsigned int physicalMachine)
 {
     double switchCapacity = this->unassignedNode[switch_id]->totalCPU;
     double switchBandwidth = this->unassignedNode[switch_id]->totalBandwidth;
@@ -259,7 +259,7 @@ void GuranteedEmbedding::assignSwitch(unsigned long switch_id, unsigned int phys
     this->machines[physicalMachine]->embeddedSwitches.push_back(switch_id);
 
 }
-void GuranteedEmbedding::getFeasibleValue(unsigned long switch_id,
+void GuaranteedEmbedding::getFeasibleValue(unsigned long switch_id,
         unsigned int physicalMachine, double &capacityFactor, double& neighborFactor)
 {
 
@@ -308,7 +308,7 @@ void GuranteedEmbedding::getFeasibleValue(unsigned long switch_id,
     }
 
 }
-void GuranteedEmbedding::updateNeighborsEmbeddedCount(unsigned long switchId)
+void GuaranteedEmbedding::updateNeighborsEmbeddedCount(unsigned long switchId)
 {
     for(unsigned long i = 0; i < this->numberOfSwitches; i++)
     {
@@ -321,7 +321,7 @@ void GuranteedEmbedding::updateNeighborsEmbeddedCount(unsigned long switchId)
         }
     }
 }
-unsigned int GuranteedEmbedding::getBestNode() {
+unsigned int GuaranteedEmbedding::getBestNode() {
 
     double bestValue = 0;
     int bestNode = -1;
@@ -345,21 +345,21 @@ unsigned int GuranteedEmbedding::getBestNode() {
     return bestNode;
 }
 
-void GuranteedEmbedding::processInputTopology(InputTopology* inputTopology)
+void GuaranteedEmbedding::processLogicalTopology(LogicalTopology* logicalTopology)
 {
 
     double maxNeighbor = 0;
     double maxBandwidth = 0;
     double minBandwidth = DBL_MAX;
     double maxCpu  = 0;
-    this->numberOfSwitches = inputTopology->getNumberOfSwitches();
+    this->numberOfSwitches = logicalTopology->getNumberOfSwitches();
 
     this->currentEmbedding = new int[this->numberOfSwitches];
     for(unsigned long i = 0; i < this->numberOfSwitches; i++)
         this->currentEmbedding[i] = -1;
 
-    inputTopology->populateTopologyBandwidth(this->logical_topology);
-    inputTopology->populateTopologyDelay(this->logical_topology_delay);
+    logicalTopology->populateTopologyBandwidth(this->logical_topology);
+    logicalTopology->populateTopologyDelay(this->logical_topology_delay);
     cout << "after delay" <<endl;
     for(unsigned long i = 0; i < this->numberOfSwitches; i++)
     {
@@ -380,11 +380,11 @@ void GuranteedEmbedding::processInputTopology(InputTopology* inputTopology)
                 minBandwidth = newNode->totalBandwidth;
 
         newNode->totalCPU = 0;
-        for(unsigned long j = 0; j < this->numberOfHosts; j++)
+        for(unsigned long j = 0; j < this->numberOfVMs; j++)
         {
-            if(this->hosts->getSwitch(j) == i)
+            if(this->vms->getSwitch(j) == i)
             {
-                newNode->totalCPU += this->hosts->getCPU(j);
+                newNode->totalCPU += this->vms->getCPU(j);
             }
         }
         if(newNode->totalCPU > maxCpu)
@@ -394,7 +394,7 @@ void GuranteedEmbedding::processInputTopology(InputTopology* inputTopology)
         //all PM are feasible initially
         for(unsigned int j = 0; j < this->numberOfPhysicalMachines; j++)
         {
-            this->unassignedNode[i]->feasibleHosts.push_back(j);
+            this->unassignedNode[i]->feasibleVMs.push_back(j);
         }
     }
     //cout << "Before Map" << endl;
@@ -413,7 +413,7 @@ void GuranteedEmbedding::processInputTopology(InputTopology* inputTopology)
 
 
 
-bool GuranteedEmbedding::isFeasible(long * embedding ) {
+bool GuaranteedEmbedding::isFeasible(long * embedding ) {
 
     double * bandwidthRequired = new double[this->numberOfPhysicalMachines];
     memset(bandwidthRequired, 0, sizeof(double)*this->numberOfPhysicalMachines);
@@ -466,7 +466,7 @@ bool GuranteedEmbedding::isFeasible(long * embedding ) {
     return true;
 }
 
-GuranteedEmbedding::~GuranteedEmbedding()
+GuaranteedEmbedding::~GuaranteedEmbedding()
 {
     delete [] this->stepProbabilities;
     delete [] this->accumulatedStepProbabilities;
@@ -482,7 +482,7 @@ GuranteedEmbedding::~GuranteedEmbedding()
 
     delete [] this->globalBest;
 }
-void GuranteedEmbedding::runSA()
+void GuaranteedEmbedding::runSA()
 {
     this->globalBest = new long [this->numberOfSwitches];
     long * current;
@@ -510,7 +510,7 @@ void GuranteedEmbedding::runSA()
         generateInitalState(current);
     }
 }
-unsigned int GuranteedEmbedding::getNumberOfActiveMachines(long * next)
+unsigned int GuaranteedEmbedding::getNumberOfActiveMachines(long * next)
 {
     bool* machinesActive = new bool [this->numberOfPhysicalMachines];
     memset(machinesActive, 0, this->numberOfPhysicalMachines*sizeof(bool));
@@ -527,7 +527,7 @@ unsigned int GuranteedEmbedding::getNumberOfActiveMachines(long * next)
     }
     return activeCount;
 }
-bool GuranteedEmbedding::run()
+bool GuaranteedEmbedding::run()
 {
     this->globalBest = new long[this->numberOfSwitches];
     cout << "Before greedy " << endl;
@@ -588,7 +588,7 @@ bool GuranteedEmbedding::run()
     return true;
 }
 
-void GuranteedEmbedding::generateOutput()
+void GuaranteedEmbedding::generateOutput()
 {
     cout << "output assignment" << endl;
     for(unsigned long i = 0; i < this->numberOfSwitches; i++)
@@ -598,7 +598,7 @@ void GuranteedEmbedding::generateOutput()
 
 }
 //processing input files
-void GuranteedEmbedding::processConfigurationFile(string fileName)
+void GuaranteedEmbedding::processConfigurationFile(string fileName)
 {
     this->alpha = 1;
     this->beta = 1;
@@ -643,7 +643,7 @@ void GuranteedEmbedding::processConfigurationFile(string fileName)
         fin.close();
     }
     else
-        cout << "Unable to open GuranteedEmbedding configuration file: " << fileName <<  endl;
+        cout << "Unable to open GuaranteedEmbedding configuration file: " << fileName <<  endl;
 
     //Getting the values
     if(eachConfiguration.find("alpha") != eachConfiguration.end())
@@ -722,7 +722,7 @@ void GuranteedEmbedding::processConfigurationFile(string fileName)
 }
 
 
-void GuranteedEmbedding::generateInitalState(long *& next)
+void GuaranteedEmbedding::generateInitalState(long *& next)
 {
     next = new long[this->numberOfSwitches];
     for (unsigned long i = 0; i < this->numberOfSwitches; i++)
@@ -734,11 +734,11 @@ void GuranteedEmbedding::generateInitalState(long *& next)
 
 
 
-void GuranteedEmbedding::printCost(long * next)
+void GuaranteedEmbedding::printCost(long * next)
 {
 
 }
-double GuranteedEmbedding::cost(long * next)
+double GuaranteedEmbedding::cost(long * next)
 {
 
     long edgeCount = 0;
@@ -764,7 +764,7 @@ double GuranteedEmbedding::cost(long * next)
 }
 
 
-void GuranteedEmbedding::successor(long* current, long * &next)
+void GuaranteedEmbedding::successor(long* current, long * &next)
 {
 
     short randomNumber = unifRand(100);
@@ -804,7 +804,7 @@ void GuranteedEmbedding::successor(long* current, long * &next)
 }
 
 
-void GuranteedEmbedding::simRun(long * start, long *&final)
+void GuaranteedEmbedding::simRun(long * start, long *&final)
 {
     //cout << "SA Started" << endl;
 
@@ -865,7 +865,7 @@ void GuranteedEmbedding::simRun(long * start, long *&final)
 //
 // Generate a random number between 0 and 1
 // return a uniform number in [0,1].
-double GuranteedEmbedding::unifRand()
+double GuaranteedEmbedding::unifRand()
 {
     return rand() / double(RAND_MAX);
     //return distribution(generator);
@@ -875,7 +875,7 @@ double GuranteedEmbedding::unifRand()
 // param a one end point of the interval
 // param b the other end of the interval
 // return a inform rand numberin [a,b].
-double GuranteedEmbedding::unifRand(double a, double b)
+double GuaranteedEmbedding::unifRand(double a, double b)
 {
     return (b-a)*unifRand() + a;
 }
@@ -883,7 +883,7 @@ double GuranteedEmbedding::unifRand(double a, double b)
 // Generate a random integer between 1 and a given value.
 // param n the largest value
 // return a uniform random value in [1,...,n]
-long GuranteedEmbedding::unifRand(long n)
+long GuaranteedEmbedding::unifRand(long n)
 {
 
     if (n < 0) n = -n;
@@ -898,7 +898,7 @@ long GuranteedEmbedding::unifRand(long n)
 }
 //
 // Reset the random number generator with the system clock.
-void GuranteedEmbedding::seed()
+void GuaranteedEmbedding::seed()
 {
     srand(time(0));
 }

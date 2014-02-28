@@ -18,25 +18,22 @@
 */
 
 /*
- * PartitioningAlgorithm.cpp
+ * AbstractSwitch.cpp
  *
- *  Created on: 2013-08-12
+ *  Created on: 2013-08-28
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#include "PartitioningAlgorithm.h"
+#include "AbstractSwitch.h"
 
-PartitioningAlgorithm::PartitioningAlgorithm() {
-    // TODO Auto-generated constructor stub
+AbstractSwitch::AbstractSwitch(CommandExecutor* commandExec)
+{
+
+    this->commandExec = commandExec;
 
 }
 
-void PartitioningAlgorithm::instertMapping(Mapping* mapping, string machine) {
-
-    mapping->instertMapping(machine);
-}
-
-PartitioningAlgorithm::~PartitioningAlgorithm() {
+AbstractSwitch::~AbstractSwitch() {
     // TODO Auto-generated destructor stub
 }
 

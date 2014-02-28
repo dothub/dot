@@ -31,8 +31,8 @@
 
 using namespace std;
 
-DeployDOT::DeployDOT(DOT_Topology* dotTopology, InstantitiateSwitch*  instantitiatedSwitch,
-        InstantitiateLink* instantitiatedLink, InstantitiateHost* instantitiatedHost, CommandExecutor* commandExecutor)
+DeployDOT::DeployDOT(DOT_Topology* dotTopology, AbstractSwitch*  instantitiatedSwitch,
+        AbstractLink* instantitiatedLink, AbstractVM* instantitiatedHost, CommandExecutor* commandExecutor)
 {
     this->dotTopology = dotTopology;
     this->instantitiatedHost = instantitiatedHost;
@@ -92,12 +92,12 @@ void DeployDOT::deployVMs() {
 
     this->instantitiatedHost->prepare();
     cout << "Virsh Network Created" <<endl;
-    for(unsigned long i = 0; i < this->dotTopology->hosts->getNumberOfHosts(); i++)
+    for(unsigned long i = 0; i < this->dotTopology->vms->getNumberOfVMs(); i++)
     {
         this->instantitiatedHost->startHost(i);
         this->instantitiatedHost->retrieveInterface(i);
 
-        unsigned long switchId = this->dotTopology->hosts->getSwitch(i);
+        unsigned long switchId = this->dotTopology->vms->getSwitch(i);
         
         ostringstream switchName;
         
@@ -108,8 +108,8 @@ void DeployDOT::deployVMs() {
         Switch* switchOfHost = this->dotTopology->topologySwitchMap[switchName.str()];
 
         this->instantitiatedSwitch->assignQoSToPort(switchOfHost,
-            this->dotTopology->hosts->getInterfaceName(i),
-            this->dotTopology->hosts->getBandwidth(i)*1000);
+            this->dotTopology->vms->getInterfaceName(i),
+            this->dotTopology->vms->getBandwidth(i)*1000);
     }
 }
 
@@ -255,9 +255,9 @@ void DeployDOT::createIPMACForController() {
 
     if(fout.is_open())
     {
-        for(unsigned long i = 0; i < this->dotTopology->hosts->getNumberOfHosts(); i++)
+        for(unsigned long i = 0; i < this->dotTopology->vms->getNumberOfVMs(); i++)
         {
-            fout << this->dotTopology->hosts->getIPAddress(i) << " " << this->dotTopology->hosts->getMacAddress(i) << endl;
+            fout << this->dotTopology->vms->getIPAddress(i) << " " << this->dotTopology->vms->getMacAddress(i) << endl;
         }
         fout.close();
         this->commandExecutor->executeLocal("cp ipMac.txt ~/floodlight/ipMac.txt");

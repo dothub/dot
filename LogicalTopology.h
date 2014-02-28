@@ -24,13 +24,13 @@
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#ifndef INPUTTOPOLOGY_H_
-#define INPUTTOPOLOGY_H_
+#ifndef LOGICALTOPOLOGY_H_
+#define LOGICALTOPOLOGY_H_
 
 #include <string>
 using namespace std;
 
-class InputTopology {
+class LogicalTopology {
 
     struct LinkProperty
     {
@@ -42,13 +42,13 @@ class InputTopology {
 
     LinkProperty ** topology;
 
-    static InputTopology* inputTopology;
+    static LogicalTopology* logicalTopology;
     unsigned long numberOfSwitches;
 
-    InputTopology();
+    LogicalTopology();
 
 public:
-    static InputTopology* getInputTopology();
+    static LogicalTopology* getLogicalTopology();
 
     void populateTopology(string fileName);
 
@@ -62,7 +62,7 @@ public:
 
     bool isNeighbor(unsigned long switch1, unsigned long switch2);
 
-    virtual ~InputTopology();
+    virtual ~LogicalTopology();
 };
 
-#endif /* INPUTTOPOLOGY_H_ */
+#endif /* LOGICALTOPOLOGY_H_ */

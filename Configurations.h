@@ -47,7 +47,7 @@ public:
     string controllerInfoFile;
     string hostInfoFile;
     string switch2ControllerFile;
-    string partitioningAlgorithm;
+    string embeddingAlgorithm;
     string partitioningAlgoConfFile;
     string credentialFile;
     string hypervisor;

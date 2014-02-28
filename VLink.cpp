@@ -32,7 +32,7 @@
 using namespace std;
 
 VLink::VLink(CommandExecutor* commandExec):
-    InstantitiateLink(commandExec){
+    AbstractLink(commandExec){
 
 
 }

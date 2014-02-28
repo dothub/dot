@@ -32,11 +32,11 @@
 #include <map>
 #include <sstream>
 #include <fstream>
-#include "PartitioningAlgorithm.h"
+#include "EmbeddingAlgorithm.h"
 #include "Global.h"
 #include "Configurations.h"
 #include "LibvirtAttachment.h"
-#include "GuranteedEmbedding.h"
+#include "GuaranteedEmbedding.h"
 #include "DOTTopology.h"
 #include "OVS_1_10.h"
 #include "DeployDOT.h"
@@ -49,8 +49,8 @@ void prepare(string globalConfFile)
 {
     Configurations *globalConf = Configurations::getConfiguration(globalConfFile);
 
-    Global::inputTopology = InputTopology::getInputTopology();
-    Global::inputTopology->populateTopology(globalConf->logicalTopologyFile);
+    Global::logicalTopology = LogicalTopology::getLogicalTopology();
+    Global::logicalTopology->populateTopology(globalConf->logicalTopologyFile);
 
     Global::physicalMachines = PhysicalMachines::getPhysicalMachines();
     Global::physicalMachines->populateMachines(globalConf->physicalTopologyFile);
@@ -62,8 +62,8 @@ void prepare(string globalConfFile)
 
     }
 
-    Global::hosts = Hosts::getHosts();
-    Global::hosts->populateHosts(globalConf->hostInfoFile);
+    Global::vms = VMs::getVMs();
+    Global::vms->populateVMs(globalConf->hostInfoFile);
 
     Global::controllers = Controllers::getControllers();
     Global::controllers->populateControllers(globalConf->controllerInfoFile);
@@ -81,10 +81,10 @@ void prepare(string globalConfFile)
     Global::mapping = Mapping::getMapping();
 
 
-    PartitioningAlgorithm * partitioning = new GuranteedEmbedding(
+    EmbeddingAlgorithm * partitioning = new GuaranteedEmbedding(
         globalConf->partitioningAlgoConfFile, 
-        Global::inputTopology, Global::physicalMachines, 
-        Global::mapping, Global::hosts);
+        Global::logicalTopology, Global::physicalMachines, 
+        Global::mapping, Global::vms);
 
     if( partitioning->run() == false)
     {
@@ -96,8 +96,8 @@ void prepare(string globalConfFile)
     
     Global::instantitiatedSwitch = new OVS_1_10(Global::commandExecutor);
     Global::instantitiatedLink = new VLink(Global::commandExecutor);
-    Global::instantitiatedHost = new LibvirtAttachment(globalConf, Global::hosts, 
-                   Global::commandExecutor, Global::inputTopology, Global::mapping);
+    Global::instantitiatedHost = new LibvirtAttachment(globalConf, Global::vms, 
+                   Global::commandExecutor, Global::logicalTopology, Global::mapping);
 
     
 
@@ -107,9 +107,9 @@ void prepare(string globalConfFile)
 void deploy()
 {
     
-    DOT_Topology* dotTopology = DOT_Topology::getDOT_Topology(Global::inputTopology, 
+    DOT_Topology* dotTopology = DOT_Topology::getDOT_Topology(Global::logicalTopology, 
                Global::physicalMachines, Global::mapping, 
-               Global::sw2controller, Global::hosts, Global::instantitiatedHost);
+               Global::sw2controller, Global::vms, Global::instantitiatedHost);
     
     dotTopology->generate();
 
@@ -130,10 +130,10 @@ void generateMappingForRemote()
  
     if(fout.is_open()) 
     { 
-        for(unsigned long i = 0; i < Global::hosts->getNumberOfHosts(); i++) 
+        for(unsigned long i = 0; i < Global::vms->getNumberOfVMs(); i++) 
         { 
             fout << "h" << i+1 << " " 
-                << Global::mapping->getMapping()->getMachine(Global::hosts->getSwitch(i)) << endl; 
+                << Global::mapping->getMapping()->getMachine(Global::vms->getSwitch(i)) << endl; 
         } 
         fout.close(); 
     } 

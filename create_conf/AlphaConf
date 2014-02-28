@@ -15,7 +15,7 @@ node cn214 10.254.254.48 4 11000 600 eth0 1024
 node cn215 10.254.254.49 4 11000 600 eth0 1024
 
 [PhysicalTopologyDelay]
-#Pairwise delay between any physical hosts
+#Pairwise delay between any physical vms
 #If no delay between a pair is specified, default value will be considered
 #Default value of delay is 0
 #First line: Number of pair of machines have delay

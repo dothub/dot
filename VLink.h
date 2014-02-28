@@ -27,9 +27,9 @@
 #ifndef VLINK_H_
 #define VLINK_H_
 
-#include "InstantitiateLink.h"
+#include "AbstractLink.h"
 
-class VLink: public InstantitiateLink {
+class VLink: public AbstractLink {
 public:
     VLink(CommandExecutor* commandExec);
     virtual ~VLink();
