@@ -146,17 +146,43 @@ int main(int argc, char * argv[])
 {
 
     string globalConfFile;
-    if(argc == 2 && strcmp(argv[1], "-h") == 0)
+
+    if(argc == 1 ||
+        (argc == 2 && strcmp(argv[1], "-h") == 0))
     {
-        cout << "-h help" << endl <<
-            "-g global configuration file (default: DefaultConfiguration)" << endl;
+        cout << "-h Help" << endl <<
+            "-c Configuration file" << endl
+             << "-d Debug" << endl;
         exit(0);
     }
-    else if(argc == 3 && strcmp(argv[1],"-g") == 0)
+    if(argc == 3 && strcmp(argv[1],"-g") == 0)
             globalConfFile = argv[2];
 
-    else if(argc==1)
-            globalConfFile = "DefaultConfiguration";
+    else if(argc == 4)
+    {
+            if(strcmp(argv[1], "-g") == 0
+                && strcmp(argv[3], "-d") == 0)
+            {   
+                globalConfFile = argv[2];
+                
+                Global::debugMode = true;
+                
+                cout << "Debug mode on" << endl;
+
+            }
+            else if(strcmp(argv[1], "-d") == 0
+                && strcmp(argv[2], "-g") == 0)
+            {
+                globalConfFile = argv[3];
+                Global::debugMode = true;  
+                
+                cout << "Debug mode on" << endl;
+            }
+            
+            else
+                exit(1);
+    } 
+
     else
         exit(1);
 

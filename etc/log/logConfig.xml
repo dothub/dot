@@ -115,11 +115,76 @@
         <appender-ref ref="appxConsoleAppender"/>
     </category>
     
-    <category name="LibvirtWithKVM" >
+    <category name="KVMWithLibvirt" >
         <priority value = "info" />
         <appender-ref ref="appxNormalAppender"/>
         <appender-ref ref="appxConsoleAppender"/>
     </category>
 
+    <category name="Link" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+    
+    <category name="LogicalTopology" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+    
+    <category name="Mapping" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+    
+    <category name="OVS_1_10" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+
+    <category name="PhysicalMachines" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+    
+    <category name="Switch2Controller" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+    
+    <category name="Switch" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+    
+    <category name="Tunnel" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+
+    <category name="Util" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+    
+    <category name="VLink" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+ 
+    <category name="VMs" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
 
 </log4j:configuration>

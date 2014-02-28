@@ -66,6 +66,7 @@ public:
     static AbstractSwitch*  instantitiatedSwitch;
     static AbstractLink* instantitiatedLink;
     static AbstractVM* instantitiatedHost;
+    static bool debugMode;
 };
 
 #endif /* GLOBAL_H_ */

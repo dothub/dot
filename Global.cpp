@@ -41,4 +41,4 @@ CommandExecutor* Global::commandExecutor = NULL;
 AbstractSwitch*  Global::instantitiatedSwitch = NULL;
 AbstractLink* Global::instantitiatedLink = NULL;
 AbstractVM* Global::instantitiatedHost = NULL;
-
+bool Global::debugMode = false;
