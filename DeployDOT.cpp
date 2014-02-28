@@ -27,6 +27,8 @@
 #include "DeployDOT.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
+
 using namespace std;
 
 DeployDOT::DeployDOT(DOT_Topology* dotTopology, InstantitiateSwitch*  instantitiatedSwitch,
@@ -93,6 +95,21 @@ void DeployDOT::deployVMs() {
     for(unsigned long i = 0; i < this->dotTopology->hosts->getNumberOfHosts(); i++)
     {
         this->instantitiatedHost->startHost(i);
+        this->instantitiatedHost->retrieveInterface(i);
+
+        unsigned long switchId = this->dotTopology->hosts->getSwitch(i);
+        
+        ostringstream switchName;
+        
+        switchName << "topo" << switchId+1;
+       
+        cout << "Host is attached to " << switchName.str() << endl;
+ 
+        Switch* switchOfHost = this->dotTopology->topologySwitchMap[switchName.str()];
+
+        this->instantitiatedSwitch->assignQoSToPort(switchOfHost,
+            this->dotTopology->hosts->getInterfaceName(i),
+            this->dotTopology->hosts->getBandwidth(i)*1000);
     }
 }
 

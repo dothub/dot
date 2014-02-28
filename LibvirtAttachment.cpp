@@ -214,3 +214,44 @@ void LibvirtAttachment::startHost(unsigned long host_id)
 
 }
 
+
+void LibvirtAttachment::retrieveInterface(unsigned long host_id)
+{
+    unsigned long switchId = this->hosts->getSwitch(host_id);
+
+    //start
+    ostringstream fileName;
+    fileName << "retrieveInterface.sh";
+    ofstream fout(fileName.str().c_str());
+
+    if(fout.is_open())
+    {
+        fout << "output=`sudo virsh dumpxml h" << host_id+1 
+               <<" | grep \"<target dev='vnet\" | cut -f2 -d\"'\"`" << endl;
+        fout << "echo -n $output" << endl;
+
+        fout.close();
+
+        
+        this->commandExec->executeLocal("chmod +x "+fileName.str());
+        
+        string interfaceName = 
+            this->commandExec->executeScriptRemote(
+                    this->mapping->getMachine(switchId), "", fileName.str());
+
+        this->commandExec->executeRemote(this->mapping->getMachine(switchId),
+               "rm "+ fileName.str());
+        
+        if(remove(fileName.str().c_str()) != 0 )
+            cout << "Error Interface Script file" << endl;
+
+        
+        cout << "Interface Name: " << interfaceName;
+        
+        this->hosts->setInterfaceName(host_id, interfaceName);
+    }
+    else
+        cout << "Cannot create Interface Script file" << endl;
+
+
+}

@@ -43,7 +43,7 @@ protected:
     CommandExecutor* commandExec;
     Mapping* mapping;
     InputTopology* topology;
-
+       
     virtual void createHost2SwitchAttachmentConf()=0;
     virtual void loadConfiguration(string fileName)=0;
 
@@ -53,7 +53,7 @@ public:
     virtual void prepare()=0;
     virtual void startHost(unsigned long host_id)=0;
     virtual string tapInterfacePrefix()=0;
-
+    virtual void retrieveInterface(unsigned long host_id)=0;
     virtual ~InstantitiateHost();
 };
 

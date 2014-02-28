@@ -39,6 +39,8 @@ class Hosts {
         string mac;
         string ip;
         unsigned int cpu;
+        unsigned long interfaceBandwidth;
+        string interfaceName;
     };
     static Hosts* hosts;
     Hosts();
@@ -56,6 +58,9 @@ public:
     string getMacAddress(unsigned long hostId);
     string getIPAddress(unsigned long hostId);
     unsigned int getCPU(unsigned long hostId);
+    unsigned long getBandwidth(unsigned long hostId);
+    string getInterfaceName(unsigned long hostId);
+    void setInterfaceName(unsigned long hostId, string name);
 
     virtual ~Hosts();
 };

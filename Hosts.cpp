@@ -55,7 +55,8 @@ void Hosts::populateHosts(string fileName) {
         {
             string host_str, switch_str, mac, ip;
             unsigned int cpu;
-            fin >> host_str >> switch_str >> mac >> ip >> cpu;
+            unsigned long bandwidth;
+            fin >> host_str >> switch_str >> mac >> ip >> cpu >> bandwidth;
 
             HostAttribute newHost;
             newHost.host_id = atol(host_str.substr(1).c_str())-1;
@@ -63,9 +64,10 @@ void Hosts::populateHosts(string fileName) {
             newHost.mac = mac;
             newHost.ip = ip;
             newHost.cpu = cpu;
+            newHost.interfaceBandwidth = bandwidth;
+            newHost.interfaceName = "";
 
             this->hostIdVector.push_back(newHost);
-
         }
 
 
@@ -120,6 +122,45 @@ unsigned int Hosts::getCPU(unsigned long hostId) {
     return this->hostIdVector[hostId].cpu;
 
 }
+
+unsigned long Hosts::getBandwidth(unsigned long hostId) {
+
+    if(hostId < 0 || hostId >= this->hostIdVector.size())
+    {
+        cout << "Invalid Host ID " << hostId << endl;
+        return 0;
+    }
+
+    return this->hostIdVector[hostId].interfaceBandwidth;
+
+}
+
+
+void Hosts::setInterfaceName(unsigned long hostId, string name) {
+
+    if(hostId < 0 || hostId >= this->hostIdVector.size())
+    {
+        cout << "Invalid Host ID " << hostId << endl;
+        return;
+    }
+
+    this->hostIdVector[hostId].interfaceName = name;
+
+}
+
+
+string Hosts::getInterfaceName(unsigned long hostId) {
+
+    if(hostId < 0 || hostId >= this->hostIdVector.size())
+    {
+        cout << "Invalid Host ID " << hostId << endl;
+        return "Error";
+    }
+
+    return this->hostIdVector[hostId].interfaceName;
+
+}
+
 
 unsigned long Hosts::getNumberOfHosts() {
 

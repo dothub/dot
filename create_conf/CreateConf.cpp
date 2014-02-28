@@ -368,7 +368,8 @@ void processConfFile(string fileName)
                     //cout << ip << endl;
                     
                     fout_Host << tokens->at(0) << " " << tokens->at(1) << " "
-                            << mac << " " << ip << " " << tokens->at(2) << endl;
+                            << mac << " " << ip << " " << tokens->at(2) << " "
+                            << tokens->at(3) << endl;
 
                 }
 

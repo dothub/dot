@@ -40,6 +40,7 @@ public:
     LibvirtAttachment(Configurations* globalConf, Hosts* hosts, CommandExecutor* commandExec, InputTopology *topology, Mapping* mapping);
     void createHost2SwitchAttachmentConf();
     void startHost(unsigned long host_id);
+    void retrieveInterface(unsigned long host_id);
     void prepare();
     string tapInterfacePrefix();
 
