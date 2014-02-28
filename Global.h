@@ -38,21 +38,20 @@
 #include "AbstractSwitch.h"
 #include "AbstractLink.h"
 #include "AbstractVM.h"
-#include <log4cxx/logger.h>
-#include <map>
 #include <string>
 #include <cstdio>
+#include "LoggerFactory.h"
 
-using namespace log4cxx;
 using namespace std;
 /* 
 * 
 */
 
+class LoggerFactory;
+
 class Global {
 
 public:
-    static map<string, LoggerPtr> loggerMap; 
     static string MasterName;
     static string MasterIP;
     static Credentials* credentials;
@@ -67,6 +66,8 @@ public:
     static AbstractLink* instantitiatedLink;
     static AbstractVM* instantitiatedHost;
     static bool debugMode;
+    static string logConfigFile;
+    static LoggerFactory* loggerFactory;
 };
 
 #endif /* GLOBAL_H_ */

@@ -1,0 +1,24 @@
+2014-02-28 01:40:17,142 INFO  LoggerFactory (LoggerFactory.cpp:49) - test
+2014-02-28 01:40:17,142 INFO  LoggerFactory (LoggerFactory.cpp:49) - test
+2014-02-28 01:40:17,142 INFO  LoggerFactory (LoggerFactory.cpp:51) - test2
+2014-02-28 01:40:17,142 INFO  LoggerFactory (LoggerFactory.cpp:51) - test2
+2014-02-28 01:43:33,635 INFO  LoggerFactory (LoggerFactory.cpp:49) - test
+2014-02-28 01:43:33,635 INFO  LoggerFactory (LoggerFactory.cpp:49) - test
+2014-02-28 01:43:33,635 INFO  LoggerFactory (LoggerFactory.cpp:51) - test2
+2014-02-28 01:43:33,635 INFO  LoggerFactory (LoggerFactory.cpp:51) - test2
+2014-02-28 01:47:06,670 INFO  LoggerFactory (LoggerFactory.cpp:51) - test
+2014-02-28 01:47:06,670 INFO  LoggerFactory (LoggerFactory.cpp:51) - test
+2014-02-28 01:47:06,670 INFO  LoggerFactory (LoggerFactory.cpp:53) - test2
+2014-02-28 01:47:06,670 INFO  LoggerFactory (LoggerFactory.cpp:53) - test2
+2014-02-28 01:47:06,671 ERROR log4cxx (LoggerFactory.cpp:75) - There is no logger for classnone
+2014-02-28 01:47:06,671 ERROR log4cxx (LoggerFactory.cpp:75) - There is no logger for classnone
+2014-02-28 02:09:03,381 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
+2014-02-28 02:09:03,381 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
+2014-02-28 02:09:29,301 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
+2014-02-28 02:09:29,301 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
+2014-02-28 02:13:14,317 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
+2014-02-28 02:13:14,317 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
+2014-02-28 02:13:14,317 INFO   (DOT.cpp:154) - Test 10noting
+2014-02-28 02:13:43,997 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
+2014-02-28 02:13:43,997 ERROR log4cxx (LoggerFactory.cpp:128) - There is no logger for classnone
+2014-02-28 02:13:43,997 INFO   (DOT.cpp:154) - Test 10noting

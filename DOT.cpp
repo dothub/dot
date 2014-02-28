@@ -147,6 +147,12 @@ int main(int argc, char * argv[])
 
     string globalConfFile;
 
+    Global::loggerFactory = LoggerFactory::getLoggerFactory();
+    
+    Global::loggerFactory->getLogger("none");
+    LoggerPtr* selfLogger = Global::loggerFactory->getLogger("main");
+    LOG4CXX_INFO((*selfLogger), "Test "<< 10 << "noting");
+    
     if(argc == 1 ||
         (argc == 2 && strcmp(argv[1], "-h") == 0))
     {
@@ -187,7 +193,7 @@ int main(int argc, char * argv[])
         exit(1);
 
     cout << globalConfFile << endl;
-
+    
     prepare(globalConfFile);
     deploy();
     generateMappingForRemote();

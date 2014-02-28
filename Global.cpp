@@ -27,7 +27,6 @@
 
 #include "Global.h"
 
-map<string, LoggerPtr> Global::loggerMap;
 string Global::MasterName = "";
 string Global::MasterIP = "";
 Credentials* Global::credentials = NULL;
@@ -42,3 +41,5 @@ AbstractSwitch*  Global::instantitiatedSwitch = NULL;
 AbstractLink* Global::instantitiatedLink = NULL;
 AbstractVM* Global::instantitiatedHost = NULL;
 bool Global::debugMode = false;
+string Global::logConfigFile = "./etc/log/logConfig.xml";
+LoggerFactory* Global::loggerFactory = NULL;

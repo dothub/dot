@@ -126,7 +126,13 @@
         <appender-ref ref="appxNormalAppender"/>
         <appender-ref ref="appxConsoleAppender"/>
     </category>
-    
+   
+     <category name="LoggerFactory" >
+        <priority value = "info" />
+        <appender-ref ref="appxNormalAppender"/>
+        <appender-ref ref="appxConsoleAppender"/>
+    </category>
+     
     <category name="LogicalTopology" >
         <priority value = "info" />
         <appender-ref ref="appxNormalAppender"/>
