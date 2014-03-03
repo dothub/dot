@@ -362,10 +362,10 @@ void processConfFile(string fileName)
                     int hostID = atoi(tokens->at(0).substr(1).c_str());
                     
                     string mac = Util::intToMac(hostID);
-                    //cout << mac << endl;
+                    cout << mac << endl;
                     
                     string ip = Util::intToIP(Util::ipToInt(baseIP) + hostID);
-                    //cout << ip << endl;
+                    cout << ip << endl;
                     
                     fout_Host << tokens->at(0) << " " << tokens->at(1) << " "
                             << mac << " " << ip << " " << tokens->at(2) << " "
