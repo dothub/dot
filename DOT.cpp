@@ -46,7 +46,7 @@ using namespace std;
 
 LoggerPtr* selfLogger;
 
-void prepare(string globalConfFile)
+bool prepare(string globalConfFile)
 {
     LOG4CXX_INFO((*selfLogger), "Reading the configurations");
 
@@ -94,7 +94,7 @@ void prepare(string globalConfFile)
     {
         LOG4CXX_INFO((*selfLogger), 
              "Embedding is not successful");
-        return;
+        return false;
     }
         
     LOG4CXX_INFO((*selfLogger), "Instantiating the deployment specific devices");
@@ -104,6 +104,7 @@ void prepare(string globalConfFile)
     Global::abstractVM = new KVMWithLibvirt(globalConf, Global::vms, 
                    Global::commandExecutor, Global::logicalTopology, Global::mapping);
     
+    return true;
 }
 
 void deploy()
@@ -208,7 +209,8 @@ int main(int argc, char * argv[])
            "The global configuration file: "
              << globalConfFile);
     
-    prepare(globalConfFile);
+    if(! prepare(globalConfFile))
+        exit(1);
     deploy();
     generateMappingForRemote();
 

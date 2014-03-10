@@ -71,7 +71,7 @@ s2 c1
 
 [Credentials]
 #User name of the dot nodes
-UserName=dot
+UserName=dotuser
 
 
 [Embedding]
