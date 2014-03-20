@@ -186,6 +186,10 @@ void KVMWithLibvirt::startHost(unsigned long host_id)
     unsigned long switchId = this->vms->getSwitch(host_id);
     string mac = this->vms->getMacAddress(host_id);
 
+    string secondaryMac = mac;
+
+    secondaryMac[0] = 'F';
+
     ostringstream command;
 
     command << "sudo virsh undefine h" << host_id+1;
@@ -206,6 +210,7 @@ void KVMWithLibvirt::startHost(unsigned long host_id)
     command << " --disk  path="<< this->createNewImage(host_id)<<",format=qcow2";
     command << " --graphics vnc,listen=0.0.0.0 --noautoconsole";
     command << " --network model=virtio,network=ovs_network_" << switchId+1 << ",mac="<< mac;
+    command << " --network model=virtio,network=ovs_network-ext,mac=" << secondaryMac;
     command << " --boot hd";
 
     this->commandExec->executeRemote(this->mapping->getMachine(switchId), command.str());
@@ -229,7 +234,8 @@ void KVMWithLibvirt::retrieveInterface(unsigned long host_id)
     if(fout.is_open())
     {
         fout << "output=`sudo virsh dumpxml h" << host_id+1 
-               <<" | grep \"<target dev='vnet\" | cut -f2 -d\"'\"`" << endl;
+               <<" | grep \"<target dev='vnet\" | cut -f2 -d\"'\"" 
+               " | awk 'NR==1'`" << endl;
         fout << "echo -n $output" << endl;
 
         fout.close();

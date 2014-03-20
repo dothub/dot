@@ -200,6 +200,7 @@ void OVS_1_10::assignQoSToPort(Switch* theSwitch,
         << " Interface " << portName 
         << " ingress_policing_rate=" << rate;
 
+    cout << "The policing: " << command.str() << endl;
 
     this->commandExec->executeRemote(theSwitch->getIPOfMachine(),
         command.str());
