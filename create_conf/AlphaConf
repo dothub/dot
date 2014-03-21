@@ -21,7 +21,7 @@ node cn214 10.254.254.48 4 10000 500 eth0 1024
 #First line: Number of pair of machines have delay
 #Next, each line specifies a tuple
 #machine1, machine2, delay (ms)
-0
+cn213 cn214 20
 
 [LogicalTopology]
 #First line: Number of switches, number of links
@@ -29,8 +29,8 @@ node cn214 10.254.254.48 4 10000 500 eth0 1024
 #Switch # should start with 1
 #Next, each line specifies a bidirectional link with the following format:
 # s# s# bandwidth delay
-2 1 
-s1 s2 500 10
+2 1
+s1 s2 500 25
 
 [VirtualMachineProvision]
 #Start marker of this section. Don't remove
@@ -47,9 +47,9 @@ NetworkFile=libvirt_network.xml
 #Next, each line specifies a VM, the switch it is attached, CPU:
 # VM# s# CPU
 3
-h1 s1 1 50
-h2 s1 1 50
-h3 s2 2 50
+h1 s1 1 100
+h2 s1 1 100
+h3 s2 2 250
 
 
 [Controllers]

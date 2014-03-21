@@ -160,3 +160,75 @@
 2014-03-20 13:27:20,868 INFO   (DOT.cpp:119) - DOT Topology is generated
 2014-03-20 13:28:04,106 INFO   (DOT.cpp:126) - Emulated network has been deployed 
 2014-03-20 13:28:04,106 INFO   (DOT.cpp:135) - Generating Mapping File for DOT console 
+2014-03-20 18:17:08,080 INFO   (DOT.cpp:164) - DOT main has started 
+2014-03-20 18:17:08,081 INFO   (DOT.cpp:210) - The global configuration file: ./emulations/alpha/DefaultConfiguration_alpha
+2014-03-20 18:17:08,081 INFO  prepare(std (DOT.cpp:51) - Reading the configurations
+2014-03-20 18:17:08,081 INFO  prepare(std (DOT.cpp:86) - Embedding is started
+2014-03-20 18:17:08,085 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
+2014-03-20 18:17:08,085 INFO   (DOT.cpp:112) - DOT Deployment has started
+2014-03-20 18:17:08,086 INFO   (DOT.cpp:119) - DOT Topology is generated
+2014-03-20 18:17:23,620 INFO   (DOT.cpp:126) - Emulated network has been deployed 
+2014-03-20 18:17:23,620 INFO   (DOT.cpp:135) - Generating Mapping File for DOT console 
+2014-03-20 18:27:41,956 INFO   (DOT.cpp:164) - DOT main has started 
+2014-03-20 18:27:41,956 INFO   (DOT.cpp:210) - The global configuration file: emulations/alpha/DefaultConfiguration_alpha
+2014-03-20 18:27:41,956 INFO  prepare(std (DOT.cpp:51) - Reading the configurations
+2014-03-20 18:27:41,956 INFO  prepare(std (DOT.cpp:86) - Embedding is started
+2014-03-20 18:27:41,959 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
+2014-03-20 18:27:41,959 INFO   (DOT.cpp:112) - DOT Deployment has started
+2014-03-20 18:27:41,960 INFO   (DOT.cpp:119) - DOT Topology is generated
+2014-03-20 18:27:57,685 INFO   (DOT.cpp:126) - Emulated network has been deployed 
+2014-03-20 18:27:57,685 INFO   (DOT.cpp:135) - Generating Mapping File for DOT console 
+2014-03-20 18:37:03,449 INFO   (DOT.cpp:164) - DOT main has started 
+2014-03-20 18:37:03,449 INFO   (DOT.cpp:210) - The global configuration file: emulations/alpha/DefaultConfiguration_alpha
+2014-03-20 18:37:03,449 INFO  prepare(std (DOT.cpp:51) - Reading the configurations
+2014-03-20 18:37:03,450 INFO  prepare(std (DOT.cpp:86) - Embedding is started
+2014-03-20 18:37:03,453 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
+2014-03-20 18:37:03,454 INFO   (DOT.cpp:112) - DOT Deployment has started
+2014-03-20 18:37:03,454 INFO   (DOT.cpp:119) - DOT Topology is generated
+2014-03-20 18:37:19,096 INFO   (DOT.cpp:126) - Emulated network has been deployed 
+2014-03-20 18:37:19,097 INFO   (DOT.cpp:135) - Generating Mapping File for DOT console 
+2014-03-20 21:57:21,840 INFO   (DOT.cpp:164) - DOT main has started 
+2014-03-20 21:57:21,841 INFO   (DOT.cpp:210) - The global configuration file: emulations/alpha/DefaultConfiguration_alpha
+2014-03-20 21:57:21,841 INFO  prepare(std (DOT.cpp:51) - Reading the configurations
+2014-03-20 21:57:21,841 INFO  prepare(std (DOT.cpp:86) - Embedding is started
+2014-03-20 21:57:21,843 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
+2014-03-20 21:57:21,843 INFO   (DOT.cpp:112) - DOT Deployment has started
+2014-03-20 21:57:21,843 INFO   (DOT.cpp:119) - DOT Topology is generated
+2014-03-20 21:57:37,310 INFO   (DOT.cpp:126) - Emulated network has been deployed 
+2014-03-20 21:57:37,310 INFO   (DOT.cpp:135) - Generating Mapping File for DOT console 
+2014-03-20 21:58:32,952 INFO   (DOT.cpp:164) - DOT main has started 
+2014-03-20 21:58:32,952 INFO   (DOT.cpp:210) - The global configuration file: emulations/alpha/DefaultConfiguration_alpha
+2014-03-20 21:58:32,952 INFO  prepare(std (DOT.cpp:51) - Reading the configurations
+2014-03-20 21:58:32,953 INFO  prepare(std (DOT.cpp:86) - Embedding is started
+2014-03-20 21:58:32,955 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
+2014-03-20 21:58:32,955 INFO   (DOT.cpp:112) - DOT Deployment has started
+2014-03-20 21:58:32,955 INFO   (DOT.cpp:119) - DOT Topology is generated
+2014-03-20 21:58:48,531 INFO   (DOT.cpp:126) - Emulated network has been deployed 
+2014-03-20 21:58:48,531 INFO   (DOT.cpp:135) - Generating Mapping File for DOT console 
+2014-03-21 01:54:36,632 INFO   (DOT.cpp:164) - DOT main has started 
+2014-03-21 01:54:36,632 INFO   (DOT.cpp:210) - The global configuration file: emulations/alpha2/DefaultConfiguration_alpha2
+2014-03-21 01:54:36,632 INFO  prepare(std (DOT.cpp:51) - Reading the configurations
+2014-03-21 01:54:36,633 INFO  prepare(std (DOT.cpp:86) - Embedding is started
+2014-03-21 01:54:36,636 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
+2014-03-21 01:54:36,636 INFO   (DOT.cpp:112) - DOT Deployment has started
+2014-03-21 01:54:36,637 INFO   (DOT.cpp:119) - DOT Topology is generated
+2014-03-21 01:55:21,422 INFO   (DOT.cpp:126) - Emulated network has been deployed 
+2014-03-21 01:55:21,422 INFO   (DOT.cpp:135) - Generating Mapping File for DOT console 
+2014-03-21 03:18:23,735 INFO   (DOT.cpp:164) - DOT main has started 
+2014-03-21 03:18:23,735 INFO   (DOT.cpp:210) - The global configuration file: emulations/alpha2/DefaultConfiguration_alpha2
+2014-03-21 03:18:23,735 INFO  prepare(std (DOT.cpp:51) - Reading the configurations
+2014-03-21 03:18:23,736 INFO  prepare(std (DOT.cpp:86) - Embedding is started
+2014-03-21 03:18:23,739 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
+2014-03-21 03:18:23,739 INFO   (DOT.cpp:112) - DOT Deployment has started
+2014-03-21 03:18:23,740 INFO   (DOT.cpp:119) - DOT Topology is generated
+2014-03-21 03:19:08,752 INFO   (DOT.cpp:126) - Emulated network has been deployed 
+2014-03-21 03:19:08,752 INFO   (DOT.cpp:135) - Generating Mapping File for DOT console 
+2014-03-21 06:00:36,772 INFO   (DOT.cpp:164) - DOT main has started 
+2014-03-21 06:00:36,772 INFO   (DOT.cpp:210) - The global configuration file: emulations/withloop/DefaultConfiguration_withloop
+2014-03-21 06:00:36,772 INFO  prepare(std (DOT.cpp:51) - Reading the configurations
+2014-03-21 06:00:36,773 INFO  prepare(std (DOT.cpp:86) - Embedding is started
+2014-03-21 06:00:36,777 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
+2014-03-21 06:00:36,777 INFO   (DOT.cpp:112) - DOT Deployment has started
+2014-03-21 06:00:36,778 INFO   (DOT.cpp:119) - DOT Topology is generated
+2014-03-21 06:01:17,456 INFO   (DOT.cpp:126) - Emulated network has been deployed 
+2014-03-21 06:01:17,456 INFO   (DOT.cpp:135) - Generating Mapping File for DOT console 
