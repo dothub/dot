@@ -1,0 +1,14 @@
+MasterName=cn216
+MasterIP=10.254.254.50
+PhysicalTopology=./emulations/withloop2/PhysicalTopology_withloop2
+PhysicalMachineDelay=No
+LogicalTopology=./emulations/withloop2/LogicalTopology_withloop2
+HyperVisorConfiguration=./emulations/withloop2/Hypervisor_withloop2
+HyperVisor=lib-virt
+HostImage=~/images/base_VM.qcow2
+HostConfiguration=./emulations/withloop2/HostInfo_withloop2
+Controllers=./emulations/withloop2/ControllerInfo_withloop2
+SwitchToController=./emulations/withloop2/Switch2Controller_withloop2
+UserCredentials=./emulations/withloop2/CredentialFile_withloop2
+EmbeddingAlgorithm=Guaranteed_Embedding
+EmbeddingAlgorithmConfiguration=Guaranteed_Embedding_Conf
