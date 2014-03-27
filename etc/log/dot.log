@@ -72,3 +72,22 @@
 2014-03-07 14:53:52,544 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
 2014-03-07 14:53:52,545 INFO   (DOT.cpp:111) - DOT Deployment has started
 2014-03-07 14:53:52,545 INFO   (DOT.cpp:118) - DOT Topology is generated
+2014-03-27 10:49:21,352 INFO   (DOT.cpp:164) - DOT main has started 
+2014-03-27 10:49:21,352 INFO   (DOT.cpp:187) - Debug mode on
+2014-03-27 10:49:21,352 INFO   (DOT.cpp:210) - The global configuration file: emulations/withloop/DefaultConfiguration_alpha2
+2014-03-27 10:49:21,352 INFO  prepare(std (DOT.cpp:51) - Reading the configurations
+2014-03-27 10:49:21,353 INFO  prepare(std (DOT.cpp:86) - Embedding is started
+2014-03-27 10:50:36,424 INFO   (DOT.cpp:164) - DOT main has started 
+2014-03-27 10:50:36,424 INFO   (DOT.cpp:187) - Debug mode on
+2014-03-27 10:50:36,424 INFO   (DOT.cpp:210) - The global configuration file: emulations/alpha2/DefaultConfiguration_alpha2
+2014-03-27 10:50:36,424 INFO  prepare(std (DOT.cpp:51) - Reading the configurations
+2014-03-27 10:50:36,425 INFO  prepare(std (DOT.cpp:86) - Embedding is started
+2014-03-27 10:50:36,428 INFO  prepare(std (DOT.cpp:100) - Instantiating the deployment specific devices
+2014-03-27 10:50:36,428 DEBUG OVS_1_10 (OVS_1_10.cpp:42) - Constructor is called
+2014-03-27 10:50:36,428 DEBUG OVS_1_10 (OVS_1_10.cpp:42) - Constructor is called
+2014-03-27 10:50:36,428 DEBUG AbstractLink (AbstractLink.cpp:33) - AbstractLink constructor is invoked 
+2014-03-27 10:50:36,428 DEBUG AbstractLink (AbstractLink.cpp:33) - AbstractLink constructor is invoked 
+2014-03-27 10:50:36,429 INFO   (DOT.cpp:112) - DOT Deployment has started
+2014-03-27 10:50:36,430 INFO   (DOT.cpp:119) - DOT Topology is generated
+2014-03-27 10:51:21,343 INFO   (DOT.cpp:126) - Emulated network has been deployed 
+2014-03-27 10:51:21,343 INFO   (DOT.cpp:135) - Generating Mapping File for DOT console 
