@@ -40,7 +40,7 @@ if [ ! -f "$1" ]; then
     exit 1
 fi
 
-if [ ! "$2" = "-d" ]; then
+if [ "$#" -eq 2 ] && [ ! "$2" = "-d" ]; then
     echo "Invalid second parameter $2"
     echo "To turn the debug mode on use -d as second parameter"
     exit 1
@@ -48,7 +48,7 @@ fi
  
 echo "Start reading the configuration file"
 
-create_conf/conf_util -c $1 &>/dev/null
+create_conf/conf_util -c $1 
 line_number=`grep -n "\[EmulationName\]" $1 | cut -f1 -d':'`
 line_number=$(($line_number+1))
 emulation_name=`awk 'NR=='"$line_number"'' $1`
