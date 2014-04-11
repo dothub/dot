@@ -9,10 +9,10 @@ alpha2
 #Then, each line specifies a tuple:
 #type name ip cpu memory disk external_interface bandwidth
 4
-manager cn216 10.254.254.50
-node cn215 10.254.254.49 5 512 8 eth0 1024
-node cn214 10.254.254.48 6 512 8 eth0 1024
-node cn213 10.254.254.47 5 512 8 eth0 1024
+manager cn207 10.254.254.41
+node cn208 10.254.254.42 5 512 8 eth0 1024
+node cn209 10.254.254.43 6 512 8 eth0 1024
+node cn210 10.254.254.44 5 512 8 eth0 1024
 
 [PhysicalTopologyDelay]
 #Pairwise delay between any physical vms
@@ -66,7 +66,7 @@ h7 s3 1 300
 #Next, each line a tuple:
 # c# ip port
 1
-c1 10.254.254.50 6633
+c1 10.254.254.41 6633
 
 [Switch2Controller]
 #First line: Number of switches

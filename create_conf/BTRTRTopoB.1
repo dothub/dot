@@ -1,0 +1,529 @@
+#The sections are strictly ordered.
+#Don't remove or rearrange any section
+
+[EmulationName]
+BTRTRTopoB
+
+[PhysicalTopology]
+#First line: Number of physical machines
+#Then, each line specifies a tuple:
+#type name ip cpu memory disk external_interface bandwidth
+9
+manager cn207 10.254.254.41
+node cn208 10.254.254.42 80 512 8 eth0 1024
+node cn209 10.254.254.43 80 512 8 eth0 1024
+node cn210 10.254.254.44 80 512 8 eth0 1024
+node cn211 10.254.254.45 80 512 8 eth0 1024
+node cn212 10.254.254.46 80 512 8 eth0 1024
+node cn213 10.254.254.47 80 512 8 eth0 1024
+node cn214 10.254.254.48 80 512 8 eth0 1024
+node cn215 10.254.254.49 80 512 8 eth0 1024
+
+[PhysicalTopologyDelay]
+#Pairwise delay between any physical vms
+#If no delay between a pair is specified, default value will be considered
+#Default value of delay is 0
+#First line: Number of pair of machines have delay
+#Next, each line specifies a tuple
+#machine1, machine2, delay (ms)
+0
+
+[LogicalTopology]
+#First line: Number of switches, number of links
+#Each switch is represented by 's#'
+#Switch # should start with 1
+#Next, each line specifies a bidirectional link with the following format:
+# s# s# bandwidth delay
+#With scale factor 0.1
+106 237
+s64 s67 100 0
+s63 s88 100 0
+s36 s48 100 0
+s44 s86 100 0
+s29 s103 100 0
+s50 s86 100 0
+s50 s84 100 0
+s86 s97 100 0
+s88 s97 100 0
+s3 s64 100 0
+s56 s103 100 0
+s9 s74 100 0
+s16 s48 100 0
+s74 s92 100 0
+s27 s98 100 0
+s48 s73 100 0
+s61 s103 100 0
+s71 s88 100 0
+s64 s82 100 0
+s26 s85 100 0
+s26 s74 100 0
+s76 s102 100 0
+s26 s47 100 0
+s26 s43 100 0
+s20 s56 100 0
+s42 s85 100 0
+s55 s74 100 0
+s7 s40 100 0
+s19 s20 100 0
+s37 s99 100 0
+s4 s48 100 0
+s64 s73 100 0
+s20 s74 100 0
+s70 s97 100 0
+s94 s98 100 0
+s73 s98 100 0
+s65 s88 100 0
+s20 s94 100 0
+s22 s57 100 0
+s13 s48 100 0
+s15 s26 100 0
+s34 s64 100 0
+s43 s76 100 0
+s34 s72 100 0
+s81 s103 100 0
+s17 s76 100 0
+s20 s61 100 0
+s25 s86 100 0
+s43 s86 100 0
+s43 s103 100 0
+s97 s103 100 0
+s81 s88 100 0
+s77 s88 100 0
+s30 s50 100 0
+s1 s57 100 0
+s20 s89 100 0
+s39 s88 100 0
+s30 s60 100 0
+s6 s43 100 0
+s16 s72 100 0
+s88 s98 100 0
+s73 s99 100 0
+s5 s98 100 0
+s41 s103 100 0
+s18 s85 100 0
+s74 s88 100 0
+s96 s103 100 0
+s43 s42 100 0
+s73 s97 100 0
+s38 s78 100 0
+s25 s85 100 0
+s72 s104 100 0
+s68 s76 100 0
+s57 s102 100 0
+s51 s57 100 0
+s72 s82 100 0
+s33 s86 100 0
+s48 s106 100 0
+s48 s80 100 0
+s18 s86 100 0
+s84 s85 100 0
+s20 s93 100 0
+s64 s88 100 0
+s40 s59 100 0
+s8 s74 100 0
+s72 s100 100 0
+s57 s85 100 0
+s95 s97 100 0
+s43 s74 100 0
+s59 s85 100 0
+s74 s86 100 0
+s37 s97 100 0
+s74 s103 100 0
+s53 s74 100 0
+s40 s73 100 0
+s79 s85 100 0
+s46 s99 100 0
+s20 s103 100 0
+s74 s85 100 0
+s90 s99 100 0
+s85 s97 100 0
+s33 s85 100 0
+s24 s64 100 0
+s57 s76 100 0
+s40 s92 100 0
+s88 s89 100 0
+s88 s103 100 0
+s11 s85 100 0
+s40 s69 100 0
+s23 s85 100 0
+s20 s43 100 0
+s73 s74 100 0
+s10 s103 100 0
+s73 s85 100 0
+s43 s78 100 0
+s11 s86 100 0
+s66 s78 100 0
+s26 s66 100 0
+s50 s60 100 0
+s64 s91 100 0
+s79 s86 100 0
+s74 s97 100 0
+s80 s98 100 0
+s64 s100 100 0
+s14 s43 100 0
+s58 s88 100 0
+s12 s26 100 0
+s73 s106 100 0
+s73 s83 100 0
+s40 s74 100 0
+s73 s88 100 0
+s44 s85 100 0
+s76 s85 100 0
+s10 s88 100 0
+s30 s38 100 0
+s20 s39 100 0
+s31 s88 100 0
+s20 s77 100 0
+s85 s86 100 0
+s20 s73 100 0
+s48 s98 100 0
+s26 s78 100 0
+s48 s49 100 0
+s36 s98 100 0
+s20 s88 100 0
+s2 s75 100 0
+s46 s97 100 0
+s20 s41 100 0
+s32 s48 100 0
+s8 s40 100 0
+s43 s84 100 0
+s21 s73 100 0
+s2 s86 100 0
+s24 s72 100 0
+s90 s97 100 0
+s103 s105 100 0
+s40 s53 100 0
+s40 s55 100 0
+s57 s74 100 0
+s43 s88 100 0
+s85 s103 100 0
+s83 s88 100 0
+s88 s105 100 0
+s35 s43 100 0
+s51 s74 100 0
+s28 s88 100 0
+s71 s103 100 0
+s20 s97 100 0
+s54 s98 100 0
+s72 s101 100 0
+s65 s103 100 0
+s45 s76 100 0
+s20 s99 100 0
+s60 s75 100 0
+s95 s99 100 0
+s97 s99 100 0
+s62 s78 100 0
+s15 s78 100 0
+s20 s85 100 0
+s4 s73 100 0
+s22 s76 100 0
+s85 s88 100 0
+s93 s98 100 0
+s64 s74 100 0
+s49 s97 100 0
+s57 s97 100 0
+s20 s28 100 0
+s23 s40 100 0
+s31 s103 100 0
+s3 s72 100 0
+s74 s76 100 0
+s72 s91 100 0
+s52 s64 100 0
+s32 s73 100 0
+s26 s62 100 0
+s35 s85 100 0
+s6 s84 100 0
+s5 s48 100 0
+s87 s103 100 0
+s64 s101 100 0
+s70 s73 100 0
+s78 s97 100 0
+s47 s78 100 0
+s43 s68 100 0
+s20 s58 100 0
+s12 s78 100 0
+s13 s72 100 0
+s19 s73 100 0
+s29 s73 100 0
+s40 s52 100 0
+s30 s75 100 0
+s9 s40 100 0
+s20 s96 100 0
+s73 s103 100 0
+s2 s43 100 0
+s63 s103 100 0
+s1 s76 100 0
+s43 s73 100 0
+s78 s85 100 0
+s84 s97 100 0
+s27 s48 100 0
+s17 s43 100 0
+s64 s104 100 0
+s98 s103 100 0
+s20 s98 100 0
+s87 s88 100 0
+s26 s38 100 0
+s64 s72 100 0
+s43 s45 100 0
+s54 s72 100 0
+s7 s74 100 0
+s67 s72 100 0
+s14 s84 100 0
+s69 s74 100 0
+s43 s97 100 0
+s21 s48 100 0
+s40 s97 100 0
+
+
+[VirtualMachineProvision]
+#Start marker of this section. Don't remove
+Hypervisor=kvm
+Library=lib-virt
+ImageLocation=~/images/base_VM.qcow2
+NetworkFile=libvirt_network.xml
+#End marker of this section. Don't remove
+
+[VirtualMachines]
+#First line: Number of VMs
+#Each switch is represented by 'h#'
+#VM# should start with 1
+#Next, each line specifies a VM, the switch it is attached, CPU, B/W(Mbps):
+# VM# s# CPU B/W
+106
+h1 s1 1 100
+h2 s2 1 100
+h3 s3 1 100
+h4 s4 1 100
+h5 s5 1 100
+h6 s6 1 100
+h7 s7 1 100
+h8 s8 1 100
+h9 s9 1 100
+h10 s10 1 100
+h11 s11 1 100
+h12 s12 1 100
+h13 s13 1 100
+h14 s14 1 100
+h15 s15 1 100
+h16 s16 1 100
+h17 s17 1 100
+h18 s18 1 100
+h19 s19 1 100
+h20 s20 1 100
+h21 s21 1 100
+h22 s22 1 100
+h23 s23 1 100
+h24 s24 1 100
+h25 s25 1 100
+h26 s26 1 100
+h27 s27 1 100
+h28 s28 1 100
+h29 s29 1 100
+h30 s30 1 100
+h31 s31 1 100
+h32 s32 1 100
+h33 s33 1 100
+h34 s34 1 100
+h35 s35 1 100
+h36 s36 1 100
+h37 s37 1 100
+h38 s38 1 100
+h39 s39 1 100
+h40 s40 1 100
+h41 s41 1 100
+h42 s42 1 100
+h43 s43 1 100
+h44 s44 1 100
+h45 s45 1 100
+h46 s46 1 100
+h47 s47 1 100
+h48 s48 1 100
+h49 s49 1 100
+h50 s50 1 100
+h51 s51 1 100
+h52 s52 1 100
+h53 s53 1 100
+h54 s54 1 100
+h55 s55 1 100
+h56 s56 1 100
+h57 s57 1 100
+h58 s58 1 100
+h59 s59 1 100
+h60 s60 1 100
+h61 s61 1 100
+h62 s62 1 100
+h63 s63 1 100
+h64 s64 1 100
+h65 s65 1 100
+h66 s66 1 100
+h67 s67 1 100
+h68 s68 1 100
+h69 s69 1 100
+h70 s70 1 100
+h71 s71 1 100
+h72 s72 1 100
+h73 s73 1 100
+h74 s74 1 100
+h75 s75 1 100
+h76 s76 1 100
+h77 s77 1 100
+h78 s78 1 100
+h79 s79 1 100
+h80 s80 1 100
+h81 s81 1 100
+h82 s82 1 100
+h83 s83 1 100
+h84 s84 1 100
+h85 s85 1 100
+h86 s86 1 100
+h87 s87 1 100
+h88 s88 1 100
+h89 s89 1 100
+h90 s90 1 100
+h91 s91 1 100
+h92 s92 1 100
+h93 s93 1 100
+h94 s94 1 100
+h95 s95 1 100
+h96 s96 1 100
+h97 s97 1 100
+h98 s98 1 100
+h99 s99 1 100
+h100 s100 1 100
+h101 s101 1 100
+h102 s102 1 100
+h103 s103 1 100
+h104 s104 1 100
+h105 s105 1 100
+h106 s106 1 100
+
+[Controllers]
+#First line: Number of controllers
+#Each controller is represented by 'c#'
+#Controller # should start with 1
+#Next, each line a tuple:
+# c# ip port
+1
+c1 10.254.254.41 6633
+
+[Switch2Controller]
+#First line: Number of switches
+#Next, each line specifies a switch and its controller
+# s# c#
+106
+s1 c1
+s2 c1
+s3 c1
+s4 c1
+s5 c1
+s6 c1
+s7 c1
+s8 c1
+s9 c1
+s10 c1
+s11 c1
+s12 c1
+s13 c1
+s14 c1
+s15 c1
+s16 c1
+s17 c1
+s18 c1
+s19 c1
+s20 c1
+s21 c1
+s22 c1
+s23 c1
+s24 c1
+s25 c1
+s26 c1
+s27 c1
+s28 c1
+s29 c1
+s30 c1
+s31 c1
+s32 c1
+s33 c1
+s34 c1
+s35 c1
+s36 c1
+s37 c1
+s38 c1
+s39 c1
+s40 c1
+s41 c1
+s42 c1
+s43 c1
+s44 c1
+s45 c1
+s46 c1
+s47 c1
+s48 c1
+s49 c1
+s50 c1
+s51 c1
+s52 c1
+s53 c1
+s54 c1
+s55 c1
+s56 c1
+s57 c1
+s58 c1
+s59 c1
+s60 c1
+s61 c1
+s62 c1
+s63 c1
+s64 c1
+s65 c1
+s66 c1
+s67 c1
+s68 c1
+s69 c1
+s70 c1
+s71 c1
+s72 c1
+s73 c1
+s74 c1
+s75 c1
+s76 c1
+s77 c1
+s78 c1
+s79 c1
+s80 c1
+s81 c1
+s82 c1
+s83 c1
+s84 c1
+s85 c1
+s86 c1
+s87 c1
+s88 c1
+s89 c1
+s90 c1
+s91 c1
+s92 c1
+s93 c1
+s94 c1
+s95 c1
+s96 c1
+s97 c1
+s98 c1
+s99 c1
+s100 c1
+s101 c1
+s102 c1
+s103 c1
+s104 c1
+s105 c1
+s106 c1
+
+
+[Credentials]
+#User name of the dot nodes
+UserName=dotuser
+
+
+[Embedding]
+#Specifies the embedding algorithm and its configuation
+#Currenlty not used

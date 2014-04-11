@@ -1,5 +1,5 @@
-MasterName=cn216
-MasterIP=10.254.254.50
+MasterName=cn207
+MasterIP=10.254.254.41
 PhysicalTopology=./emulations/alpha2/PhysicalTopology_alpha2
 PhysicalMachineDelay=No
 LogicalTopology=./emulations/alpha2/LogicalTopology_alpha2

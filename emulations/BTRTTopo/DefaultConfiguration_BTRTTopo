@@ -1,0 +1,14 @@
+MasterName=cn207
+MasterIP=10.254.254.41
+PhysicalTopology=./emulations/BTRTTopo/PhysicalTopology_BTRTTopo
+PhysicalMachineDelay=No
+LogicalTopology=./emulations/BTRTTopo/LogicalTopology_BTRTTopo
+HyperVisorConfiguration=./emulations/BTRTTopo/Hypervisor_BTRTTopo
+HyperVisor=lib-virt
+HostImage=~/images/base_VM.qcow2
+HostConfiguration=./emulations/BTRTTopo/HostInfo_BTRTTopo
+Controllers=./emulations/BTRTTopo/ControllerInfo_BTRTTopo
+SwitchToController=./emulations/BTRTTopo/Switch2Controller_BTRTTopo
+UserCredentials=./emulations/BTRTTopo/CredentialFile_BTRTTopo
+EmbeddingAlgorithm=Guaranteed_Embedding
+EmbeddingAlgorithmConfiguration=Guaranteed_Embedding_Conf

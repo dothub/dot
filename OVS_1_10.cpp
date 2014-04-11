@@ -76,7 +76,7 @@ void OVS_1_10::runSwitch(Switch* theSwitch) {
         }
         fout << "sudo ovs-vsctl set bridge " 
              << theSwitch->getName() << " other-config:datapath-id=" 
-            << theSwitch->getDPID() << endl;
+             << theSwitch->getDPID() << endl;
 
         fout.close();
 

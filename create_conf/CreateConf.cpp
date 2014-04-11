@@ -103,13 +103,13 @@ void processConfFile(string fileName)
                 directory += line;
                 directory += "/";
 
-                string storingPath = "mkdir -p ../emulations/";
+                string storingPath = "mkdir -p ./emulations/";
                 storingPath += line;
                 storingPath += "/";
 
                 system(storingPath.c_str());
                 
-                storingPath = "../emulations/";
+                storingPath = "./emulations/";
                 storingPath += line;
                 storingPath += "/";
 

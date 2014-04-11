@@ -1,0 +1,2 @@
+virt_type=kvm
+networkFile=libvirt_network.xml

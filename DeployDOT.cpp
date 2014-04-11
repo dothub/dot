@@ -52,12 +52,12 @@ DeployDOT::DeployDOT(DOT_Topology* dotTopology, AbstractSwitch*  abstractSwitch,
     cout << "assigned port number" <<endl;
     assignStaticRules();
     cout << "static rule generated" <<endl;
-    createLogicalTopology();
-    cout << "topology for controller" <<endl;
-    createIPMACForController();
-    cout << "ipmac file for controller" <<endl;
-    startController();
-    cout << "Controller started" <<endl;
+    //createLogicalTopology();
+    //cout << "topology for controller" <<endl;
+    //createIPMACForController();
+    //cout << "ipmac file for controller" <<endl;
+    //startController();
+    //cout << "Controller started" <<endl;
 }
 
 DeployDOT::~DeployDOT() {

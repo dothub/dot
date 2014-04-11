@@ -1,0 +1,950 @@
+Start reading the configuration file
+#First line: Number of physical machines
+#Then, each line specifies a tuple:#type name ip cpu memory disk external_interface bandwidth9PT: 9
+manager
+node
+node
+node
+node
+node
+node
+node
+node
+#Pairwise delay between any physical vms
+#If no delay between a pair is specified, default value will be considered#Default value of delay is 0#First line: Number of pair of machines have delay#Next, each line specifies a tuple#machine1, machine2, delay (ms)0PTD: 0
+#First line: Number of switches, number of links
+#Each switch is represented by 's#'#Switch # should start with 1#Next, each line specifies a bidirectional link with the following format:# s# s# bandwidth delay#With scale factor 0.1106 237LT: 106 237
+#Start marker of this section. Don't remove
+Hypervisor=kvmVMP: Hypervisor=kvm
+#First line: Number of VMs
+#Each switch is represented by 'h#'#VM# should start with 1#Next, each line specifies a VM, the switch it is attached, CPU, B/W(Mbps):# VM# s# CPU B/W106VM: 106
+00:00:00:00:00:01
+10.254.0.1
+00:00:00:00:00:02
+10.254.0.2
+00:00:00:00:00:03
+10.254.0.3
+00:00:00:00:00:04
+10.254.0.4
+00:00:00:00:00:05
+10.254.0.5
+00:00:00:00:00:06
+10.254.0.6
+00:00:00:00:00:07
+10.254.0.7
+00:00:00:00:00:08
+10.254.0.8
+00:00:00:00:00:09
+10.254.0.9
+00:00:00:00:00:0a
+10.254.0.10
+00:00:00:00:00:0b
+10.254.0.11
+00:00:00:00:00:0c
+10.254.0.12
+00:00:00:00:00:0d
+10.254.0.13
+00:00:00:00:00:0e
+10.254.0.14
+00:00:00:00:00:0f
+10.254.0.15
+00:00:00:00:00:10
+10.254.0.16
+00:00:00:00:00:11
+10.254.0.17
+00:00:00:00:00:12
+10.254.0.18
+00:00:00:00:00:13
+10.254.0.19
+00:00:00:00:00:14
+10.254.0.20
+00:00:00:00:00:15
+10.254.0.21
+00:00:00:00:00:16
+10.254.0.22
+00:00:00:00:00:17
+10.254.0.23
+00:00:00:00:00:18
+10.254.0.24
+00:00:00:00:00:19
+10.254.0.25
+00:00:00:00:00:1a
+10.254.0.26
+00:00:00:00:00:1b
+10.254.0.27
+00:00:00:00:00:1c
+10.254.0.28
+00:00:00:00:00:1d
+10.254.0.29
+00:00:00:00:00:1e
+10.254.0.30
+00:00:00:00:00:1f
+10.254.0.31
+00:00:00:00:00:20
+10.254.0.32
+00:00:00:00:00:21
+10.254.0.33
+00:00:00:00:00:22
+10.254.0.34
+00:00:00:00:00:23
+10.254.0.35
+00:00:00:00:00:24
+10.254.0.36
+00:00:00:00:00:25
+10.254.0.37
+00:00:00:00:00:26
+10.254.0.38
+00:00:00:00:00:27
+10.254.0.39
+00:00:00:00:00:28
+10.254.0.40
+00:00:00:00:00:29
+10.254.0.41
+00:00:00:00:00:2a
+10.254.0.42
+00:00:00:00:00:2b
+10.254.0.43
+00:00:00:00:00:2c
+10.254.0.44
+00:00:00:00:00:2d
+10.254.0.45
+00:00:00:00:00:2e
+10.254.0.46
+00:00:00:00:00:2f
+10.254.0.47
+00:00:00:00:00:30
+10.254.0.48
+00:00:00:00:00:31
+10.254.0.49
+00:00:00:00:00:32
+10.254.0.50
+00:00:00:00:00:33
+10.254.0.51
+00:00:00:00:00:34
+10.254.0.52
+00:00:00:00:00:35
+10.254.0.53
+00:00:00:00:00:36
+10.254.0.54
+00:00:00:00:00:37
+10.254.0.55
+00:00:00:00:00:38
+10.254.0.56
+00:00:00:00:00:39
+10.254.0.57
+00:00:00:00:00:3a
+10.254.0.58
+00:00:00:00:00:3b
+10.254.0.59
+00:00:00:00:00:3c
+10.254.0.60
+00:00:00:00:00:3d
+10.254.0.61
+00:00:00:00:00:3e
+10.254.0.62
+00:00:00:00:00:3f
+10.254.0.63
+00:00:00:00:00:40
+10.254.0.64
+00:00:00:00:00:41
+10.254.0.65
+00:00:00:00:00:42
+10.254.0.66
+00:00:00:00:00:43
+10.254.0.67
+00:00:00:00:00:44
+10.254.0.68
+00:00:00:00:00:45
+10.254.0.69
+00:00:00:00:00:46
+10.254.0.70
+00:00:00:00:00:47
+10.254.0.71
+00:00:00:00:00:48
+10.254.0.72
+00:00:00:00:00:49
+10.254.0.73
+00:00:00:00:00:4a
+10.254.0.74
+00:00:00:00:00:4b
+10.254.0.75
+00:00:00:00:00:4c
+10.254.0.76
+00:00:00:00:00:4d
+10.254.0.77
+00:00:00:00:00:4e
+10.254.0.78
+00:00:00:00:00:4f
+10.254.0.79
+00:00:00:00:00:50
+10.254.0.80
+00:00:00:00:00:51
+10.254.0.81
+00:00:00:00:00:52
+10.254.0.82
+00:00:00:00:00:53
+10.254.0.83
+00:00:00:00:00:54
+10.254.0.84
+00:00:00:00:00:55
+10.254.0.85
+00:00:00:00:00:56
+10.254.0.86
+00:00:00:00:00:57
+10.254.0.87
+00:00:00:00:00:58
+10.254.0.88
+00:00:00:00:00:59
+10.254.0.89
+00:00:00:00:00:5a
+10.254.0.90
+00:00:00:00:00:5b
+10.254.0.91
+00:00:00:00:00:5c
+10.254.0.92
+00:00:00:00:00:5d
+10.254.0.93
+00:00:00:00:00:5e
+10.254.0.94
+00:00:00:00:00:5f
+10.254.0.95
+00:00:00:00:00:60
+10.254.0.96
+00:00:00:00:00:61
+10.254.0.97
+00:00:00:00:00:62
+10.254.0.98
+00:00:00:00:00:63
+10.254.0.99
+00:00:00:00:00:64
+10.254.0.100
+00:00:00:00:00:65
+10.254.0.101
+00:00:00:00:00:66
+10.254.0.102
+00:00:00:00:00:67
+10.254.0.103
+00:00:00:00:00:68
+10.254.0.104
+00:00:00:00:00:69
+10.254.0.105
+00:00:00:00:00:6a
+10.254.0.106
+#First line: Number of controllers
+#Each controller is represented by 'c#'#Controller # should start with 1#Next, each line a tuple:# c# ip port1CT: 1
+#First line: Number of switches
+#Next, each line specifies a switch and its controller# s# c#106S2C: 106
+#User name of the dot nodes
+UserName=dotuserCRE: UserName=dotuser
+BTRTRTopoB
+End Reading the configuration file
+Running DOT Manager....
+end check
+INFO  main - DOT main has started 
+INFO  main - The global configuration file: emulations/BTRTRTopoB/DefaultConfiguration_BTRTRTopoB
+INFO  main - Reading the configurations
+Unable to open physical machine delay file: PhysicalTopologyDelay
+INFO  main - Embedding is started
+Guranted started
+after delay
+Map size: 106
+Before greedy 
+At GG NS: 106
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 3 best node: 87
+SwithchId: 87
+Feasible vms size: 8
+feasible host 0
+feasible host 1
+feasible host 2
+feasible host 3
+feasible host 4
+feasible host 5
+feasible host 6
+feasible host 7
+adding 0
+0
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 9
+SwithchId: 9
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+Feasible vms size: 8
+feasible host 0
+feasible host 1
+feasible host 2
+feasible host 3
+feasible host 4
+feasible host 5
+feasible host 6
+feasible host 7
+adding 1
+1
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 27
+SwithchId: 27
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 14.6 824
+1: capacity 13.2 0
+1
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 30
+SwithchId: 30
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 13.2 624
+1: capacity 11.8 0
+1
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 38
+SwithchId: 38
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 11.8 424
+1: capacity 10.4 0
+1
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 57
+SwithchId: 57
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 10.4 224
+1: capacity 9 0
+1
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 62
+SwithchId: 62
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+Feasible vms size: 8
+feasible host 0
+feasible host 1
+feasible host 2
+feasible host 3
+feasible host 4
+feasible host 5
+feasible host 6
+feasible host 7
+adding 2
+2
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 64
+SwithchId: 64
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 14.6 824
+2: capacity 13.2 0
+2
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 70
+SwithchId: 70
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 13.2 624
+2: capacity 11.8 0
+2
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 76
+SwithchId: 76
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 11.8 424
+2: capacity 10.4 0
+2
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 80
+SwithchId: 80
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 10.4 224
+2: capacity 9 0
+2
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.49275 best node: 102
+SwithchId: 102
+
+SW1 2100
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 2100
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 2100
+machinecap:2 9 24
+2: capacity -1 -1
+Feasible vms size: 8
+feasible host 0
+feasible host 1
+feasible host 2
+feasible host 3
+feasible host 4
+feasible host 5
+feasible host 6
+feasible host 7
+adding 3
+3
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 9.17391 best node: 86
+SwithchId: 86
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+Feasible vms size: 8
+feasible host 0
+feasible host 1
+feasible host 2
+feasible host 3
+feasible host 4
+feasible host 5
+feasible host 6
+feasible host 7
+adding 4
+4
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 9.17391 best node: 104
+SwithchId: 104
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 200
+machinecap:4 14.6 824
+4: capacity 13.2 0
+4
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 28
+SwithchId: 28
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 200
+machinecap:4 13.2 624
+4: capacity 11.8 0
+4
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 40
+SwithchId: 40
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 200
+machinecap:4 11.8 424
+4: capacity 10.4 0
+4
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.49275 best node: 19
+SwithchId: 19
+
+SW1 2100
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 2100
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 2100
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 2100
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 2100
+machinecap:4 10.4 224
+4: capacity -1 -1
+Feasible vms size: 8
+feasible host 0
+feasible host 1
+feasible host 2
+feasible host 3
+feasible host 4
+feasible host 5
+feasible host 6
+feasible host 7
+adding 5
+5
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 9.17391 best node: 55
+SwithchId: 55
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 200
+machinecap:4 10.4 224
+4: capacity 9 0
+
+SW1 200
+machinecap:5 10.8 -1076
+5: capacity -1 -1
+4
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 9.17391 best node: 60
+SwithchId: 60
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 200
+machinecap:4 9 24
+4: capacity -1 -1
+
+SW1 200
+machinecap:5 10.8 -1076
+5: capacity -1 -1
+Feasible vms size: 8
+feasible host 0
+feasible host 1
+feasible host 2
+feasible host 3
+feasible host 4
+feasible host 5
+feasible host 6
+feasible host 7
+adding 6
+6
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 9.17391 best node: 88
+SwithchId: 88
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 200
+machinecap:4 9 24
+4: capacity -1 -1
+
+SW1 200
+machinecap:5 10.8 -1076
+5: capacity -1 -1
+
+SW1 200
+machinecap:6 14.6 824
+6: capacity 13.2 0
+6
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 9.17391 best node: 95
+SwithchId: 95
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 200
+machinecap:4 9 24
+4: capacity -1 -1
+
+SW1 200
+machinecap:5 10.8 -1076
+5: capacity -1 -1
+
+SW1 200
+machinecap:6 13.2 624
+6: capacity 11.8 0
+6
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 18
+SwithchId: 18
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 200
+machinecap:4 9 24
+4: capacity -1 -1
+
+SW1 200
+machinecap:5 10.8 -1076
+5: capacity -1 -1
+
+SW1 200
+machinecap:6 11.8 424
+6: capacity 10.4 0
+6
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 82
+SwithchId: 82
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 200
+machinecap:4 9 24
+4: capacity -1 -1
+
+SW1 200
+machinecap:5 10.8 -1076
+5: capacity -1 -1
+
+SW1 200
+machinecap:6 10.4 224
+6: capacity 9 0
+6
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 92
+SwithchId: 92
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 200
+machinecap:4 9 24
+4: capacity -1 -1
+
+SW1 200
+machinecap:5 10.8 -1076
+5: capacity -1 -1
+
+SW1 200
+machinecap:6 9 24
+6: capacity -1 -1
+Feasible vms size: 8
+feasible host 0
+feasible host 1
+feasible host 2
+feasible host 3
+feasible host 4
+feasible host 5
+feasible host 6
+feasible host 7
+adding 7
+7
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.17391 best node: 93
+SwithchId: 93
+
+SW1 200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 200
+machinecap:4 9 24
+4: capacity -1 -1
+
+SW1 200
+machinecap:5 10.8 -1076
+5: capacity -1 -1
+
+SW1 200
+machinecap:6 9 24
+6: capacity -1 -1
+
+SW1 200
+machinecap:7 14.6 824
+7: capacity 13.2 0
+7
+Assinging to embedding 
+Calling best node
+IN BEST VAlue: Map size: 106
+best value: 5.37681 best node: 97
+SwithchId: 97
+
+SW1 1200
+machinecap:0 10.4 -1276
+0: capacity -1 -1
+
+SW1 1200
+machinecap:1 9 24
+1: capacity -1 -1
+
+SW1 1200
+machinecap:2 9 24
+2: capacity -1 -1
+
+SW1 1200
+machinecap:3 10.8 -1076
+3: capacity -1 -1
+
+SW1 1200
+machinecap:4 9 24
+4: capacity -1 -1
+
+SW1 1200
+machinecap:5 10.8 -1076
+5: capacity -1 -1
+
+SW1 1200
+machinecap:6 9 24
+6: capacity -1 -1
+
+SW1 1200
+machinecap:7 13.2 624
+7: capacity -1 -1
+Feasible vms size: 8
+feasible host 0
+feasible host 1
+feasible host 2
+feasible host 3
+feasible host 4
+feasible host 5
+feasible host 6
+feasible host 7
+4294967295
+No feasible mapping
+INFO  main - Embedding is not successful

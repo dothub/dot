@@ -1,0 +1,14 @@
+MasterName=cn207
+MasterIP=10.254.254.41
+PhysicalTopology=./emulations/BT-strawman/PhysicalTopology_BT-strawman
+PhysicalMachineDelay=No
+LogicalTopology=./emulations/BT-strawman/LogicalTopology_BT-strawman
+HyperVisorConfiguration=./emulations/BT-strawman/Hypervisor_BT-strawman
+HyperVisor=lib-virt
+HostImage=~/images/base_VM.qcow2
+HostConfiguration=./emulations/BT-strawman/HostInfo_BT-strawman
+Controllers=./emulations/BT-strawman/ControllerInfo_BT-strawman
+SwitchToController=./emulations/BT-strawman/Switch2Controller_BT-strawman
+UserCredentials=./emulations/BT-strawman/CredentialFile_BT-strawman
+EmbeddingAlgorithm=Guaranteed_Embedding
+EmbeddingAlgorithmConfiguration=Guaranteed_Embedding_Conf
