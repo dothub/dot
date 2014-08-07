@@ -50,7 +50,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
-am_dot_OBJECTS = src/global/global.$(OBJEXT) \
+am_dot_OBJECTS = src/util/util.$(OBJEXT) src/global/global.$(OBJEXT) \
 	src/executor/command_executor.$(OBJEXT) \
 	src/console/console.$(OBJEXT) src/dotcore.$(OBJEXT) \
 	src/dot.$(OBJEXT)
@@ -180,7 +180,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-dot_SOURCES = src/global/global.cpp\
+dot_SOURCES = src/util/util.cpp\
+src/global/global.cpp\
 src/executor/command_executor.cpp\
 src/console/console.cpp\
 src/dotcore.cpp\
@@ -245,6 +246,14 @@ distclean-hdr:
 
 clean-noinstPROGRAMS:
 	-test -z "$(noinst_PROGRAMS)" || rm -f $(noinst_PROGRAMS)
+src/util/$(am__dirstamp):
+	@$(MKDIR_P) src/util
+	@: > src/util/$(am__dirstamp)
+src/util/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) src/util/$(DEPDIR)
+	@: > src/util/$(DEPDIR)/$(am__dirstamp)
+src/util/util.$(OBJEXT): src/util/$(am__dirstamp) \
+	src/util/$(DEPDIR)/$(am__dirstamp)
 src/global/$(am__dirstamp):
 	@$(MKDIR_P) src/global
 	@: > src/global/$(am__dirstamp)
@@ -289,6 +298,7 @@ mostlyclean-compile:
 	-rm -f src/dotcore.$(OBJEXT)
 	-rm -f src/executor/command_executor.$(OBJEXT)
 	-rm -f src/global/global.$(OBJEXT)
+	-rm -f src/util/util.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
@@ -298,6 +308,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/console/$(DEPDIR)/console.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/executor/$(DEPDIR)/command_executor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/global/$(DEPDIR)/global.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/util/$(DEPDIR)/util.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -567,6 +578,8 @@ distclean-generic:
 	-rm -f src/executor/$(am__dirstamp)
 	-rm -f src/global/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/global/$(am__dirstamp)
+	-rm -f src/util/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/util/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -577,7 +590,7 @@ clean-am: clean-generic clean-noinstPROGRAMS mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf src/$(DEPDIR) src/console/$(DEPDIR) src/executor/$(DEPDIR) src/global/$(DEPDIR)
+	-rm -rf src/$(DEPDIR) src/console/$(DEPDIR) src/executor/$(DEPDIR) src/global/$(DEPDIR) src/util/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-tags
@@ -625,7 +638,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf src/$(DEPDIR) src/console/$(DEPDIR) src/executor/$(DEPDIR) src/global/$(DEPDIR)
+	-rm -rf src/$(DEPDIR) src/console/$(DEPDIR) src/executor/$(DEPDIR) src/global/$(DEPDIR) src/util/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

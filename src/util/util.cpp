@@ -24,11 +24,15 @@
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#include "Util.h"
+#include "util.h"
 #include <sstream>
 #include <iomanip>
 #include <math.h>  
 #include <cstdlib>
+
+using namespace util;
+
+LoggerPtr Util::logger = Logger::getLogger("Util");
 
 void Util::parseKeyValue(string input, string& key, string& value,
         char delimeter) {

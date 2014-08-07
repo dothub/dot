@@ -28,10 +28,15 @@
 #define UTIL_H_
 #include <string>
 #include <vector>
+#include <log4cxx/logger.h>
+using namespace log4cxx;
 
 using namespace std;
-
+namespace util
+{
 class Util {
+    static LoggerPtr logger;
+
 public:
     void static parseKeyValue(string input, string& key, string& value, char delimeter);
     void static parseString(string input, vector<string>* &tokens, char delimeter);
@@ -43,5 +48,5 @@ public:
     int static ipToInt(string ip);
 
 };
-
+}
 #endif /* UTIL_H_ */
