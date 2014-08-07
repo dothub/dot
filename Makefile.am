@@ -1,5 +1,7 @@
 noinst_PROGRAMS = dot
-dot_SOURCES =src/console/console.cpp\
+dot_SOURCES = src/global/global.cpp\
+src/executor/command_executor.cpp\
+src/console/console.cpp\
 src/dotcore.cpp\
 src/dot.cpp
 

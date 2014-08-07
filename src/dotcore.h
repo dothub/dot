@@ -3,8 +3,11 @@
 
 #include "console/console.h"
 #include "global/global.h"
+#include <log4cxx/logger.h>
 
+using namespace log4cxx;
 using namespace console;
+
 
 namespace core
 {
@@ -12,14 +15,15 @@ namespace core
 class DOTCore
 {   
  
-   bool debugMode;
+    static LoggerPtr logger; 
    
-   static Console* cons;
+    static Console cons;
    
 public:
-        DOTCore(bool debug=false);
+        DOTCore();
         static void signalHandler(int signal);
-        void setDebug(bool mode);
+        void init();
+        
 };
 
 }

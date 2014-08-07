@@ -3,6 +3,7 @@ prev_src/
 resources/keys/*
 resources/images/*
 *.o
+*.log
 .deps/
 autom4te.cache/
 dot

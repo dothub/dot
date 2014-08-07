@@ -26,22 +26,35 @@
 
 #include <signal.h>
 #include <cstring>
+#include <log4cxx/logger.h>
+#include <log4cxx/xml/domconfigurator.h>
+
 #include "dotcore.h"
+#include "global/global.h"
 
-
+using namespace log4cxx;
+using namespace log4cxx::xml;
+using namespace log4cxx::helpers;
 using namespace core;
-
+using namespace global;
 
 int main(int argc, char* argv[])
 {
     
+   //initiate logging
+    
+   DOMConfigurator::configure("configurations/log/logConfig.xml");
+
+   LoggerPtr rootLogger = Logger::getRootLogger();
+
+   if(argc == 2 && strcmp(argv[1], "-d") == 0)
+       rootLogger->setLevel(Level::getDebug());
+
     DOTCore core;
-    
-    if(argc == 2 && strcmp(argv[1], "-d") == 0)
-        core.setDebug(true);
-    
+        
     signal(SIGINT, core.signalHandler);
 
-
+    core.init();
+   
     return 0;
 }
