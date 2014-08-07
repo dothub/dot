@@ -3,3 +3,6 @@ prev_src/
 resources/keys
 resources/images
 *.o
+*.deps*
+autom4te.cache/*
+dot

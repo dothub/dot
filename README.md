@@ -10,7 +10,7 @@ Please follow the instructons on <a href="http://www.dothub.org" target="_blank"
 Team
 ====================================================================================================================
 <ul>
-	<li>Arup Raton Roy</li>
+	<li><a href="http://www.royarup.com" target="_blank">Arup Raton Roy</a></li>
 	<li><a href="http://www.cs.uwaterloo.ca/~mfbari" target="_blank">Md. Faizul Bari</a></li>
 	<li><a href="https://cs.uwaterloo.ca/~mfzhani/" target="_blank">Mohamed Faten Zhani</a></li>
 	<li><a href="https://cs.uwaterloo.ca/~r5ahmed" target="_blank">Reaz Ahmed</a></li>
