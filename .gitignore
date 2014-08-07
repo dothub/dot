@@ -5,5 +5,5 @@ resources/images/*
 *.o
 **/.deps/
 autom4te.cache/
-./dot
+dot
 .dirstamp
