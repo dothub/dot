@@ -1,8 +1,9 @@
 test/
 prev_src/
-resources/keys
-resources/images
+resources/keys/*
+resources/images/*
 *.o
-.deps/
-autom4te.cache/*
-dot
+**/.deps/
+autom4te.cache/
+./dot
+.dirstamp
