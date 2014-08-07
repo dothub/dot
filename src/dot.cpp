@@ -28,15 +28,14 @@
 #include <cstring>
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
-
-#include "dotcore.h"
-#include "global/global.h"
+#include "console/console.h"
+#include "core/dotcore.h"
 
 using namespace log4cxx;
 using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
+using namespace console;
 using namespace core;
-using namespace global;
 
 int main(int argc, char* argv[])
 {
@@ -50,11 +49,11 @@ int main(int argc, char* argv[])
    if(argc == 2 && strcmp(argv[1], "-d") == 0)
        rootLogger->setLevel(Level::getDebug());
 
-    DOTCore core;
         
-    signal(SIGINT, core.signalHandler);
+    signal(SIGINT, Console::signalHandler);
 
-    core.init();
+    DOTCore::init();
+    Console::start();
    
     return 0;
 }

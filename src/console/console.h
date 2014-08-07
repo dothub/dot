@@ -2,18 +2,21 @@
 #define CONSOLE_H
 
 #include <log4cxx/logger.h>
+#include "../core/dotcore.h"
+#include "../global/global.h"
+
 using namespace log4cxx;
 namespace console
 {
 
 class Console
 {
-
     static LoggerPtr logger;
 public:
     Console();
-    void start();
-    void stop();
+    static void signalHandler(int signal);
+    static void start();
+    static void stop();
     
 };
 }

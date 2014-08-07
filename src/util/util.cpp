@@ -34,7 +34,12 @@ using namespace util;
 
 LoggerPtr Util::logger = Logger::getLogger("Util");
 
-void Util::parseKeyValue(string input, string& key, string& value,
+bool Util::onlySpaces(string& input) {
+
+   return input.find_first_not_of(" \t\n\v\f\r") == input.npos;
+}
+
+void Util::parseKeyValue(string& input, string& key, string& value,
         char delimeter) {
 
 
@@ -60,16 +65,16 @@ string Util::getPathName(const string& strPath)
         return strPath.substr(0, (iLastSeparator = strPath.find_last_of("/")) == string::npos ? 0: iLastSeparator+1);
 }
 
-void Util::parseString(string input, vector<string>* &tokens, char delimeter) {
+void Util::parseString(string& input, vector<string>& tokens, char delimeter) {
 
-    tokens = new vector<string>();
+    //tokens = new vector<string>();
 
     stringstream tokenizer(input);
 
     string eachPart;
     while(getline(tokenizer, eachPart, delimeter))
     {
-        tokens->push_back(eachPart);
+        tokens.push_back(eachPart);
     }
 
 }
@@ -138,13 +143,13 @@ string Util::intToIP(int input)
 int Util::ipToInt(string ip)
 {
 
-    vector<string>* tokens;
+    vector<string> tokens;
     Util::parseString(ip, tokens, '.');
 
-    int value = (int)(pow(256, 3) * atoi(tokens->at(0).c_str())
-                + pow(256, 2) * atoi(tokens->at(1).c_str())
-                + 256 * atoi(tokens->at(2).c_str())
-                + atoi(tokens->at(3).c_str())
+    int value = (int)(pow(256, 3) * atoi(tokens.at(0).c_str())
+                + pow(256, 2) * atoi(tokens.at(1).c_str())
+                + 256 * atoi(tokens.at(2).c_str())
+                + atoi(tokens.at(3).c_str())
                 );
 
 

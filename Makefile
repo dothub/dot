@@ -52,8 +52,8 @@ PROGRAMS = $(noinst_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am_dot_OBJECTS = src/util/util.$(OBJEXT) src/global/global.$(OBJEXT) \
 	src/executor/command_executor.$(OBJEXT) \
-	src/console/console.$(OBJEXT) src/dotcore.$(OBJEXT) \
-	src/dot.$(OBJEXT)
+	src/console/console.$(OBJEXT) src/infra/infra.$(OBJEXT) \
+	src/core/dotcore.$(OBJEXT) src/dot.$(OBJEXT)
 dot_OBJECTS = $(am_dot_OBJECTS)
 dot_DEPENDENCIES = /usr/lib/liblog4cxx.so
 DEFAULT_INCLUDES = -I. -I$(top_builddir)/src/build_config
@@ -184,7 +184,8 @@ dot_SOURCES = src/util/util.cpp\
 src/global/global.cpp\
 src/executor/command_executor.cpp\
 src/console/console.cpp\
-src/dotcore.cpp\
+ src/infra/infra.cpp\
+src/core/dotcore.cpp\
 src/dot.cpp
 
 dot_LDADD = /usr/lib/liblog4cxx.so
@@ -278,14 +279,28 @@ src/console/$(DEPDIR)/$(am__dirstamp):
 	@: > src/console/$(DEPDIR)/$(am__dirstamp)
 src/console/console.$(OBJEXT): src/console/$(am__dirstamp) \
 	src/console/$(DEPDIR)/$(am__dirstamp)
+src/infra/$(am__dirstamp):
+	@$(MKDIR_P) src/infra
+	@: > src/infra/$(am__dirstamp)
+src/infra/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) src/infra/$(DEPDIR)
+	@: > src/infra/$(DEPDIR)/$(am__dirstamp)
+src/infra/infra.$(OBJEXT): src/infra/$(am__dirstamp) \
+	src/infra/$(DEPDIR)/$(am__dirstamp)
+src/core/$(am__dirstamp):
+	@$(MKDIR_P) src/core
+	@: > src/core/$(am__dirstamp)
+src/core/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) src/core/$(DEPDIR)
+	@: > src/core/$(DEPDIR)/$(am__dirstamp)
+src/core/dotcore.$(OBJEXT): src/core/$(am__dirstamp) \
+	src/core/$(DEPDIR)/$(am__dirstamp)
 src/$(am__dirstamp):
 	@$(MKDIR_P) src
 	@: > src/$(am__dirstamp)
 src/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) src/$(DEPDIR)
 	@: > src/$(DEPDIR)/$(am__dirstamp)
-src/dotcore.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
 src/dot.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 dot$(EXEEXT): $(dot_OBJECTS) $(dot_DEPENDENCIES) $(EXTRA_dot_DEPENDENCIES) 
 	@rm -f dot$(EXEEXT)
@@ -294,20 +309,22 @@ dot$(EXEEXT): $(dot_OBJECTS) $(dot_DEPENDENCIES) $(EXTRA_dot_DEPENDENCIES)
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 	-rm -f src/console/console.$(OBJEXT)
+	-rm -f src/core/dotcore.$(OBJEXT)
 	-rm -f src/dot.$(OBJEXT)
-	-rm -f src/dotcore.$(OBJEXT)
 	-rm -f src/executor/command_executor.$(OBJEXT)
 	-rm -f src/global/global.$(OBJEXT)
+	-rm -f src/infra/infra.$(OBJEXT)
 	-rm -f src/util/util.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
 
 include src/$(DEPDIR)/dot.Po
-include src/$(DEPDIR)/dotcore.Po
 include src/console/$(DEPDIR)/console.Po
+include src/core/$(DEPDIR)/dotcore.Po
 include src/executor/$(DEPDIR)/command_executor.Po
 include src/global/$(DEPDIR)/global.Po
+include src/infra/$(DEPDIR)/infra.Po
 include src/util/$(DEPDIR)/util.Po
 
 .cpp.o:
@@ -574,10 +591,14 @@ distclean-generic:
 	-rm -f src/$(am__dirstamp)
 	-rm -f src/console/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/console/$(am__dirstamp)
+	-rm -f src/core/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/core/$(am__dirstamp)
 	-rm -f src/executor/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/executor/$(am__dirstamp)
 	-rm -f src/global/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/global/$(am__dirstamp)
+	-rm -f src/infra/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/infra/$(am__dirstamp)
 	-rm -f src/util/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/util/$(am__dirstamp)
 
@@ -590,7 +611,7 @@ clean-am: clean-generic clean-noinstPROGRAMS mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf src/$(DEPDIR) src/console/$(DEPDIR) src/executor/$(DEPDIR) src/global/$(DEPDIR) src/util/$(DEPDIR)
+	-rm -rf src/$(DEPDIR) src/console/$(DEPDIR) src/core/$(DEPDIR) src/executor/$(DEPDIR) src/global/$(DEPDIR) src/infra/$(DEPDIR) src/util/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-tags
@@ -638,7 +659,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf src/$(DEPDIR) src/console/$(DEPDIR) src/executor/$(DEPDIR) src/global/$(DEPDIR) src/util/$(DEPDIR)
+	-rm -rf src/$(DEPDIR) src/console/$(DEPDIR) src/core/$(DEPDIR) src/executor/$(DEPDIR) src/global/$(DEPDIR) src/infra/$(DEPDIR) src/util/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

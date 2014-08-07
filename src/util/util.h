@@ -38,14 +38,15 @@ class Util {
     static LoggerPtr logger;
 
 public:
-    void static parseKeyValue(string input, string& key, string& value, char delimeter);
-    void static parseString(string input, vector<string>* &tokens, char delimeter);
-    string static intToHexString(unsigned long input, unsigned int width=0);
-    string static getFileName(const string& strPath);
-    string static getPathName(const string& strPath);
-    string static intToMac(unsigned long input);
-    string static intToIP(int input);
-    int static ipToInt(string ip);
+    static bool onlySpaces(string& input); 
+    static void  parseKeyValue(string& input, string& key, string& value, char delimeter);
+    static void parseString(string& input, vector<string>& tokens, char delimeter);
+    static string intToHexString(unsigned long input, unsigned int width=0);
+    static string getFileName(const string& strPath);
+    static string getPathName(const string& strPath);
+    static string intToMac(unsigned long input);
+    static string intToIP(int input);
+    static int ipToInt(string ip);
 
 };
 }
