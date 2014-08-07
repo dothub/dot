@@ -34,8 +34,12 @@
 using namespace std;
 using namespace executor;
 
+LoggerPtr CommandExecutor::logger = Logger::getLogger("CommandExecutor");
+
 string CommandExecutor::execute(string command)
 {
+    LOG4CXX_DEBUG(logger, "Command: " << command);
+
     FILE * pipe = popen(command.c_str(), "r");
 
     if(!pipe)
@@ -55,6 +59,9 @@ string CommandExecutor::execute(string command)
     //removing the newline
     if(result.size() > 0)  
         result.resize(result.size() - 1); 
+    
+    LOG4CXX_DEBUG(logger, "Result: "<< result);
+
     return result; 
 }
 

@@ -27,9 +27,10 @@
 #ifndef COMMAND_EXECUTOR_H
 #define COMMAND_EXECUTOR_H
 
-
 #include <string>
+#include <log4cxx/logger.h>
 
+using namespace log4cxx;
 using namespace std;
 
 namespace executor
@@ -37,6 +38,7 @@ namespace executor
 
 class CommandExecutor
 {
+    static LoggerPtr logger; 
 public: 
     CommandExecutor();
     static string execute(string command);

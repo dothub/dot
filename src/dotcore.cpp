@@ -22,12 +22,13 @@ LoggerPtr DOTCore::logger = Logger::getLogger("DOTCore");
 
 DOTCore:: DOTCore()
 {
-    LOG4CXX_INFO(logger, "In constructor");
+    LOG4CXX_DEBUG(logger, "In constructor");
 }
 
 
 void DOTCore::signalHandler(int signal)
 {
+    LOG4CXX_INFO(logger, "Started signal handling");
 
     cons.stop();
 }
@@ -36,10 +37,13 @@ void DOTCore::signalHandler(int signal)
 void DOTCore::init()
 {   
    
-    LOG4CXX_INFO(logger, "Core Initiated");
+    LOG4CXX_INFO(logger, "Core Initiation Started");
           
     Global::dotRoot = CommandExecutor::executeLocal("pwd");
-    LOG4CXX_DEBUG(logger, Global::dotRoot);
+    LOG4CXX_DEBUG(logger, "Dot Root: " << Global::dotRoot);
+
+
+    LOG4CXX_INFO(logger, "Core initiation finised");
     
 }
 

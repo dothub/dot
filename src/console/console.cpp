@@ -1,12 +1,9 @@
 #include "console.h"
-#include <iostream>
-
-
-using namespace std;
 
 using namespace console;
 
 
+LoggerPtr Console::logger = Logger::getLogger("Console");
 
 Console::Console()
 {
@@ -21,7 +18,7 @@ void Console::start()
 
 void Console::stop()
 {
-    cout << "Stopping" << endl;    
+    LOG4CXX_INFO(logger, "Stopping");    
 }
 
 
