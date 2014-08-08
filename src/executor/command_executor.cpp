@@ -67,7 +67,11 @@ string CommandExecutor::execute(string command)
 
 void CommandExecutor::executeBackground(string command)
 {
-    system(command.c_str());
+
+    ostringstream toExecute;
+    toExecute << command << " &";
+
+    system(toExecute.str().c_str());
 }
 string CommandExecutor::executeLocal(string command) {
 
@@ -85,7 +89,7 @@ string CommandExecutor::executeScriptLocal(string filePath, string fileName, str
 void CommandExecutor::executeScriptBackground(string filePath, string fileName, string parameters) {
 
     ostringstream toExecute;
-    toExecute << filePath << fileName << " " << parameters << "&";
+    toExecute << filePath << fileName << " " << parameters;
 
    executeBackground(toExecute.str());
 }
