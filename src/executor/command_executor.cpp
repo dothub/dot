@@ -65,7 +65,10 @@ string CommandExecutor::execute(string command)
     return result; 
 }
 
-
+void CommandExecutor::executeBackground(string command)
+{
+    system(command.c_str());
+}
 string CommandExecutor::executeLocal(string command) {
 
     return execute(command);
@@ -77,6 +80,14 @@ string CommandExecutor::executeScriptLocal(string filePath, string fileName, str
     toExecute << filePath << fileName << " " << parameters;
 
     return execute(toExecute.str());
+}
+
+void CommandExecutor::executeScriptBackground(string filePath, string fileName, string parameters) {
+
+    ostringstream toExecute;
+    toExecute << filePath << fileName << " " << parameters << "&";
+
+   executeBackground(toExecute.str());
 }
 
 string CommandExecutor::executeRemote(string machine, string command, 

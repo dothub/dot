@@ -3,7 +3,7 @@ dot_SOURCES = src/util/util.cpp\
 src/global/global.cpp\
 src/executor/command_executor.cpp\
 src/console/console.cpp\
- src/infra/infra.cpp\
+src/infra/infra.cpp\
 src/core/dotcore.cpp\
 src/dot.cpp
 

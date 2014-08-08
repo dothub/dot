@@ -34,6 +34,16 @@ using namespace util;
 
 LoggerPtr Util::logger = Logger::getLogger("Util");
 
+void Util::bipartiateString(string &input, vector<string>& tokens, char delimeter)
+{
+    string left = input.substr(0, input.find_first_of(delimeter));
+    string right = input.substr(input.find_first_of(delimeter)+1);
+
+    tokens.push_back(left);
+    tokens.push_back(right);
+}
+    
+
 bool Util::onlySpaces(string& input) {
 
    return input.find_first_not_of(" \t\n\v\f\r") == input.npos;
@@ -56,13 +66,15 @@ void Util::parseKeyValue(string& input, string& key, string& value,
 string Util::getFileName(const string& strPath)
 {
         size_t iLastSeparator = 0;
-        return strPath.substr((iLastSeparator = strPath.find_last_of("/")) != string::npos ? iLastSeparator + 1 : 0, strPath.size());
+        return strPath.substr((iLastSeparator = strPath.find_last_of("/")) 
+                    != string::npos ? iLastSeparator + 1 : 0, strPath.size());
 }
 
 string Util::getPathName(const string& strPath)
 {
         size_t iLastSeparator = 0;
-        return strPath.substr(0, (iLastSeparator = strPath.find_last_of("/")) == string::npos ? 0: iLastSeparator+1);
+        return strPath.substr(0, (iLastSeparator = strPath.find_last_of("/")) 
+               == string::npos ? 0: iLastSeparator+1);
 }
 
 void Util::parseString(string& input, vector<string>& tokens, char delimeter) {

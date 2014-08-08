@@ -41,9 +41,11 @@ class CommandExecutor
     static LoggerPtr logger; 
 public: 
     CommandExecutor();
+    static void executeBackground(string command);
     static string execute(string command);
     static string executeLocal(string command);
-    static string executeScriptLocal(string filePath, string fileName, string parameters);
+    static string executeScriptLocal(string filePath, string fileName, string parameters="");
+    static void executeScriptBackground(string filePath, string fileName, string parameters="");
     static string executeRemote(string machine, string command, string user, string key="");
     static string executeScriptRemote(string machine, string filePath, string fileName, string parameters, string user, string key="");
     static void copyUsingLocal(string sourceMachine, string destinationMachine, string sourcePath, string destinationPath,

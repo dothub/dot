@@ -39,6 +39,7 @@ class Util {
 
 public:
     static bool onlySpaces(string& input); 
+    static void bipartiateString(string &input, vector<string>& tokens, char delimeter);
     static void  parseKeyValue(string& input, string& key, string& value, char delimeter);
     static void parseString(string& input, vector<string>& tokens, char delimeter);
     static string intToHexString(unsigned long input, unsigned int width=0);
