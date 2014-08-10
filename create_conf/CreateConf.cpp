@@ -60,7 +60,9 @@ void processConfFile(string fileName)
     string hostConfigurationFileName = "HostInfo_";
     string hypervisorConfFileName = "Hypervisor_";
     string credentialFileName = "CredentialFile_";
-
+    string imageFileName = "ImageFile_";
+    string otherConfigFileName = "OtherConfigFile_";
+   
     ifstream fin(fileName.c_str());
    
     ofstream fout_DefaultConf;
@@ -72,8 +74,8 @@ void processConfFile(string fileName)
     ofstream fout_Host;
     ofstream fout_Hypervisor;
     ofstream fout_Credential;
- 
-    
+    ofstream fout_Image;
+    ofstream fout_Other; 
 
     vector<string> physicalMachines;
     map<pair<string, string>, double> physicalMachineDelayMap;
@@ -123,7 +125,8 @@ void processConfFile(string fileName)
                 string hostConfigurationFileNameWithPath =  storingPath + hostConfigurationFileName + emulationName;
                 string hypervisorConfFileNameWithPath =  storingPath + hypervisorConfFileName + emulationName;
                 string credentialFileNameWithPath = storingPath + credentialFileName + emulationName;
-                               
+                string imageFileNameWithPath = storingPath + imageFileName + emulationName;
+                string otherConfigFileNameWithPath = storingPath + otherConfigFileName + emulationName;              
 
                 fout_DefaultConf.open(defaultConfFileNameWithPath.c_str(), ofstream::out );
                 fout_PhysicalTopo.open(physicalTopologyFileNameWithPath.c_str(), ofstream::out);
@@ -134,12 +137,16 @@ void processConfFile(string fileName)
                 fout_Host.open(hostConfigurationFileNameWithPath.c_str(), ofstream::out);
                 fout_Hypervisor.open(hypervisorConfFileNameWithPath.c_str(), ofstream::out);
                 fout_Credential.open(credentialFileNameWithPath.c_str(), ofstream::out);
+                fout_Image.open(imageFileNameWithPath.c_str(), ofstream::out);
+                fout_Other.open(otherConfigFileNameWithPath.c_str(), ofstream::out);
 
                 if( !fout_DefaultConf.is_open() || !fout_PhysicalTopo.is_open()
                     || !fout_PhysicalTopoDelay.is_open() || !fout_LogicalTopo.is_open()
                     || !fout_Ctrl.is_open() || !fout_Sw2Ctrl.is_open()
                     || !fout_Host.is_open() || !fout_Hypervisor.is_open()
                     || !fout_Credential.is_open()
+                    || !fout_Image.is_open()
+                    || !fout_Other.is_open()
                     )       
                 {
                     cout <<  "Any one of the otuput file cannot be opened" << endl;

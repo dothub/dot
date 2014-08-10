@@ -58,9 +58,6 @@ public:
     void deployTunnel();
     void assignPortNumbers();
     void assignStaticRules();
-    void createLogicalTopology();
-    void createIPMACForController();
-    void startController();
 
 };
 

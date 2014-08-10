@@ -129,6 +129,12 @@ public:
     virtual void assignQoSToPort(Switch* theSwitch, 
             string portName, unsigned long rate, unsigned long burst=0)=0; 
     
+    virtual void stopL2Flood(Switch* theSwitch)=0;
+    
+    virtual void setOFVersion(Switch* theSwitch, string version)=0;
+    
+    virtual void assignIPAddress(Switch* theSwitch)=0;
+
     /**
     * Destructor of the class.
     */

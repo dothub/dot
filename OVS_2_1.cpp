@@ -18,13 +18,13 @@
 */
 
 /*
- * OVS_1_10.cpp
+ * OVS_2_1.cpp
  *
  *  Created on: 2013-08-28
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#include "OVS_1_10.h"
+#include "OVS_2_1.h"
 #include <sstream>
 #include <map>
 #include <fstream>
@@ -34,20 +34,20 @@
 
 using namespace std;
 
-OVS_1_10::OVS_1_10(CommandExecutor* commandExec)
+OVS_2_1::OVS_2_1(CommandExecutor* commandExec)
     :AbstractSwitch(commandExec)
 {
     // TODO Auto-generated constructor stub
-    this->selfLogger = Global::loggerFactory->getLogger("OVS_1_10");
+    this->selfLogger = Global::loggerFactory->getLogger("OVS_2_1");
     LOG4CXX_DEBUG((*selfLogger), "Constructor is called");
 }
 
 
-OVS_1_10::~OVS_1_10() {
+OVS_2_1::~OVS_2_1() {
     // TODO Auto-generated destructor stub
 }
 
-void OVS_1_10::clearSwitch(Switch* theSwitch) {
+void OVS_2_1::clearSwitch(Switch* theSwitch) {
 
     ostringstream command;
     command << "sudo ovs-vsctl del-br " << theSwitch->getName();
@@ -56,7 +56,7 @@ void OVS_1_10::clearSwitch(Switch* theSwitch) {
 
 }
 
-void OVS_1_10::runSwitch(Switch* theSwitch) {
+void OVS_2_1::runSwitch(Switch* theSwitch) {
 
 
     ostringstream fileName;
@@ -71,8 +71,6 @@ void OVS_1_10::runSwitch(Switch* theSwitch) {
             fout << "sudo ovs-vsctl set-controller " << theSwitch->getName()
                         << " tcp:" << theSwitch->getIPofController() 
                         << ":" << theSwitch->getPortofController() << endl;
-            fout << "sudo ovs-vsctl set-fail-mode " 
-                << theSwitch->getName() << " secure" << endl;
         }
         fout << "sudo ovs-vsctl set bridge " 
              << theSwitch->getName() << " other-config:datapath-id=" 
@@ -98,7 +96,7 @@ void OVS_1_10::runSwitch(Switch* theSwitch) {
 
 }
 
-void OVS_1_10::attachPort(Switch* theSwitch, Interface* newInterface) {
+void OVS_2_1::attachPort(Switch* theSwitch, Interface* newInterface) {
 
     //hypervisor will create the tap interface
     ostringstream command;
@@ -118,14 +116,23 @@ void OVS_1_10::attachPort(Switch* theSwitch, Interface* newInterface) {
 
 }
 
-string OVS_1_10::createClearAllRules(Switch* theSwitch) {
+string OVS_2_1::createClearAllRules(Switch* theSwitch) {
     ostringstream command;
     command << "sudo ovs-ofctl del-flows " << theSwitch->getName();
 
     return command.str();
 }
 
-string OVS_1_10::createStaticTunnelRule(Switch* theSwitch,
+void OVS_2_1::stopL2Flood(Switch* theSwitch){
+
+    ostringstream command;
+    
+    command << "sudo ovs-vsctl set-fail-mode " << theSwitch->getName() << " secure";
+
+    this->commandExec->executeRemote(theSwitch->getIPOfMachine(), command.str());
+}
+
+string OVS_2_1::createStaticTunnelRule(Switch* theSwitch,
         unsigned int tunnel_id, unsigned int input_port,
         unsigned int output_port) {
 
@@ -138,7 +145,7 @@ string OVS_1_10::createStaticTunnelRule(Switch* theSwitch,
             << tunnel_id << ",actions=output:" << input_port;
     return command.str();
 }
-void OVS_1_10::assignPortNumber(Switch* theSwitch, Interface* newInterface) {
+void OVS_2_1::assignPortNumber(Switch* theSwitch, Interface* newInterface) {
 
     ostringstream command;
     command << "sudo ovs-ofctl show " << theSwitch->getName() 
@@ -151,7 +158,7 @@ void OVS_1_10::assignPortNumber(Switch* theSwitch, Interface* newInterface) {
     strStream >> newInterface->port;
 
 }
-void OVS_1_10::assignStaticTunnelRule(Switch* theSwitch,
+void OVS_2_1::assignStaticTunnelRule(Switch* theSwitch,
         list<pair<unsigned int, pair<unsigned int, unsigned int> > > rules) {
 
         ostringstream fileName;
@@ -186,13 +193,13 @@ void OVS_1_10::assignStaticTunnelRule(Switch* theSwitch,
 
 
 }
-void OVS_1_10::clearAllRules(Switch* theSwitch) {
+void OVS_2_1::clearAllRules(Switch* theSwitch) {
 
     string command = this->createClearAllRules(theSwitch);
     this->commandExec->executeRemote(theSwitch->getIPOfMachine(), command);
 }
 
-void OVS_1_10::assignQoSToPort(Switch* theSwitch, 
+void OVS_2_1::assignQoSToPort(Switch* theSwitch, 
     string portName, unsigned long rate, unsigned long burst)
 {
     ostringstream command;
@@ -220,5 +227,27 @@ void OVS_1_10::assignQoSToPort(Switch* theSwitch,
     }
 
 }
+void OVS_2_1::setOFVersion(Switch * theSwitch, string version)
+{
+    ostringstream command;
 
+    command << "ovs-vsctl set bridge " << theSwitch->getName() << " protocols=OpenFlow";
+ 
+    //removing the .   
+    command << version[0] << version[2];
 
+    this->commandExec->executeRemote(theSwitch->getIPOfMachine(), command.str());
+
+}
+
+void OVS_2_1::assignIPAddress(Switch* theSwitch)
+{
+    ostringstream command;
+    
+    command << "ifconfig " << theSwitch->getName() << " 10.254."
+        << (128+theSwitch->getID()/256) << "." << theSwitch->getID()%256
+        << "/16";
+    
+     this->commandExec->executeRemote(theSwitch->getIPOfMachine(), command.str());
+  
+}

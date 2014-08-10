@@ -52,12 +52,6 @@ DeployDOT::DeployDOT(DOT_Topology* dotTopology, AbstractSwitch*  abstractSwitch,
     cout << "assigned port number" <<endl;
     assignStaticRules();
     cout << "static rule generated" <<endl;
-    //createLogicalTopology();
-    //cout << "topology for controller" <<endl;
-    //createIPMACForController();
-    //cout << "ipmac file for controller" <<endl;
-    //startController();
-    //cout << "Controller started" <<endl;
 }
 
 DeployDOT::~DeployDOT() {
@@ -83,6 +77,7 @@ void DeployDOT::deploySwitch() {
         this->abstractSwitch->clearSwitch(iter->second);
         this->abstractSwitch->runSwitch(iter->second);
         this->abstractSwitch->clearAllRules(iter->second);
+        this->abstractSwitch->stopL2Flood(iter->second);
     }
 
 
@@ -214,66 +209,4 @@ void DeployDOT::assignStaticRules() {
     }
 
 }
-
-void DeployDOT::createLogicalTopology() {
-
-    ofstream fout("links.txt");
-
-    if(fout.is_open())
-    {
-        //cout << "For internal edges" << endl;
-        for(map<unsigned long, Link*>::iterator iter = this->dotTopology->linkMap.begin();
-                iter != this->dotTopology->linkMap.end(); iter ++)
-        {
-            if(iter->second->getType() != CUT_EDGE)
-            {
-            fout << iter->second->getInterface1()->getSwitch()->getDPID() << " " << iter->second->getInterface1()->port
-                    << " " << iter->second->getInterface2()->getSwitch()->getDPID() << " " << iter->second->getInterface2()->port << endl;
-            }
-        }
-
-        //cout << "For cut edges" << endl;
-        for(vector<pair<CutEdge*, CutEdge*> >::iterator iter = this->dotTopology->cutEdgesPairVector.begin();
-                     iter != this->dotTopology->cutEdgesPairVector.end(); iter++)
-        {
-            fout << iter->first->getInterface1()->getSwitch()->getDPID() << " " << iter->first->getInterface1()->port
-                                << " " << iter->second->getInterface1()->getSwitch()->getDPID() << " " << iter->second->getInterface1()->port << endl;
-        }
-
-        fout.close();
-        this->commandExecutor->executeLocal("cp links.txt ~/floodlight/links.txt");
-    }
-    else
-        cout << "~/floodlight/links.txt cannot be created" << endl;
-}
-
-
-
-void DeployDOT::createIPMACForController() {
-
-    ofstream fout("ipMac.txt");
-
-    if(fout.is_open())
-    {
-        for(unsigned long i = 0; i < this->dotTopology->vms->getNumberOfVMs(); i++)
-        {
-            fout << this->dotTopology->vms->getIPAddress(i) << " " << this->dotTopology->vms->getMacAddress(i) << endl;
-        }
-        fout.close();
-        this->commandExecutor->executeLocal("cp ipMac.txt ~/floodlight/ipMac.txt");
-    }
-    else
-        cout << "~/floodlight/ipMac.txt cannot be created" << endl;
-
-
-}
-
-void DeployDOT::startController() {
-
-
-    this->commandExecutor->executeLocal("sudo kill `sudo lsof -t -i:6633` &>/dev/null");
-    this->commandExecutor->executeLocal("sudo java -jar ~/floodlight/target/floodlight.jar " 
-        "-cf ~/floodlight/src/main/resources/floodlightdefault.properties 1> /dev/null 2>&1 &");
-}
-
 

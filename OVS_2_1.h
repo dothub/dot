@@ -18,14 +18,14 @@
 */
 
 /*
- * OVS_1_10.h
+ * OVS_2_1.h
  *
  *  Created on: 2013-08-28
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#ifndef OVS_1_10_H_
-#define OVS_1_10_H_
+#ifndef OVS_2_1_H_
+#define OVS_2_1_H_
 #include "Global.h"
 #include "AbstractSwitch.h"
 #include <log4cxx/logger.h>
@@ -35,7 +35,7 @@ using namespace log4cxx;
 using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
 
-class OVS_1_10: public AbstractSwitch {
+class OVS_2_1: public AbstractSwitch {
     /**
     * The event logger of this class.
     */
@@ -65,11 +65,11 @@ public:
     * Constructor of the class.
     * @param commandExec - Pointer to the global object of CommandExecutor.
     */
-    OVS_1_10(CommandExecutor* commandExec);
+    OVS_2_1(CommandExecutor* commandExec);
     /**
     * Destructor of the class.
     */
-    virtual ~OVS_1_10();
+    virtual ~OVS_2_1();
     /**
     * This function deletes the switch.
     * @param theSwitch - Pointer to the switch
@@ -115,6 +115,10 @@ public:
     */
     void assignQoSToPort(Switch* theSwitch, string portName, 
             unsigned long rate, unsigned long burst=0);
+
+    void assignIPAddress(Switch* theSwitch); 
+    void stopL2Flood(Switch* theSwitch);
+    void setOFVersion(Switch* theSwitch, string version);
 };
 
-#endif /* OVS_1_10_H_ */
+#endif /* OVS_2_1_H_ */

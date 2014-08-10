@@ -38,7 +38,7 @@
 #include "KVMWithLibvirt.h"
 #include "GuaranteedEmbedding.h"
 #include "DOTTopology.h"
-#include "OVS_1_10.h"
+#include "OVS_2_1.h"
 #include "DeployDOT.h"
 #include "VLink.h"
 
@@ -99,7 +99,7 @@ bool prepare(string globalConfFile)
         
     LOG4CXX_INFO((*selfLogger), "Instantiating the deployment specific devices");
 
-    Global::abstractSwitch = new OVS_1_10(Global::commandExecutor);
+    Global::abstractSwitch = new OVS_2_1(Global::commandExecutor);
     Global::abstractLink = new VLink(Global::commandExecutor);
     Global::abstractVM = new KVMWithLibvirt(globalConf, Global::vms, 
                    Global::commandExecutor, Global::logicalTopology, Global::mapping);
