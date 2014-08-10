@@ -43,3 +43,5 @@ AbstractVM* Global::abstractVM = NULL;
 bool Global::debugMode = false;
 string Global::logConfigFile = "./etc/log/logConfig.xml";
 LoggerFactory* Global::loggerFactory = NULL;
+ImageRepo* Global::imageRepo = NULL;
+OtherConfig* Global::otherConfig = NULL;

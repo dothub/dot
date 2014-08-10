@@ -1,0 +1,3 @@
+2
+i1 tc ~/images/base_tc.qcow2
+i2 ubuntu ~/images/base_lubuntu_mini.qcow2

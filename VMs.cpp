@@ -56,7 +56,9 @@ void VMs::populateVMs(string fileName) {
             string host_str, switch_str, mac, ip;
             unsigned int cpu;
             unsigned long bandwidth;
-            fin >> host_str >> switch_str >> mac >> ip >> cpu >> bandwidth;
+            unsigned short memory;
+            string image;
+            fin >> host_str >> switch_str >> mac >> ip >> cpu >> bandwidth >> memory >> image;
 
             HostAttribute newHost;
             newHost.host_id = atol(host_str.substr(1).c_str())-1;
@@ -65,6 +67,8 @@ void VMs::populateVMs(string fileName) {
             newHost.ip = ip;
             newHost.cpu = cpu;
             newHost.interfaceBandwidth = bandwidth;
+            newHost.memory = memory;
+            newHost.image_id = atoi(image.substr(1).c_str())-1;
             newHost.interfaceName = "";
 
             this->hostIdVector.push_back(newHost);
@@ -76,6 +80,30 @@ void VMs::populateVMs(string fileName) {
     else
         cout << "Unable to open host file: " << fileName << endl;
 }
+unsigned short VMs::getMemory(unsigned long hostId) {
+
+    if(hostId < 0 || hostId >= this->hostIdVector.size())
+    {
+        cout << "Invalid Host ID " << hostId << endl;
+        return 0;
+    }
+
+    return this->hostIdVector[hostId].memory;
+
+}
+
+unsigned int VMs::getImageId(unsigned long hostId) {
+ 
+    if(hostId < 0 || hostId >= this->hostIdVector.size())
+    { 
+        cout << "Invalid Host ID " << hostId << endl;
+        return 0; 
+    }
+ 
+    return this->hostIdVector[hostId].image_id; 
+ 
+}
+
 
 unsigned long VMs::getSwitch(unsigned long hostId) {
 

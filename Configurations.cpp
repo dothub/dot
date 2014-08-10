@@ -65,6 +65,8 @@ void Configurations::loadConfiguration() {
     hypervisorConfigurationFile="lib-virt_Configuration";
     hostImage="~/Core-current.iso";
     delayBetweenPhysicalMachine = false;
+    imageConfigFile = "ImageFile";
+    otherConfigFile = "Other";
 
     map<string, string> eachConfiguration;
 
@@ -138,6 +140,15 @@ void Configurations::loadConfiguration() {
         if(eachConfiguration.find("PhysicalDelayFile") != eachConfiguration.end())
             physicalMachineDelayFile = eachConfiguration["PhysicalDelayFile"];
     }
+    
+    if(eachConfiguration.find("Images") != eachConfiguration.end())
+        imageConfigFile = eachConfiguration["Images"];
+
+    if(eachConfiguration.find("OtherConfig") != eachConfiguration.end())
+        otherConfigFile = eachConfiguration["OtherConfig"]; 
+
+
+    
 
 }
 

@@ -51,6 +51,9 @@ class VMs {
         unsigned int cpu;
         unsigned long interfaceBandwidth;
         string interfaceName;
+        
+        unsigned short memory;
+        unsigned int image_id;
     };
     static VMs* vms;
     VMs();
@@ -71,6 +74,8 @@ public:
     unsigned long getBandwidth(unsigned long hostId);
     string getInterfaceName(unsigned long hostId);
     void setInterfaceName(unsigned long hostId, string name);
+    unsigned short getMemory(unsigned long hostId);
+    unsigned int getImageId(unsigned long hostId);
 
     virtual ~VMs();
 };

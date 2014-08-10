@@ -18,16 +18,18 @@
 */
 
 /*
- * Configurations.h
+ * Image.h
  *
- *  Created on: 2013-08-06
+ *  Created on: 2013-08-28
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#ifndef CONFIGURATIONS_H_
-#define CONFIGURATIONS_H_
-
+#ifndef IMAGE_REPO_H_
+#define IMAGE__REPO_H_
 #include <string>
+#include "Image.h"
+#include <map>
+#include "CommandExecutor.h"
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
 
@@ -36,36 +38,42 @@ using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
 using namespace std;
 
-class Configurations {
 
+/**
+* This is the base class for provisioning different classes of virtual switch.
+*/
+class ImageRepo {
+
+    /**
+    * The event logger of this class.
+    */
     LoggerPtr* selfLogger;
-
-    static Configurations* configuration;
-    Configurations(string configurationFileName);
-    void loadConfiguration();
-    string globalConfigurationFile;
+ 
+   /**
+    * Pointer to the CommandExecutor Object.
+    */
+    CommandExecutor* commandExec;
+    
+    map<unsigned short, Image*> imageStore;
+    unsigned short numberOfImages;    
 
 public:
-    string masterName;
-    string masterIPAddress;
-    string hostImage;
-    string logicalTopologyFile;
-    string physicalTopologyFile;
-    string controllerInfoFile;
-    string hostInfoFile;
-    string switch2ControllerFile;
-    string embeddingAlgorithm;
-    string partitioningAlgoConfFile;
-    string credentialFile;
-    string hypervisor;
-    string hypervisorConfigurationFile;
-    bool delayBetweenPhysicalMachine;
-    string physicalMachineDelayFile;
-    string otherConfigFile;
-    string imageConfigFile;
-    static Configurations* getConfiguration(string configurationFileName);
+    /**
+    * Constructor of the class.
+    * @param commandExec - Pointer to the global object of CommandExecutor.
+    */
+    ImageRepo(CommandExecutor* commandExec);
 
-    virtual ~Configurations();
+    void prepareImage(string type, string cloneName, 
+                unsigned long vmId);    
+
+    Image* getImage(unsigned short image_id);
+
+    void populateImages(string fileName);
+    /**
+    * Destructor of the class.
+    */
+    virtual ~ImageRepo();
 };
 
-#endif /* CONFIGURATIONS_H_ */
+#endif /* IMAGE_REPO_H_ */

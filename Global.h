@@ -38,6 +38,7 @@
 #include "AbstractSwitch.h"
 #include "AbstractLink.h"
 #include "AbstractVM.h"
+#include "OtherConfig.h"
 #include <string>
 #include <cstdio>
 #include "LoggerFactory.h"
@@ -65,6 +66,8 @@ class CommandExecutor;
 class AbstractSwitch;
 class AbstractLink;
 class AbstractVM;
+class ImageRepo;
+class OtherConfig;
 
 class Global {
     LoggerPtr* selfLogger;
@@ -85,6 +88,8 @@ public:
     static bool debugMode;
     static string logConfigFile;
     static LoggerFactory* loggerFactory;
+    static ImageRepo* imageRepo;
+    static OtherConfig* otherConfig;
 };
 
 #endif /* GLOBAL_H_ */

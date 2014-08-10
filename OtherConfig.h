@@ -18,15 +18,14 @@
 */
 
 /*
- * Configurations.h
+ * OtherConfig.h
  *
- *  Created on: 2013-08-06
+ *  Created on: 2013-08-12
  *      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
  */
 
-#ifndef CONFIGURATIONS_H_
-#define CONFIGURATIONS_H_
-
+#ifndef OTER_CONFIG_H_
+#define OTER_CONFIG_H_
 #include <string>
 #include <log4cxx/logger.h>
 #include <log4cxx/xml/domconfigurator.h>
@@ -36,36 +35,33 @@ using namespace log4cxx::xml;
 using namespace log4cxx::helpers;
 using namespace std;
 
-class Configurations {
+/**
+* This singleton class stores inforamtion about user credentials.
+*/
+class OtherConfig {
 
     LoggerPtr* selfLogger;
 
-    static Configurations* configuration;
-    Configurations(string configurationFileName);
-    void loadConfiguration();
-    string globalConfigurationFile;
+    string of_version;
 
 public:
-    string masterName;
-    string masterIPAddress;
-    string hostImage;
-    string logicalTopologyFile;
-    string physicalTopologyFile;
-    string controllerInfoFile;
-    string hostInfoFile;
-    string switch2ControllerFile;
-    string embeddingAlgorithm;
-    string partitioningAlgoConfFile;
-    string credentialFile;
-    string hypervisor;
-    string hypervisorConfigurationFile;
-    bool delayBetweenPhysicalMachine;
-    string physicalMachineDelayFile;
-    string otherConfigFile;
-    string imageConfigFile;
-    static Configurations* getConfiguration(string configurationFileName);
+     OtherConfig();
+   
+     /**
+    * The function to populate credentials from a file.
+    * @param fileName - Name of the file
+    */
+ 
+    void populate(string fileName);
 
-    virtual ~Configurations();
+     /**
+    * The function returns the Of version.
+    * @return version of openflow as a string
+    */
+
+    string getOFVersion();
+
+    virtual ~OtherConfig();
 };
 
-#endif /* CONFIGURATIONS_H_ */
+#endif /* OTER_CONFIG_H_ */

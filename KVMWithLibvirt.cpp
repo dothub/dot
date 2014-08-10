@@ -54,7 +54,7 @@ void KVMWithLibvirt::loadConfiguration(string fileName)
     map<string, string> eachConfiguration;
 
     virt_type = "kvm";
-    networkFile="libvirt_network.xml";
+    networkFile="resources/libvirt_network.xml";
 
     ifstream fin(fileName.c_str());
 

@@ -45,7 +45,7 @@ i2 ubuntu ~/images/base_lubuntu_mini.qcow2
 #Start marker of this section. Don't remove
 Hypervisor=kvm
 Library=lib-virt
-NetworkFile=libvirt_network.xml
+NetworkFile=resources/libvirt_network.xml
 #End marker of this section. Don't remove
 
 [VirtualMachines]
@@ -92,4 +92,4 @@ UserName=dotuser
 
 [OtherConfig]
 #
-openflow-version 1.0
+OFVersion=1.0

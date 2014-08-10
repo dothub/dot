@@ -41,6 +41,8 @@
 #include "OVS_2_1.h"
 #include "DeployDOT.h"
 #include "VLink.h"
+#include "ImageRepo.h"
+#include "OtherConfig.h"
 
 using namespace std;
 
@@ -64,6 +66,13 @@ bool prepare(string globalConfFile)
         }
 
     }
+    
+    Global::commandExecutor = new CommandExecutor(Global::credentials, 
+        globalConf->masterIPAddress, globalConf->masterName);
+
+
+    Global::imageRepo = new ImageRepo(Global::commandExecutor);
+    Global::imageRepo->populateImages(globalConf->imageConfigFile);
 
     Global::vms = VMs::getVMs();
     Global::vms->populateVMs(globalConf->hostInfoFile);
@@ -77,10 +86,9 @@ bool prepare(string globalConfFile)
     Global::credentials = Credentials::getCredentials();
     Global::credentials->populateCredentials(globalConf->credentialFile);
 
-    Global::commandExecutor = new CommandExecutor(Global::credentials, 
-        globalConf->masterIPAddress, globalConf->masterName);
-
-
+    Global::otherConfig = new OtherConfig();
+    Global::otherConfig->populate(globalConf->otherConfigFile);
+    
     Global::mapping = Mapping::getMapping();
 
     LOG4CXX_INFO((*selfLogger), "Embedding is started");

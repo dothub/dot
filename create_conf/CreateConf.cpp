@@ -296,6 +296,34 @@ void processConfFile(string fileName)
                 }
             }
             
+            else if(line.substr(0,strlen("[Images]")).compare("[Images]") == 0)
+            {
+                //reading the emulation name by skipping any empty line or comment    
+                getline(fin, line);
+                cout << line << endl;
+                while(line.size() == 0 || line[0] == '#')
+                {
+                    getline(fin, line);
+                    cout << line;
+                }
+                
+                fout_DefaultConf << "Images" <<  "=" <<  directory
+                        << imageFileName << emulationName << endl;
+                
+                cout << "Image: " << line << endl;
+                int numberOfImages = atoi(line.c_str());
+
+                fout_Image << line << endl;
+
+                for(int i = 0; i < numberOfImages; i++)
+                {
+                    getline(fin, line);
+
+
+                    fout_Image << line << endl;
+
+                }
+            }            
             else if(line.substr(0,strlen("[VirtualMachineProvision]")).compare("[VirtualMachineProvision]") == 0)
             {
                 //reading the emulation name by skipping any empty line or comment    
@@ -326,11 +354,6 @@ void processConfFile(string fileName)
                         fout_DefaultConf << "HyperVisor=" << tokens->at(1) << endl;
                     }
 
-                    else if(tokens->at(0).compare("ImageLocation") == 0)
-                    {
-                        fout_DefaultConf << "HostImage=" << tokens->at(1) << endl;
-
-                    }
                     else if(tokens->at(0).compare("NetworkFile") == 0)
                     {
                         fout_Hypervisor << "networkFile=" << tokens->at(1) << endl;
@@ -376,7 +399,8 @@ void processConfFile(string fileName)
                     
                     fout_Host << tokens->at(0) << " " << tokens->at(1) << " "
                             << mac << " " << ip << " " << tokens->at(2) << " "
-                            << tokens->at(3) << endl;
+                            << tokens->at(3) << " " << tokens->at(4) << " " 
+                            << tokens->at(5) << endl;
 
                 }
 
@@ -458,16 +482,35 @@ void processConfFile(string fileName)
 
             }
             
-            else if(line.substr(0,strlen("[Embedding]")).compare("[Embedding]") == 0)
+            else if(line.substr(0,strlen("[OtherConfig]")).compare("[OtherConfig]") == 0)
             {
-                //Currently assigned to default value
-                fout_DefaultConf << "EmbeddingAlgorithm=Guaranteed_Embedding" << endl
-                                 << "EmbeddingAlgorithmConfiguration=Guaranteed_Embedding_Conf" << endl;
-            }
+                
+                getline(fin, line);
+                cout << line << endl; 
+                while(line.size() == 0 || line[0] == '#')
+                {
+                    getline(fin, line);
+                    cout << line;
+                }
 
+                fout_DefaultConf << "OtherConfig" <<  "=" <<  directory
+                        << otherConfigFileName << emulationName << endl;
+ 
+                cout << "OC: " << line << endl; 
+ 
+                fout_Other << line << endl; 
+    
+                
+            }    
+       
+            
             
         }
 
+       fout_DefaultConf << "EmbeddingAlgorithm=Guaranteed_Embedding" << endl
+                                 << "EmbeddingAlgorithmConfiguration=Guaranteed_Embedding_Conf" << endl;
+            
+ 
         fin.close();
         fout_DefaultConf.close();
         fout_PhysicalTopo.close();
@@ -478,6 +521,8 @@ void processConfFile(string fileName)
         fout_Host.close();
         fout_Hypervisor.close();
         fout_Credential.close();
+        fout_Image.close();
+        fout_Other.close();
         
     }
     else
