@@ -27,6 +27,7 @@
 
 #include "Global.h"
 
+string Global::dotRoot = "";
 string Global::MasterName = "";
 string Global::MasterIP = "";
 Credentials* Global::credentials = NULL;

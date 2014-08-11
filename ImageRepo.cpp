@@ -18,9 +18,45 @@ void ImageRepo::prepareImage(string type, string cloneName,
         //do nothing
     }
     else if(type.compare("ubuntu") == 0)
-    {
+    {   
+        ofstream fout("prepareVM.sh");
 
+        if(fout.is_open())
+        {
+            string tempDir = Global::dotRoot + "/temp/h";
+            tempDir += (vmId +1);
+            tempDir += "/";
 
+            fout << "mkdir -p " << tempDir << endl;
+            
+            fout << "cp " <<  Global::dotRoot << "/resources/provisioning/ubuntu/* "
+                 << tempDir << endl;
+
+            
+            fout << "sed -i 's/$host_name/h1/g' " << tempDir << "hostname" << endl; 
+            
+            fout << "sed -i 's/$ip_address/" << Global::vms->getIPAddress(vmId)
+                << "/g' " << tempDir << "interfaces" << endl; 
+            
+            fout << "virt-copy-in -a " << cloneName << " " << tempDir 
+                << "70-persistent-net.rules /etc/udev/rules.d/" << endl;
+            
+            fout << "virt-copy-in -a " << cloneName << " " << tempDir 
+                << "hostname /etc/" << endl;
+            
+            fout << "virt-copy-in -a " << cloneName << " " << tempDir 
+                << "interfaces /etc/network" << endl;
+            
+            fout << "rm -r " << tempDir;
+
+            fout.close();      
+            
+            this->commandExec->executeScriptLocal(Global::dotRoot, "prepareVM.sh");
+            this->commandExec->executeLocal("rm prepareVM.sh");
+           
+        }
+        else
+            cout << "Unbale to open the script file" << endl;
     }
 }
  

@@ -72,6 +72,7 @@ class OtherConfig;
 class Global {
     LoggerPtr* selfLogger;
 public:
+    static string dotRoot;
     static string MasterName;
     static string MasterIP;
     static Credentials* credentials;

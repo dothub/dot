@@ -31,6 +31,7 @@
 #include <sstream>
 #include <map>
 #include "Util.h"
+#include "ImageRepo.h"
 
 using namespace std;
 
@@ -48,13 +49,15 @@ KVMWithLibvirt::~KVMWithLibvirt() {
 void KVMWithLibvirt::prepare()
 {
     this->createHost2SwitchAttachmentConf();
+
 }
 void KVMWithLibvirt::loadConfiguration(string fileName)
 {
     map<string, string> eachConfiguration;
 
     virt_type = "kvm";
-    networkFile="resources/libvirt_network.xml";
+    networkFile = Global::dotRoot;
+    networkFile += "resources/provisioning/libvirt/libvirt_network.xml";
 
     ifstream fin(fileName.c_str());
 
@@ -82,7 +85,11 @@ void KVMWithLibvirt::loadConfiguration(string fileName)
         virt_type = eachConfiguration["virt_type"];
 
     if(eachConfiguration.find("networkFile") != eachConfiguration.end())
-        networkFile = eachConfiguration["networkFile"];
+    {
+         networkFile = Global::dotRoot;
+         networkFile += "/";
+         networkFile +=  eachConfiguration["networkFile"];
+    }
 
 }
 void KVMWithLibvirt::createHost2SwitchAttachmentConf()
@@ -165,26 +172,33 @@ string KVMWithLibvirt::createNewImage(unsigned long host_id)
 {
 
     unsigned long switchId = this->vms->getSwitch(host_id);
-    string imagePath = Util::getPathName(this->globalConf->hostImage);
+    string imagePath = Global::dotRoot; 
+    imagePath += "/resources/images/";
 
     ostringstream newImageName;
     newImageName << imagePath << "clone_h" << host_id+1 << ".qcow2";
     ostringstream command;
 
+    Image* vmImage = Global::imageRepo->getImage(this->vms->getImageId(host_id));
+
     command << "sudo qemu-img create -b ";
-    command <<  this->globalConf->hostImage;
+    command << imagePath;
+    command <<  vmImage->getBaseImage();
     command << " -f qcow2 ";
     command << newImageName.str();
 
-    this->commandExec->executeRemote(this->mapping->getMachine(switchId), command.str());
+    //It will be now executed locally
+    this->commandExec->executeLocal(command.str());
 
+    Global::imageRepo->prepareImage(vmImage->getType(), newImageName.str(), host_id);
 
     return newImageName.str();
 }
 void KVMWithLibvirt::startHost(unsigned long host_id)
 {
     unsigned long switchId = this->vms->getSwitch(host_id);
-    string mac = this->vms->getMacAddress(host_id);
+    string mac = this->vms->getMacAddress(host_id); 
+    
 
     string secondaryMac = mac;
 
@@ -206,7 +220,7 @@ void KVMWithLibvirt::startHost(unsigned long host_id)
     }
 
     command << " --name h" << host_id+1;
-    command << " --ram 64 ";
+    command << " --ram " <<  this->vms->getMemory(host_id);
     command << " --disk  path="<< this->createNewImage(host_id)<<",format=qcow2";
     command << " --graphics vnc,listen=0.0.0.0 --noautoconsole";
     command << " --network model=virtio,network=ovs_network_" << switchId+1 << ",mac="<< mac;

@@ -70,6 +70,8 @@ bool prepare(string globalConfFile)
     Global::commandExecutor = new CommandExecutor(Global::credentials, 
         globalConf->masterIPAddress, globalConf->masterName);
 
+    Global::dotRoot = Global::commandExecutor->executeLocal("pwd");
+    LOG4CXX_INFO((*selfLogger), "DOT Root" << Global::dotRoot);
 
     Global::imageRepo = new ImageRepo(Global::commandExecutor);
     Global::imageRepo->populateImages(globalConf->imageConfigFile);

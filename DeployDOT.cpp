@@ -68,6 +68,7 @@ void DeployDOT::deploySwitch() {
 
         this->abstractSwitch->clearSwitch(iter->second);
         this->abstractSwitch->runSwitch(iter->second);
+        this->abstractSwitch->setOFVersion(iter->second, Global::otherConfig->getOFVersion());
     }
 
     //deploy gateway switch
