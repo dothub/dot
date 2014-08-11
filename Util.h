@@ -45,6 +45,7 @@ public:
     string static intToHexString(unsigned long input, unsigned int width=0);
     string static getFileName(const string& strPath);
     string static getPathName(const string& strPath);
+    string static longToString(const long input);
 };
 
 #endif /* UTIL_H_ */

@@ -40,6 +40,7 @@ DeployDOT::DeployDOT(DOT_Topology* dotTopology, AbstractSwitch*  abstractSwitch,
     this->abstractSwitch = abstractSwitch;
     this->commandExecutor = commandExecutor;
 
+    cout << "Switch Deployment Started" << endl;
     deploySwitch();
     cout << "Switch deployed" <<endl;
     deployLinks();
@@ -65,10 +66,12 @@ void DeployDOT::deploySwitch() {
     for( map<string, Switch*>::iterator iter = this->dotTopology->topologySwitchMap.begin();
             iter != this->dotTopology->topologySwitchMap.end(); iter++)
     {
-
+        cout << "Clearing switch" << endl;
         this->abstractSwitch->clearSwitch(iter->second);
+        cout << "Running Switch" << endl;
         this->abstractSwitch->runSwitch(iter->second);
         this->abstractSwitch->setOFVersion(iter->second, Global::otherConfig->getOFVersion());
+        this->abstractSwitch->assignIPAddress(iter->second);
     }
 
     //deploy gateway switch

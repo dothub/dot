@@ -50,7 +50,11 @@ OVS_2_1::~OVS_2_1() {
 void OVS_2_1::clearSwitch(Switch* theSwitch) {
 
     ostringstream command;
+    cout << theSwitch->getName() << ":" << theSwitch->getIPOfMachine() << endl;
     command << "sudo ovs-vsctl del-br " << theSwitch->getName();
+
+    if(this->commandExec == NULL)
+        cout << "CExec NULL" << endl;
 
     this->commandExec->executeRemote(theSwitch->getIPOfMachine(), command.str());
 
@@ -231,7 +235,7 @@ void OVS_2_1::setOFVersion(Switch * theSwitch, string version)
 {
     ostringstream command;
 
-    command << "ovs-vsctl set bridge " << theSwitch->getName() << " protocols=OpenFlow";
+    command << "sudo ovs-vsctl set bridge " << theSwitch->getName() << " protocols=OpenFlow";
  
     //removing the .   
     command << version[0] << version[2];
@@ -244,7 +248,7 @@ void OVS_2_1::assignIPAddress(Switch* theSwitch)
 {
     ostringstream command;
     
-    command << "ifconfig " << theSwitch->getName() << " 10.254."
+    command << "sudo ifconfig " << theSwitch->getName() << " 10.254."
         << (128+(theSwitch->getID()+1)/256) << "." << (theSwitch->getID()+1)%256
         << "/16";
     

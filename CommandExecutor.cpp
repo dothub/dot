@@ -52,15 +52,19 @@ string CommandExecutor::execute(string command)
 
     pclose(pipe);
 
-    return result;
+    //removing the last newline
+    
+    return result.substr(0, result.size()-1);
     //return "";
 }
 
 
 string CommandExecutor::executeLocal(string command) {
 
+    cout << command << endl;
     return this->execute(command);
 }
+
 
 string CommandExecutor::executeScriptLocal(string filePath, string fileName, string parameters) {
 
@@ -74,9 +78,12 @@ string CommandExecutor::executeRemote(string machine, string command)
 {
     ostringstream toExecute;
 
+    if(this->credential == NULL)
+        cout << "No credential" << endl;
+
     toExecute << "ssh " << this->credential->getUserName() <<"@" << machine
             << " \"" << command << "\"";
-    //cout << toExecute.str() << endl;
+    cout << toExecute.str() << endl;
 
     return this->execute(toExecute.str());
 }

@@ -121,8 +121,11 @@ void KVMWithLibvirt::createHost2SwitchAttachmentConf()
                 command << "sed -i \'s/\\$/" << i+1 << "/g\' " << outputFileName.str();
                 this->commandExec->executeLocal(command.str());
 
+                string remoteFileName = outputFileName.str().substr(outputFileName.str().find_last_of("/")+1);
+                cout << "Remote File Name " << remoteFileName << endl;
+
                 this->commandExec->copyContent("localhost", 
-                    this->mapping->getMachine(i), outputFileName.str(), outputFileName.str());
+                    this->mapping->getMachine(i), outputFileName.str(), remoteFileName);
 
                 ostringstream netDefineCommand;
 
@@ -135,7 +138,7 @@ void KVMWithLibvirt::createHost2SwitchAttachmentConf()
                 this->commandExec->executeRemote(this->mapping->getMachine(i), netDefineCommand.str());
 
                 netDefineCommand.str("");
-                netDefineCommand << "sudo virsh net-define " << outputFileName.str();
+                netDefineCommand << "sudo virsh net-define " << remoteFileName;
                 this->commandExec->executeRemote(this->mapping->getMachine(i), netDefineCommand.str());
 
                 netDefineCommand.str("");
@@ -147,7 +150,7 @@ void KVMWithLibvirt::createHost2SwitchAttachmentConf()
                 this->commandExec->executeRemote(this->mapping->getMachine(i), netDefineCommand.str());
 
 
-                this->commandExec->executeRemote(this->mapping->getMachine(i), "rm " + outputFileName.str());
+                this->commandExec->executeRemote(this->mapping->getMachine(i), "rm " + remoteFileName);
 
                 if(remove(outputFileName.str().c_str()) != 0 )
                     cout << "Error Virt attachment delete failed" << endl;
@@ -176,21 +179,23 @@ string KVMWithLibvirt::createNewImage(unsigned long host_id)
     imagePath += "/resources/images/";
 
     ostringstream newImageName;
-    newImageName << imagePath << "clone_h" << host_id+1 << ".qcow2";
+    newImageName << "clone_h" << host_id+1 << ".qcow2";
     ostringstream command;
 
     Image* vmImage = Global::imageRepo->getImage(this->vms->getImageId(host_id));
 
+    command << "cd " << imagePath << " && ";
     command << "sudo qemu-img create -b ";
-    command << imagePath;
     command <<  vmImage->getBaseImage();
     command << " -f qcow2 ";
     command << newImageName.str();
-
+    command << " && chown nobody:nogroup " << newImageName.str();
+    // << " &&";
+    //command << " popd";
     //It will be now executed locally
     this->commandExec->executeLocal(command.str());
 
-    Global::imageRepo->prepareImage(vmImage->getType(), newImageName.str(), host_id);
+    Global::imageRepo->prepareImage(vmImage->getType(), imagePath+newImageName.str(), host_id);
 
     return newImageName.str();
 }
@@ -221,7 +226,7 @@ void KVMWithLibvirt::startHost(unsigned long host_id)
 
     command << " --name h" << host_id+1;
     command << " --ram " <<  this->vms->getMemory(host_id);
-    command << " --disk  path="<< this->createNewImage(host_id)<<",format=qcow2";
+    command << " --disk  path=~/dot/images/"<< this->createNewImage(host_id)<<",format=qcow2";
     command << " --graphics vnc,listen=0.0.0.0 --noautoconsole";
     command << " --network model=virtio,network=ovs_network_" << switchId+1 << ",mac="<< mac;
     command << " --network model=virtio,network=ovs_network-ext,mac=" << secondaryMac;

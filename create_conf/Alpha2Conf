@@ -10,8 +10,8 @@ alpha2
 #type name ip cpu memory disk external_interface bandwidth
 3
 manager rsg-pc146.cs.uwaterloo.ca 192.168.137.202
-node rsg-pc145.cs.uwaterloo.ca 192.168.137.57 5 512 8 eth0 1024
-node rsg-pc161.cs.uwaterloo.ca 192.168.137.44 6 512 8 eth0 1024
+node rsg-pc145.cs.uwaterloo.ca 192.168.137.57 50 5120 8 eth0 10240
+node rsg-pc161.cs.uwaterloo.ca 192.168.137.44 60 5120 8 eth0 10240
 
 [PhysicalTopologyDelay]
 #Pairwise delay between any physical vms
@@ -45,7 +45,7 @@ i2 ubuntu base_lubuntu_mini.qcow2
 #Start marker of this section. Don't remove
 Hypervisor=kvm
 Library=lib-virt
-NetworkFile=resources/libvirt_network.xml
+NetworkFile=resources/provisioning/libvirt/libvirt_network.xml
 #End marker of this section. Don't remove
 
 [VirtualMachines]
@@ -54,14 +54,9 @@ NetworkFile=resources/libvirt_network.xml
 #VM# should start with 1
 #Next, each line specifies a VM, the switch it is attached, CPU, B/W(Mbps), Memory(MB) and image:
 # VM# s# CPU B/W Memory i#
-7
+2
 h1 s1 1 300 64 i1
 h2 s2 2 400 512 i2
-h3 s3 1 300 64 i1
-h4 s4 1 400 64 i1
-h5 s5 1 300 64 i1
-h6 s1 1 400 64 i1
-h7 s3 1 300 64 i1
 
 [Controllers]
 #First line: Number of controllers

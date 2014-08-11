@@ -67,6 +67,7 @@ void Credentials::populateCredentials(string fileName) {
         if(confMap.find("UserName") != confMap.end())
         {
             this->userName = confMap["UserName"];
+            cout << "Credential Read " << this->userName << endl;
         }
         else
             cout << "Please enter an user name in credential file: " << fileName <<  " with key: UserName" << endl;

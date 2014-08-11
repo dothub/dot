@@ -67,7 +67,7 @@ class LoggerFactory {
     static LoggerPtr loggerLoggerFactory;
     static LoggerPtr loggerLogicalTopology;
     static LoggerPtr loggerMapping;
-    static LoggerPtr loggerOVS_1_10;
+    static LoggerPtr loggerOVS_2_1;
     static LoggerPtr loggerPhysicalMachines;
     static LoggerPtr loggerSwitch2Controller;
     static LoggerPtr loggerSwitch;

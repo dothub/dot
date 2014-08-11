@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
-
+#include "Util.h"
 
 ImageRepo::ImageRepo(CommandExecutor* commandExec)
 {
@@ -23,8 +23,10 @@ void ImageRepo::prepareImage(string type, string cloneName,
 
         if(fout.is_open())
         {
+            
             string tempDir = Global::dotRoot + "/temp/h";
-            tempDir += (vmId +1);
+            
+            tempDir += Util::longToString(vmId +1);
             tempDir += "/";
 
             fout << "mkdir -p " << tempDir << endl;
@@ -33,16 +35,16 @@ void ImageRepo::prepareImage(string type, string cloneName,
                  << tempDir << endl;
 
             
-            fout << "sed -i 's/$host_name/h1/g' " << tempDir << "hostname" << endl; 
+            fout << "sed -i 's/$host_name/h"<< (vmId + 1) << "/g' " << tempDir << "hostname" << endl; 
             
             fout << "sed -i 's/$ip_address/" << Global::vms->getIPAddress(vmId)
                 << "/g' " << tempDir << "interfaces" << endl; 
             
             fout << "virt-copy-in -a " << cloneName << " " << tempDir 
-                << "70-persistent-net.rules /etc/udev/rules.d/" << endl;
+                << "70-persistent-net.rules /etc/udev/rules.d" << endl;
             
             fout << "virt-copy-in -a " << cloneName << " " << tempDir 
-                << "hostname /etc/" << endl;
+                << "hostname /etc" << endl;
             
             fout << "virt-copy-in -a " << cloneName << " " << tempDir 
                 << "interfaces /etc/network" << endl;
@@ -51,8 +53,9 @@ void ImageRepo::prepareImage(string type, string cloneName,
 
             fout.close();      
             
-            this->commandExec->executeScriptLocal(Global::dotRoot, "prepareVM.sh");
-            this->commandExec->executeLocal("rm prepareVM.sh");
+            this->commandExec->executeLocal("chmod +x prepareVM.sh");
+            this->commandExec->executeScriptLocal("", "prepareVM.sh");
+           // this->commandExec->executeLocal("rm prepareVM.sh");
            
         }
         else

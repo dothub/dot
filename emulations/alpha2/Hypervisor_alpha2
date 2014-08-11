@@ -1,2 +1,2 @@
 virt_type=kvm
-networkFile=resources/libvirt_network.xml
+networkFile=resources/provisioning/libvirt/libvirt_network.xml

@@ -81,3 +81,12 @@ string Util::intToHexString(unsigned long input, unsigned int width)
     return stream.str();
 }
 
+string Util::longToString(const long input)
+{
+    ostringstream stream;
+    
+    stream << input;
+    
+    return stream.str();
+
+}

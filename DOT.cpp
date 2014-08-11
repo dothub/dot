@@ -54,6 +54,13 @@ bool prepare(string globalConfFile)
 
     Configurations *globalConf = Configurations::getConfiguration(globalConfFile);
 
+    Global::credentials = Credentials::getCredentials();
+    Global::credentials->populateCredentials(globalConf->credentialFile);
+
+    Global::commandExecutor = new CommandExecutor(Global::credentials, 
+        globalConf->masterIPAddress, globalConf->masterName);
+
+
     Global::logicalTopology = LogicalTopology::getLogicalTopology();
     Global::logicalTopology->populateTopology(globalConf->logicalTopologyFile);
 
@@ -67,9 +74,6 @@ bool prepare(string globalConfFile)
 
     }
     
-    Global::commandExecutor = new CommandExecutor(Global::credentials, 
-        globalConf->masterIPAddress, globalConf->masterName);
-
     Global::dotRoot = Global::commandExecutor->executeLocal("pwd");
     LOG4CXX_INFO((*selfLogger), "DOT Root" << Global::dotRoot);
 
@@ -84,9 +88,6 @@ bool prepare(string globalConfFile)
     
     Global::sw2controller = Switch2Controller::getSwitch2Controller(Global::controllers);
     Global::sw2controller->loadConfiguration(globalConf->switch2ControllerFile);
-
-    Global::credentials = Credentials::getCredentials();
-    Global::credentials->populateCredentials(globalConf->credentialFile);
 
     Global::otherConfig = new OtherConfig();
     Global::otherConfig->populate(globalConf->otherConfigFile);

@@ -49,7 +49,7 @@ LoggerPtr LoggerFactory::loggerLink(Logger::getLogger("Link"));
 LoggerPtr LoggerFactory::loggerLoggerFactory(Logger::getLogger("LoggerFactory"));
 LoggerPtr LoggerFactory::loggerLogicalTopology(Logger::getLogger("LogicalTopology"));
 LoggerPtr LoggerFactory::loggerMapping(Logger::getLogger("Mapping"));
-LoggerPtr LoggerFactory::loggerOVS_1_10(Logger::getLogger("OVS_1_10"));
+LoggerPtr LoggerFactory::loggerOVS_2_1(Logger::getLogger("OVS_1_10"));
 LoggerPtr LoggerFactory::loggerPhysicalMachines(Logger::getLogger("PhysicalMachines"));
 LoggerPtr LoggerFactory::loggerSwitch2Controller(Logger::getLogger("Switch2Controller"));
 LoggerPtr LoggerFactory::loggerSwitch(Logger::getLogger("Switch"));
@@ -91,7 +91,7 @@ void LoggerFactory::initateFactory()
     this->loggerMap["LoggerFactory"] = &loggerLoggerFactory;
     this->loggerMap["LogicalTopology"] = &loggerLogicalTopology;
     this->loggerMap["Mapping"] = &loggerMapping;
-    this->loggerMap["OVS_1_10"] = &loggerOVS_1_10;
+    this->loggerMap["OVS_2_1"] = &loggerOVS_2_1;
     this->loggerMap["PhysicalMachines"] = &loggerPhysicalMachines;
     this->loggerMap["Switch2Controller"] = &loggerSwitch2Controller;
     this->loggerMap["Switch"] = &loggerSwitch;
