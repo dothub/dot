@@ -134,7 +134,6 @@ void deploy()
                             Global::abstractLink, Global::abstractVM, 
                             Global::commandExecutor);
 
-    LOG4CXX_INFO((*selfLogger), "Emulated network has been deployed ");
 
 
 }
@@ -145,7 +144,7 @@ void generateMappingForRemote()
   
     LOG4CXX_INFO((*selfLogger), "Generating Mapping File for DOT console ");
 
-    fstream fout("ongoing_emulation/mapping"); 
+    ofstream fout("ongoing_emulation/mapping"); 
  
     fout << Global::credentials->getUserName() << endl;
  
