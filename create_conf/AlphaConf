@@ -2,26 +2,25 @@
 #Don't remove or rearrange any section
 
 [EmulationName]
-alpha
+alpha2
 
 [PhysicalTopology]
 #First line: Number of physical machines
 #Then, each line specifies a tuple:
 #type name ip cpu memory disk external_interface bandwidth
 3
-manager cn216 10.254.254.50
-node cn213 10.254.254.47 4 10000 500 eth0 1024
-node cn214 10.254.254.48 4 10000 500 eth0 1024
-
+manager rsg-pc146.cs.uwaterloo.ca 192.168.137.202
+node rsg-pc145.cs.uwaterloo.ca 192.168.137.57 8 5120 8 eth0 10240
+node rsg-pc161.cs.uwaterloo.ca 192.168.137.44 8 5120 8 eth0 10240
 
 [PhysicalTopologyDelay]
-#Pairwise delay between any physical hosts
+#Pairwise delay between any physical vms
 #If no delay between a pair is specified, default value will be considered
 #Default value of delay is 0
 #First line: Number of pair of machines have delay
 #Next, each line specifies a tuple
 #machine1, machine2, delay (ms)
-cn213 cn214 20
+0
 
 [LogicalTopology]
 #First line: Number of switches, number of links
@@ -29,27 +28,41 @@ cn213 cn214 20
 #Switch # should start with 1
 #Next, each line specifies a bidirectional link with the following format:
 # s# s# bandwidth delay
-2 1
-s1 s2 500 25
+5 4
+s1 s2 500 100
+s2 s3 499 150
+s2 s4 300 200
+s3 s5 400 100
+
+[Images]
+#Number of images
+#each line image id, type, location
+2
+i1 tc base_tc.qcow2
+i2 ubuntu base_lubuntu_mini.qcow2
 
 [VirtualMachineProvision]
 #Start marker of this section. Don't remove
 Hypervisor=kvm
 Library=lib-virt
-ImageLocation=~/images/base_VM.qcow2
-NetworkFile=libvirt_network.xml
+NetworkFile=resources/provisioning/libvirt/libvirt_network.xml
 #End marker of this section. Don't remove
 
 [VirtualMachines]
 #First line: Number of VMs
 #Each switch is represented by 'h#'
 #VM# should start with 1
-#Next, each line specifies a VM, the switch it is attached, CPU:
-# VM# s# CPU
-3
-h1 s1 1 100
-h2 s1 1 100
-h3 s2 2 250
+#Next, each line specifies a VM, the switch it is attached, CPU, B/W(Mbps), Memory(MB) and image:
+# VM# s# CPU B/W Memory i#
+7
+h1 s1 1 300 64 i1
+h2 s2 2 400 512 i2
+h3 s3 1 300 64 i1
+h4 s4 2 400 64 i1
+h5 s5 1 300 512 i2
+h6 s2 2 400 64 i1
+h7 s5 1 300 64 i1
+
 
 
 [Controllers]
@@ -58,22 +71,27 @@ h3 s2 2 250
 #Controller # should start with 1
 #Next, each line a tuple:
 # c# ip port
-1
-c1 10.254.254.50 6633
+2
+c1 10.254.0.2 6633
+c2 192.168.137.202 6633
 
 [Switch2Controller]
 #First line: Number of switches
 #Next, each line specifies a switch and its controller
 # s# c#
-2
+5
 s1 c1
 s2 c1
+s3 c1
+s4 c1
+s5 c1
+
 
 [Credentials]
 #User name of the dot nodes
 UserName=dotuser
 
 
-[Embedding]
-#Specifies the embedding algorithm and its configuation
-#Currenlty not used
+[OtherConfig]
+#
+OFVersion=1.3

@@ -1028,3 +1028,49 @@
 2014-08-11 07:22:56,211 INFO   (DOT.cpp:130) - DOT Topology is generated
 2014-08-11 07:24:50,085 INFO   (DOT.cpp:137) - Emulated network has been deployed 
 2014-08-11 07:24:50,085 INFO   (DOT.cpp:146) - Generating Mapping File for DOT console 
+2014-08-11 07:58:21,079 INFO   (DOT.cpp:175) - DOT main has started 
+2014-08-11 07:58:21,079 INFO   (DOT.cpp:221) - The global configuration file: emulations/alpha2/DefaultConfiguration_alpha2
+2014-08-11 07:58:21,079 INFO  prepare(std (DOT.cpp:53) - Reading the configurations
+2014-08-11 07:58:21,082 INFO  prepare(std (DOT.cpp:78) - DOT Root/home/ar3roy/DOT/dot_v1
+2014-08-11 07:58:21,083 INFO  prepare(std (DOT.cpp:97) - Embedding is started
+2014-08-11 07:58:21,088 INFO  prepare(std (DOT.cpp:111) - Instantiating the deployment specific devices
+2014-08-11 07:58:21,089 INFO   (DOT.cpp:123) - DOT Deployment has started
+2014-08-11 07:58:21,089 INFO   (DOT.cpp:130) - DOT Topology is generated
+2014-08-11 08:00:13,071 INFO   (DOT.cpp:137) - Emulated network has been deployed 
+2014-08-11 08:00:13,071 INFO   (DOT.cpp:146) - Generating Mapping File for DOT console 
+2014-08-11 08:02:43,776 INFO   (DOT.cpp:175) - DOT main has started 
+2014-08-11 08:02:43,776 INFO   (DOT.cpp:221) - The global configuration file: emulations/alpha2/DefaultConfiguration_alpha2
+2014-08-11 08:02:43,776 INFO  prepare(std (DOT.cpp:53) - Reading the configurations
+2014-08-11 08:02:43,779 INFO  prepare(std (DOT.cpp:78) - DOT Root/home/ar3roy/DOT/dot_v1
+2014-08-11 08:02:43,779 INFO  prepare(std (DOT.cpp:97) - Embedding is started
+2014-08-11 08:02:43,785 INFO  prepare(std (DOT.cpp:111) - Instantiating the deployment specific devices
+2014-08-11 08:02:43,785 INFO   (DOT.cpp:123) - DOT Deployment has started
+2014-08-11 08:02:43,786 INFO   (DOT.cpp:130) - DOT Topology is generated
+2014-08-11 08:04:49,430 INFO   (DOT.cpp:137) - Emulated network has been deployed 
+2014-08-11 08:04:49,430 INFO   (DOT.cpp:146) - Generating Mapping File for DOT console 
+2014-08-11 08:18:50,075 INFO   (DOT.cpp:175) - DOT main has started 
+2014-08-11 08:18:50,075 INFO   (DOT.cpp:221) - The global configuration file: emulations/alpha2/DefaultConfiguration_alpha2
+2014-08-11 08:18:50,075 INFO  prepare(std (DOT.cpp:53) - Reading the configurations
+2014-08-11 08:18:50,078 INFO  prepare(std (DOT.cpp:78) - DOT Root/home/ar3roy/DOT/dot_v1
+2014-08-11 08:18:50,079 INFO  prepare(std (DOT.cpp:97) - Embedding is started
+2014-08-11 08:18:50,085 INFO  prepare(std (DOT.cpp:111) - Instantiating the deployment specific devices
+2014-08-11 08:18:50,085 INFO   (DOT.cpp:123) - DOT Deployment has started
+2014-08-11 08:18:50,086 INFO   (DOT.cpp:130) - DOT Topology is generated
+2014-08-11 08:20:26,024 INFO   (DOT.cpp:175) - DOT main has started 
+2014-08-11 08:20:26,024 INFO   (DOT.cpp:221) - The global configuration file: emulations/alpha2/DefaultConfiguration_alpha2
+2014-08-11 08:20:26,024 INFO  prepare(std (DOT.cpp:53) - Reading the configurations
+2014-08-11 08:20:26,027 INFO  prepare(std (DOT.cpp:78) - DOT Root/home/ar3roy/DOT/dot_v1
+2014-08-11 08:20:26,027 INFO  prepare(std (DOT.cpp:97) - Embedding is started
+2014-08-11 08:20:26,035 INFO  prepare(std (DOT.cpp:111) - Instantiating the deployment specific devices
+2014-08-11 08:20:26,035 INFO   (DOT.cpp:123) - DOT Deployment has started
+2014-08-11 08:20:26,037 INFO   (DOT.cpp:130) - DOT Topology is generated
+2014-08-11 08:24:28,009 INFO   (DOT.cpp:175) - DOT main has started 
+2014-08-11 08:24:28,010 INFO   (DOT.cpp:221) - The global configuration file: emulations/alpha2/DefaultConfiguration_alpha2
+2014-08-11 08:24:28,010 INFO  prepare(std (DOT.cpp:53) - Reading the configurations
+2014-08-11 08:24:28,013 INFO  prepare(std (DOT.cpp:78) - DOT Root/home/ar3roy/DOT/dot_v1
+2014-08-11 08:24:28,013 INFO  prepare(std (DOT.cpp:97) - Embedding is started
+2014-08-11 08:24:28,021 INFO  prepare(std (DOT.cpp:111) - Instantiating the deployment specific devices
+2014-08-11 08:24:28,021 INFO   (DOT.cpp:123) - DOT Deployment has started
+2014-08-11 08:24:28,022 INFO   (DOT.cpp:130) - DOT Topology is generated
+2014-08-11 08:27:32,237 INFO   (DOT.cpp:137) - Emulated network has been deployed 
+2014-08-11 08:27:32,238 INFO   (DOT.cpp:146) - Generating Mapping File for DOT console 

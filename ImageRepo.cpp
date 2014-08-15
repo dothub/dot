@@ -54,7 +54,7 @@ void ImageRepo::prepareImage(string type, string cloneName,
             fout.close();      
             
             this->commandExec->executeLocal("chmod +x prepareVM.sh");
-            this->commandExec->executeScriptLocal("", "prepareVM.sh");
+            this->commandExec->executeScriptLocal("", "./prepareVM.sh");
            // this->commandExec->executeLocal("rm prepareVM.sh");
            
         }
