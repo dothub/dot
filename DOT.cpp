@@ -138,31 +138,6 @@ void deploy()
 
 }
 
-
-void generateMappingForRemote()
-{
-  
-    LOG4CXX_INFO((*selfLogger), "Generating Mapping File for DOT console ");
-
-    ofstream fout("ongoing_emulation/mapping"); 
- 
-    fout << Global::credentials->getUserName() << endl;
- 
-    if(fout.is_open()) 
-    { 
-        for(unsigned long i = 0; i < Global::vms->getNumberOfVMs(); i++) 
-        { 
-            fout << "h" << i+1 << " " 
-                << Global::mapping->getMapping()->getMachine(Global::vms->getSwitch(i)) << endl; 
-        } 
-        fout.close(); 
-    } 
-    else 
-        LOG4CXX_ERROR((*selfLogger), 
-            "Mapping file for \"DOT Console\" cannot be created"); 
-}
-
-
 int main(int argc, char * argv[])
 {
 
@@ -222,7 +197,6 @@ int main(int argc, char * argv[])
     if(! prepare(globalConfFile))
         exit(1);
     deploy();
-    generateMappingForRemote();
 
 
     return 0;

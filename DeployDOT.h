@@ -58,7 +58,7 @@ public:
     void deployTunnel();
     void assignPortNumbers();
     void assignStaticRules();
-
+    void generateConsoleMapping();
 };
 
 #endif /* DEPLOYDOT_H_ */

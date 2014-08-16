@@ -28,6 +28,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "Global.h"
 
 using namespace std;
 
@@ -53,6 +54,8 @@ DeployDOT::DeployDOT(DOT_Topology* dotTopology, AbstractSwitch*  abstractSwitch,
     cout << "assigned port number" <<endl;
     assignStaticRules();
     cout << "static rule generated" <<endl;
+    generateConsoleMapping();
+    cout << "Console mapping generated" << endl;
 }
 
 DeployDOT::~DeployDOT() {
@@ -87,6 +90,102 @@ void DeployDOT::deploySwitch() {
 
 }
 
+void DeployDOT::generateConsoleMapping()
+{
+
+    ofstream fout("ongoing_emulation/mapping"); 
+ 
+    fout << Global::credentials->getUserName() << endl;
+ 
+    if(fout.is_open()) 
+    { 
+        for(unsigned long i = 0; i < this->dotTopology->vms->getNumberOfVMs(); i++) 
+        { 
+            unsigned long switchId = this->dotTopology->vms->getSwitch(i);
+    
+            ostringstream switchName;
+
+            switchName << "topo" << switchId+1;
+
+            //cout << "Host is attached to " << switchName.str() << endl;
+
+            Switch* switchOfHost = this->dotTopology->topologySwitchMap[switchName.str()];
+
+            fout << "h" << i+1 << " " 
+                << switchOfHost->getIPOfMachine() << " "
+                << this->dotTopology->vms->getImageId(i)+1    << endl; 
+        } 
+        fout.close(); 
+    } 
+    else 
+        cout << "Mapping file for \"DOT Console\" cannot be created" << endl; 
+
+
+    fout.clear();
+    fout.open("ongoing_emulation/switch_mapping"); 
+ 
+ 
+    if(fout.is_open()) 
+    { 
+        for(unsigned long i = 0; i < Global::logicalTopology->getNumberOfSwitches(); i++) 
+        { 
+            fout << "s" << i+1 << " " 
+                << Global::mapping->getMapping()->getMachine(i) << endl; 
+        } 
+        fout.close(); 
+    } 
+    else 
+          cout << "Switch Mapping file for \"DOT Console\" cannot be created" <<endl; 
+
+    fout.clear();
+    fout.open("ongoing_emulation/link_mapping"); 
+ 
+     if(fout.is_open())
+     {
+         //generate the itra-host links
+         for(map<unsigned long, Link*>::iterator iter = this->dotTopology->linkMap.begin();
+                iter != this->dotTopology->linkMap.end(); iter ++)
+         {
+
+             Switch* switch1 = iter->second->getInterface1()->getSwitch();
+             Switch* switch2 = iter->second->getInterface2()->getSwitch();
+
+             if(switch1->getName().substr(0,2).compare("gw") != 0 
+                && switch2->getName().substr(0,2).compare("gw") != 0)
+
+                fout << "s" << switch1->getID()+1 << " " 
+                    << iter->second->getInterface1()->getName() << " "
+                    << "s" << switch2->getID()+1 << " " 
+                    << iter->second->getInterface2()->getName() << endl; 
+        }
+
+        //generating the iter-host links
+        for(vector<pair<CutEdge*, CutEdge*> >::iterator iter = this->dotTopology->cutEdgesPairVector.begin();
+            iter != this->dotTopology->cutEdgesPairVector.end(); iter++)
+        {
+            CutEdge* cutEdge1 = iter->first;
+            CutEdge* cutEdge2 = iter->second;
+
+            Interface* interface1 = cutEdge1->getInterface1();
+            Interface* interface2 = cutEdge2->getInterface1();
+
+            Switch* switch1 = interface1->getSwitch();
+            Switch* switch2 = interface2->getSwitch();
+
+            fout << "s" << switch1->getID()+1 << " "
+                 << interface1->getName() << " "
+                 << "s" << switch2->getID()+1 << " "
+                 << interface2->getName() << endl;
+
+        }
+
+        fout.close();
+    }
+
+    else 
+          cout << "Link Mapping file for \"DOT Console\" cannot be created" <<endl; 
+
+}
 void DeployDOT::deployVMs() {
 
     this->abstractVM->prepare();

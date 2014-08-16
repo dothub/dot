@@ -32,7 +32,7 @@ VM_LIST=()
 
 #Function readMapping retrieves the username of the DOT node
 #and corresping host of the provisioned VMs
-#Takes the mapping file name as parameter
+#Takes the mapping file name as parameter1
 function readMapping {
 
 	flag=0
@@ -71,13 +71,13 @@ do
 		
 	#Parsing the input for input and command
 	command=`echo $input| cut -f1 -d' '`
-	parameter=`echo $input| cut -f2 -d' '`
-	
+	parameter1=`echo $input| cut -f2 -d' '`
+    parameter2=`echo $input| cut -f3 -d' '`	
 	
 	case "$command" in
 		("connect") 
-			#Here, parameter is the name of the VM 
-			echo "Connecting $parameter"
+			#Here, parameter1 is the name of the VM 
+			echo "Connecting $parameter1"
 			
 			foundFlag=0
 
@@ -86,21 +86,21 @@ do
 			do
 			
 				#Finding a match
-				VM_NAME=`echo "$mapping"| grep $parameter| cut -f1 -d' '`
+				VM_NAME=`echo "$mapping"| grep $parameter1| cut -f1 -d' '`
 			
-				if [ "$VM_NAME" = "$parameter" ]; then
+				if [ "$VM_NAME" = "$parameter1" ]; then
 				
 					foundFlag=1
 					
 					#Retrieving the ip address of the host
-					IP_ADDRESS=`echo "$mapping"| grep $parameter | cut -f2 -d' '`
+					IP_ADDRESS=`echo "$mapping"| grep $parameter1 | cut -f2 -d' '`
 		 				
 					
 					#Connecting the VM
-                        		virt-viewer -c qemu+ssh://$USER_NAME@$IP_ADDRESS/system $parameter &>/dev/null &  
+                        		virt-viewer -c qemu+ssh://$USER_NAME@$IP_ADDRESS/system $parameter1 &>/dev/null &  
                         
                        			#Storing the process id
-                        		processIDs[$processIndex]="$parameter $! active"
+                        		processIDs[$processIndex]="$parameter1 $! active"
                         		processIndex=$((processIndex+1))
 					
 		            
@@ -113,24 +113,24 @@ do
 
 			#No VM is found
                         if [ "$foundFlag" -eq 0 ]; then
-                                echo "$parameter is not running"
+                                echo "$parameter1 is not running"
                         fi			
 			;;
 
 		("disconnect") 
-			#Here, the parameter is the name of the VM
+			#Here, the parameter1 is the name of the VM
 						
 			#Retrieving the proeces id of the VM
 			retrieveFlag=0
 			for index in "${!processIDs[@]}"
 			do
-				status=`echo ${processIDs[$index]}| grep $parameter| cut -f3 -d' '`
+				status=`echo ${processIDs[$index]}| grep $parameter1| cut -f3 -d' '`
 				
 				
 				if [ "$status" = "active" ]; then
 					#Found an active VM 
 					retrieveFlag=1
-					echo "Disconnecting $parameter"
+					echo "Disconnecting $parameter1"
 					
 					#retrieving the process id
 					process_id=`echo ${processIDs[$index]}|  cut -f2 -d' '`
@@ -150,7 +150,7 @@ do
 			
 			#No VM is found
 			if [ "$retrieveFlag" -eq 0 ]; then
-				echo "$parameter is not connected"
+				echo "$parameter1 is not connected"
 			fi
 			
 			;;
@@ -189,7 +189,7 @@ do
 			;;
         
         ("clean")
-            case "$parameter" in
+            case "$parameter1" in
                 ("all")
                     read -r -p "Do you want to destroy all VMs and VSs? [Y/n]" response
                     response=${response,,} # tolower
@@ -212,6 +212,54 @@ do
                 (*)
                     echo "To clean DOT: clean all"
             esac
+            ;;
+        ("attach")
+            ;;
+
+        ("detach")
+            ;;
+
+        ("ping")
+                echo "pinging $parameter2"
+                image_id=`grep $parameter1 mapping|cut -f3 -d' '`
+                image_uname=`head -$image_id image_username| tail -1|cut -f2 -d' '`
+                ssh -i key $image_uname@$parameter1 "ping $parameter2" 
+            ;;
+        ("pingAll")
+                hosts=(`awk '{if(NR!=1){print $1}}' mapping`)
+                numberOfHosts=${#hosts[@]}
+                for (( i=0; i<=$numberOfHosts-2; i++ ))
+                do
+                    for (( j=$i+1; j<=$numberOfHosts-1; j++ ))
+                    do 
+                        echo "Pinging ${hosts[$i]}->${hosts[$j]}"
+                        image_id=`grep ${hosts[$i]} mapping|cut -f3 -d' '`
+                        image_uname=`head -$image_id image_username| tail -1|cut -f2 -d' '`
+                        ssh -i key $image_uname@${hosts[$i]} "ping ${hosts[$j]} -c 4"
+                        echo ""
+                    done
+                done
+            ;;
+
+         ("run")
+                case "$parameter1" in
+                    ("script")
+                        host=$parameter2
+                        image_id=`grep $host mapping|cut -f3 -d' '`
+                        image_uname=`head -$image_id image_username| tail -1|cut -f2 -d' '`
+                        scriptWithPath=`echo $input| awk '{$1="";$2="";$3=""; print $0}'` 
+                        scriptName=`basename $scriptWithPath`
+                        scp -i key $scriptWithPath $image_uname@$host: >/dev/null
+                        ssh -i key $image_uname@$host "./$scriptName"
+                    ;;
+                    (*)
+                        host=$parameter1
+                        image_id=`grep $host mapping|cut -f3 -d' '`
+                        image_uname=`head -$image_id image_username| tail -1|cut -f2 -d' '`
+                        runCommand=`echo $input| awk '{$1="";$2=""; print $0}'`
+                        ssh -i key $image_uname@$host "$runCommand"
+                    ;;
+                esac
             ;;
     	(*) 
 			echo "For connecting to VM: connect h#"
