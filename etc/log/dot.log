@@ -1090,3 +1090,27 @@
 2014-08-16 07:15:10,729 INFO  prepare(std (DOT.cpp:111) - Instantiating the deployment specific devices
 2014-08-16 07:15:10,729 INFO   (DOT.cpp:123) - DOT Deployment has started
 2014-08-16 07:15:10,730 INFO   (DOT.cpp:130) - DOT Topology is generated
+2014-08-16 09:05:24,215 INFO   (DOT.cpp:149) - DOT main has started 
+2014-08-16 09:05:24,215 INFO   (DOT.cpp:195) - The global configuration file: emulations/script1/DefaultConfiguration_script1
+2014-08-16 09:05:24,216 INFO  prepare(std (DOT.cpp:53) - Reading the configurations
+2014-08-16 09:05:24,219 INFO  prepare(std (DOT.cpp:78) - DOT Root/home/ar3roy/dot
+2014-08-16 09:05:24,219 INFO  prepare(std (DOT.cpp:97) - Embedding is started
+2014-08-16 09:05:24,224 INFO  prepare(std (DOT.cpp:111) - Instantiating the deployment specific devices
+2014-08-16 09:05:24,224 INFO   (DOT.cpp:123) - DOT Deployment has started
+2014-08-16 09:05:24,226 INFO   (DOT.cpp:130) - DOT Topology is generated
+2014-08-16 10:12:16,406 INFO   (DOT.cpp:149) - DOT main has started 
+2014-08-16 10:12:16,406 INFO   (DOT.cpp:195) - The global configuration file: emulations/script1/DefaultConfiguration_script1
+2014-08-16 10:12:16,406 INFO  prepare(std (DOT.cpp:53) - Reading the configurations
+2014-08-16 10:12:16,409 INFO  prepare(std (DOT.cpp:78) - DOT Root/home/ar3roy/dot
+2014-08-16 10:12:16,410 INFO  prepare(std (DOT.cpp:97) - Embedding is started
+2014-08-16 10:12:16,415 INFO  prepare(std (DOT.cpp:111) - Instantiating the deployment specific devices
+2014-08-16 10:12:16,416 INFO   (DOT.cpp:123) - DOT Deployment has started
+2014-08-16 10:12:16,417 INFO   (DOT.cpp:130) - DOT Topology is generated
+2014-08-16 10:30:59,614 INFO   (DOT.cpp:149) - DOT main has started 
+2014-08-16 10:30:59,615 INFO   (DOT.cpp:195) - The global configuration file: emulations/sig_of_1.3/DefaultConfiguration_sig_of_1.3
+2014-08-16 10:30:59,615 INFO  prepare(std (DOT.cpp:53) - Reading the configurations
+2014-08-16 10:30:59,617 INFO  prepare(std (DOT.cpp:78) - DOT Root/home/ar3roy/dot
+2014-08-16 10:30:59,618 INFO  prepare(std (DOT.cpp:97) - Embedding is started
+2014-08-16 10:30:59,619 INFO  prepare(std (DOT.cpp:111) - Instantiating the deployment specific devices
+2014-08-16 10:30:59,619 INFO   (DOT.cpp:123) - DOT Deployment has started
+2014-08-16 10:30:59,620 INFO   (DOT.cpp:130) - DOT Topology is generated

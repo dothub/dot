@@ -2,7 +2,7 @@
 #Don't remove or rearrange any section
 
 [EmulationName]
-script1
+sig_of_1.3
 
 [PhysicalTopology]
 #First line: Number of physical machines
@@ -80,11 +80,11 @@ c2 192.168.10.106 6633
 #Next, each line specifies a switch and its controller
 # s# c#
 5
-s1 c1
-s2 c1
-s3 c1
-s4 c1
-s5 c1
+s1 c2
+s2 c2
+s3 c2
+s4 c2
+s5 c2
 
 
 [Credentials]
@@ -94,4 +94,4 @@ UserName=dotuser
 
 [OtherConfig]
 #
-OFVersion=1.0
+OFVersion=1.3
