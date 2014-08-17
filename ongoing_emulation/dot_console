@@ -489,6 +489,8 @@ do
             echo "Ping: ping h# h#"
             echo "For sending ping between all pair of hosts: PingAll"
             echo "For running command in a host: run [-b] [-s] command/scriptfile"
+            echo "For monitoring a switch: monitor [-s] start/stop s#"
+            echo "For monitoring a controller: monitor [-c] start/stop c#"
             echo "For cleaning DOT: clean all"
 			echo "To exit: quit"
 			;;
