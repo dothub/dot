@@ -330,6 +330,96 @@ do
                     ;;
                 esac
             ;;
+
+        ("monitor")
+            case "$parameter1" in
+                ("-c")
+                    #Controller monitor
+                    case "$parameter2" in
+                        ("start")
+                            of_version=`awk '{if(NR==1){print $1}}' ctrl_mapping`
+                            ctrl=`echo $input| cut -f4 -d' '`
+                            ip_ctrl=`awk '{if($1=="'"$ctrl"'") print $2}' ctrl_mapping`
+                            port_ctrl=`awk '{if($1=="'"$ctrl"'") print $3}' ctrl_mapping`
+
+                            common_filter="-f \"port $port_ctrl\" "
+                            common_fields="-T fields -e frame.time -e ip.src -e ip.dst -e tcp.srcport -e tcp.dstport "
+                            
+                            if [ "$of_version" = "1.0" ]; then
+                                of_filter="-Y \"openflow_v1\" "
+                                of_fields="-e openflow_1_0.type -e openflow.datapath_id "
+                            elif [ "$of_version" = "1.3" ]; then
+                                of_filter="-Y \"openflow_v4\" " 
+                                of_fields="-e openflow_v4.type -e openflow_v4.switch_features.datapath_id "
+                         
+                            fi
+
+                            capture_command="sudo tshark "$common_filter$of_filter$common_fields$of_fields
+                            #check whether it is inband controller
+                            if [ ! -z "$ip_ctrl" ]; then
+                            
+                                monitor_file=$ctrl.`date | tr ' ' '_'`".log"
+                             
+                                #check in band
+                                in_band=`echo $ip_ctrl| awk -F"." '{{if($1==10 && $2==254) {print "true";} else{print "false"} }}'`
+                                if [ $in_band = "true" ]; then
+                                    host_name="h"`echo $ip_ctrl| awk -F"." '{host_id=$3*256+$4; print host_id}'`
+                                    image_id=`grep $host_name mapping|cut -f3 -d' '`
+                                    image_uname=`head -$image_id image_username| tail -1|cut -f2 -d' '`
+
+                                    options=" -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i key "
+                                    address=" $image_uname@$host_name" 
+                                    
+                                    
+                                    #As remote we have to ssh it
+                                    echo "$capture_command&>$monitor_file& ">tempScript 
+                                    echo 'echo $!' >> tempScript
+                                    chmod +x tempScript
+                                    
+                                    scp $options tempScript $address: >/dev/null 2>&1
+                                    process_id=`ssh $options$address './tempScript' 2>/dev/null`
+                                    echo "$ctrl $address $((process_id+1)) $monitor_file">>ongoing_monitoring
+                                    rm tempScript
+                                fi
+
+                            fi
+                            
+                        ;;
+                        ("stop")
+                            ctrl=`echo $input| cut -f4 -d' '`
+                            options=" -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i key "
+                            line_num=`awk '{if($1=="'"$ctrl"'"){print NR; exit;}}' ongoing_monitoring`
+                            address=`awk '{if($1=="'"$ctrl"'"){print $2; exit;}}' ongoing_monitoring`
+                            pid=`awk '{if($1=="'"$ctrl"'"){print $3; exit;}}' ongoing_monitoring`
+                            file=`awk '{if($1=="'"$ctrl"'"){print $4; exit;}}' ongoing_monitoring`
+                            
+                            if [ ! -z "$pid" ]; then 
+                                mkdir ../log >/dev/null 2>&1
+                                ssh $options $address "sudo kill -9 $pid" >/dev/null 2>&1
+                                scp $options $address:$file ../log/ >/dev/null 2>&1
+                                ssh $options $address "sudo rm $file" >/dev/null 2>&1
+                                echo "deleting $line_num"
+                                awk '{if(NR !='"$line_num"') print $0}' ongoing_monitoring > temp.om && mv temp.om ongoing_monitoring
+                            fi
+                        ;;
+                    esac
+                ;;
+                ("-s")
+                    #Switch monitor
+                    case "$parameter2" in
+                        ("start")
+
+                        ;;
+
+                        ("stop")
+
+                        ;;
+                    esac
+                  
+                ;;
+            esac
+
+            ;;
     	(*) 
 			echo "For connecting to VM: connect h#"
 			echo "For disconnecting a VM: disconnect h#"

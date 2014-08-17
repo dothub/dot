@@ -2,3 +2,4 @@ temp/
 dot_manager
 *.tar.gz
 *.qcow2
+*.log

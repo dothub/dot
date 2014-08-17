@@ -2,7 +2,7 @@
 #Don't remove or rearrange any section
 
 [EmulationName]
-sig_of_1.3
+sig_ob_1.0
 
 [PhysicalTopology]
 #First line: Number of physical machines
@@ -72,8 +72,8 @@ h7 s5 1 300 64 i1
 #Next, each line a tuple:
 # c# ip port
 2
-c1 10.254.0.2 6633
-c2 192.168.10.106 6633
+c1 192.168.10.106 6633
+c2 10.254.0.2 6633
 
 [Switch2Controller]
 #First line: Number of switches

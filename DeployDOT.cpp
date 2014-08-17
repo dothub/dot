@@ -28,6 +28,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <map>
+#include <utility>
 #include "Global.h"
 
 using namespace std;
@@ -184,6 +186,37 @@ void DeployDOT::generateConsoleMapping()
 
     else 
           cout << "Link Mapping file for \"DOT Console\" cannot be created" <<endl; 
+
+    fout.clear();
+
+    fout.open("ongoing_emulation/ctrl_mapping");
+    if(fout.is_open())
+    {
+        //OF version configured
+        fout << Global::otherConfig->getOFVersion() << endl;
+        
+        map<unsigned int, pair<string, string> > activeControllerMap;
+      
+        for(unsigned long i = 0; i < Global::logicalTopology->getNumberOfSwitches(); i++)
+        {
+           
+            activeControllerMap[Global::sw2controller->getControllerId(i)] 
+                = make_pair(Global::sw2controller->getControllerIP(i),
+                        Global::sw2controller->getControllerPort(i));
+        }
+
+        for(map<unsigned int, pair<string, string> >::iterator iter = activeControllerMap.begin();
+            iter != activeControllerMap.end(); iter++)
+            fout << "c" << iter->first+1 << " " << iter->second.first 
+                << " " << iter->second.second << endl;
+
+    
+        fout.close();
+
+
+    }
+    else
+         cout << "Contrlller mapping file cannot be generated" << endl;
 
 }
 void DeployDOT::deployVMs() {
