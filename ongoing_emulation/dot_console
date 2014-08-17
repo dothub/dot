@@ -378,6 +378,7 @@ do
                                     
                                     scp $options tempScript $address: >/dev/null 2>&1
                                     process_id=`ssh $options$address './tempScript' 2>/dev/null`
+                                    ssh $options$address 'sudo rm tempScript' 2>/dev/null
                                     echo "$ctrl $address $((process_id+1)) $monitor_file">>ongoing_monitoring
                                     rm tempScript
 
@@ -426,10 +427,52 @@ do
                     #Switch monitor
                     case "$parameter2" in
                         ("start")
+                            
+                            sw=`echo $input| cut -f4 -d' '`
+                            if [ ! -z "$sw" ]; then
+                                monitor_file=$sw.`date | tr ' ' '_'`".log"
+
+                                switch_DN=`awk '{if($1=="'"$sw"'"){print $2}}' switch_mapping`
+                            
+                                echo -n "sudo ovs-ofctl snoop topo${sw:1} 2>&1 | " >tempScript
+                                echo -n 'awk '"'"'{print strftime("[%Y-%m-%d %H:%M:%S]" ), $0}'"'"'&>' >> tempScript
+                                echo "$monitor_file&" >> tempScript
+                                echo 'echo $!' >> tempScript
+                                chmod +x tempScript
+                                
+                                scp tempScript $USER_NAME@$switch_DN: >/dev/null 2>&1
+                                process_id=`ssh $USER_NAME@$switch_DN './tempScript' 2>/dev/null`
+                                echo "$sw $USER_NAME@$switch_DN $((process_id+1)) $monitor_file">>ongoing_monitoring
+                                ssh $USER_NAME@$switch_DN "sudo rm tempScript" >/dev/null 2>&1
+
+                                rm tempScript
+                                echo "Monitioring is started..."
+                                echo "The output will be stored at {DOT_ROOT}/log/$monitor_file when stopped"
+
+
+                            fi
+
 
                         ;;
 
                         ("stop")
+                            sw=`echo $input| cut -f4 -d' '`
+                            line_num=`awk '{if($1=="'"$sw"'"){print NR; exit;}}' ongoing_monitoring`
+                            address=`awk '{if($1=="'"$sw"'"){print $2; exit;}}' ongoing_monitoring`
+                            pid=`awk '{if($1=="'"$sw"'"){print $3; exit;}}' ongoing_monitoring`
+                            file=`awk '{if($1=="'"$sw"'"){print $4; exit;}}' ongoing_monitoring`
+                            
+                            if [ ! -z "$pid" ]; then 
+                                mkdir ../log >/dev/null 2>&1
+                                
+                          
+                                ssh $address "sudo kill -9 $pid" >/dev/null 2>&1
+                                scp $address:$file ../log/ >/dev/null 2>&1
+                                ssh $address "sudo rm $file" >/dev/null 2>&1
+                               
+                                    
+                                awk '{if(NR !='"$line_num"') print $0}' ongoing_monitoring > temp.om && mv temp.om ongoing_monitoring
+                            fi
 
                         ;;
                     esac
