@@ -383,13 +383,13 @@ do
 
                                 else
                                     #assuming local controller
-                                    echo "$capture_command"
-                                    command_to_run="$capture_command & > ../log/$monitor_file"
-                                    echo "$command_to_run"
-                                    eval "($command_to_run) &"
-                                    process_id=$!
+                                    echo "$capture_command&>../log/$monitor_file& ">tempScript
+                                    echo 'echo $!' >> tempScript
+                                    chmod +x tempScript
+                                    process_id=`./tempScript`
                                     echo "pid: $process_id"
                                     echo "$ctrl LOCAL $((process_id+2)) $monitor_file" >> ongoing_monitoring
+                                    rm tempScript
                                 fi
                                 
                                 echo "Monitioring is started..."
