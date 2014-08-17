@@ -380,7 +380,20 @@ do
                                     process_id=`ssh $options$address './tempScript' 2>/dev/null`
                                     echo "$ctrl $address $((process_id+1)) $monitor_file">>ongoing_monitoring
                                     rm tempScript
+
+                                else
+                                    #assuming local controller
+                                    echo "$capture_command"
+                                    command_to_run="$capture_command & > ../log/$monitor_file"
+                                    echo "$command_to_run"
+                                    eval "($command_to_run) &"
+                                    process_id=$!
+                                    echo "pid: $process_id"
+                                    echo "$ctrl LOCAL $((process_id+2)) $monitor_file" >> ongoing_monitoring
                                 fi
+                                
+                                echo "Monitioring is started..."
+                                echo "The output will be stored at {DOT_ROOT}/log/$monitor_file when stopped"
 
                             fi
                             
@@ -395,10 +408,15 @@ do
                             
                             if [ ! -z "$pid" ]; then 
                                 mkdir ../log >/dev/null 2>&1
-                                ssh $options $address "sudo kill -9 $pid" >/dev/null 2>&1
-                                scp $options $address:$file ../log/ >/dev/null 2>&1
-                                ssh $options $address "sudo rm $file" >/dev/null 2>&1
-                                echo "deleting $line_num"
+                                
+                                if [ "$address" == "LOCAL" ]; then
+                                    sudo kill -9 $pid
+                                else
+                                    ssh $options $address "sudo kill -9 $pid" >/dev/null 2>&1
+                                    scp $options $address:$file ../log/ >/dev/null 2>&1
+                                    ssh $options $address "sudo rm $file" >/dev/null 2>&1
+                                fi
+                                    
                                 awk '{if(NR !='"$line_num"') print $0}' ongoing_monitoring > temp.om && mv temp.om ongoing_monitoring
                             fi
                         ;;
