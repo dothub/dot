@@ -1,0 +1,15 @@
+MasterName=rsg-pc145
+MasterIP=192.168.10.106
+PhysicalTopology=./emulations/sig_1.0_mb/PhysicalTopology_sig_1.0_mb
+PhysicalMachineDelay=No
+LogicalTopology=./emulations/sig_1.0_mb/LogicalTopology_sig_1.0_mb
+Images=./emulations/sig_1.0_mb/ImageFile_sig_1.0_mb
+HyperVisorConfiguration=./emulations/sig_1.0_mb/Hypervisor_sig_1.0_mb
+HyperVisor=lib-virt
+HostConfiguration=./emulations/sig_1.0_mb/HostInfo_sig_1.0_mb
+Controllers=./emulations/sig_1.0_mb/ControllerInfo_sig_1.0_mb
+SwitchToController=./emulations/sig_1.0_mb/Switch2Controller_sig_1.0_mb
+UserCredentials=./emulations/sig_1.0_mb/CredentialFile_sig_1.0_mb
+OtherConfig=./emulations/sig_1.0_mb/OtherConfigFile_sig_1.0_mb
+EmbeddingAlgorithm=Guaranteed_Embedding
+EmbeddingAlgorithmConfiguration=Guaranteed_Embedding_Conf
