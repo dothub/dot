@@ -1,5 +1,2 @@
-s1 veth6 s2 veth7
-s1 veth8 s3 veth9
-s2 veth10 s4 veth11
-s3 veth16 s6 veth17
-s3 veth12 s5 veth14
+s1 veth6 s3 veth7
+s1 veth2 s2 veth4
