@@ -209,8 +209,6 @@ void KVMWithLibvirt::startHost(unsigned long host_id)
 
     secondaryMac[0] = 'F';
     
-    string thirdMac = mac;
-    thirdMac[0] = 'A';
     ostringstream command;
 
     command << "sudo virsh undefine h" << host_id+1;
@@ -232,7 +230,6 @@ void KVMWithLibvirt::startHost(unsigned long host_id)
     command << " --graphics vnc,listen=0.0.0.0 --noautoconsole";
     command << " --network model=virtio,network=ovs_network_" << switchId+1 << ",mac="<< mac;
     command << " --network model=virtio,network=ovs_network-ext,mac=" << secondaryMac;
-    command << " --network model=virtio,network=ovs_network_" << switchId+1 << ",mac="<< thirdMac;
     command << " --boot hd";
 
     this->commandExec->executeRemote(this->mapping->getMachine(switchId), command.str());

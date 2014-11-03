@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# This file is part of DOT.
+#
+#     DOT is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     DOT is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with DOT.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Copyright 2011-2013 dothub.org
+#
+
+#
+#  dot_ping
+#
+#  Created on: 2014-02-18
+#      Author: Arup Raton Roy (ar3roy@uwaterloo.ca)
+
+
+host1=$1
+host2=$2
+host1_uname=$3
+
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ../key $host1_uname@$host1 "ping $host2 -c 4" 
