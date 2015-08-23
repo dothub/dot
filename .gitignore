@@ -1,4 +1,5 @@
 temp/
+conf_util
 dot_manager
 *.tar.gz
 *.qcow2
